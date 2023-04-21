@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 
 안녕하세용. 상상기업 AGENTMASTER팀에서 데이터베이스 파트를 맡은 팀장 이동헌입니다.
 
