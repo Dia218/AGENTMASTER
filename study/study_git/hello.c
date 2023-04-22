@@ -9,5 +9,9 @@ int main()
 	printf("(이번 프로젝트를 성공적으로 마무리 짓기 위해 으쌰으쌰 힘냅시다~ 화이팅!)\n");
 	printf("(앞으로도 잘해보아요~)\n");
 
+	printf("꺼어억\n");
+	printf("배부르다\n");
+	printf("'stup1db4nana' is not in the sudoers file. This incident will be reported.\n");
+
 	return 0;
 }
