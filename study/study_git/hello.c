@@ -2,12 +2,12 @@
 
 int main() 
 {
-	printf("에이전트마스터 기업의 깃허브 연습 코드입니다\n");
+	printf("Hello!!\n");
 	printf("***************************************\n");
 
-	printf("(이 부분을 자유롭게 수정해주세요)\n");
-	printf("(코드를 추가해주셔도 좋습니다)\n");
-	printf("(하지만 다른 파일을 생성해서 추가하시는 건 무효입니다)\n");
+	printf("(Please feel free to edit this part)\n");
+	printf("(You can add some codes)\n");
+	printf("(However, creating another file and adding it is invalid)\n");
 
 	return 0;
 }
