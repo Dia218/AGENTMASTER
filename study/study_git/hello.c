@@ -2,17 +2,13 @@
 
 int main() 
 {
-	printf("에이전트마스터 기업의 깃허브 연습 코드입니다\n");
+	printf("hello my name is kimtaewan\n");
+
 	printf("***************************************\n");
-	//back01 브랜치 내용, backEnd 파트 파트원이 작성 
-	printf("안녕하십니까 저는 이번 BackEnd 파티원을 맞은 김태완입니다.\n");
-	printf("첫 병합 과정이다 보니 잘 할 수 있을지 걱정이되네요.\n");
-	printf("그래도 이를 잘 따라가서 상상기업에 도움이 되어 보겠습니다.\n");
-	//back00 브랜치 내용, backEnd 파트장이 작성 
-	printf("안녕하세요 이번에 백엔드를 맡게된 파트장 박주형입니다.\n");
-	printf("상상기업을 참여하게 되어서 기쁘네요\n");
-	printf("잘 부탁드리겠습니다\n");
 
-
+	printf("My part is Back-end so i warried\n");
+	printf("but I very ver practice and supported my part\n");
+	printf("nice to meet to too!\n");
 	return 0;
 }
+
