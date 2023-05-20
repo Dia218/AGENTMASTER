@@ -7,7 +7,7 @@ int main()
 
 
 	printf("(인공지능 파트장 이서준)\n");
-	printf("(코드 수정 완료)\n");
+	printf("(Github 과제2)\n");
 	printf("(Commit)\n");
 
 	return 0;
