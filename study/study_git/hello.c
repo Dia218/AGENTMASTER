@@ -2,12 +2,13 @@
 
 int main() 
 {
-	printf("Hello!!\n");
-	printf("***************************************\n");
+	printf("?—?´? „?Š¸ë§ˆìŠ¤?„° ê¸°ì—…?˜ ê¹ƒí—ˆë¸? ?—°?Šµ ì½”ë“œ?…?‹ˆ?‹¤\n");
+	printf("**************************************\n");
 
-	printf("(Please feel free to edit this part)\n");
-	printf("(You can add some codes)\n");
-	printf("(However, creating another file and adding it is invalid)\n");
+
+	printf("(?¸ê³µì???Š¥ ?ŒŒ?Š¸?¥ ?´?„œì¤?)\n");
+	printf("(Github ê³¼ì œ2)\n");
+	printf("(Commit)\n");
 
 	printf("Leaving trace. Kimjunwoo");
 
