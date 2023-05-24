@@ -8,6 +8,7 @@ int main()
 	printf("(Please feel free to edit this part)\n");
 	printf("(You can add some codes)\n");
 	printf("(However, creating another file and adding it is invalid)\n");
+	printf("(bruhh)\n");
 
 	return 0;
 }
