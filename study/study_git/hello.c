@@ -2,12 +2,12 @@
 
 int main() 
 {
-	printf("에이전트마스터 기업의 깃허브 연습 코드입니다\n");
+	printf("Hello!!\n");
 	printf("***************************************\n");
 
-	printf("꺼어억\n");
-	printf("배부르다\n");
-	printf("'stup1db4nana' is not in the sudoers file. This incident will be reported.\n");
+	printf("(Please feel free to edit this part)\n");
+	printf("(You can add some codes)\n");
+	printf("(However, creating another file and adding it is invalid)\n");
 
 	return 0;
 }
