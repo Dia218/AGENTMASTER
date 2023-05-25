@@ -12,11 +12,5 @@ int main()
 
 	printf("Leaving trace. Kimjunwoo");
 
-	int repeat = 10;
-
-	for (int i = 0; i < repeat; i++) {
-		printf("I will not submit my homework late again. \n");
-	}
-
 	return 0;
 }
