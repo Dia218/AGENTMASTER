@@ -2,12 +2,9 @@
 
 int main() 
 {
-	printf("Hello!!\n");
-	printf("***************************************\n");
+	printf("my back hurts!!\n");
+	printf("le wholesome year of the linux desktop!!!1!!\n");
 
-	printf("(Please feel free to edit this part)\n");
-	printf("(You can add some codes)\n");
-	printf("(However, creating another file and adding it is invalid)\n");
 
 	return 0;
 }
