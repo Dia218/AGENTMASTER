@@ -1,4 +1,4 @@
-//고객
+/*고객*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
 (
@@ -14,7 +14,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS "AGENTMASTER"."Customer"
     OWNER to postgres;
 
-//주식
+/*주식*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
 (
@@ -33,7 +33,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS "AGENTMASTER"."Stock"
     OWNER to postgres;
 
-//주식정보
+/*주식정보*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
 (
@@ -54,7 +54,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS "AGENTMASTER"."Stock_info"
     OWNER to postgres;
 
-//모의투자
+/*모의투자*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
 (
@@ -78,7 +78,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS "AGENTMASTER"."Simulation"
     OWNER to postgres;
 
-//북마크
+/*북마크*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Bookmark"
 (
