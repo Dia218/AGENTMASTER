@@ -1,3 +1,16 @@
+/*분야*/
+create table if not exists "AGENTMASTER"."Field"(
+    field_name varchar(10) not null,
+
+    constraint "PK_Field" primary key (field_name)
+)
+
+tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Field"
+    OWNER to postgres;
+
+
 /*기사*/
 create table if not exists "AGENTMASTER"."Article"(
     article_id int not null,
@@ -31,7 +44,7 @@ alter table if exists "AGENTMASTER"."Article"
 
 /*연관뉴스*/
 create table if not exists "AGENTMASTER"."Article_group"(
-    group_name int not null,
+    group_name varchar(30) not null,
 
     constraint "PK_articleGroup" primary key (group_name)
 )
@@ -49,7 +62,7 @@ create table if not exists "AGENTMASTER"."Article_Scrap"(
 
     constraint "PK_Article_Scrap" primary key  (customer_id, article_id),
     constraint "FK_Article_Scrap_customer_id" foreign key (customer_id)
-        references "AGENTMASTER"."Customer" (customer_id), match simple
+        references "AGENTMASTER"."Customer" (customer_id) match simple
         on update cascade
         on delete cascade,
     constraint "FK_Article_Scrap_news_id" foreign key (article_id)
@@ -79,17 +92,4 @@ create table if not exists "AGENTMASTER"."Article_summary"(
 tablespace pg_default;
 
 alter table if exists "AGENTMASTER"."Article_summary"
-    OWNER to postgres;
-
-
-/*분야*/
-create table if not exists "AGENTMASTER"."Field"(
-    field_name varchar(10) not null,
-
-    constraint "PK_Field" primary key (field_name)
-)
-
-tablespace pg_default;
-
-alter table if exists "AGENTMASTER"."Field"
     OWNER to postgres;
