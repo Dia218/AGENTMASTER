@@ -31,11 +31,7 @@ tablespace pg_default;
 alter table if exists "AGENTMASTER"."Field"
     OWNER to postgres;
 
-/*
-==================
-merged from newsDB
-==================
-*/
+
 /*주식*/
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
@@ -143,6 +139,19 @@ alter table if exists "AGENTMASTER"."Field"
     OWNER to postgres;
 
 
+/*연관뉴스*/
+create table if not exists "AGENTMASTER"."Article_group"(
+    group_name varchar(30) not null,
+
+    constraint "PK_articleGroup" primary key (group_name)
+)
+
+tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_group"
+    OWNER to postgres;
+
+
 /*기사*/
 create table if not exists "AGENTMASTER"."Article"(
     article_id int not null,
@@ -171,19 +180,6 @@ create table if not exists "AGENTMASTER"."Article"(
 tablespace pg_default;
 
 alter table if exists "AGENTMASTER"."Article"
-    OWNER to postgres;
-
-
-/*연관뉴스*/
-create table if not exists "AGENTMASTER"."Article_group"(
-    group_name varchar(30) not null,
-
-    constraint "PK_articleGroup" primary key (group_name)
-)
-
-tablespace pg_default;
-
-alter table if exists "AGENTMASTER"."Article_group"
     OWNER to postgres;
 
 
