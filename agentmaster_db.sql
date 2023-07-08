@@ -21,7 +21,7 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Customer"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Field"
 (
-    field_name varchar(10) not null,
+    field_name varchar(20) not null,
 
     constraint "Field_pkey" primary key (field_name)
 )
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
 (
     stock_id   integer     NOT NULL,
     stock_name varchar(20) NOT NULL,
-    field_name varchar(10) NOT NULL,
+    field_name varchar(20) NOT NULL,
     CONSTRAINT Stock_pkey PRIMARY KEY (stock_id),
     CONSTRAINT field_name_fkey FOREIGN KEY (field_name)
         REFERENCES "AGENTMASTER"."Field" (field_name) MATCH SIMPLE
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     body       text        not null,
     link       text        not null,
     group_name varchar(30),
-    field_name varchar(10) not null,
+    field_name varchar(20) not null,
 
     constraint "Article_pkey" primary key (article_id),
     constraint "Articles_group_name_fkey" foreign key (group_name)
