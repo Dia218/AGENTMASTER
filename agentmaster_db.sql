@@ -141,8 +141,8 @@ alter table if exists "AGENTMASTER"."Article_group"
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
     article_id int         not null,
-    company    varchar(10) not null,
-    reporter   varchar(10) not null,
+    company    varchar(20) not null,
+    reporter   varchar(20) not null,
     title      text        not null,
     subtitle   text,
     first_pub  date        not null,
