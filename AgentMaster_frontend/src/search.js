@@ -63,30 +63,17 @@ function SearchBar() {
           },
         }}
       />
-<<<<<<< HEAD:src/search.js
-    <IconButton
-=======
       <IconButton
->>>>>>> main:AgentMaster_frontend/src/search.js
         type="submit"
         sx={{ p: "10px" }}
         aria-label="search"
         size="large"
-<<<<<<< HEAD:src/search.js
-        style={{ marginLeft: "-50px" ,marginTop:"20px" }} // 아이콘의 위치를 조정
-      >
-        <SearchIcon fontSize="large"/>
-=======
         style={{ marginLeft: "-50px", marginTop: "20px" }} // 아이콘의 위치를 조정
         onClick={handleSearch} // 검색 버튼 클릭 시 handleSearch 함수 호출
       >
         <SearchIcon fontSize="large" />
->>>>>>> main:AgentMaster_frontend/src/search.js
       </IconButton>
     </div>
   );
 }
-<<<<<<< HEAD:src/search.js
 
-=======
->>>>>>> main:AgentMaster_frontend/src/search.js
