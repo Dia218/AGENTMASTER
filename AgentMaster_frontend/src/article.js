@@ -28,4 +28,7 @@ function ArticleList() {
   }
   
   export default ArticleList;
+<<<<<<< HEAD:src/article.js
 
+=======
+>>>>>>> main:AgentMaster_frontend/src/article.js

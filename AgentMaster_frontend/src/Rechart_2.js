@@ -70,5 +70,9 @@ export default class Example extends PureComponent {
       </ResponsiveContainer>
     );
   }
+<<<<<<< HEAD:src/Rechart_2.js
 }
 
+=======
+}
+>>>>>>> main:AgentMaster_frontend/src/Rechart_2.js

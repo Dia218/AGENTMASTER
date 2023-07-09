@@ -6,8 +6,8 @@ import ArticleList from './article';
 import Table from './Table';
 function App() {
   return (
-    <div className='background1'>
-    <div className='background2'>
+    
+    <div >
   <div style={{ display: "flex" }}>
     <div style={{ width: 600, height: 400 }}>
       <Rechart1 />
@@ -23,7 +23,7 @@ function App() {
         <ArticleList />
       </div>
 </div>
-</div>
+
   );
 }
 

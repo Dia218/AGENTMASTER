@@ -69,9 +69,12 @@
   margin-right: 20px;
   margin-bottom: 40px;
 }
+<<<<<<< HEAD:src/App.css
 .background1{
   background: #1c92d2;  /* fallback for old browsers */
 }
 .background2{
   background: white;  /* fallback for old browsers */
 }
+=======
+>>>>>>> main:AgentMaster_frontend/src/App.css
