@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
     CONSTRAINT field_name_fkey FOREIGN KEY (field_name)
         REFERENCES "AGENTMASTER"."Field" (field_name) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 )
     TABLESPACE pg_default;
 
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     CONSTRAINT stock_id FOREIGN KEY (stock_id)
         REFERENCES "AGENTMASTER"."Stock" (stock_id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE RESTRICT
 )
     TABLESPACE pg_default;
 
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     constraint "Articles_field_name_fkey" foreign key (field_name)
         references "AGENTMASTER"."Field" (field_name) match simple
         on update cascade
-        on delete cascade,
+        on delete restrict,
     constraint "article_URL_format" check (link ~ '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
     tablespace pg_default;
