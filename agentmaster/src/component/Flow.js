@@ -1,23 +1,20 @@
+//사건의 흐름 구현 부분
+//props로 flow와 flownews를 전달받아 공통 이슈를 flow로 출력하고
+//사건과 관련된 기사를 flownews로 전달받아 순서대로 출력한다.
+
 import { Stack } from 'react-bootstrap';
 import './css/Flow.css';
 
-function Flow(){
+function Flow({flow,flownews}){
 
-    const text = "공통 이슈1\n공통 이슈2\n공통 이슈3\n";
-    const article = [
-        {title : '기사 제목1', summary: '기사 요약1\n'},
-        {title : '기사 제목2', summary: '기사 요약2'},
-        {title : '기사 제목3', summary: '기사 요약3'},
-        {title : '기사 제목4', summary: '기사 요약4'},
-        {title : '기사 제목5', summary: '기사 요약5'},
-    ]
-    const articleList = article.map((article) => (
+    //사건의 흐름 중 요약 기사를 map함수를 통해 순서대로 출력.
+    const articleList = flownews.map((article) => (
         <>
         <div className='col-5 flow_summary' key={article.title}>
             <h5 className='as_title'>{article.title}</h5>
             <hr/>
             <div className='flow_summary_body'>
-                {article.summary}
+                {article.text}
             </div>
         </div>
         </>
@@ -28,7 +25,7 @@ function Flow(){
             <div className='col-xl-5'>
                 <Stack gap={2} className='flow_text'>
                     <div><h4>사건의 흐름</h4><hr /></div>
-                        <div className='flow_text_body'>{text}</div>
+                        <div className='flow_text_body'>{flow.text}</div>
                 </Stack>
             </div>
             <div class="col-xl-7">

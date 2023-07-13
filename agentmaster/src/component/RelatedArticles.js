@@ -1,17 +1,15 @@
+//연관 기사 구현 부분
+//props로 relatedArticles를 받아 연관된 기사의 제목 목록을 출력한다.
+
 import { Stack } from 'react-bootstrap';
 import ArticleLink from './ArticleLink';
 import './css/RelatedArticles.css'
 
-function RelatedArticles(){
+function RelatedArticles({relatedArticles}){
 
-    const article = [
-        {title : '기사 제목1\n제목1'},
-        {title : '기사 제목2\n제목2'},
-        {title : '기사 제목3\n제목3'},
-        {title : '기사 제목4\n제목4'},
-        {title : '기사 제목5\n제목5'}
-    ]
-    const articleList = article.map((v) => (<ArticleLink key={v.title} title={v.title} />));
+    //받은 props를 map 함수와 ArticleLink 컴포넌트를 사용해 출력한다.
+    //const articleList = article.map((v) => (<ArticleLink key={v.title} title={v.title} />));
+    const articleList = relatedArticles.map((v) => (<ArticleLink key={v.title} title={v.title} />));
 
     return(
         <Stack gap={0} className='ra'>
