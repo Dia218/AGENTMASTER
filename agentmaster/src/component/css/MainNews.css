@@ -1,0 +1,16 @@
+.publisher {
+    margin-left: 5px;
+}
+
+.MainNews {
+    border: 1px solid #95d6ff;
+    border-radius: 10px;
+    padding: 8px;
+    min-height: 150px;
+    background-color: whitesmoke;
+}
+
+.newsKeyword {
+    margin-left: 10px;
+    margin-top: 10px
+}

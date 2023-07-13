@@ -1,9 +1,9 @@
-import NewsDetail from './NewsDetail';
 import './App.css';
+import NewsMain from './NewsMain';
 
 function App() {
   return (
-    <NewsDetail />
+    <NewsMain />
   );
 }
 
