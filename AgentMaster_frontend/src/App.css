@@ -56,8 +56,12 @@
   border-right: none;
 }
 .table-container {
+  width: 1500px;
+  height: 160px;
   display: flex;
   margin-left: 70px;
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
 .Article {
   border: 3px solid #9bccfb;
@@ -76,4 +80,68 @@
 .background2{
   background: white;  /* fallback for old browsers */
 }
+.news{
 
+    border: 3px solid #9bccfb;
+    padding: 200px;
+    width: 300px;
+    height: 80px;
+    justify-content: center;
+    margin-top: 90px;
+    margin-left: 150px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+}
+.news h1{
+  position: absolute;
+  top: 5px;
+  left: 230px;
+  transform: translateX(-50%);
+  
+}
+.news-container {
+  display: flex;
+  gap: 20px;
+}
+
+.news-title {
+  margin-top: -150px;
+  margin-left: -120px;
+  margin-bottom: 250px;
+}
+
+.news-description {
+  margin-top: -100px;
+  margin-left: -120px;
+  margin-bottom: 20px;
+}
+
+
+
+.search-container {
+  margin-left: 10px;
+  margin-top: 600px;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-search-container {
+  display: flex;
+  gap: 20px;
+}
+.table-buttons{
+  margin-left: 80px;
+  display: flex;
+  gap: 50px;
+}
+.table-buttons button {
+  width: 180px;
+  height: 30px;
+}
+.table-buttons button.test {
+  margin-left: 80px;
+  background-color: #3eb7ff;
+  border-radius: 10px;
+}
