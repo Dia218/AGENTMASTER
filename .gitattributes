@@ -1632,3 +1632,4 @@ README.md filter=lfs diff=lfs merge=lfs -text
 /AgentMaster_frontend/node_modules/yargs/LICENSE filter=lfs diff=lfs merge=lfs -text
 /AgentMaster_frontend/node_modules/yargs/yargs filter=lfs diff=lfs merge=lfs -text
 /AgentMaster_frontend/node_modules/yocto-queue/license filter=lfs diff=lfs merge=lfs -text
+*.jar filter=lfs diff=lfs merge=lfs -text
