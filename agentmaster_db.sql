@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
     field_name varchar(100) NOT NULL,
     CONSTRAINT Stock_pkey PRIMARY KEY (stock_id),
     CONSTRAINT stock_name_unique UNIQUE (stock_name),
-	CONSTRAINT stock_id_check CHECK (stock_id LIKE '______'),
+	CONSTRAINT stock_id_check CHECK (stock_id ~ '\d{6}'),
     CONSTRAINT field_name_fkey FOREIGN KEY (field_name)
         REFERENCES "AGENTMASTER"."Field" (field_name) MATCH SIMPLE
         ON UPDATE CASCADE
