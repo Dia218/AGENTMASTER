@@ -7,15 +7,18 @@ CREATE SCHEMA IF NOT EXISTS "AGENTMASTER"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
 (
-    customer_id  varchar(20)     NOT NULL,
-    password     varchar(20)     NOT NULL,
-    e_mail       text            NOT NULL,
-    simul_money  integer         NOT NULL,
-    total_return integer         NOT NULL,
-    total_range  numeric(10, 2)   NOT NULL,
+    customer_id     varchar(20)     NOT NULL,
+    password        varchar(20)     NOT NULL,
+    e_mail          text            NOT NULL,
+    total_money     integer         NOT NULL,
+    yesterday_money integer         NOT NULL,
+    simul_money     integer         NOT NULL,
+    stock_money     integer         NOT NULL,
+    total_return    integer         NOT NULL,
+    rank_range      numeric(10, 2)  NOT NULL,
     CONSTRAINT Customer_pkey PRIMARY KEY (customer_id),
 	CONSTRAINT customer_id_between CHECK(customer_id NOT BETWEEN 'ㄱ' AND '힣'),
-	CONSTRAINT customer_email_check CHECK (e_mail LIKE '%@%.%')
+	CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
 )
     TABLESPACE pg_default;
 
@@ -89,11 +92,12 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Stock_info"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
 (
-    customer_id    varchar(20)   NOT NULL,
-    stock_id       varchar(20)   NOT NULL,
-    simul_return   integer       NOT NULL,
-    simul_range    NUMERIC(10, 2) NOT NULL,
-    simul_holdings integer       NOT NULL,
+    customer_id     varchar(20)      NOT NULL,
+    stock_id        varchar(20)      NOT NULL,
+    simul_return    integer          NOT NULL,
+    simul_range     NUMERIC(10, 2)   NOT NULL,
+    simul_holdings  integer          NOT NULL,
+    perchase_amount integer          NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES "AGENTMASTER"."Customer" (customer_id) MATCH SIMPLE
@@ -153,23 +157,23 @@ alter table if exists "AGENTMASTER"."Article_group"
 /*기사*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
-    article_id int         not null,
-    company    varchar(20) not null,
-    reporter   varchar(20) not null,
-    title      text        not null,
-    subtitle   text,
-    first_pub  timestamp   not null,
-    last_pub   timestamp   not null,
-    body       text        not null,
-    link       text        not null,
-    group_name varchar(30),
-    field_name varchar(100) not null,
+    article_id      int         not null,
+    company         varchar(20) not null,
+    reporter        varchar(20) not null,
+    title           text        not null,
+    issue_keyword   varchar(100),
+    first_pub       timestamp   not null,
+    last_pub        timestamp   not null,
+    body            text        not null,
+    link            text        not null,
+    group_name      varchar(30),
+    field_name      varchar(100) not null,
 
     constraint "Article_pkey" primary key (article_id),
     constraint "Articles_group_name_fkey" foreign key (group_name)
         references "AGENTMASTER"."Article_group" (group_name) match simple
         on update cascade
-        on delete cascade,
+        on delete set null,
     constraint "Articles_field_name_fkey" foreign key (field_name)
         references "AGENTMASTER"."Field" (field_name) match simple
         on update cascade
