@@ -14,6 +14,17 @@ import Chart from './Chart';
 
 function Main() {
 
+    //임시 데이터
+    const text = "테스트코드1\n테스트코드2\n테스트코드3\n";
+    const publisher = "신문사 이름";
+    const name = "기자 이름";
+    const title = "신문기사 제목이 올라갈 공간"
+
+    //뉴스 데이터와 주식 데이터를 담을 useState 훅
+    const [socket, setSocket] = useState();
+    const [news, setNews] = useState(['','','','','']);
+    const [stockData, setStockData] = useState([]);
+
     //테이블 차트의 헤더 액세서 설정. 
     const columns = useMemo(
         () => [
@@ -38,6 +49,7 @@ function Main() {
     );
 
     //테이블 차트 임시 데이터. 헤더 액세서를 알맞게 설정해줘야함.
+    //이후 백엔드에게 요청해서 주식 데이터를 담을 부분.
     const data = useMemo(() => [
             {
             "name": "주식 이름1",
@@ -53,7 +65,6 @@ function Main() {
             },
     ],[]);
 
-    const [socket, setSocket] = useState();
     //로그인 성공 시 값을 true로 변경.
     const [isLogin, setIsLogin] = useState(false);
 
@@ -61,33 +72,57 @@ function Main() {
         //소켓 연결
         const socketIo = io.connect('');
 
+        //서버로부터 데이터 수신. 백엔드로부터 데이터를 요청하고 받아와 각각의 state에 저장함.
+        socketIo.on('callNews',(data) => {
+            setNews([data]);
+        });
+        socketIo.on('callStockData',(data) => {
+            setStockData(data);
+        });
 
-    })
+        //임시 데이터 추가
+            setNews([{text,publisher,name,title},
+                {text,"publisher":"시험용",name,title},
+                {text,publisher,name,title},
+                {text,publisher,name,title},
+                {text,publisher,name,title}]);
+            setStockData(data);
+
+            setSocket(socketIo);
+    },[])
+
+    useEffect(()=>{
+        return(()=>{
+            if(socket){
+                socket.disconnect();//소켓 연결 헤제
+            }
+        })
+    },[socket])
 
     return(
-        <>
-        <Stack gap={0}>
-            <Stack direction='horizontal' gap={0}>
-                <div className='news'><MainNews /></div>
-                <div className='news'><MainNews /></div>
-                <div className='news'><MainNews /></div>
-                <div className='login'>
-                    {isLogin?<Login_after setIsLogin={setIsLogin} />:<Login_before setIsLogin={setIsLogin}/>}
-                </div>
-            </Stack>
-            <Stack direction='horizontal' gap={0}>
-                <div className='news'><MainNews /></div>
-                <div className='news'><MainNews /></div>
-                <div className='stock'>
-                    <Stack direction='horizontal' className='stock_title'>
-                        <div><h4>증시</h4></div>
-                        <div className="ms-auto text-center"><h3>+</h3></div>
+        <div className='main border'>
+                <Stack>
+                    <Stack direction='horizontal' gap={0}>
+                        <div className='news'><MainNews news={news[0]}/></div>
+                        <div className='news'><MainNews news={news[1]}/></div>
+                        <div className='news'><MainNews news={news[2]}/></div>
+                        <div className='login'>
+                            {isLogin?<Login_after setIsLogin={setIsLogin} />:<Login_before setIsLogin={setIsLogin}/>}
+                        </div>
                     </Stack>
-                    <Chart columns={columns} data={data} />
-                </div>
-            </Stack>
-        </Stack>
-        </>
+                    <Stack direction='horizontal'>
+                        <div className='news'><MainNews news={news[3]}/></div>
+                        <div className='news'><MainNews news={news[4]}/></div>
+                        <div className='stock'>
+                            <Stack direction='horizontal' className='stock_title'>
+                                <div><h4>증시</h4></div>
+                                <div className="ms-auto text-center"><h3>+</h3></div>
+                            </Stack>
+                            <Chart columns={columns} data={stockData} />
+                        </div>
+                    </Stack>
+                </Stack>
+        </div>
     );
 }
 

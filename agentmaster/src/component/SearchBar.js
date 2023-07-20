@@ -5,24 +5,24 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import './css/SearchBar.css';
 import { useRef, useState } from "react";
-//import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
 
-    //검색 기능 구현 시 사용. 현재는 사용x
-    //const [search, setSearch] = useState("");
-    //const [searchParams, setSearchParams] = useSearchParams();
-
     const [keyword, setKeyword] = useState("");
     const isEnterCurrent = useRef();
+    const navigate = useNavigate();
 
-    //엔터키 입력 시 실행. 키워드를 수정하고 콘솔로 출력한다.
+    //엔터키 입력 시 실행. url에 입력한 키워드를 state에 담아 넘겨주고 검색 페이지로 이동한다.
     const handleKeyDown = (e) =>{
         if(e.key === "Enter" && (isEnterCurrent.current === undefined || isEnterCurrent.current === false)){
             isEnterCurrent.current = true;
-            //setSearch(keyword);
             setKeyword('');
-            console.log("keyword:",keyword);
+            navigate(`/searchList?result=${keyword}&offset=0&limit=10`,{
+                state: {
+                    keyword: keyword
+                }
+            });
         } else if(isEnterCurrent.current === true) {
             isEnterCurrent.current = false;
             setKeyword('');

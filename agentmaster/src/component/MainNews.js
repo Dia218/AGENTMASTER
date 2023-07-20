@@ -4,18 +4,18 @@
 import { Stack } from "react-bootstrap";
 import './css/MainNews.css';
 
-function MainNews() {
-    const publisher = "신문사 이름";
-    const title = "신문기사 제목 출력. 클릭 시 요약화면으로 넘어감";
-
+function MainNews({news}) {
     return(
         <>
         <Stack gap={0}>
             <div className="mt-1 publisher">
-                <h5>{publisher}</h5>
+                <h5>{news.publisher}</h5>
             </div>
             <div className="mt-1 MainNews">
-                <h3>{title}</h3>
+                <h3>{news.title}</h3>
+            </div>
+            <div className="category">
+                분야:
             </div>
         </Stack>
         </>

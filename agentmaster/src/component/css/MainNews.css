@@ -4,13 +4,20 @@
 
 .MainNews {
     border: 1px solid #95d6ff;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 8px;
     min-height: 150px;
-    background-color: whitesmoke;
+    
 }
 
 .newsKeyword {
     margin-left: 10px;
     margin-top: 10px
+}
+
+.category {
+    margin-left: 5px;
+    margin-top: 5px;
+    color: gray;
+    font-style: italic;
 }
