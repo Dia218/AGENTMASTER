@@ -1,10 +1,10 @@
-//뉴스 메인화면을 구현하는 코드. 
-//<SearchBar>는 검색바, <Main>은 그 외 나머지 부분을 구현한다.
+//뉴스 검색 결과화면을 구현하는 코드. 
+//<SearchBar>는 검색바, <SearchList>는 검색된 결과 리스트를 구현한다.
 
 import Header from "./component/Header";
-import Main from "./component/Main";
 import SearchBar from "./component/SearchBar";
-import './NewsMain.css';
+import SearchList from "./component/SearchList";
+import './NewsSearch.css';
 
 function NewsMain(){
     return (
@@ -13,7 +13,7 @@ function NewsMain(){
         <div className="container pt-4 pb-3">
             <SearchBar />
             
-            <Main />
+            <SearchList />
         </div>
     </div>);
 }

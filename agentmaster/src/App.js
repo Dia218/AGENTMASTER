@@ -1,9 +1,16 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import NewsMain from './NewsMain';
+import NewsSearch from './NewsSearch';
+import Detail from './Detail';
 
 function App() {
   return (
-    <NewsMain />
+    <BrowserRouter>
+    <Routes>
+      <Route path='/searchList' element={<NewsSearch />}></Route>
+      <Route path='/newsDetail' element={<Detail />}></Route>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
