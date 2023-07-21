@@ -13,7 +13,7 @@ function SearchBar() {
     const isEnterCurrent = useRef();
     const navigate = useNavigate();
 
-    //엔터키 입력 시 실행. url에 입력한 키워드를 state에 담아 넘겨주고 검색 페이지로 이동한다.
+    //엔터키 입력 시 실행. 키워드를 수정하고 콘솔로 출력한다.
     const handleKeyDown = (e) =>{
         if(e.key === "Enter" && (isEnterCurrent.current === undefined || isEnterCurrent.current === false)){
             isEnterCurrent.current = true;

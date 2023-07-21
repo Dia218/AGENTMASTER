@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import NewsMain from './NewsMain';
-import SearchResult from './SearchResult';
+import NewsSearch from './NewsSearch'
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<NewsMain />}></Route>
-      <Route path='/searchList' element={<SearchResult />} />
+      <Route path='/searchList' element={<NewsSearch />} />
     </Routes>
     </BrowserRouter>
   );
