@@ -15,7 +15,7 @@ function MainNews({news}) {
                 <h3>{news.title}</h3>
             </div>
             <div className="category">
-                분야:
+                키워드:
             </div>
         </Stack>
         </>
