@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar'
 import { Container } from 'react-bootstrap';
-import './css/Header.css';
+import './Header.css';
 
 function Header(){
 

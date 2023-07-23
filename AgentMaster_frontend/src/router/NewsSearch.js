@@ -1,12 +1,12 @@
 //뉴스 검색 결과화면을 구현하는 코드. 
 //<SearchBar>는 검색바, <SearchList>는 검색된 결과 리스트를 구현한다.
 
-import Header from "./component/Header";
-import SearchBar from "./component/SearchBar";
-import SearchList from "./component/SearchList";
-import './NewsSearch.css';
+import Header from "../component/Header";
+import SearchBar from "../component/news/SearchBar";
+import SearchList from "../component/news/SearchList";
+import './css/NewsSearch.css';
 
-function NewsMain(){
+function NewsSearch(){
     return (
     <div className='nd_body'>
         <header className="mb-4"><Header /></header>
@@ -18,4 +18,4 @@ function NewsMain(){
     </div>);
 }
 
-export default NewsMain;
+export default NewsSearch;

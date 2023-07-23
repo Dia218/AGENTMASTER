@@ -21,3 +21,15 @@
     color: gray;
     font-style: italic;
 }
+
+.titleButton {
+    text-align: left;
+    padding: 0;
+    border: 0px;
+    background-color: #95d6ff;
+    
+}
+
+.titleButton:hover {
+    text-decoration: underline;
+}

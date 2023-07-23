@@ -3,8 +3,20 @@
 
 import { Stack } from "react-bootstrap";
 import './css/MainNews.css';
+import { useNavigate } from "react-router-dom";
 
 function MainNews({news}) {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/newsDetail?id=${news.id}`,{
+            state: {
+                id: news.id
+            }
+        });
+    }
+
     return(
         <>
         <Stack gap={0}>
@@ -12,7 +24,9 @@ function MainNews({news}) {
                 <h5>{news.publisher}</h5>
             </div>
             <div className="mt-1 MainNews">
-                <h3>{news.title}</h3>
+                <button 
+                className="titleButton" 
+                onClick={handleClick}><h3>{news.title}</h3></button>
             </div>
             <div className="category">
                 키워드:

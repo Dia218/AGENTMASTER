@@ -4,11 +4,11 @@
 
 import { useState,useEffect } from 'react';
 import { io } from 'socket.io-client';
-import './NewsDetail.css'
-import Flow from './component/Flow';
-import Header from './component/Header';
-import RelatedArticles from './component/RelatedArticles';
-import Summary from './component/Summary';
+import './css/NewsDetail.css'
+import Flow from '../component/news/Flow';
+import Header from '../component/Header';
+import RelatedArticles from '../component/news/RelatedArticles';
+import Summary from '../component/news/Summary';
 
 function NewsDetail(){
 

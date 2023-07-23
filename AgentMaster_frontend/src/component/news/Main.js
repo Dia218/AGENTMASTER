@@ -11,6 +11,7 @@ import { io } from 'socket.io-client';
 import Login_after from './Login_after';
 import Login_before from './Login_before';
 import Chart from './Chart';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
 
@@ -18,7 +19,9 @@ function Main() {
     const text = "테스트코드1\n테스트코드2\n테스트코드3\n";
     const publisher = "신문사 이름";
     const name = "기자 이름";
-    const title = "신문기사 제목이 올라갈 공간"
+    const title = "신문기사 제목이 올라갈 공간입니다"
+
+    const navigate = useNavigate();
 
     //뉴스 데이터와 주식 데이터를 담을 useState 훅
     const [socket, setSocket] = useState();
@@ -68,6 +71,10 @@ function Main() {
     //로그인 성공 시 값을 true로 변경.
     const [isLogin, setIsLogin] = useState(false);
 
+    const handleClick = () => {
+        navigate(`/chartMain`);
+    }
+
     useEffect(() => {
         //소켓 연결
         const socketIo = io.connect('');
@@ -81,11 +88,11 @@ function Main() {
         });
 
         //임시 데이터 추가
-            setNews([{text,publisher,name,title},
-                {text,"publisher":"시험용",name,title},
-                {text,publisher,name,title},
-                {text,publisher,name,title},
-                {text,publisher,name,title}]);
+            setNews([{"id":"00",text,publisher,name,title},
+                {"id":"01",text,"publisher":"시험용",name,title},
+                {"id":"02",text,publisher,name,title},
+                {"id":"03",text,publisher,name,title},
+                {"id":"04",text,publisher,name,title}]);
             setStockData(data);
 
             setSocket(socketIo);
@@ -116,7 +123,7 @@ function Main() {
                         <div className='stock'>
                             <Stack direction='horizontal' className='stock_title'>
                                 <div><h4>증시</h4></div>
-                                <div className="ms-auto text-center"><h3>+</h3></div>
+                                <div className="ms-auto text-center" onClick={handleClick}><h3>+</h3></div>
                             </Stack>
                             <Chart columns={columns} data={stockData} />
                         </div>
