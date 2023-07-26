@@ -1,0 +1,148 @@
+.news {
+    border: 3px solid #9bccfb;
+    height: 450px;
+    width: 600px;
+    justify-content: center;
+    margin-top: 90px;
+    margin-left: 300px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .news-h2 {
+    margin-top: 2px;
+  }
+  
+  .news-container {
+    height: 300px;
+    width: 400px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .news-description {
+    margin-bottom: 15px;
+  }
+
+  .table2 {
+    width: 1300px;
+    border-collapse: collapse;
+    border: 1px solid #9bccfb ;
+    margin-left: 150px;
+    margin-top: 10px;
+  }
+  
+  .table2 th,
+  .table2 td {
+    text-align: center;
+    padding: 8px;
+  }
+  
+  .table2 th{
+    background-color:#2067d8 ;
+  }
+  .table2 td:last-child {
+    border-right: none;
+  }
+
+  .news-search-container {
+    display: flex;
+    gap: 20px;
+  }
+  .table-buttons{
+    margin-left: 150px;
+    display: flex;
+    gap: 50px;
+  }
+  .table-buttons button {
+    width: 170px;
+    height: 30px;
+  }
+  .table-buttons button.test {
+    margin-left: 30px;
+    background-color: #3eb7ff;
+    border-radius: 10px;
+  }
+  .ranking-container {
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 300px;
+  }
+
+  .mock-ranking-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 550px;
+    margin-top: 200px;
+    margin-left: -650px;
+  }
+  
+  .ranking-list {
+    border: 3px solid #9bccfb;
+    text-align: left;
+    width: 550px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .ranking-list h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 25px;
+  }
+  
+  .ranking-list ol {
+    margin-left: 10px;
+    text-align: left;
+  }
+  
+  .ranking-list li {
+    margin-bottom: 10px;
+    margin-left: 2px;
+  }
+  
+  .ranking-list li.title {
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+    color: blue;
+  }
+  
+  .ranking-list {
+    position: relative;
+  }
+  
+  .ranking-left,
+  .ranking-right {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .ranking-left {
+    margin-right: 15px;
+  }
+  
+  .ranking-right {
+    margin-left: 20px;
+  }
+  .dot-list {
+    position: relative;
+  }
+  
+  .dot-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, #9bccfb 50%);
+    background-size: 100% 8px;
+    background-repeat: repeat-y;
+    margin-left: 15px; 
+  }
+  
