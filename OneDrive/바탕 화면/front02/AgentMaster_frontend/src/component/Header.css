@@ -1,0 +1,12 @@
+div.header {
+    background-color:#0073e5;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+}
+
+.nav_text {
+    font-weight: 600;
+}
