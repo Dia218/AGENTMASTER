@@ -56,35 +56,44 @@ export function UserInfoForm() {
     </div>
   );
 }
-//아직 구현 중
-export function KeywordAlert() {
-    return (
-      <div className="userForm">
-        <h1>키워드 알림</h1>
-        
-      </div>
-    );
-  }
+
+
   //데이터베이스에서 저장된 스크랩 기사 링크
   export function ScrapedArticles() {
     const [articles, setArticles] = useState([
-      { id: 1, title: 'News Article 1', url: 'https://example.com/article1' },
-      { id: 2, title: 'News Article 2', url: 'https://example.com/article2' },
-      { id: 3, title: 'News Article 3', url: 'https://example.com/article3' },
+      { id: 1, title: 'News Article 1', author: 'Author 1', date: '2023-07-28', url: 'https://example.com/article1' },
+      { id: 2, title: 'News Article 2', author: 'Author 2', date: '2023-07-29', url: 'https://example.com/article2' },
+      { id: 3, title: 'News Article 3', author: 'Author 3', date: '2023-07-30', url: 'https://example.com/article3' },
     ]);
   
     const handleArticleClick = (url) => {
-      window.open(url, '_blank'); 
+      window.open(url, '_blank');
     };
   
     return (
-      <div className="userForm">
+      <div className="userForm2">
         <h1>스크랩한 기사</h1>
-        {articles.map((article) => (
-          <div key={article.id} className="news-title" onClick={() => handleArticleClick(article.url)}>
-            {article.title}
-          </div>
-        ))}
+        <table className="article-table">
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>기자</th>
+              <th>날짜</th>
+              <th>기사</th>
+            </tr>
+          </thead>
+          <tbody>
+            {articles.map((article) => (
+              <tr key={article.id} className="news-article" onClick={() => handleArticleClick(article.url)}>
+                <td>{article.title}</td>
+                <td>{article.author}</td>
+                <td>{article.date}</td>
+                <td><a href={article.url} target="_blank" rel="noopener noreferrer">기사 링크</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
+  

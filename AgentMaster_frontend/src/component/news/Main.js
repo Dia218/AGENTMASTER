@@ -110,17 +110,17 @@ function Main() {
         <div className='main border'>
                 <Stack>
                     <Stack direction='horizontal' gap={0}>
-                        <div className='news'><MainNews news={news[0]}/></div>
-                        <div className='news'><MainNews news={news[1]}/></div>
-                        <div className='news'><MainNews news={news[2]}/></div>
-                        <div className='login'>
+                        <div className='news_main'><MainNews news={news[0]}/></div>
+                        <div className='news_main'><MainNews news={news[1]}/></div>
+                        <div className='news_main'><MainNews news={news[2]}/></div>
+                        <div className='login_main'>
                             {isLogin?<Login_after setIsLogin={setIsLogin} />:<Login_before setIsLogin={setIsLogin}/>}
                         </div>
                     </Stack>
                     <Stack direction='horizontal'>
-                        <div className='news'><MainNews news={news[3]}/></div>
-                        <div className='news'><MainNews news={news[4]}/></div>
-                        <div className='stock'>
+                        <div className='news_main'><MainNews news={news[3]}/></div>
+                        <div className='news_main'><MainNews news={news[4]}/></div>
+                        <div className='stock_main'>
                             <Stack direction='horizontal' className='stock_title'>
                                 <div><h4>증시</h4></div>
                                 <div className="ms-auto text-center" onClick={handleClick}><h3>+</h3></div>

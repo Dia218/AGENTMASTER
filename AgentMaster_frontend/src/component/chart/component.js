@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import {
   LineChart,
@@ -15,6 +14,8 @@ import {
 import Autosuggest from 'react-autosuggest';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import { useLocation } from 'react-router-dom';
+
 
 export function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -42,7 +43,7 @@ export function ArticleList() {
 
   return (
     <div className="Article">
-      <ul>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
         {articles.map((article) => (
           <li key={article.id}>{article.title}</li>
         ))}
@@ -75,7 +76,7 @@ export function Table() {
   }
 
   return (
-    <div className="table-container">
+    <div>
       <table className="custom-table">
         <tbody>{rows}</tbody>
       </table>
@@ -84,35 +85,44 @@ export function Table() {
 }
 
 export function Rechart1() {
-  const data = [
+  const location = useLocation();
+  const [keyword, setKeyword] = useState('');
+
+  useEffect(() => {
+    if (location.state) {
+      setKeyword(decodeURIComponent(location.state.keyword));
+    } else {
+      setKeyword('');
+    }
+  }, [location]);
+
+  const data1 = [
     {
       name: '오전 10:00',
-      백광산업: 4000,
+      [keyword]: 4000,
       amt: 2400,
     },
     {
       name: '오전 12:00',
-      백광산업: 3000,
+      [keyword]: 3000,
       amt: 2210,
     },
     {
       name: '오후 2:00',
-      백광산업: 2000,
+      [keyword]: 2000,
       amt: 2290,
     },
   ];
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width={800} height={500}>
       <LineChart
-        width={500}
-        height={300}
-        data={data}
+        data={data1}
         margin={{
-          top: 65,
-          right: 30,
-          left: 20,
+          top: 70,
+          left: 100,
           bottom: 5,
+          right: 10,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -120,68 +130,55 @@ export function Rechart1() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="백광산업"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Label
-          value="백광산업"
-          position="top"
-          offset={10}
-          style={{ fill: 'black' }}
-        />
-        {data.map((entry, index) => (
-          <text
-            key={`label-${index}`}
-            x={90} // x 위치 조정
-            y={40} // y 위치 조정
-            textAnchor="middle"
-            fill="black"
-            style={{ fontSize: 20 }}
-          >
-            백광산업
-          </text>
-        ))}
+        <Line type="monotone" dataKey={keyword} stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Label value={keyword} position="top" offset={10} style={{ fill: 'black' }} />
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
-export function Rechart2() {
-  const data = [
+export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
+  const location = useLocation();
+
+  const data2 = [
     {
       name: '오전 10:00',
-      백광산업: 4000,
-      LX인터내셔널: 2400,
+      [keywordFromChartMain]: 2400,
+      [keywordFromSearch2]: 4000,
+     
       amt: 2400,
     },
     {
       name: '오전 12:00',
-      백광산업: 3000,
-      LX인터내셔널: 1398,
+      [keywordFromChartMain]: 1398,
+      [keywordFromSearch2]: 3000,
+     
       amt: 2210,
     },
     {
       name: '오후 2:00',
-      백광산업: 2000,
-      LX인터내셔널: 9800,
+      [keywordFromChartMain]: 9800,
+      [keywordFromSearch2]: 2000,
+      
       amt: 2290,
     },
   ];
 
+  useEffect(() => {
+    if (location.state) {
+     
+    }
+  }, [location]);
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width={800} height={500}>
       <LineChart
-        width={500}
-        height={300}
-        data={data}
+        data={data2}
         margin={{
-          top: 65,
-          right: 30,
-          left: 20,
+          top: 70,
+          left: 110,
           bottom: 5,
+          right: 10,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -189,85 +186,140 @@ export function Rechart2() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="백광산업"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="LX인터내셔널" stroke="#82ca9d" />
-        <Label
-          value="백광산업"
-          position="top"
-          offset={10}
-          style={{ fill: 'black' }}
-        />
+        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#82ca9d" />
+        <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
-export function Search2() {
-  const predefinedSuggestions = ['검색어1', '검색어2', '검색어3'];
+
+export function Search2({ onKeywordChange }) {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const searchInputRef = useRef(null);
+  const resultContainerRef = useRef(null);
+  const webSocketRef = useRef(null);
+
+  useEffect(() => {
+    webSocketRef.current = new WebSocket('ws://your-websocket-server-url'); //웹소켓 주소
+
+    webSocketRef.current.onopen = () => {
+      console.log('웹소켓 연결이 성립되었습니다.');
+    };
+
+    webSocketRef.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setSuggestions(data);
+      setIsOpen(data.length > 0);
+    };
+
+    webSocketRef.current.onclose = () => {
+      console.log('웹소켓 연결이 종료되었습니다.');
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (webSocketRef.current) {
+        webSocketRef.current.close();
+      }
+    };
+  }, []);
+
+  const sendWebSocketMessage = (message) => {
+    if (webSocketRef.current && webSocketRef.current.readyState === WebSocket.OPEN) {
+      webSocketRef.current.send(JSON.stringify({ query: message }));
+    }
+  };
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    const filteredSuggestions = predefinedSuggestions.filter((suggestion) =>
-      suggestion.toLowerCase().includes(value.toLowerCase())
-    );
-    setSuggestions(filteredSuggestions);
+    sendWebSocketMessage(value);
   };
 
   const onSuggestionsClearRequested = () => {
     setSuggestions([]);
+    setIsOpen(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (resultContainerRef.current && !resultContainerRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleSearch = () => {
+    console.log('검색어:', value);
+    setSearchHistory([...searchHistory, value]);
+    onKeywordChange(value); 
+  }
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
 
   const onSuggestionSelected = (event, { suggestion }) => {
-    // 선택된 검색어 항목 처리 로직을 작성
+    setValue(suggestion);
+    setIsOpen(false);
   };
 
   const renderSuggestion = (suggestion) => {
     return <div>{suggestion}</div>;
   };
 
-  const handleSearch = () => {
-    console.log('Search:', value);
-  };
-
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        onSuggestionSelected={onSuggestionSelected}
-        getSuggestionValue={(suggestion) => suggestion}
-        renderSuggestion={renderSuggestion}
-        inputProps={{
-          value: value,
-          onChange: (event, { newValue }) => setValue(newValue),
-          style: {
-            backgroundColor: 'white',
-            border: '3px solid #9bccfb',
-            padding: '10px',
-            borderRadius: '5px',
-            width: '200px',
-            marginLeft: '70px',
-            marginTop: '20px',
-          },
-        }}
-      />
-      <IconButton
-        type="submit"
-        sx={{ p: '10px' }}
-        aria-label="search"
-        size="large"
-        style={{ marginLeft: '-50px', marginTop: '20px' }} // 아이콘의 위치를 조정
-        onClick={handleSearch} // 검색 버튼 클릭 시 handleSearch 함수 호출
+    <div style={{ position: 'relative' }}>
+      <div
+        ref={resultContainerRef}
+        style={{ position: 'absolute', width: '700px', background: '#9bccfb', marginTop: '30px', marginLeft: '150px', zIndex: 1 }}
       >
-        <SearchIcon fontSize="large" />
-      </IconButton>
+        {isOpen && (
+          <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
+            {searchHistory.map((searchItem, index) => (
+              <li key={index}>{searchItem}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          onSuggestionSelected={onSuggestionSelected}
+          getSuggestionValue={(suggestion) => suggestion}
+          renderSuggestion={renderSuggestion}
+          inputProps={{
+            value: value,
+            onChange: (event, { newValue }) => setValue(newValue),
+            style: {
+              backgroundColor: 'white',
+              border: '3px solid #9bccfb',
+              padding: '10px',
+              borderRadius: '5px',
+              width: '700px',
+              marginLeft: '150px',
+              marginTop: '50px',
+            },
+            ref: searchInputRef,
+          }}
+        />
+        <IconButton
+          type="submit"
+          sx={{ p: '10px' }}
+          aria-label="search"
+          size="large"
+          style={{ marginLeft: '-50px', marginTop: '50px' }}
+          onClick={handleSearch}
+        >
+          <SearchIcon fontSize="large" />
+        </IconButton>
+      </div>
     </div>
   );
 }

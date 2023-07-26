@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NewsMain from './router/NewsMain';
 import NewsSearch from './router/NewsSearch';
 import NewsDetail from './router/NewsDetail';
-import ChartMain from './router/chartPage';
-import ChartDetail from './router/chartDetail';
-import UserPage from './router/userPage';
+import ChartDetail from './router/ChartDetail';
+import ChartMain from './router/ChartMain';
+import UserPage from './router/UserPage';
 
 function App() {
   return (

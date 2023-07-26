@@ -1,4 +1,4 @@
-.news {
+.news_main {
     min-height: 250px;
     min-width: 300px;
     margin: 15px;
@@ -11,7 +11,7 @@
     background-color: #95d6ff;
 }
 
-.login {
+.login_main {
     min-height: 200px;
     min-width: 300px;
     margin: 15px;
@@ -19,7 +19,7 @@
     background-color: #50b3ff;
 }
 
-.stock {
+.stock_main {
     min-height: 250px;
     min-width: 630px;
     margin: 15px;

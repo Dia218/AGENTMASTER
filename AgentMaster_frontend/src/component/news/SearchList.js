@@ -68,7 +68,7 @@ function SearchList(){
     ))},[searchResult]);
 
     return(
-        <div className="bg-white list">
+        <div className="bg-white searchList">
             <Stack>
                 <div className="py-3"></div>
                 <div>{resultList}</div>

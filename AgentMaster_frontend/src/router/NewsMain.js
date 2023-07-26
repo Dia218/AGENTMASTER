@@ -10,7 +10,7 @@ function NewsMain(){
     return (
     <div className='nd_body'>
         <header className="mb-4"><Header /></header>
-        <div className="container pt-4 pb-3 border">
+        <div className="container pt-4 pb-3">
             <SearchBar />
             
             <Main />
