@@ -13,10 +13,11 @@
 
 
 .custom-table {
-    width: 800px;
-    margin-top: 100px;
+    width: 700px;
+    margin-top: 50px;
     border-collapse: collapse;
     border: 1px solid #9bccfb ;
+    margin-left: 150px;
   }
   
   .custom-table th,

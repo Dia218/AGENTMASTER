@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import Autosuggest from 'react-autosuggest';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 const socket = io(); // 웹소켓 서버 주소
 
 export function News() {
@@ -55,8 +55,10 @@ export function News() {
   );
 }
 
-export function Search({ onSearch }) {
-  const [value, setValue] = useState('');
+
+
+export function Search() {
+  const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
 
@@ -74,9 +76,14 @@ export function Search({ onSearch }) {
     setValue(newValue);
   };
 
-  const handleSearch = (keyword) => {
-    console.log('Search:', keyword);
-    navigate(`/component.js?keyword=${keyword}`); 
+  const handleSearch = () => {
+    if (value.trim() !== '') {
+      navigate(`/component?result=${encodeURIComponent(value)}&offset=0&limit=10`, {
+        state: {
+          keyword: value,
+        },
+      });
+    }
   };
 
   return (
@@ -102,6 +109,7 @@ export function Search({ onSearch }) {
                 marginTop: '60px',
                 fontSize: '20px',
                 marginLeft: '60px',
+                listStyle: 'none',
               },
             }}
           />
@@ -111,14 +119,15 @@ export function Search({ onSearch }) {
             style={{
               position: 'absolute',
               top: '60%',
-              left: 0,
+              left: 50,
               right: 0,
               backgroundColor: 'white',
               borderRadius: '5px',
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
               padding: '10px',
-              width: '800px',
+              width: '600px',
               margin: 'auto',
+              listStyle: 'none',
             }}
           >
             {suggestions.map((suggestion) => (
@@ -146,6 +155,7 @@ export function Search({ onSearch }) {
     </div>
   );
 }
+
 
 
 //상한가, 하한가 등등 데이터 필요해서 웹소켓 코드로 변경
@@ -370,7 +380,7 @@ export function MockInvestmentRanking() {
 
   useEffect(() => {
     const updateRankingData = () => {
-      // Generate random investment values for the ranking data
+      
       const updatedRankingData = mockData.map((item) => ({
         ...item,
         returns: getRandomReturns(),
@@ -378,11 +388,11 @@ export function MockInvestmentRanking() {
       setRankingData(updatedRankingData);
     };
 
-    // Update the ranking every 4 seconds
+    
     const intervalId = setInterval(updateRankingData, 4000);
 
     return () => {
-      clearInterval(intervalId); // Clear the interval when the component unmounts
+      clearInterval(intervalId); 
     };
   }, []);
 

@@ -1,5 +1,6 @@
 import React, { useState, useRef,useEffect } from 'react';
-import socketIOClient from 'socket.io-client';
+import { io } from 'socket.io-client'
+import { useLocation, useSearchParams } from "react-router-dom";
 import {
   LineChart,
   Line,
@@ -16,11 +17,12 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 
 
+
 export function ArticleList() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const socket = socketIOClient('/'); // 소켓 연결
+    const socket = io('/'); // 소켓 연결
 
     // 서버로부터 업데이트된 데이터 수신
     socket.on('articles', (data) => {
@@ -84,20 +86,31 @@ export function Table() {
 }
 
 export function Rechart1() {
-  const data = [
+  const location = useLocation();
+  const [keyword, setKeyword] = useState('');
+
+  useEffect(() => {
+    if (location.state) {
+      setKeyword(decodeURIComponent(location.state.keyword));
+    } else {
+      setKeyword('');
+    }
+  }, [location]);
+
+  const data1 = [
     {
       name: '오전 10:00',
-      백광산업: 4000,
+      [keyword]: 4000,
       amt: 2400,
     },
     {
       name: '오전 12:00',
-      백광산업: 3000,
+      [keyword]: 3000,
       amt: 2210,
     },
     {
       name: '오후 2:00',
-      백광산업: 2000,
+      [keyword]: 2000,
       amt: 2290,
     },
   ];
@@ -105,8 +118,7 @@ export function Rechart1() {
   return (
     <ResponsiveContainer width={800} height={500}>
       <LineChart
-       
-        data={data}
+        data={data1}
         margin={{
           top: 70,
           left: 100,
@@ -119,50 +131,50 @@ export function Rechart1() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="백광산업"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Label
-          value="백광산업"
-          position="top"
-          offset={10}
-          style={{ fill: 'black' }}
-        />
-      
+        <Line type="monotone" dataKey={keyword} stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Label value={keyword} position="top" offset={10} style={{ fill: 'black' }} />
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
-export function Rechart2() {
-  const data = [
+export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
+  const location = useLocation();
+
+  const data2 = [
     {
       name: '오전 10:00',
-      백광산업: 4000,
-      LX인터내셔널: 2400,
+      [keywordFromChartMain]: 2400,
+      [keywordFromSearch2]: 4000,
+     
       amt: 2400,
     },
     {
       name: '오전 12:00',
-      백광산업: 3000,
-      LX인터내셔널: 1398,
+      [keywordFromChartMain]: 1398,
+      [keywordFromSearch2]: 3000,
+     
       amt: 2210,
     },
     {
       name: '오후 2:00',
-      백광산업: 2000,
-      LX인터내셔널: 9800,
+      [keywordFromChartMain]: 9800,
+      [keywordFromSearch2]: 2000,
+      
       amt: 2290,
     },
   ];
 
+  useEffect(() => {
+    if (location.state) {
+     
+    }
+  }, [location]);
+
   return (
     <ResponsiveContainer width={800} height={500}>
       <LineChart
-        data={data}
+        data={data2}
         margin={{
           top: 70,
           left: 110,
@@ -175,26 +187,16 @@ export function Rechart2() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="백광산업"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" dataKey="LX인터내셔널" stroke="#82ca9d" />
-        <Label
-          value="백광산업"
-          position="top"
-          offset={10}
-          style={{ fill: 'black' }}
-        />
+        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#82ca9d" />
+        <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
       </LineChart>
     </ResponsiveContainer>
   );
 }
 
 
-export function Search2() {
+export function Search2({ onKeywordChange }) {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [searchHistory, setSearchHistory] = useState([]);
@@ -205,7 +207,7 @@ export function Search2() {
   const webSocketRef = useRef(null);
 
   useEffect(() => {
-    webSocketRef.current = new WebSocket('ws://your-websocket-server-url'); // 웹소켓 서버 URL로 대체하세요
+    webSocketRef.current = new WebSocket('ws://your-websocket-server-url'); //웹소켓 주소
 
     webSocketRef.current.onopen = () => {
       console.log('웹소켓 연결이 성립되었습니다.');
@@ -213,8 +215,8 @@ export function Search2() {
 
     webSocketRef.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      setSuggestions(data); // 데이터가 서버로부터 제안 배열로 오는 것을 가정합니다
-      setIsOpen(data.length > 0); // 제안이 있을 때만 드롭다운을 보여줍니다
+      setSuggestions(data);
+      setIsOpen(data.length > 0);
     };
 
     webSocketRef.current.onclose = () => {
@@ -237,7 +239,7 @@ export function Search2() {
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    sendWebSocketMessage(value); // 웹소켓을 통해 서버로 검색어를 보냅니다
+    sendWebSocketMessage(value);
   };
 
   const onSuggestionsClearRequested = () => {
@@ -254,7 +256,8 @@ export function Search2() {
   const handleSearch = () => {
     console.log('검색어:', value);
     setSearchHistory([...searchHistory, value]);
-  };
+    onKeywordChange(value); 
+  }
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -271,7 +274,10 @@ export function Search2() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <div style={{ position: 'absolute', width: '700px', background: '#9bccfb', marginTop: '30px', marginLeft: '150px', zIndex: 1 }}>
+      <div
+        ref={resultContainerRef}
+        style={{ position: 'absolute', width: '700px', background: '#9bccfb', marginTop: '30px', marginLeft: '150px', zIndex: 1 }}
+      >
         {isOpen && (
           <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
             {searchHistory.map((searchItem, index) => (
