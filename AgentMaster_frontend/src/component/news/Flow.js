@@ -28,8 +28,8 @@ function Flow({flow,flownews}){
                         <div className='flow_text_body'>{flow.text}</div>
                 </Stack>
             </div>
-            <div class="col-xl-7">
-                <div class='scroll_horizental'>
+            <div className="col-xl-7">
+                <div className='scroll_horizental'>
                         <div className='row flex-row flex-nowrap pt-3'>
                             {articleList}
                         </div>

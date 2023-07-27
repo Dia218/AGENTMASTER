@@ -6,7 +6,7 @@ function UserPage() {
   return (
     <div className="App">
       <header className="mb-4"><Header /></header>
-      <div className="container userPage border">
+      <div className="container userPage">
         <UserInfoForm/>
         <ScrapedArticles/>
       </div>

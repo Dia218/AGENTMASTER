@@ -107,7 +107,7 @@ function Main() {
     },[socket])
 
     return(
-        <div className='main border'>
+        <div className='main'>
                 <Stack>
                     <Stack direction='horizontal' gap={0}>
                         <div className='news_main'><MainNews news={news[0]}/></div>

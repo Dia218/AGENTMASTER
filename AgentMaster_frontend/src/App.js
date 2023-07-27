@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NewsMain from './router/NewsMain';
 import NewsSearch from './router/NewsSearch';
 import NewsDetail from './router/NewsDetail';
-import ChartDetail from './router/ChartDetail';
+import ChartDetail from './router/chartDetail';
 import ChartMain from './router/ChartMain';
 import UserPage from './router/UserPage';
 

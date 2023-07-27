@@ -5,13 +5,20 @@
 import { useCallback } from "react";
 import { Button, Stack } from "react-bootstrap";
 import './css/Login_after.css'
+import { useNavigate } from "react-router-dom";
 
 const Login_after = ({setIsLogin}) => {
+
+    const navigate = useNavigate();
     
     const onLogout = useCallback(() => {
         sessionStorage.removeItem('user_id')
         setIsLogin(false)
     },[])
+
+    const handleClick = () => {
+        navigate(`/userPage`);
+    }
 
     return (
         <div className="loginForm">
@@ -20,7 +27,7 @@ const Login_after = ({setIsLogin}) => {
             </div>
             <div className="buttons">
                 <Stack direction='horizontal' gap={3}>
-                    <Button variant="info">사용자 페이지</Button>
+                    <Button variant="info" onClick={handleClick}>사용자 페이지</Button>
                     <Button variant="primary" onClick={onLogout}>로그아웃</Button>
                 </Stack>
             </div>

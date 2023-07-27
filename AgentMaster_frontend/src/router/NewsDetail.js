@@ -3,7 +3,7 @@
 //각각의 컴포넌트에 props로 전달한다.
 
 import { useState,useEffect } from 'react';
-import { io } from 'socket.io-client';
+import { io,socketIOClient } from 'socket.io-client';
 import './css/NewsDetail.css'
 import Flow from '../component/news/Flow';
 import Header from '../component/Header';
@@ -26,7 +26,7 @@ function NewsDetail(){
 
     useEffect(()=>{
         //소켓 연결
-        const socketIo = io.connect('');
+        const socketIo = io.connect('/');
 
         //서버로부터 데이터 수신
         socketIo.on('callNews',(data) => {
@@ -60,22 +60,22 @@ function NewsDetail(){
 
     return (
     <div className='nd_body'>
-        <header class="mb-4"><Header /></header>
-        <div class="container pt-4 pb-3">
-            <div class="row align-items-md-stretch space">
-                <div class="col-xl-8 mb-4" >
-                    <div class="summary_parent">
+        <header className="mb-4"><Header /></header>
+        <div className="container pt-4 pb-3">
+            <div className="row align-items-md-stretch space">
+                <div className="col-xl-8 mb-4" >
+                    <div className="summary_parent">
                         <Summary news={news} />
                     </div>
                 </div>
-                <div class="col-xl-4 mb-4">
-                    <div class="related_parent">
+                <div className="col-xl-4 mb-4">
+                    <div className="related_parent">
                         <RelatedArticles relatedArticles={ra} />
                     </div>
                 </div>
             </div>
 
-            <div class="space mt-4">
+            <div className="space mt-4">
                 <Flow 
                 flow={flow}
                 flownews={flowNews}
