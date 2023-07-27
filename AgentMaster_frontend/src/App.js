@@ -5,7 +5,7 @@ import NewsSearch from './router/NewsSearch';
 import NewsDetail from './router/NewsDetail';
 import ChartDetail from './router/chartDetail';
 import ChartMain from './router/ChartMain';
-import UserPage from './router/UserPage';
+import UserPage from './router/userPage';
 
 function App() {
   return (
