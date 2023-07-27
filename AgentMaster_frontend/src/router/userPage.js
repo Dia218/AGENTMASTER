@@ -4,7 +4,7 @@ import Header from "../component/Header";
 
 function UserPage() {
   return (
-    <div className="App">
+    <div className="app">
       <header className="mb-4"><Header /></header>
       <div className="container userPage">
         <UserInfoForm/>
