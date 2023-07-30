@@ -1,0 +1,42 @@
+.App {
+    background-color: white;
+    position: relative;
+}
+
+.Left {
+    float: left;
+    width: 60%;
+}
+
+.Right {
+    float: right;
+    width: 40%;
+}
+
+.StockSimilarCategory {
+    margin-left: 30px;
+    margin-top: 25px;
+
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.StockSimilarCategoryGroup {
+    display: inline-flex;
+}
+
+.StockSimilarCategoryGroupFlex1 {
+    flex: 1;
+}
+
+.StockSimilarCategoryGroupFlex2 {
+    flex: 2;
+}
+
+.StockSimilarCategoryGroupFlex3 {
+    flex: 3;
+}
+
+.StockSimilarCategoryGroupFlex4 {
+    flex: 4;
+}
