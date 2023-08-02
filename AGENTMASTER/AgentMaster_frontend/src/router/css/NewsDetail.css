@@ -1,0 +1,27 @@
+.space {
+  white-space: pre-line;
+}
+
+.nd_body {
+  min-height: 100vh;
+  background-color: rgb(240, 240, 240);
+  padding-bottom: 25px;
+}
+
+.summary_parent {
+  height: 100%;
+  background-color: #95d6ff;
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.related_parent {
+  max-width: 420px;
+  height: 100%;
+  background-color: #cdf7ff;
+  padding: 25px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+
