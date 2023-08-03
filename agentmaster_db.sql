@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     simul_range     NUMERIC(10, 2)   NOT NULL,
     simul_holdings  integer          NOT NULL,
     perchase_amount integer          NOT NULL,
-    average price   integer          NOT NULL,
+    average_price   integer          NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES "AGENTMASTER"."Customer" (customer_id) MATCH SIMPLE
