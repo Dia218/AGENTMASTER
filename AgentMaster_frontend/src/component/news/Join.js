@@ -8,7 +8,8 @@ function Join({show,setShow}){
     const [pw,setPw] = useState("");
     const [email,setEmail] = useState("");
     const [idList,setIdList] = useState([]);
-    const [check,setCheck] = useState(null);
+    const [check,setCheck] = useState(false);
+    const [checkMessage,setCheckMessage] = useState("");
 
     useEffect(()=>{
         setIdList([{"id":"idd"},{"id":"iddd"},{"id":"no"},{"id":"yes"}]);
@@ -27,16 +28,21 @@ function Join({show,setShow}){
         setPw("");
         setEmail("");
     };
-    /*const handleChange = (e) => {
-        setId(e.target.value);
-        const double = idList.map((a) => {
-            if(a.id === id){
-                return true;
+    const handleClick = () => {
+        for(let i=0;i<idList.length;i++){
+            if(idList[i].id===id){
+                setCheck(true);
+                break;
             }
-        });
-        console.log(double);
-        setCheck(double);
-    };*/
+            else if(id===""){
+                setCheck(false);
+                setCheckMessage("아이디를 입력해주세요.");
+                break;
+            }
+            setCheck(false);
+            setCheckMessage("사용 가능한 아이디 입니다.");
+        };
+    };
 
     return(
         <>
@@ -54,10 +60,12 @@ function Join({show,setShow}){
                         placeholder="아이디"
                         value={id}
                         onChange={(e)=>{setId(e.target.value);}}/>
-                        <Button variant="outline-secondary">중복확인</Button>
+                        <Button 
+                        variant="outline-secondary"
+                        onClick={handleClick}>중복확인</Button>
                     </InputGroup>
                     <div>
-                        {(check?"중복입니다!!!다른 아이디를 써주세요!":"")}
+                        {(check?"중복입니다!!!다른 아이디를 써주세요!":checkMessage)}
                     </div>
                     <InputGroup className="mb-3 inputPw">
                         <div className="mx-2">비밀번호 :</div>
