@@ -1,6 +1,6 @@
 .Article{
     margin-top: 40px;
-    margin-left: 140px;
+    margin-left: 200px;
     height: 300px;
     width: 670px;
     background-color: #9bccfb;
@@ -17,7 +17,7 @@
   margin-top: 50px;
   border-collapse: collapse;
   border: 1px solid #9bccfb ;
-  margin-left: 150px;
+  margin-left: 200px;
 }
   
   .custom-table th,
@@ -37,7 +37,7 @@
     width: 700px;
     height: 160px;
     display: flex;
-    margin-left: 150px;
+    margin-left: 100px;
     margin-top: 50px;
     margin-bottom: 100px;
   }

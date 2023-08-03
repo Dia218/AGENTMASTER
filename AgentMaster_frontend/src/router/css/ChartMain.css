@@ -4,7 +4,7 @@
     width: 600px;
     justify-content: center;
     margin-top: 90px;
-    margin-left: 21vh;
+    margin-left: 300px;
     margin-right: 20px;
     margin-bottom: 40px;
   }
@@ -32,7 +32,7 @@
     width: 1300px;
     border-collapse: collapse;
     border: 1px solid #9bccfb ;
-    margin-left: 150px;
+    margin-left: 250px;
     margin-top: 10px;
   }
   
@@ -59,7 +59,7 @@
   }
 
   .table-buttons{
-    margin-left: 150px;
+    margin-left: 250px;
     display: flex;
     gap: 50px;
   }
@@ -75,7 +75,7 @@
   .ranking-container {
     margin-top: 20px;
     text-align: center;
-    margin-right: 300px;
+    margin-right: 100px;
   }
 
   .mock-ranking-container {
@@ -84,7 +84,7 @@
     align-items: center;
     width: 550px;
     margin-top: 200px;
-    margin-left: -650px;
+    margin-left: -600px;
   }
   
   .ranking-list {

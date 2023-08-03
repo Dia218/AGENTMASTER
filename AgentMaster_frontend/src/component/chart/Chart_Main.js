@@ -76,7 +76,7 @@ export function Search() {
 
   const handleSearch = () => {
     if (value.trim() !== '') {
-      navigate(`/chartDetail?result=${encodeURIComponent(value)}`, {
+      navigate(`/ChartDetail?result=${encodeURIComponent(value)}`, {
         state: {
           keyword: value,
         },
@@ -103,7 +103,7 @@ export function Search() {
                 border: '3px solid #9bccfb',
                 padding: '30px',
                 borderRadius: '10px',
-                width: '600px',
+                width: '550px',
                 marginTop: '60px',
                 fontSize: '20px',
                 marginLeft: '60px',
@@ -144,7 +144,7 @@ export function Search() {
         style={{
           position: 'absolute',
           top: '190px',
-          marginLeft: '600px',
+          marginLeft: '560px',
         }}
         onClick={handleSearch}
       >
@@ -377,7 +377,7 @@ export function MockInvestmentRanking() {
 
   useEffect(() => {
     const updateRankingData = () => {
-      // Generate random investment values for the ranking data
+     
       const updatedRankingData = mockData.map((item) => ({
         ...item,
         returns: getRandomReturns(),
@@ -385,11 +385,11 @@ export function MockInvestmentRanking() {
       setRankingData(updatedRankingData);
     };
 
-    // Update the ranking every 4 seconds
-    const intervalId = setInterval(updateRankingData, 4000);
+    
+    const intervalId = setInterval(updateRankingData, 3000);
 
     return () => {
-      clearInterval(intervalId); // Clear the interval when the component unmounts
+      clearInterval(intervalId); 
     };
   }, []);
 

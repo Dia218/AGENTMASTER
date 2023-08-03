@@ -120,9 +120,9 @@ export function Rechart1() {
         data={data1}
         margin={{
           top: 70,
-          left: 100,
+          left: 150,
           bottom: 5,
-          right: 10,
+          
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -139,7 +139,16 @@ export function Rechart1() {
 
 export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   const location = useLocation();
+  const [keyword, setKeyword] = useState('');
 
+  useEffect(() => {
+    if (location.state) {
+      setKeyword(decodeURIComponent(location.state.keyword));
+    } else {
+      setKeyword('');
+    }
+  }, [location]);
+  
   const data2 = [
     {
       name: '오전 10:00',
@@ -176,9 +185,9 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
         data={data2}
         margin={{
           top: 70,
-          left: 110,
+          left: 150,
           bottom: 5,
-          right: 10,
+          
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -303,7 +312,7 @@ export function Search2({ onKeywordChange }) {
               padding: '10px',
               borderRadius: '5px',
               width: '700px',
-              marginLeft: '150px',
+              marginLeft: '200px',
               marginTop: '50px',
             },
             ref: searchInputRef,

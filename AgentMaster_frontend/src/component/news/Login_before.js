@@ -2,7 +2,7 @@
 //로그인에 성공하면 유저 정보를 백에 넘겨줘야함.
 //회원가입 버튼 클릭시 회원가입 창 띄우기 구현 필요.
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import './css/Login_before.css';
 import Join from "./Join";
