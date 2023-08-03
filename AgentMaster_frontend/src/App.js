@@ -6,7 +6,7 @@ import NewsDetail from './router/NewsDetail';
 import ChartDetail from './router/ChartDetail';
 import ChartMain from './router/ChartMain';
 import UserPage from './router/UserPage';
-import NotFound from './router/NotFound';
+import SimulMain from './router/SimulMain';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path='/chartMain' element={<ChartMain />} />
         <Route path='/chartDetail' element={<ChartDetail />} />
         <Route path='/userPage' element={<UserPage />} />
-        <Route path='/*' element={<NotFound />} />
+        <Route path='/simulMain' element={<SimulMain />} />
       </Routes>
     </BrowserRouter>
   );
