@@ -16,7 +16,7 @@ function App() {
         <Route path='/searchList' element={<NewsSearch />} />
         <Route path='/newsDetail' element={<NewsDetail />} />
         <Route path='/chartMain' element={<ChartMain />} />
-        <Route path='/ChartDetail' element={<ChartDetail />} />
+        <Route path='/chartDetail' element={<ChartDetail />} />
         <Route path='/userPage' element={<UserPage />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>

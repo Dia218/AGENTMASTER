@@ -76,7 +76,7 @@ export function Search() {
 
   const handleSearch = () => {
     if (value.trim() !== '') {
-      navigate(`/ChartDetail?result=${encodeURIComponent(value)}`, {
+      navigate(`/chartDetail?result=${encodeURIComponent(value)}`, {
         state: {
           keyword: value,
         },
