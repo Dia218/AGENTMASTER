@@ -11,7 +11,7 @@ function Simul_status() {
     const [total_money, setTotalMoney] = useState(money + stock_money);
     const [stock_holdings, setStockHoldings] = useState(20);
 
-    const onClick = () => {
+    const onClick = () => {     //클릭 리스너
         const reset = window.confirm("모의투자 정보를 초기화 하시겠습니까?");
         if(reset === true) {
             setMoney(10000);
@@ -20,8 +20,7 @@ function Simul_status() {
         }
     }
 
-
-    useEffect(() => {
+    useEffect(() => {   //총 자산 저장할 때 프론트에 바로 적용이 안되서 따로 적음. 필요없으면 지워도 됨.
         setTotalMoney(money + stock_money);
     },[money]);
 

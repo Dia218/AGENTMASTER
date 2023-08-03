@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function Status_list({stock_holdings}) {
 
-    const NoneSimulStock = () => {
+    const NoneSimulStock = () => {  //보유 중인 모의투자 주식이 없을 때 생성
         return (
             <div className="noneSimulStock">보유 중인 모의투자 주식이 없습니다.</div>
         )

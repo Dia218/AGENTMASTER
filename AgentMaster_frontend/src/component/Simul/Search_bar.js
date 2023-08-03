@@ -2,8 +2,9 @@
 
 import "./css/Search_bar.css";
 import React from "react";
+import PropTypes from "prop-types";
 
-const Search_bar = ({searchBarRef, handleSearchBarChange, handleSearchBarClick}) => {
+const Search_bar = ({ searchBarRef, handleSearchBarChange, handleSearchBarClick }) => {
 
     return (
         <div id='simulSearchBar' className="simulSearchBar" >
@@ -21,4 +22,11 @@ const Search_bar = ({searchBarRef, handleSearchBarChange, handleSearchBarClick})
             </div>
     )
 }
+
+Search_bar.propTypes = {
+    searchBarRef: PropTypes.object.isRequired,
+    handleSearchBarChange: PropTypes.func.isRequired,
+    handleSearchBarClick: PropTypes.func.isRequired,
+}
+
 export default Search_bar;

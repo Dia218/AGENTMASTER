@@ -2,33 +2,37 @@
 
 import "./css/Search_button.css";
 import React from "react";
+import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import { SearchOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 
-const Search_button = ({ btnClick, keyword }) => {
+const Search_button = ({ btnClick }) => {
     return (
         
         <div className="simulSearchBtn">
-        <Button 
-            variant="outline-primary" 
-            onClick={btnClick}
-            style={{
-                    border: 'none', 
-                    borderRadius: '100%', 
-                    padding: '0'
-            }} 
-        >
-            <SearchOutlined 
-                style={{ 
-                    display: 'block', 
-                    margin: 'auto', 
-                    fontSize: '25px'
+            <Button 
+                variant="outline-primary" 
+                onClick={btnClick}
+                style={{
+                        border: 'none', 
+                        borderRadius: '100%', 
+                        padding: '0'
                 }} 
-            />
-        </Button>
-    </div>
+            >
+                <SearchOutlined 
+                    style={{ 
+                        display: 'block', 
+                        margin: 'auto', 
+                        fontSize: '25px'
+                    }} 
+                />
+            </Button>
+        </div>
     )
+}
+
+Search_button.propTypes = {
+    btnClick: PropTypes.func.isRequired,
 }
 
 export default Search_button;
