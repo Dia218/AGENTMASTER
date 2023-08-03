@@ -2,19 +2,19 @@
 //로그인시 유저의 이름을 출력하는 기능 추가 예정.
 //로그아웃 기능과 사용자 페이지클릭 시 넘어가기 기능 구현 필요 
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import './css/Login_after.css'
 import { useNavigate } from "react-router-dom";
 
-const Login_after = ({setIsLogin}) => {
+function Login_after({setIsLogin}) {
 
     const navigate = useNavigate();
     
-    const onLogout = useCallback(() => {
-        sessionStorage.removeItem('user_id')
+    const onLogout = () => {
+        sessionStorage.clear()
         setIsLogin(false)
-    },[])
+    }
 
     const handleClick = () => {
         navigate(`/userPage`);
@@ -23,7 +23,7 @@ const Login_after = ({setIsLogin}) => {
     return (
         <div className="loginForm">
             <div className="welcomeUser">
-                <p>.....님{"\n"}환영합니다!</p>
+                <p>{sessionStorage.getItem("user_id")}님{"\n"}환영합니다!</p>
             </div>
             <div className="buttons">
                 <Stack direction='horizontal' gap={3}>

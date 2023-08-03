@@ -10,3 +10,7 @@ header {
 .nav_text {
     font-weight: 600;
 }
+
+.nav_text:hover {
+    cursor: pointer;
+}

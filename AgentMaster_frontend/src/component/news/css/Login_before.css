@@ -29,6 +29,11 @@
 }
 
 .signup {
-    text-align: center;
+    margin: 0 auto;
     text-decoration: underline;
+    width: fit-content;
+}
+
+.signup:hover {
+    cursor: pointer;
 }

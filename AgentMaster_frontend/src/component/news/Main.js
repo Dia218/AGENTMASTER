@@ -21,8 +21,6 @@ function Main() {
     const name = "기자 이름";
     const title = "신문기사 제목이 올라갈 공간입니다"
 
-    const navigate = useNavigate();
-
     //뉴스 데이터와 주식 데이터를 담을 useState 훅
     const [socket, setSocket] = useState();
     const [news, setNews] = useState(['','','','','']);
@@ -70,7 +68,11 @@ function Main() {
 
     //로그인 성공 시 값을 true로 변경.
     const [isLogin, setIsLogin] = useState(false);
+    useEffect(()=>{
+        setIsLogin(sessionStorage.getItem("isLogin"));
+    },[])
 
+    const navigate = useNavigate();
     const handleClick = () => {
         navigate(`/chartMain`);
     }
@@ -114,7 +116,7 @@ function Main() {
                         <div className='news_main'><MainNews news={news[1]}/></div>
                         <div className='news_main'><MainNews news={news[2]}/></div>
                         <div className='login_main'>
-                            {isLogin?<Login_after setIsLogin={setIsLogin} />:<Login_before setIsLogin={setIsLogin}/>}
+                            {isLogin?<Login_after setIsLogin={setIsLogin}/>:<Login_before setIsLogin={setIsLogin}/>}
                         </div>
                     </Stack>
                     <Stack direction='horizontal'>
@@ -123,7 +125,7 @@ function Main() {
                         <div className='stock_main'>
                             <Stack direction='horizontal' className='stock_title'>
                                 <div><h4>증시</h4></div>
-                                <div className="ms-auto text-center" onClick={handleClick}><h3>+</h3></div>
+                                <div className="ms-auto text-center moveToStock" onClick={handleClick}><h3>+</h3></div>
                             </Stack>
                             <Chart columns={columns} data={stockData} />
                         </div>

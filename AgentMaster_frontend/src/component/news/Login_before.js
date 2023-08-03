@@ -5,30 +5,36 @@
 import { useCallback, useState } from "react";
 import { Button } from "react-bootstrap";
 import './css/Login_before.css';
+import Join from "./Join";
 
 const Login_before = ({setIsLogin}) => {
-    const [id,setId] = useState('');
-    const [pw, setPw] = useState('');
+    const [id,setId] = useState("");
+    const [pw, setPw] = useState("");
+    const [show,setShow] = useState(false);
 
     //input에 변화가 있을때마다 value 값을 변경해서 state에 저장한다.
     const handleId = (e) => {
-        setId(e.target.value)
+        setId(e.target.value);
     }
 
     const handlePw = (e) => {
-        setPw(e.target.value)
+        setPw(e.target.value);
     }
 
     //로그인 버튼 클릭 시 실행. 현재는 자동으로 성공 처리함.
-    const onClickLogin = useCallback(() =>{
-        console.log('click')
-        setIsLogin(true)
-        sessionStorage.setItem('user_id',id)
-    },[])
+    const onClickLogin = () =>{
+        sessionStorage.setItem("user_id", id);
+        sessionStorage.setItem("user_pw",pw);
+        sessionStorage.setItem("isLogin",true);
+        setIsLogin(true);
+    }
 
-
+    const onClickJoin = () => {
+        setShow(true);
+    }
 
     return (
+        <>
         <div className="loginForm">
             <div className="loginId">
                 <input type='text' name='input_id' placeholder="아이디" value={id} onChange={handleId} required/>
@@ -39,8 +45,10 @@ const Login_before = ({setIsLogin}) => {
             <div className="loginButton">
                 <Button className="button" variant="primary" onClick={onClickLogin}>Login</Button>
             </div>
-            <div className="signup" onClick={onClickLogin}>sign up</div>
+            <div className="signup" onClick={onClickJoin}>sign up</div>
         </div>
+        <Join show={show} setShow={setShow}/>
+        </>
     );
   }
   

@@ -1,14 +1,19 @@
-import Navbar from 'react-bootstrap/Navbar'
+import Navbar from 'react-bootstrap/Navbar';
 import { Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header(){
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/`);
+    }
 
     return(
         <div className='header'>
             <Navbar expand="lg" className='navbar'>
                 <Container>
-                    <Navbar.Brand href="/" className='nav_text'>AgentMaster</Navbar.Brand>
+                    <Navbar.Brand onClick={handleClick} className='nav_text'>AgentMaster</Navbar.Brand>
                 </Container>
             </Navbar>
         </div>
