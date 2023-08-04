@@ -1,6 +1,5 @@
-.App {
-    background-color: white;
-    position: relative;
+.StockTradeScene {
+    min-width: 1300px;
 }
 
 .Left {
@@ -15,14 +14,17 @@
 
 .StockSimilarCategory {
     margin-left: 30px;
-    margin-top: 25px;
-
+    margin-top: 22px;
+    margin-bottom: 20px;
     font-size: 25px;
-    margin-bottom: 25px;
+
 }
 
 .StockSimilarCategoryGroup {
-    display: inline-flex;
+    min-width: 700px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .StockSimilarCategoryGroupFlex1 {

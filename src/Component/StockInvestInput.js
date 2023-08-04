@@ -1,40 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './css/StockInvestInput.css';
 
-export default function StockInvestInput() {
+const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle }) => {
+    return (
+        <>
+            <input
+                checked={StockInvestInputSwitchActive}
+                onChange={handleToggle}
+                className="StockInvestInputCheckbox"
+                id={`Price`}
+                type="checkbox"
+            />
+            <label
+                className="StockInvestInputLable"
+                htmlFor={`Price`}
+            >
+                매수
+                <span className={`react-switch-button`}/>
+                매도
+            </label>
+        </>
+    );
+};
+export default function StockInvestInput({AvailableAsset, Amount}) {
+    const [SwitchActive, setSwitch] = useState(false);
+
     return (
         <div className="StockInvestInput">
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    className="toggle-switch-checkbox"
-                    name="toggleSwitch"
-                    id="toggleSwitch"
-                />
-                <label className="toggle-switch-label" htmlFor="toggleSwitch">
-                    <span className="toggle-switch-inner" />
-                    <span className="toggle-switch-switch" />
-                </label>
-            </div>
+            <StockInvestInputSwitch
+                StockInvestInputSwitchActive= {SwitchActive}
+                handleToggle={()=>setSwitch(!SwitchActive)}
+            />
             <div className="StockInvestInputData">
                 <div>
-                    가용 자산: -
+                    가용 자산: {AvailableAsset}
                 </div>
                 <div>
-                    보유량: -
+                    보유량: {Amount}
                 </div>
 
             </div>
-            < div className="StockInvestInputField">
-                <div>
-                    가격:<input/>
+            <div className="StockInvestInputLower">
+                <div className="StockInvestInputBox">
+                    <div>
+                        가격:
+                        < div className="StockInvestInputPrice">
+                            <input/>
+                        </div>
+                    </div>
+                    <div>
+                        매수량:
+                        <div className="StockInvestInputAmount">
+                            <input/>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    매수량:<input/>
-                </div>
-            </div>
-            <div className="StockInvestInputButton">
-                <button>매수</button>
+
+                {SwitchActive && (
+                    <div className="StockInvestInputButton">
+                        매수
+                    </div>
+                )}
+                {!SwitchActive && (
+                    <div className="StockInvestInputButton">
+                        매도
+                    </div>
+                )}
             </div>
         </div>
     );

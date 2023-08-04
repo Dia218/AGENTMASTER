@@ -18,41 +18,59 @@ export default function StockInvestData({
             <div className="StockInvestDataLeft">
                 <div className="PDP">
                     전일 종가:
-                    {PreviousDayPrice}
+                    <div>
+                        {PreviousDayPrice}
+                    </div>
                 </div>
                 <div className="DL">
                     일일 최저가:
-                    {DaysLow}
+                    <div>
+                        {DaysLow}
+                    </div>
                 </div>
                 <div className="WL">
                     52주 최저가:
-                    {WeekLow}
+                    <div>
+                        {WeekLow}
+                    </div>
                 </div>
                 <div className="PER">
                     주가 수익률:
-                    {PriceEarningsRatio}
+                    <div>
+                        {PriceEarningsRatio}
+                    </div>
                 </div>
                 <div className="PTB">
                     주당순자산비율:
-                    {PriceToBook}
+                    <div>
+                        {PriceToBook}
+                    </div>
                 </div>
             </div>
-            <div className="StockInvestDataright">
+            <div className="StockInvestDataRight">
                 <div className="MCP">
                     시가 총액:
-                    {MarketCapPrice}
+                    <div>
+                        {MarketCapPrice}
+                    </div>
                 </div>
-                <div className="MCP">
+                <div className="DH">
                     일일 최고가:
-                    {DaysHigh}
+                    <div>
+                        {DaysHigh}
+                    </div>
                 </div>
-                <div className="MCP">
+                <div className="WH">
                     52주 최고가:
-                    {WeekHigh}
+                    <div>
+                        {WeekHigh}
+                    </div>
                 </div>
-                <div className="MCP">
+                <div className="DY">
                     배당 수익률:
-                    {DividendYield}
+                    <div>
+                        {DividendYield}
+                    </div>
                 </div>
             </div>
         </div>

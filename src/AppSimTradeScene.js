@@ -54,7 +54,7 @@ const GraphInput = [
 
 export default function AppSimTradeScene() {
     return (
-        <div className="App">
+        <div className="StockTradeScene">
             <div className="Left">
                 <div className="StockGraph">
                     <StockGraph/>
@@ -66,26 +66,18 @@ export default function AppSimTradeScene() {
                     동일 업종
                 </div>
                 <div className="StockSimilarCategoryGroup">
-                    <div className="StockSimilarCategoryGroupFlex1">
-                        <StockSimilarCategoryBox
-                            SimilarStockname="bruh" SimilarStockPrice="bruh"
-                            SimilarStockrates="bruh" SimilarStockcode="bruh"/>
-                    </div>
-                    <div className="StockSimilarCategoryGroupFlex2">
-                        <StockSimilarCategoryBox
-                            SimilarStockname="bruh" SimilarStockPrice="bruh"
-                            SimilarStockrates="bruh" SimilarStockcode="bruh"/>
-                    </div>
-                    <div className="StockSimilarCategoryGroupFlex3">
-                        <StockSimilarCategoryBox
-                            SimilarStockname="bruh" SimilarStockPrice="bruh"
-                            SimilarStockrates="bruh" SimilarStockcode="bruh"/>
-                    </div>
-                    <div className="StockSimilarCategoryGroupFlex4">
-                        <StockSimilarCategoryBox
-                            SimilarStockname="bruh" SimilarStockPrice="bruh"
-                            SimilarStockrates="bruh" SimilarStockcode="bruh"/>
-                    </div>
+                    <StockSimilarCategoryBox
+                        SimilarStockname="bruh" SimilarStockPrice="bruh"
+                        SimilarStockrates="bruh" SimilarStockcode="bruh"/>
+                    <StockSimilarCategoryBox
+                        SimilarStockname="bruh" SimilarStockPrice="bruh"
+                        SimilarStockrates="bruh" SimilarStockcode="bruh"/>
+                    <StockSimilarCategoryBox
+                        SimilarStockname="bruh" SimilarStockPrice="bruh"
+                        SimilarStockrates="bruh" SimilarStockcode="bruh"/>
+                    <StockSimilarCategoryBox
+                        SimilarStockname="bruh" SimilarStockPrice="bruh"
+                        SimilarStockrates="bruh" SimilarStockcode="bruh"/>
                 </div>
             </div>
             <div className="Right">
@@ -100,7 +92,12 @@ export default function AppSimTradeScene() {
                     DividendYield='bruh'
                     PriceToBook='bruh'
                 ></StockInvestData>
-                <StockInvestInput/>
+                <StockInvestInput
+                    AvailableAsset='bruh'
+                    Amount='bruh'
+                    >
+                </StockInvestInput>
+
             </div>
         </div>
 
