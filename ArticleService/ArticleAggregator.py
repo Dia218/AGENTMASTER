@@ -3,13 +3,15 @@
     WRITTEN DATE: 2023.08.02
     NAME: NewsAggregatorService.py
 """
-
+import json
 import math
 
 from datetime import date, timedelta
 
 import requests
 from bs4 import BeautifulSoup
+
+import Link
 
 articleTemplate = {
     "title": None,
@@ -182,16 +184,17 @@ class ArticleAggregator:
         date = self._date(dayOffset)
         pageLast = nround
 
-        for i in range(0, nround):
-            # Generate a complete url to request. [v]
-            linkBase = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm" \
-                    "&sid1=" + str(self.codeSection[nameSection]) + "" \
-                    "&sid2=" + str(self.codeSectionGeneral[nameSection]) + "" \
-                    "&date=" + self._date(dayOffset)
-            page = i+1; linkpartPage = "&page=" + str(page)
-
-            # Request a html document. [v]
-            document = BeautifulSoup(requests.get(linkBase + linkpartPage, headers=self.header).text, "html.parser")
+        for page in range(0, nround):
+            try:
+                # Generate a complete url to request. [v]   
+                url = Link.assemble_link(base="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm",
+                                   parameters=["sid1", "sid2", "date", "page"],
+                                   values=[str(self.codeSection[nameSection]), str(self.codeSectionGeneral[nameSection]), self._date(dayOffset), str(page + 1)])
+            
+                # Request a html document. [v]
+                document = BeautifulSoup(requests.get(url, headers=self.header).text, "html.parser")
+            except Link.InvalidLinkException as le:
+                raise le
 
             # Gather aggregated articles. [v]
             additionalAggregatedArticles = self._parse_section_general(document)
@@ -288,11 +291,11 @@ class ArticleAggregator:
                 # Extract body [v]
 
                 bodyText = document.find("div", id="dic_area")
-
-                for t in bodyText.find_all():
+                
+                for t in bodyText.find_all() if bodyText else []:
                     t.decompose()
                 
-                article['body'] = bodyText.text.strip()
+                article['body'] = bodyText.text.strip() if bodyText else ""
 
                 # Extract reporter [v]
                 nameReporter = ""
@@ -339,10 +342,10 @@ class ArticleAggregator:
                 # Extract body [v]
                 bodyText = document.find("div", id="dic_area")
 
-                for t in bodyText.find_all():
+                for t in bodyText.find_all() if bodyText else []:
                     t.decompose()
                 
-                article['body'] = bodyText.text.strip()
+                article['body'] = bodyText.text.strip() if bodyText else ""
 
                 # Extract reporter [v]
                 nameReporter = ""
@@ -376,7 +379,6 @@ class ArticleAggregator:
             dayOffset=dayOffset)
         return self.aggregate_articles(linkAggregated)
 
-
 model = ArticleAggregator()
 
 arts = model.aggregate_section_general()
@@ -384,9 +386,10 @@ arts = model.aggregate_articles(aggregated=arts)
 
 arts = model.aggregate_continous_section_general(aggregated=arts)
 
-model.aggregate_continous_article(arts)
+arts = model.aggregate_continous_article(arts)
 
-for i, a in enumerate(arts['articles']):
-    print(f'{i:2}: {a["title"]} \n { a["body"][:30] +"..." if a["body"] else "NONE"} \n', sep='')
+"""for i, a in enumerate(arts['articles']):
+    print(f'{i:2}: {a["title"]} \n { a["body"][:30] +"..." if a["body"] else "NONE"} \n', sep='')"""
 
-
+with open("article_example.json", "w", encoding="UTF-8") as jsn:
+    json.dump(arts, jsn, indent=4)
