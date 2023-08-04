@@ -10,6 +10,35 @@ import json
 import requests
 import bardapi
 
-class ArticleRelator:
+class ArticleBucket:
+    """
+    """
+    def __init__(self):
+        ...
     ...
-    # TBD
+
+class ArticleRelator:
+    """
+        ArticleRelator
+    """
+    def __init__(self):
+        self.promprt = """..."""
+
+    def set_path(self):
+        """
+        
+        """
+        ...
+    
+    def relate_article(self, article: dict, aggregated: dict):
+        """
+        relate_article
+            A function
+        """
+
+        # Same article Should not be recommended. 
+        if article in aggregated:
+            ...
+
+        
+

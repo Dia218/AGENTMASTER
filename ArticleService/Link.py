@@ -25,7 +25,15 @@ class DuplicatedParameterException(InvalidLinkException):
     def __init__(self):
         self.msg = "context: assemble_link() has invoked. \n" \
                 "problem: assemble_link() has given duplicate paramter. \n" \
-                "solution: assemble_link() must given valid parameters. This method is unable to use for user point. Contact admin. \n"
+                "solution: assemble_link() must given unique parameters. This method is unable to use for user point. Contact admin. \n"
+
+def _has_duplicated_elements(l: list):
+    keys = dict()
+    for e in l:
+        if str(e) in keys: return True
+        keys[str(e)] = None
+    
+    return False
 
 def assemble_link(
     base: str = None, 
@@ -56,40 +64,46 @@ def assemble_link(
         # 1) base addr has not given.
         # 2) parameters has not given but values are given. 
     if not base or type(base) != str: raise InvalidBaseException()
-    if len(parameters) == 0 and values: InvalidParameterValuePairException()
+    if not parameters and values: InvalidParameterValuePairException()
 
     # When the number of parameters and values are not matching up.
     if not values: values = list()
     if len(parameters) != len(values): raise InvalidParameterValuePairException()
 
     # When some elements in parameters are not 'str'.
-    if ...: raise InvalidParameterException()
+    if list(filter(lambda p: (type(p) != str), parameters)): raise InvalidParameterException()
 
     # When some elements in values are not 'str' or 'None'.
-    if ...: raise InvalidValueException()
+    if list(filter(lambda v: (type(v) == str) or v is None , values)) != values: raise InvalidValueException()
 
     # When the elements in parameters is duplicated.
-    if ...: raise DuplicatedParameterException()
+    if _has_duplicated_elements(parameters): raise DuplicatedParameterException()
 
-    # Assemble the link. 
-    query = '&'.join([param + "=" + (val if val else "") for param, val in zip(parameters, values)])
+    # Assemble the given link. 
+    assembledPV = list(param + "=" + (val if val else "") for param, val in zip(parameters, values))
+    query = '&'.join(assembledPV)
     return base + ("" if query == "" else "?") + query 
 
-print(assemble_link(base="www.naver.com"))
+test = {
+    "base": "www.testing.com",
+    "PV": [
+        { "P": [], "V": [] },
+        { "P": ["foo", "bar"], "V": ["1", "2"] },
+        { "P": ["foo", "bar"], "V": [None, None] },
+        { "P": ["foo", "bar"], "V": [None] },
+        { "P": ["foo", "bar"], "V": ["1", None] },
+        { "P": [132, 312], "V": ["11", "11"] },
+        { "P": ["foo", "bar"], "V": [11, 11]}, 
+        { "P": ["foo", "foo"], "V": ["11", "11"] },
+        { "P": ["foo", "bar", "baz"], "V": ["1", 2, "3"] }
+    ]
+}
 
-print(assemble_link(base="www.based.com",
-                    parameters=[],
-                    values=[]))
+for itc, tc in enumerate(test['PV']):
+    b = test['base']
 
-print(assemble_link(base="www.naver.com",
-                    parameters=["sep", "ple"],
-                    values=["1", "2"]))
-
-print(assemble_link(base="www.naver.com",
-                    parameters=["sep", "ple"],
-                    values=[None, None]))
-
-print(assemble_link(base=321,
-                    parameters=["sep", "ple"],
-                    values=[None]))
-
+    try:
+        l = assemble_link(base=b, parameters=tc["P"], values=tc["V"])
+        print(f"{itc+1:2} / {len(test['PV'])}", l)
+    except InvalidLinkException as e:
+        print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)
