@@ -1,6 +1,6 @@
 """
     WRITER: Kim Junwoo
-    WRITTEN DATE: 2023.08.02
+    WRITTEN DATE: 2023.08.08
     NAME: NewsRelator.py
 """
 
@@ -30,80 +30,100 @@ RelatorConfigurationFileFormatException = ASE.ArticleServiceException(ASE.Except
     solution = "Check the format of configuration file. "
 ))
 
+InvalidFilePathException = ASE.ArticleServiceExcpetion(ASE.EceptionMessageForamt(
+    context = "",
+    problm = "",
+    solution = ""
+))
+
+
+
 class ArticleRelator:
     """
         ArticleRelator
-            A class
+            A class finds related articles from old news.
     """
 
-    def _load_configuration(self, path: str = "") -> None:
+    def __init__(self):
+        """
+            __init__
+                A function initializes ArticleRelator
+
+            parameters
+                None
+
+            returns
+                None
+        """
+        self.BARD_USAGE_CONFIGURATION_PATH = ""
+        
+        prompt, session_header, secure_key = self._load_configuration(self.BARD_USAGE_CONFIGURATION_PATH)
+        self.prompt = prompt
+        self.session_header = session_header
+        self.secure_key = secure_key
+
+        self.sementic_criteria = ["title", "body", "summary"]
+        self.criteria_search_limit = {"title": 50, "body": 15, "summary": 40}
+        self.timeout_miliseconds = 30
+        self.session = self._session()    
+
+    def _load_configuration(self, path: str = "") -> tuple:
         """
             _load_configuration
                 A function
+
+            parameters
+                path('str')
+
+            returns
+
         """
         # If path is nonsense.
         if path == "": raise ...
 
-        # Read a configuration file.
-        configuration = None
         try:
+            configuration = None
+            
+            # Read a configuration file.
             with open(path, "r", encoding="UTF-8") as f:
                 if not f: raise RelatorConfigurationFileIoException
-                cofiguration = json.load(f)
+                configuration = json.load(f)
 
             # Check format.
             if "key" not in configuration or "prompt" not in configuration:
                 raise RelatorConfigurationFileFormatException
-            self.bard_api_key = configuration["key"]
-            self.prompt = configuration["prompt"]
+            
+            # Retrieve informations. 
+            secure_key =  configuration["key"]
+            prompt = configuration["prompt"]
+            header = configuration["header"]
+
+            return prompt, header, secure_key
         except RelatorConfigurationFileIoException as e:
             print(e)
-            return
+            return None
         except RelatorConfigurationFileFormatException as e:
             print (e)
-            return
-            
-        # Assign each configuration variables.
-        self.bard_api_key = configuration["key"]
-        self.prompt = configuration["prompt"]
+            return None
     
     def _load_articles(self, path: str = "") -> tuple:
         """
-            _load_configuration
-                A function
+            _load_articles
+                A function loads articles from a json file.  
         """
         # If path is nonsense. 
-        if path == "": return dict()
+        if path == "": raise InvalidFilePathException
 
         # Read the json file.
+        newsBase = None
         try:
-            newsBase = None
             with open(path, "r", encoding="UTF-8") as newsJson:
                 newsBase = json.load(newsJson)
-            return newsBase
         except RelatorJsonIOException as e:
             print(e)
             return None
-
-    def __init__(self):
-        """
-
-        """
-        self.BARD_USAGE_CONFIGURATION_PATH = ""
         
-        prompt, session_header, secures = self._load_configuration(self.BARD_USAGE_CONFIGURATION_PATH)
-
-        self.prompt = prompt
-        self.session_header = session_header
-        self.secures = secures
-
-        self.sementic_criteria = ["title", "body", "summary"]
-        self.criteria_search_limit = [50, 15, 40]
-        self.timeout_miliseconds = 30
-        self.session = self._session()
-
-        self.bard_api_key = None
-        self.prompt = str() 
+        return newsBase
 
     def _find_existing_article_index(
             self, 
@@ -126,8 +146,7 @@ class ArticleRelator:
         if not aggregated: dict()
 
         for i, ag in enumerate(aggregated):
-            if article is ag:
-                return i
+            if article is ag: return i
         
         # Returns -1 if the article does not exist. 
         return -1
@@ -136,21 +155,17 @@ class ArticleRelator:
         """
             _session
                 A function returns the session of Bard (unofficial) api
+
+            parameters
+                None
+
+            returns
+                'requests.Session' which the header and the api_key have set. 
         """
 
         session = requests.Session()
-        session.headers = {
-            "host": "bard.google.com",
-            "X-Same-Domain": "1",
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) " \
-                          "AppleWebKit/537.36 (KHTML, like Gecko) " \
-                          "Chrome/73.0.3683.103 Safari/537.36",
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-            "Origin": "https://bard.google.com",
-            "Referer": "https://bard.google.com/",
-        }
-
-        os.environ['_BARD_API_KEY'] = self.bard_api_key
+        session.headers = self.session_header
+        os.environ['_BARD_API_KEY'] = self.secure_key
 
     def _parse_related_articles(self, response: str = "") -> list:
         """
@@ -159,6 +174,16 @@ class ArticleRelator:
         """
         # If response is nonsense. 
         if response == "": return list()
+
+    def _exclude_same_articles(aggregated: dict = None) -> dict:
+        """
+            _exclude_same_articles
+
+            parameters
+
+            returns
+        """
+
 
     def relate_articles(
             self, 
@@ -181,17 +206,13 @@ class ArticleRelator:
         if nrelated <= 0: list()
 
         # Same article Should not be recommended.
-        searching_articles = None
-        i_exist = self._find_existing_article_index(article, aggregated)
-        if i_exist != -1: 
-            searching_articles = aggregated[:i_exist] + aggregated[i_exist+1:]
-        searching_articles = searching_articles[:self.criteria_search_limit[criteria]]
+        searching_articles = self._exclude_same_articles(aggregated=aggregated)
 
         response = bardapi.core.Bard(
             session=self.session, 
             timeout=self.timeout_miliseconds).get_answer(self.prompt)
         
         related_article_index = self._parse_related_articles(response)
-
+        
         return [searching_articles[i] for i in related_article_index]
             
