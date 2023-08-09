@@ -6,7 +6,7 @@ import Main from "../component/news/Main";
 import SearchBar from "../component/news/SearchBar";
 import './css/NewsMain.css';
 
-function NewsMain(){
+function NewsMain(user){
     return (
     <div className='nd_body'>
         <header className="mb-4"><Header /></header>

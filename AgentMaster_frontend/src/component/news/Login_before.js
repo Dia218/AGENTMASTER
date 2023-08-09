@@ -23,7 +23,7 @@ const Login_before = ({setIsLogin}) => {
 
     //로그인 버튼 클릭 시 실행. 현재는 자동으로 성공 처리함.
     const onClickLogin = () =>{
-        sessionStorage.setItem("user_id", id);
+        sessionStorage.setItem("user_id",id);
         sessionStorage.setItem("user_pw",pw);
         sessionStorage.setItem("isLogin",true);
         setIsLogin(true);

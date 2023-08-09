@@ -66,21 +66,10 @@ function Main() {
             },
     ],[]);
 
-    //로그인 성공 시 값을 true로 변경.
-    const [isLogin, setIsLogin] = useState(false);
-    useEffect(()=>{
-        setIsLogin(sessionStorage.getItem("isLogin"));
-    },[])
-
-    const navigate = useNavigate();
-    const handleClick = () => {
-        navigate(`/chartMain`);
-    }
+    //소켓 연결
+    const socketIo = io.connect('');
 
     useEffect(() => {
-        //소켓 연결
-        const socketIo = io.connect('');
-
         //서버로부터 데이터 수신. 백엔드로부터 데이터를 요청하고 받아와 각각의 state에 저장함.
         socketIo.on('callNews',(data) => {
             setNews([data]);
@@ -108,6 +97,32 @@ function Main() {
         })
     },[socket])
 
+    //로그인 성공 시 값을 true로 변경.
+    const [isLogin, setIsLogin] = useState(false);
+    const [userName,setUserName] = useState("");
+    useEffect(()=>{
+        setIsLogin(sessionStorage.getItem("isLogin"));
+        setUserName(sessionStorage.getItem("user"));
+    },[])
+
+    useEffect(()=>{
+        if(isLogin==true){
+            socketIo.emit(`sendUserid`,{userId:sessionStorage.getItem("user_id")});
+            socketIo.on('receive_userData',(data)=>{
+                sessionStorage.setItem("user",data.userId);
+            });
+            //임시 유저 데이터 추가
+            sessionStorage.setItem("user","admin1234");
+            setUserName(sessionStorage.getItem("user"));
+        }
+    },[isLogin])
+        
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/chartMain`);
+    }
+
     return(
         <div className='main'>
                 <Stack>
@@ -116,7 +131,7 @@ function Main() {
                         <div className='news_main'><MainNews news={news[1]}/></div>
                         <div className='news_main'><MainNews news={news[2]}/></div>
                         <div className='login_main'>
-                            {isLogin?<Login_after setIsLogin={setIsLogin}/>:<Login_before setIsLogin={setIsLogin}/>}
+                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin}/>}
                         </div>
                     </Stack>
                     <Stack direction='horizontal'>
