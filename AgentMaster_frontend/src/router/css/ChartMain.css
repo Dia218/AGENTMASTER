@@ -1,3 +1,7 @@
+.Chart_Main{
+  background-color: rgb(240, 240, 240);
+  min-height: 120vh;
+}
 .chartNews {
     border: 3px solid #9bccfb;
     height: 450px;
@@ -7,6 +11,7 @@
     margin-left: 300px;
     margin-right: 20px;
     margin-bottom: 40px;
+    background-color: #95d6ff;
   }
   
   .news-h2 {
@@ -27,13 +32,16 @@
   .news-description {
     margin-bottom: 15px;
   }
-
+  .ChartMianSearch{
+    background-color: rgb(240, 240, 240);
+  }
   .table2 {
     width: 1300px;
     border-collapse: collapse;
     border: 1px solid #9bccfb ;
-    margin-left: 250px;
+    margin-left: 150px;
     margin-top: 10px;
+    
   }
   
   .table2 th,
@@ -52,16 +60,22 @@
   .news-search-container {
     display: flex;
     gap: 20px;
+   
   }
 
   .table-container_main {
     margin-left: 5vh;
   }
-
+  
   .table-buttons{
     margin-left: 250px;
     display: flex;
     gap: 50px;
+  }
+  .table-container{
+    width: 2000px;
+    margin-top: 10px;
+
   }
   .table-buttons button {
     width: 170px;
@@ -72,6 +86,7 @@
     background-color: #3eb7ff;
     border-radius: 10px;
   }
+  
   .ranking-container {
     margin-top: 20px;
     text-align: center;

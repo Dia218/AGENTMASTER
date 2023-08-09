@@ -1,8 +1,19 @@
+.chartDetail{
+  background-color: rgb(240, 240, 240);
+  min-height: 120vh;
+}
+.ChartDetailTop{
+  font-size: 40px;
+  margin-top: 30px;
+ margin-left: 300px;
+ font-weight: 600;
+ color: #0073e5;
+}
 .Article{
     margin-top: 40px;
-    margin-left: 200px;
+    margin-left: 150px;
     height: 300px;
-    width: 670px;
+    width: 620px;
     background-color: #9bccfb;
 }
  .Article li{
@@ -13,16 +24,17 @@
 
 
  .custom-table {
-  width: 700px;
+  width: 600px;
   margin-top: 50px;
   border-collapse: collapse;
-  border: 1px solid #9bccfb ;
-  margin-left: 200px;
+  border: 1px solid;
+  margin-left: 300px;
+  background-color: #9bccfb;
 }
   
   .custom-table th,
   .custom-table td {
-    border: 2px solid#9bccfb ;
+    border: 2px solid#2067d8 ;
     padding: 8px;
   }
   
@@ -34,7 +46,7 @@
     border-right: none;
   }
   .table-container {
-    width: 700px;
+    width: 800px;
     height: 160px;
     display: flex;
     margin-left: 100px;
@@ -49,4 +61,5 @@
     margin-left: 150px;
     position: relative;
   }
+  
   

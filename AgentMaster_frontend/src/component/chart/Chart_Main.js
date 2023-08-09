@@ -1,4 +1,6 @@
+//주식페이지 메인
 import React, { useState, useEffect } from 'react';
+
 import io from 'socket.io-client';
 import Autosuggest from 'react-autosuggest';
 import IconButton from '@mui/material/IconButton';
@@ -86,8 +88,8 @@ export function Search() {
 
   return (
     <div>
-      <div style={{ position: 'relative' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '10px', padding: '30px' }}>
+      <div style={{ position: 'relative'}}>
+        <div className='ChartMianSearch' style={{ borderRadius: '10px', padding: '30px' }}>
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value)}
@@ -99,7 +101,6 @@ export function Search() {
               value: value,
               onChange: handleInputChange,
               style: {
-                backgroundColor: 'white',
                 border: '3px solid #9bccfb',
                 padding: '30px',
                 borderRadius: '10px',
@@ -119,7 +120,6 @@ export function Search() {
               top: '60%',
               left: 50,
               right: 0,
-              backgroundColor: 'white',
               borderRadius: '5px',
               boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
               padding: '10px',
@@ -156,11 +156,12 @@ export function Search() {
 
 
 //상한가, 하한가 등등 데이터 필요해서 웹소켓 코드로 변경
+
 export function Table() {
   const [data, setData] = useState([]);
   const [showFullTable, setShowFullTable] = useState(false);
   const socket = io();
-
+  const navigate = useNavigate();
   useEffect(() => {
     socket.on('dataUpdate', (newData) => {
       setData(newData);
@@ -175,6 +176,10 @@ export function Table() {
     socket.emit('buttonClick', type);
   };
 
+  const handleClick = () => {
+    navigate(`/SimulMain`);
+};
+
   return (
     <div className="table-parent-container">
       <div className="table-buttons">
@@ -183,9 +188,10 @@ export function Table() {
         <button onClick={() => handleButtonClick('상승')}>상승</button>
         <button onClick={() => handleButtonClick('보합')}>보합</button>
         <button onClick={() => handleButtonClick('하락')}>하락</button>
-        <button className='test'>모의투자 해보기</button>
+        <button className='test'variant="info" onClick={handleClick}>모의투자 해보기</button>
       </div>
       <div>
+        <div className="table-container">
         <table className="table2">
           <thead>
             <tr>
@@ -228,9 +234,11 @@ export function Table() {
         </table>
       </div>
     </div>
+    </div>
   );
 }
 /*
+
 export function Table() {
   const [data, setData] = useState([]);
   const [showFullTable, setShowFullTable] = useState(false);
@@ -310,7 +318,7 @@ export function Table() {
         <button className='test'>모의투자 해보기</button>
       </div>
       <div className="table-container">
-        <table className="custom-table">
+        <table className="table2">
           <thead>
             <tr>
               <th>순위</th>
@@ -354,7 +362,7 @@ export function Table() {
     </div>
   );
 }
-*/ 
+*/
 
 export function MockInvestmentRanking() {
   const [showRanking, setShowRanking] = useState(true); // 모의투자 랭킹 표시 여부
