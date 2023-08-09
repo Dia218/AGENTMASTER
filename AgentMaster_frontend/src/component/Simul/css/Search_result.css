@@ -1,0 +1,63 @@
+
+/*result*/
+.simulSearchResult {
+    position: absolute;
+    z-index: 1;
+    background-color: #9bccfb;
+    width: 500px;
+    height: auto;
+    border-radius: 20px 20px 10px 10px;
+    padding: 10px;
+}
+
+.simulSearchResult > ul {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.simulSearchResultFrame {
+    position: relative;
+    height: 55px;
+}
+
+.simulSearchResult_li:nth-child(2n -1){
+    background-color: white;
+}
+
+.simulSearchResult_li:nth-child(2n) {
+    background-color: rgb(245, 245, 245);
+}
+
+.simulSearchResult_li:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.simulSearchResult_div {
+    position: relative;
+    height: 50px;
+}
+
+.simulSearchResult_a {
+    text-decoration: none;
+    color: black;
+}
+
+.simulSearchResult_a > div {
+    float: left;
+    padding: 13px 0px;
+    font-weight: 1000;
+    overflow: hidden;
+}
+
+.simulSearchResultId {
+    width: 100px;
+}
+
+.simulSearchResultName {
+    width: 300px;
+}
+
+.simulSearchResultMarket {
+    width: 80px;
+}

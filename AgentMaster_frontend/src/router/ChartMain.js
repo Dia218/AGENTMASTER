@@ -4,7 +4,7 @@ import Header from "../component/Header";
 
 function ChartMain() {
       return (
-        <div className="app">
+        <div className="Chart_Main">
           <header className="mb-4"><Header /></header>
           <div className="news-search-container">
             <News />
@@ -19,4 +19,3 @@ function ChartMain() {
     }
 
 export default ChartMain;
-

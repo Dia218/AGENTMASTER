@@ -1,3 +1,4 @@
+//회원가입 컴포넌트
 import { useEffect, useState } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import "./css/Join.css";

@@ -1,3 +1,4 @@
+//주식 상세 페이지
 import React, { useState, useRef,useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 import {
@@ -115,14 +116,12 @@ export function Rechart1() {
   ];
 
   return (
-    <ResponsiveContainer width={800} height={500}>
+    <ResponsiveContainer width={900} height={500}>
       <LineChart
         data={data1}
         margin={{
-          top: 70,
-          left: 150,
-          bottom: 5,
-          
+          top: 50,
+          left: 250,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -131,7 +130,7 @@ export function Rechart1() {
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey={keyword} stroke="#8884d8" activeDot={{ r: 8 }} />
-        <Label value={keyword} position="top" offset={10} style={{ fill: 'black' }} />
+        
       </LineChart>
     </ResponsiveContainer>
   );
@@ -180,14 +179,12 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   }, [location]);
 
   return (
-    <ResponsiveContainer width={800} height={500}>
+    <ResponsiveContainer width={750} height={600}>
       <LineChart
         data={data2}
         margin={{
-          top: 70,
-          left: 150,
-          bottom: 5,
-          
+          top: 150,
+          left: 100,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -282,9 +279,9 @@ export function Search2({ onKeywordChange }) {
 
   return (
     <div style={{ position: 'relative' }}>
-      <div
+      <div className='ChartDetailSearch'
         ref={resultContainerRef}
-        style={{ position: 'absolute', width: '700px', background: '#9bccfb', marginTop: '30px', marginLeft: '150px', zIndex: 1 }}
+        style={{ position: 'absolute', width: '500px', background: '#9bccfb', marginTop: '100px', marginLeft: '250px', zIndex: 1 }}
       >
         {isOpen && (
           <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
@@ -311,9 +308,10 @@ export function Search2({ onKeywordChange }) {
               border: '3px solid #9bccfb',
               padding: '10px',
               borderRadius: '5px',
-              width: '700px',
-              marginLeft: '200px',
+              width: '600px',
+              marginLeft: '300px',
               marginTop: '50px',
+              height:'100px',
             },
             ref: searchInputRef,
           }}
@@ -323,7 +321,7 @@ export function Search2({ onKeywordChange }) {
           sx={{ p: '10px' }}
           aria-label="search"
           size="large"
-          style={{ marginLeft: '-50px', marginTop: '50px' }}
+          style={{ marginLeft: '-70px', marginTop: '50px' }}
           onClick={handleSearch}
         >
           <SearchIcon fontSize="large" />

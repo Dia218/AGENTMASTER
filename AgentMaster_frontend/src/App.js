@@ -6,6 +6,7 @@ import NewsDetail from './router/NewsDetail';
 import ChartDetail from './router/ChartDetail';
 import ChartMain from './router/ChartMain';
 import UserPage from './router/UserPage';
+import SimulMain from './router/SimulMain';
 import NotFound from './router/NotFound';
 import { useState } from 'react';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/chartMain' element={<ChartMain />} />
         <Route path='/chartDetail' element={<ChartDetail />} />
         <Route path='/userPage' element={<UserPage />} />
+        <Route path='/simulMain' element={<SimulMain />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
