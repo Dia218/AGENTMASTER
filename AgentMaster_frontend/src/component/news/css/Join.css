@@ -1,0 +1,13 @@
+.joinTitle {
+    background-color: #50b3ff;
+}
+
+.joinBody {
+    margin: 30px;
+    line-height: 40px;
+}
+
+.warningId {
+    width: fit-content;
+    float: right;
+}

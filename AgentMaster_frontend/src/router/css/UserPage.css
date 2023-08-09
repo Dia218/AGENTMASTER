@@ -1,0 +1,123 @@
+.userForm {
+    border-bottom: 1px solid #9bccfb;
+    height: 700px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 90px 20px 40px 10px;
+    background-color: #9bccfb;
+    position: relative;
+  }
+
+  .userForm2 {
+    border-bottom: 1px solid #9bccfb;
+    height: 700px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 90px 20px 40px 10px;
+    background-color: #9bccfb;
+    position: relative;
+  }
+  .userForm h1 {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+
+  .userForm2 h1 {
+    position: absolute;
+    top: 10px;
+    
+    text-align: center;
+  }
+  .userForm::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top:90px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+  }
+  .userForm2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top:90px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+  }
+
+  .userForm label{
+    font-size: 30px;
+    margin-bottom: 40px;
+  }
+  .userForm .form-group {
+    margin-bottom: 40px;
+  }
+  .userForm .submit {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+  }
+  .userForm .cancel {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+  }
+  .userForm input[type="text"],
+  .userForm input[type="password"],
+  .userForm input[type="email"] {
+    width: 250px;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  .userPage {
+    display: flex;
+    flex-direction: row;
+  }
+  .userForm .news-title{
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+  .article-table {
+    width: 800px;
+    top: -100px;
+    position: relative;
+  }
+  .article-table th {
+    background-color: #9bccfb;
+    text-align: left;
+    padding: 8px;
+    font-size: 25px;
+    text-align: center;
+  }
+  
+  .article-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .article-table tr:hover {
+    background-color: #f2f2f2;
+  }

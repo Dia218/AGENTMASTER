@@ -1,0 +1,39 @@
+
+/*list*/
+.simulStatusList {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.simulStatusList_ul {
+    padding: 0px;
+    margin: 0px;
+    height: 250px;
+    list-style-type: none;
+    overflow-y: auto;
+}
+
+.simulStatusList_li > div {
+    height: 25px;
+}
+
+.simulStatusList_li:nth-child(2n-1) {
+    background-color: white;
+}
+
+.simulStatusList_li:nth-child(2n) {
+    background-color: rgb(245, 245, 245);
+}
+
+.simulStatusList_li:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+.simulStatusList_div {
+    height: 25px;
+}
+
+.simulStatusList_a {
+    color: black;
+    text-decoration: none;
+}
