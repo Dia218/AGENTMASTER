@@ -34,7 +34,7 @@ function Simul_status() {
                     </div>
                 </div>
                 <div className="simulStatusUsername">
-                    Username 님
+                    {sessionStorage.getItem("user")} 님
                 </div>
                 <div className="simulStatusHeaderLine"></div>
             </div>

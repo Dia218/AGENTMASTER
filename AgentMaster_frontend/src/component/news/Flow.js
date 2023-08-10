@@ -54,8 +54,8 @@ function Flow({flow,flownews}){
                         <div className='flow_text_body'>{flow_text}</div>
                 </Stack>
             </div>
-            <div class="col-xl-7">
-                <div class='scroll_horizental'>
+            <div className="col-xl-7">
+                <div className='scroll_horizental'>
                         <div className='row flex-row flex-nowrap pt-3'>
                             { check ? articleList : <>
                                                     <div className='col-11 flow_summary'>

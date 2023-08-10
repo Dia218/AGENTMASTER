@@ -177,7 +177,9 @@ export function Table() {
   };
 
   const handleClick = () => {
-    navigate(`/SimulMain`);
+    if(sessionStorage.getItem("user")!=null){
+      navigate(`/SimulMain`);
+    }
 };
 
   return (

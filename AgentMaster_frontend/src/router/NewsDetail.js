@@ -52,7 +52,7 @@ function NewsDetail(){
         //임시 데이터 추가
         setNews({text,publisher,name,title});
         setRa([{title},{title}]);
-        setFlow({text});
+        //setFlow({text});
         setFlowNews([{title,text},{title,text},{title,text}]);
         setScrapCheck(true);
 
@@ -83,22 +83,22 @@ function NewsDetail(){
 
     return (
     <div className='nd_body'>
-        <header class="mb-4"><Header /></header>
-        <div class="container pt-4 pb-3">
-            <div class="row align-items-md-stretch space">
-                <div class="col-xl-8 mb-4" >
-                    <div class="summary_parent">
+        <header className="mb-4"><Header /></header>
+        <div className="container pt-4 pb-3">
+            <div className="row align-items-md-stretch space">
+                <div className="col-xl-8 mb-4" >
+                    <div className="summary_parent">
                         <Summary news={news} setScrap={setScrap} scrapCheck={scrapCheck} setScrapCheck={setScrapCheck}/>
                     </div>
                 </div>
-                <div class="col-xl-4 mb-4">
-                    <div class="related_parent">
+                <div className="col-xl-4 mb-4">
+                    <div className="related_parent">
                         <RelatedArticles relatedArticles={ra} />
                     </div>
                 </div>
             </div>
 
-            <div class="space mt-4">
+            <div className="space mt-4">
                 <Flow 
                 flow={flow}
                 flownews={flowNews}

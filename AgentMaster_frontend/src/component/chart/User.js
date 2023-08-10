@@ -1,10 +1,12 @@
 //사용자 페이지
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function UserInfoForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -31,6 +33,10 @@ export function UserInfoForm() {
     setEmail('');
   };
 
+  const handleClickBack = () => {
+    navigate(`/`);
+  }
+
   return (
     <div className='userForm'>
       <form onSubmit={handleSubmit}>
@@ -51,7 +57,7 @@ export function UserInfoForm() {
           <button className="submit" type="submit">적용</button>
         </div>
         <div className="form-group" style={{ marginTop: 'auto' }}>
-          <button className="cancel" type="submit">취소</button>
+          <button className="cancel" onClick={handleClickBack}>취소</button>
         </div>
       </form>
     </div>
