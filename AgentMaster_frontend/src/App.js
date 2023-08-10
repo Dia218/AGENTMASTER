@@ -23,6 +23,7 @@ function App() {
         <Route path='/simulMain' element={<SimulMain />} />
         <Route path='/simulTrade' element={<SimTrade />} />
         <Route path='/*' element={<NotFound />} />
+
       </Routes>
     </BrowserRouter>
   );
