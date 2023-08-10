@@ -22,13 +22,15 @@ export function ChartDetail() {
   }, [location]);
  
     return (
-      <div>
+      <div className="chartDetail">
         <header className="mb-4"><Header /></header>
-        <div style={{ display: 'flex'}}>
+        
+        <div  style={{ display: 'flex'}}>
+        
         <div>
+        <p className='ChartDetailTop'>{keyword}</p>
           <Rechart1 keyword={keyword}/>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            
             <Search2 onKeywordChange={handleKeywordChange}/>
             <Table />
           </div>

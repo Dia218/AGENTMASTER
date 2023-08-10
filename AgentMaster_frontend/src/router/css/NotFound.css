@@ -1,3 +1,8 @@
+.NotFound{
+  background-color: rgb(240, 240, 240);
+  min-height: 100vh;
+}
+
 .top{
     padding-left: 350px;
     padding-top: 100px;

@@ -4,20 +4,25 @@
 
 import { Tooltip } from "antd";
 import { StarFilled, StarOutlined } from '@ant-design/icons';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 
-function Scrap(){
+function Scrap({setScrap,scrapCheck,setScrapCheck}){
     const [scrapIcon, setScrapIcon] = useState(<StarOutlined style={{fontSize:'27px'}}/>);
-    const [selected, setSelected] = useState(false);
+    const location = useLocation();
 
     //아이콘을 클릭하면 실행하는 함수. 이후 저장 기능을 추가할 예정
     const clickIcon = () => {
-        selected ? setSelected(false) : setSelected(true);
-        selected ? (
+        scrapCheck ? setScrapCheck(false) : setScrapCheck(true);
+        setScrap(location.state.id);
+    };
+
+    useEffect(()=>{
+        scrapCheck ? (
             setScrapIcon(<StarFilled style={{fontSize:'27px'}}/>)
             ) : (setScrapIcon(<StarOutlined style={{fontSize:'27px'}}/>));
-    };
+    },[scrapCheck])
 
     return(
         <div onClick={clickIcon}>

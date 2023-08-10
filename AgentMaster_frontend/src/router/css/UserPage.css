@@ -1,3 +1,8 @@
+.UserMain{
+  background-color: rgb(240, 240, 240);
+  min-height: 100vh;
+}
+
 .userForm {
     border-bottom: 1px solid #9bccfb;
     height: 700px;

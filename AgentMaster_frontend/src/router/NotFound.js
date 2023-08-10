@@ -13,7 +13,7 @@ const NotFound = () => {
   };
 
   return (
-    <div>
+    <div className='NotFound'>
       <header className="mb-4">
         <Header />
       </header>
