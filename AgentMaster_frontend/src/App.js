@@ -6,7 +6,12 @@ import NewsDetail from './router/NewsDetail';
 import ChartDetail from './router/ChartDetail';
 import ChartMain from './router/ChartMain';
 import UserPage from './router/UserPage';
+<<<<<<< Updated upstream
 import SimulMain from './router/SimulMain';
+=======
+import NotFound from './router/NotFound';
+import SimTrade from "./router/SimTrade";
+>>>>>>> Stashed changes
 
 function App() {
   return (
