@@ -84,7 +84,7 @@ def assemble_link(
     query = '&'.join(assembledPV)
     return base + ("" if query == "" else "?") + query 
 
-test = {
+"""test = {
     "base": "www.testing.com",
     "PV": [
         { "P": [], "V": [] },
@@ -106,4 +106,4 @@ for itc, tc in enumerate(test['PV']):
         l = assemble_link(base=b, parameters=tc["P"], values=tc["V"])
         print(f"{itc+1:2} / {len(test['PV'])}", l)
     except InvalidLinkException as e:
-        print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)
+        print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)"""
