@@ -70,11 +70,16 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Stock"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
 (
-    stock_id          varchar(20)   NOT NULL,
-    stock_date        date          NOT NULL,
-    stock_price       integer       NOT NULL,
-    diff_from_prevday integer       NOT NULL,
-    range             numeric(4, 2) NOT NULL,
+    stock_id            varchar(20)   NOT NULL,
+    stock_date          date          NOT NULL,
+    stock_price         integer       NOT NULL,
+    diff_from_prevday   integer       NOT NULL,
+    range               numeric(4, 2) NOT NULL,
+    start_price         integer       NOT NULL,
+    high_price          integer       NOT NULL,
+    low_price           integer       NOT NULL,
+    trading_volume      integer       NOT NULL,
+    transaction_volume  integer       NOT NULL,
     CONSTRAINT Stock_info_pkey PRIMARY KEY (stock_id, stock_date),
     CONSTRAINT stock_id_fk FOREIGN KEY (stock_id)
         REFERENCES "AGENTMASTER"."Stock" (stock_id) MATCH SIMPLE
@@ -98,7 +103,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     simul_range     NUMERIC(10, 2)   NOT NULL,
     simul_holdings  integer          NOT NULL,
     perchase_amount integer          NOT NULL,
-    average_price   integer          NOT NULL,
+    average price   integer          NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES "AGENTMASTER"."Customer" (customer_id) MATCH SIMPLE
@@ -146,7 +151,7 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Bookmark"
 /*연관뉴스*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 (
-    group_name varchar(30) not null,
+    group_name varchar(100) not null,
 
     constraint "article_group_pkey" primary key (group_name)
 )
@@ -158,17 +163,17 @@ alter table if exists "AGENTMASTER"."Article_group"
 /*기사*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
-    article_id      int         not null,
-    company         varchar(20) not null,
-    reporter        varchar(20) not null,
-    title           text        not null,
+    article_id      int             not null,
+    company         varchar(100)    not null,
+    reporter        varchar(100)    not null,
+    title           text            not null,
     issue_keyword   varchar(100),
-    first_pub       timestamp   not null,
-    last_pub        timestamp   not null,
-    body            text        not null,
-    link            text        not null,
-    group_name      varchar(30),
-    field_name      varchar(100) not null,
+    first_pub       timestamp       not null,
+    last_pub        timestamp       not null,
+    body            text            not null,
+    link            text            not null,
+    group_name      varchar(100),
+    field_name      varchar(100)    not null,
 
     constraint "Article_pkey" primary key (article_id),
     constraint "Articles_group_name_fkey" foreign key (group_name)
