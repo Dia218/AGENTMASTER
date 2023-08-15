@@ -103,7 +103,7 @@ for itc, tc in enumerate(test['PV']):
     b = test['base']
 
     try:
-        l = assemble_link(base=b, parameters=tc["P"], values=tc["V"])
+        l = assemble_link(base=b, keys=tc["P"], values=tc["V"])
         print(f"{itc+1:2} / {len(test['PV'])}", l)
     except InvalidLinkException as e:
         print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)
