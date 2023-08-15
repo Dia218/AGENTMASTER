@@ -52,6 +52,15 @@ class InvalidBeautifulSoupInstanceException(ArticleAggregatorException):
                "The admin should report this message to ai team immediately. \n" \
                "Additional information for debudding: \n " + self.msg
 
+class InvalidArticleDictException(ArticleAggregatorException):
+    def __str__(self):
+        return "context:" + self.msg_format['context'] + "\n" \
+               "problem:" + self.msg_format['problem'] + "\n" \
+               "solution" + self.msg_format['solution'] + "\n" \
+               "This message appears when a problem occured in the article-related service. Contact an admin. \n" \
+               "The admin should report this message to ai team immediately. \n" \
+               "Additional information for debudding: \n " + self.msg
+
 class ArticleAggregator:
     """
         ArticleAggregator
@@ -108,8 +117,8 @@ class ArticleAggregator:
                 dayOffset(int)
                 Offset changes the date by day from today.
                     example:
-                        dayOffset = -1 means yesterday.
-                        dayOffset = +2 means the day after tomorrow.             
+                        dayOffset = -1 means yesterday. 
+                        dayOffset = +2 means the day after tomorrow. 
 
             Returns.
                 str
@@ -138,11 +147,8 @@ class ArticleAggregator:
                         "last_pub": None,
                         "company": None,
                     }
-        
-
 
         return template
-
 
     def _parse_article_section_general(self, document: BeautifulSoup = None) -> list:
         """
@@ -249,7 +255,7 @@ class ArticleAggregator:
                 raise le
 
             # Gather aggregated articles. [v]
-            additionalAggregatedArticles = self._parse_section_general(document)
+            additionalAggregatedArticles = self._parse_article_section_general(document)
             articlesAggregated.extend(additionalAggregatedArticles)
             narticles += len(additionalAggregatedArticles)
 
@@ -300,7 +306,7 @@ class ArticleAggregator:
                 document = BeautifulSoup(requests.get(url, headers=self.header).text, "html.parser")
 
                 # Gather aggregated articles. [v]
-                additionalAggregatedArticles = self._parse_section_general(document)
+                additionalAggregatedArticles = self._parse_article_section_general(document)
                 aggregated['articles'].extend(additionalAggregatedArticles)
                 narticles += len(additionalAggregatedArticles)
 
@@ -319,20 +325,21 @@ class ArticleAggregator:
         """
         
         """
-        bodyText = document.find("div", id="dic_area")
+
+        bodyText = document.find("article", id="dic_area")
                 
         for t in bodyText.find_all() if bodyText else []:
             t.decompose()
         
         return bodyText.text.strip() if bodyText else ""
     
-    def _parse_aritcle_reporter(self, document: BeautifulSoup = None) -> str:
+    def _parse_article_reporter(self, document: BeautifulSoup = None) -> str:
         """
         
         """
         nameReporter = ""
                 
-        reporter = document.find_all("em", class_="media_end_head_journalist_name")
+        reporter = document.find_all("em", class_="media_end_head_journalist_layer_name")
         if len(reporter) > 0: nameReporter = ', '.join([r.text for r in reporter])
 
         return nameReporter
@@ -369,7 +376,7 @@ class ArticleAggregator:
         for i, arti in enumerate(aggregated['articles']):
             if arti['body'] == None:
                 iCtntless = i
-                break        
+                break
         try:
             for article in aggregated['articles'][iCtntless:]:
                 document = BeautifulSoup(requests.get(article['link'], headers=self.header).text, "html.parser")
@@ -438,12 +445,8 @@ model = ArticleAggregator()
 arts = model.aggregate_section_general()
 arts = model.aggregate_articles(aggregated=arts)
 
-arts = model.aggregate_continous_section_general(aggregated=arts)
-
-arts = model.aggregate_continous_article(arts)
-
-"""for i, a in enumerate(arts['articles']):
-    print(f'{i:2}: {a["title"]} \n { a["body"][:30] +"..." if a["body"] else "NONE"} \n', sep='')"""
+for i, a in enumerate(arts['articles']):
+    print(f'{i+1:02}: {a["title"]} \n - {a["reporter"]}, {a["first_pub"]}')
 
 with open("article_example.json", "w", encoding="UTF-8") as jsn:
     json.dump(arts, jsn, indent=4)
