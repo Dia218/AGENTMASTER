@@ -8,6 +8,7 @@ import ChartMain from './router/ChartMain';
 import UserPage from './router/UserPage';
 import SimulMain from './router/SimulMain';
 import NotFound from './router/NotFound';
+import SimTrade from "./router/SimTrade";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path='/chartDetail' element={<ChartDetail />} />
         <Route path='/userPage' element={<UserPage />} />
         <Route path='/simulMain' element={<SimulMain />} />
+        <Route path='/simulTrade' element={<SimTrade />} />
         <Route path='/*' element={<NotFound />} />
+
       </Routes>
     </BrowserRouter>
   );

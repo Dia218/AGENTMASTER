@@ -9,6 +9,7 @@ import Flow from '../component/news/Flow';
 import Header from '../component/Header';
 import RelatedArticles from '../component/news/RelatedArticles';
 import Summary from '../component/news/Summary';
+import { useLocation } from 'react-router';
 
 function NewsDetail(){
 
@@ -23,11 +24,15 @@ function NewsDetail(){
     const [ra, setRa] = useState([]);
     const [flow,setFlow] = useState([]);
     const [flowNews,setFlowNews] = useState([]);
+    const [scrap,setScrap] = useState();
+    const [scrapCheck,setScrapCheck] = useState();
+
+    const location = useLocation();
+
+    //소켓 연결
+    const socketIo = io.connect('');
 
     useEffect(()=>{
-        //소켓 연결
-        const socketIo = io.connect('');
-
         //서버로부터 데이터 수신
         socketIo.on('callNews',(data) => {
             setNews(data);
@@ -41,11 +46,15 @@ function NewsDetail(){
         socketIo.on('callFlowNews',(data) => {
             setFlowNews(data);
         });
+        socketIo.on(`callScrap${location.state.id}`,(data)=>{
+            setScrapCheck(data);
+        })
         //임시 데이터 추가
         setNews({text,publisher,name,title});
         setRa([{title},{title}]);
-        setFlow({text});
+        //setFlow({text});
         setFlowNews([{title,text},{title,text},{title,text}]);
+        setScrapCheck(true);
 
         setSocket(socketIo)
     },[])
@@ -58,24 +67,38 @@ function NewsDetail(){
         })
     },[socket])
 
+    useEffect(()=>{
+        if(scrapCheck==true){
+            if(scrap!=null&&sessionStorage.getItem("user_id")!=null){
+                socketIo.emit("sendScrapOn",{ scrap:scrap, userId:sessionStorage.getItem("user") });
+                console.log("i send id on"+scrap+sessionStorage.getItem("user"));
+            }
+        } else if(scrapCheck==false) {
+            if(scrap!=null&&sessionStorage.getItem("user_id")!=null){
+                socketIo.emit("sendScrapoff",{ scrap : scrap, userId:sessionStorage.getItem("user") });
+                console.log("i send id off"+scrap+sessionStorage.getItem("user"));
+            }
+        }
+    },[scrapCheck])
+
     return (
     <div className='nd_body'>
-        <header class="mb-4"><Header /></header>
-        <div class="container pt-4 pb-3">
-            <div class="row align-items-md-stretch space">
-                <div class="col-xl-8 mb-4" >
-                    <div class="summary_parent">
-                        <Summary news={news} />
+        <header className="mb-4"><Header /></header>
+        <div className="container pt-4 pb-3">
+            <div className="row align-items-md-stretch space">
+                <div className="col-xl-8 mb-4" >
+                    <div className="summary_parent">
+                        <Summary news={news} setScrap={setScrap} scrapCheck={scrapCheck} setScrapCheck={setScrapCheck}/>
                     </div>
                 </div>
-                <div class="col-xl-4 mb-4">
-                    <div class="related_parent">
+                <div className="col-xl-4 mb-4">
+                    <div className="related_parent">
                         <RelatedArticles relatedArticles={ra} />
                     </div>
                 </div>
             </div>
 
-            <div class="space mt-4">
+            <div className="space mt-4">
                 <Flow 
                 flow={flow}
                 flownews={flowNews}

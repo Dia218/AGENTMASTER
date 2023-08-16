@@ -6,7 +6,7 @@ import { Button, Stack } from "react-bootstrap";
 import './css/Login_after.css'
 import { useNavigate } from "react-router-dom";
 
-function Login_after({setIsLogin}) {
+function Login_after({setIsLogin,userName}) {
 
     const navigate = useNavigate();
     
@@ -22,7 +22,7 @@ function Login_after({setIsLogin}) {
     return (
         <div className="loginForm">
             <div className="welcomeUser">
-                <p>{sessionStorage.getItem("user_id")}님{"\n"}환영합니다!</p>
+                <p>{userName}님{"\n"}환영합니다!</p>
             </div>
             <div className="buttons">
                 <Stack direction='horizontal' gap={3}>

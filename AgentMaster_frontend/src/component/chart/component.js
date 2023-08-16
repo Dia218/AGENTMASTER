@@ -17,9 +17,12 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLocation } from 'react-router-dom';
 
+import Modal from 'react-modal';
 
 export function ArticleList() {
   const [articles, setArticles] = useState([]);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const socket = socketIOClient('/'); // 소켓 연결
@@ -31,9 +34,11 @@ export function ArticleList() {
 
     // 임시 데이터
     const temporaryData = [
-      { id: 1, title: '기사 1' },
-      { id: 2, title: '기사 2' },
-      { id: 3, title: '기사 3' },
+      { id: 1, title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
+      { id: 2, title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
+      { id: 3, title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
+      { id: 4, title: '뉴스 기사 3', summary: '기사 4 요약 문장입니다.' },
+      { id: 5, title: '뉴스 기사 3', summary: '기사 5 요약 문장입니다.' },
     ];
     setArticles(temporaryData);
 
@@ -42,16 +47,50 @@ export function ArticleList() {
     };
   }, []);
 
+  const openModal = (article) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedArticle(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="Article">
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {articles.map((article) => (
-          <li key={article.id}>{article.title}</li>
+          <li key={article.id}>
+            <p className="article-title" onClick={() => openModal(article)}>{article.title}</p>
+            <hr className='article-bottom' />
+          </li>
         ))}
       </ul>
+      <Modal isOpen={isModalOpen} 
+      onRequestClose={closeModal} 
+      className="Custom" 
+      overlayClassName="CustomOverlay">
+
+  {selectedArticle && (
+    <div className='Modal_main'>
+      <div className='ModalTop'>
+        <p className='ModalMove' onClick={() => window.location.href=`/news/${selectedArticle.id}`}>&lt;- 상세페이지로</p>
+        <p className='ModalClose' onClick={closeModal}>X</p>
+      </div>
+      <h2>{selectedArticle.title}</h2>
+      <div className='ModalBox'>
+      <p className="ModalText">{selectedArticle.summary}</p>
+      </div>
     </div>
+  )}
+</Modal>
+</div>
+  
   );
 }
+
+
 
 export function Table() {
   const data = [
@@ -62,30 +101,84 @@ export function Table() {
     { id: 5, name: '저가', price: 7930 },
     { id: 6, name: '거래대금', price: '349,695백만' },
   ];
-  const rows = [];
-  for (let i = 0; i < data.length; i += 3) {
-    rows.push(
-      <tr key={i}>
-        {data.slice(i, i + 3).map((item, index) => (
-          <React.Fragment key={item.id}>
-            <td>{item.name}</td>
-            <td>{item.price}</td>
-          </React.Fragment>
-        ))}
-      </tr>
-    );
-  }
 
   return (
     <div>
       <table className="custom-table">
-        <tbody>{rows}</tbody>
+        <tbody>
+          <tr>
+            <th className="divider">전일</th>
+            <th className="divider">고가</th>
+            <th className="divider">거래량</th>
+          </tr>
+          <tr>
+            <td>{data[0].price}</td>
+            <td>{data[1].price}</td>
+            <td>{data[2].price}</td>
+          </tr>
+          <tr>
+            <th className="divider">시가</th>
+            <th className="divider">저가</th>
+            <th className="divider">거래대금</th>
+          </tr>
+          <tr>
+            <td>{data[3].price}</td>
+            <td>{data[4].price}</td>
+            <td>{data[5].price}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );
 }
-
+//웹소켓  Rechart1()
 export function Rechart1() {
+  const [data, setData] = useState([]); // JSON 데이터를 저장할 상태 변수
+
+  useEffect(() => {
+    // 웹소켓 연결
+    const websocket = new WebSocket('ws://your-websocket-url'); // 웹소켓 URL을 여기에 입력
+
+    // 웹소켓으로부터 데이터 수신
+    websocket.onmessage = (event) => {
+      const receivedData = JSON.parse(event.data);
+      setData(receivedData); // 웹소켓으로 받은 JSON 데이터를 상태 변수에 저장
+    };
+
+    // 컴포넌트 언마운트 시 웹소켓 연결 종료
+    return () => {
+      websocket.close();
+    };
+  }, []);
+
+  // 데이터가 비어있을 때 로딩 상태 처리
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <ResponsiveContainer width={650} height={400}>
+      <LineChart
+        data={data}
+        margin={{
+          top: 50,
+          left: 100,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+
+        {/* 여기서 키워드에 해당하는 데이터 표시 */}
+        <Line type="monotone" dataKey="yourKeyword" stroke="#0092F3" activeDot={{ r: 8 }} />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}
+//임시값을 넣은  Rechart1()
+/*export function Rechart1() {
   const location = useLocation();
   const [keyword, setKeyword] = useState('');
 
@@ -101,27 +194,26 @@ export function Rechart1() {
     {
       name: '오전 10:00',
       [keyword]: 4000,
-      amt: 2400,
     },
     {
       name: '오전 12:00',
       [keyword]: 3000,
-      amt: 2210,
+     
     },
     {
       name: '오후 2:00',
       [keyword]: 2000,
-      amt: 2290,
+      
     },
   ];
 
   return (
-    <ResponsiveContainer width={900} height={500}>
+    <ResponsiveContainer width={650} height={400}>
       <LineChart
         data={data1}
         margin={{
           top: 50,
-          left: 250,
+          left: 100,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -129,13 +221,62 @@ export function Rechart1() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={keyword} stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey={keyword} stroke="#0092F3" activeDot={{ r: 8 }} />
         
       </LineChart>
     </ResponsiveContainer>
   );
 }
+*/
+//웹소켓 Rechart2
+export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
+  const location = useLocation();
+  const [data, setData] = useState([]); // JSON 데이터를 저장할 상태 변수
 
+  useEffect(() => {
+    // 웹소켓 연결
+    const websocket = new WebSocket('ws://your-websocket-url'); 
+
+    // 웹소켓으로부터 데이터 수신
+    websocket.onmessage = (event) => {
+      const receivedData = JSON.parse(event.data);
+      setData(receivedData); // 웹소켓으로 받은 JSON 데이터를 상태 변수에 저장
+    };
+
+    // 컴포넌트 언마운트 시 웹소켓 연결 종료
+    return () => {
+      websocket.close();
+    };
+  }, []);
+
+  // 데이터가 비어있을 때 로딩 상태 처리
+  if (data.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <ResponsiveContainer width={700} height={500}>
+      <LineChart
+        data={data}
+        margin={{
+          top: 150,
+          left: 150,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#0092F3" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#008C8C" />
+        <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+}
+//임시값 Rechart2
+/*
 export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   const location = useLocation();
   const [keyword, setKeyword] = useState('');
@@ -154,21 +295,18 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
       [keywordFromChartMain]: 2400,
       [keywordFromSearch2]: 4000,
      
-      amt: 2400,
     },
     {
       name: '오전 12:00',
       [keywordFromChartMain]: 1398,
       [keywordFromSearch2]: 3000,
      
-      amt: 2210,
     },
     {
       name: '오후 2:00',
       [keywordFromChartMain]: 9800,
       [keywordFromSearch2]: 2000,
       
-      amt: 2290,
     },
   ];
 
@@ -179,12 +317,12 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   }, [location]);
 
   return (
-    <ResponsiveContainer width={750} height={600}>
+    <ResponsiveContainer width={700} height={500}>
       <LineChart
         data={data2}
         margin={{
           top: 150,
-          left: 100,
+          left: 150,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
@@ -192,14 +330,14 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#8884d8" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#82ca9d" />
+        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#0092F3" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#008C8C" />
         <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
       </LineChart>
     </ResponsiveContainer>
   );
 }
-
+*/
 
 export function Search2({ onKeywordChange }) {
   const [value, setValue] = useState('');
@@ -212,7 +350,7 @@ export function Search2({ onKeywordChange }) {
   const webSocketRef = useRef(null);
 
   useEffect(() => {
-    webSocketRef.current = new WebSocket('ws://your-websocket-server-url'); //웹소켓 주소
+    webSocketRef.current = new WebSocket('ws:/your-websocket-server-url'); //웹소켓 주소
 
     webSocketRef.current.onopen = () => {
       console.log('웹소켓 연결이 성립되었습니다.');
@@ -281,7 +419,7 @@ export function Search2({ onKeywordChange }) {
     <div style={{ position: 'relative' }}>
       <div className='ChartDetailSearch'
         ref={resultContainerRef}
-        style={{ position: 'absolute', width: '500px', background: '#9bccfb', marginTop: '100px', marginLeft: '250px', zIndex: 1 }}
+        style={{ position: 'absolute', width: '400px', background: '#9bccfb', marginTop: '80px', marginLeft: '250px', zIndex: 1 }}
       >
         {isOpen && (
           <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
@@ -308,10 +446,10 @@ export function Search2({ onKeywordChange }) {
               border: '3px solid #9bccfb',
               padding: '10px',
               borderRadius: '5px',
-              width: '600px',
-              marginLeft: '300px',
-              marginTop: '50px',
-              height:'100px',
+              width: '500px',
+              marginLeft: '200px',
+              marginTop: '40px',
+              height:'50px',
             },
             ref: searchInputRef,
           }}
@@ -321,7 +459,7 @@ export function Search2({ onKeywordChange }) {
           sx={{ p: '10px' }}
           aria-label="search"
           size="large"
-          style={{ marginLeft: '-70px', marginTop: '50px' }}
+          style={{ marginLeft: '-70px', marginTop: '40px' }}
           onClick={handleSearch}
         >
           <SearchIcon fontSize="large" />
