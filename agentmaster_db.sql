@@ -7,7 +7,7 @@ CREATE SCHEMA IF NOT EXISTS "AGENTMASTER"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
 (
-    customer_id     varchar(20)     NOT NULL,
+    customer_id     varchar(15)     NOT NULL,
     password        varchar(20)     NOT NULL,
     e_mail          text            NOT NULL,
     total_money     integer         NOT NULL,
@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
     total_return    integer         NOT NULL,
     rank_range      numeric(10, 2)  NOT NULL,
     CONSTRAINT Customer_pkey PRIMARY KEY (customer_id),
-	CONSTRAINT customer_id_between CHECK(customer_id NOT BETWEEN 'ㄱ' AND '힣'),
+	CONSTRAINT customer_id_check CHECK(customer_id ~ '^[A-Za-z0-9]{5,15}' AND customer_id !~ '^[0-9]{5,15}'),
+	CONSTRAINT customer_password_check CHECK(password ~ '^[A-Za-z0-9]{8,20}' AND password !~ '^[0-9]{8,20}' AND password !~ '^[A-Za-z]{8,20}'),
 	CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
 )
     TABLESPACE pg_default;
@@ -103,7 +104,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     simul_range     NUMERIC(10, 2)   NOT NULL,
     simul_holdings  integer          NOT NULL,
     perchase_amount integer          NOT NULL,
-    average price   integer          NOT NULL,
+    average_price   integer          NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES "AGENTMASTER"."Customer" (customer_id) MATCH SIMPLE
