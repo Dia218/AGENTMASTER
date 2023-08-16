@@ -83,6 +83,7 @@ def assemble_link(
     assembledPV = list(param + "=" + (val if val else "") for param, val in zip(keys, values))
     query = '&'.join(assembledPV)
     return base + ("" if query == "" else "?") + query 
+<<<<<<< Updated upstream
 
 test = {
     "base": "www.testing.com",
@@ -107,3 +108,5 @@ for itc, tc in enumerate(test['PV']):
         print(f"{itc+1:2} / {len(test['PV'])}", l)
     except InvalidLinkException as e:
         print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)
+=======
+>>>>>>> Stashed changes
