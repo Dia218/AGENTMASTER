@@ -110,18 +110,27 @@ function SearchList(){
 	    setSearchParams(searchParams);
     };
 
+    //검색결과가 없을때 출력하는 부분
+    const NoResult = () => {
+        return(
+            <div className="result_NO">
+                검색 결과가 존재하지 않습니다.
+            </div>
+        )
+    }
+
     return(
         <div className="bg-white searchList">
             <Stack>
                 <div className="py-3"></div>
-                <div>{checkEmpty ? "검색 결과가 존재하지 않습니다." : items.map((v) => ( <SearchItem key={v.id} props={v}/>)) }</div>
+                <div>{checkEmpty ? <NoResult/> : items.map((v) => ( <SearchItem key={v.id} props={v}/>)) }</div>
             </Stack>
-            <div>
-                <button onClick={handlePreviousPage} disabled={page === 1}>
-                    Previous Page
+            <div className="search_buttons">
+                <button className="search_preButton" onClick={handlePreviousPage} disabled={page === 1}>
+                    {"<<"}이전 페이지
                 </button>
-                <button onClick={handleNextPage} disabled={page === lastPage}>
-                    Next Page
+                <button className="search_nextButton" onClick={handleNextPage} disabled={page === lastPage}>
+                    다음 페이지{">>"}
                 </button>
             </div>
         </div>

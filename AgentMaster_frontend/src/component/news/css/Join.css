@@ -11,3 +11,7 @@
     width: fit-content;
     float: right;
 }
+
+.doubleCheck_message {
+    padding-left: 10vh;
+}

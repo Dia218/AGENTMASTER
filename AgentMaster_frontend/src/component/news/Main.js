@@ -89,13 +89,13 @@ function Main() {
             setSocket(socketIo);
     },[])
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         return(()=>{
             if(socket){
-                socket.disconnect();//소켓 연결 헤제
+                socketIo.disconnect();//소켓 연결 헤제
             }
         })
-    },[socket])
+    },[socket])*/
 
     //로그인 성공 시 값을 true로 변경.
     const [isLogin, setIsLogin] = useState(false);
@@ -106,7 +106,7 @@ function Main() {
     },[])
 
     useEffect(()=>{
-        if(isLogin==true){
+        if(isLogin===true){
             socketIo.emit(`sendUserid`,{userId:sessionStorage.getItem("user_id")});
             socketIo.on('receive_userData',(data)=>{
                 sessionStorage.setItem("user",data.userId);

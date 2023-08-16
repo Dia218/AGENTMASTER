@@ -69,7 +69,7 @@ const Login_before = ({setIsLogin,socketIo}) => {
             </div>
             <div className="signup" onClick={onClickJoin}>sign up</div>
         </div>
-        <Join show={show} setShow={setShow}/>
+        <Join show={show} setShow={setShow} socketIo={socketIo}/>
         </>
     );
   }
