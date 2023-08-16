@@ -16,15 +16,15 @@ LIMIT 5;
 SELECT result.stock_id, result.stock_name, result.stock_price, result.diff_from_prevday, result.range
 FROM
 (
-	SELECT sinfo.stock_id, sinfo.stock_date, stock.stock_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
-	FROM
-	"AGENTMASTER"."Stock" AS stock
-	JOIN
-	"AGENTMASTER"."Stock_info" AS sinfo
-	ON stock.stock_id = stock_info.stock_id
-	ORDER BY stock_info.stock_date DESC, stock_info.range DESC
-	LIMIT 4
-)	AS result;
+    SELECT sinfo.stock_id, sinfo.stock_date, stock.stock_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
+    FROM
+    "AGENTMASTER"."Stock" AS stock
+    JOIN
+    "AGENTMASTER"."Stock_info" AS sinfo
+    ON stock.stock_id = sinfo.stock_id
+    ORDER BY sinfo.stock_date DESC, sinfo.range DESC
+    LIMIT 4
+)    AS result;
 /*
 가장 최신일자를 기준으로 등락률 상위 종목 4튜플을 출력합니다.
 출력되는 정보는 주식_id, 기준일자, 주가, 전일비, 등락률 순서로 출력됩니다.
