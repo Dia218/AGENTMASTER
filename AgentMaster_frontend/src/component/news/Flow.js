@@ -15,7 +15,7 @@ function Flow({flow,flownews}){
             setCheck(true);
             setFlow_text(flow.text)
         } else {
-            setFlow_text("사건 흐름이 없는 뉴스입니다.");
+            setFlow_text("이슈가 존재하지 않습니다.");
         }
     },[flow])
 
@@ -59,10 +59,10 @@ function Flow({flow,flownews}){
                         <div className='row flex-row flex-nowrap pt-3'>
                             { check ? articleList : <>
                                                     <div className='col-11 flow_summary'>
-                                                        <h5 className='as_title'>사건</h5>
+                                                        <h5 className='as_title'></h5>
                                                         <hr/>
                                                         <div className='flow_summary_body'>
-                                                            사건의 흐름이 없는 뉴스입니다.
+                                                            해당하는 이슈가 존재하지 않습니다.
                                                         </div>
                                                     </div>
                                                     </> }

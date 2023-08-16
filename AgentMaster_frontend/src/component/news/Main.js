@@ -131,7 +131,7 @@ function Main() {
                         <div className='news_main'><MainNews news={news[1]}/></div>
                         <div className='news_main'><MainNews news={news[2]}/></div>
                         <div className='login_main'>
-                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin}/>}
+                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin} socketIo={socketIo}/>}
                         </div>
                     </Stack>
                     <Stack direction='horizontal'>

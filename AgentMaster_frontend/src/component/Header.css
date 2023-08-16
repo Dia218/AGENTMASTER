@@ -14,3 +14,30 @@ header {
 .nav_text:hover {
     cursor: pointer;
 }
+
+.nav_newsButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: pre-line;
+}
+
+.newsButton {
+    margin-right: 5px;
+}
+
+.nav_chartButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: pre-line;
+}
+
+.chartButton {
+    margin-right: 5px;
+}
+
+.news_home {
+    
+    margin-top: 0px;
+}
