@@ -27,7 +27,7 @@ class ArticleWordsRelator:
             raw = f.read()
             self.stop_words = set(raw.split(", "))
 
-    def _is_similar(self, fr: list, to: list) -> float:
+    def _compute_words_share(self, fr: list, to: list) -> float:
         """
             _is_similar
                 A function
@@ -41,10 +41,11 @@ class ArticleWordsRelator:
         self, 
         froms: dict, 
         to: dict,
-        criteria: str = "title") -> dict:
+        criteria: str = "title",
+        narticle: int = 5) -> dict:
         """
             relate
-                A function finds semantically similar articles from 'froms' articles to a 'tos' article.  
+                A function finds semantically similar articles from 'froms' articles to a 'to' article.  
 
             parameters
                 froms 'dict'
@@ -59,23 +60,24 @@ class ArticleWordsRelator:
         if not type(to) == str: raise TypeError()
         if not type(froms) == str: raise TypeError()
     
-        if not criteria in ("title", "body", "summary"): raise InvalidCriteriaException()
-
+        if not criteria in ("title", "body", "summary"): raise Exception("Invalid")
         
-        similars = list()
+        words_share = list()
 
         # Find simliar articles by same words. 
         to_keywords = self.okt.phrase(to)
 
         for i, a in enumerate(froms['articles']):
             from_keywords = self.okt.phrase(a)
-            
-            similars.append(self._is_simliar(from_keywords, to_keywords))
+
+            words_share.append((i, self._compute_words_share(from_keywords, to_keywords)))
+        
+        sorted_words_share = sorted(words_share, key=lambda x: x[1])
+
+        return sorted_words_share[:narticle]
+        
 
         
-            
-            
-
         
         
 
