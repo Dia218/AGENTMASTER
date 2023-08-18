@@ -18,7 +18,7 @@ function SearchBar() {
         if(e.key === "Enter" && (isEnterCurrent.current === undefined || isEnterCurrent.current === false)){
             isEnterCurrent.current = true;
             setKeyword('');
-            navigate(`/searchList?result=${keyword}&offset=0&limit=10`,{
+            navigate(`/searchList?result=${keyword}&offset=0&limit=10&page=1`,{
                 state: {
                     keyword: keyword
                 }

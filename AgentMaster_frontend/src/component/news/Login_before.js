@@ -1,16 +1,17 @@
 //로그인 성공 전에 출력하는 컴포넌트. 기본 메인.
 //로그인에 성공하면 유저 정보를 백에 넘겨줘야함.
-//회원가입 버튼 클릭시 회원가입 창 띄우기 구현 필요.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import './css/Login_before.css';
 import Join from "./Join";
 
-const Login_before = ({setIsLogin}) => {
+const Login_before = ({setIsLogin,socketIo}) => {
     const [id,setId] = useState("");
     const [pw, setPw] = useState("");
     const [show,setShow] = useState(false);
+    const [result,setResult] = useState();
+    const [click,setClick] = useState(false);
 
     //input에 변화가 있을때마다 value 값을 변경해서 state에 저장한다.
     const handleId = (e) => {
@@ -26,8 +27,29 @@ const Login_before = ({setIsLogin}) => {
         sessionStorage.setItem("user_id",id);
         sessionStorage.setItem("user_pw",pw);
         sessionStorage.setItem("isLogin",true);
-        setIsLogin(true);
+        socketIo.emit('loginCheck',{ id:id, pw:pw });
+        setResult(true);
+        setClick(true);
     }
+
+    useEffect(()=>{
+        socketIo.on('loginCheck_Result',(data)=>{ setResult(data) });
+    },[socketIo]);
+
+    useEffect(()=>{
+        if(click){
+            if(result){
+                setIsLogin(true);
+                setClick(false);
+            } else {
+                alert("아이디/비밀번호가 틀립니다.");
+                setId("");
+                setPw("");
+                setIsLogin(false);
+                setClick(false);
+            }
+        }
+    },[click])
 
     const onClickJoin = () => {
         setShow(true);
@@ -47,7 +69,7 @@ const Login_before = ({setIsLogin}) => {
             </div>
             <div className="signup" onClick={onClickJoin}>sign up</div>
         </div>
-        <Join show={show} setShow={setShow}/>
+        <Join show={show} setShow={setShow} socketIo={socketIo}/>
         </>
     );
   }
