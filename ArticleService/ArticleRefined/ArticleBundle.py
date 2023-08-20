@@ -91,7 +91,7 @@ class ArticleBundle:
 
             self.aggregated += aggregated
 
-        self.last_page += r
+        self.last_crawled_page += r
 
     def _parse_links(self, document: BeautifulSoup) -> list:
         aggregated = list()
