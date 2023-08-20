@@ -7,19 +7,20 @@ CREATE SCHEMA IF NOT EXISTS "AGENTMASTER"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
 (
-    customer_id     varchar(15)     NOT NULL,
-    password        varchar(20)     NOT NULL,
-    e_mail          text            NOT NULL,
-    total_money     integer         NOT NULL,
-    yesterday_money integer         NOT NULL,
-    simul_money     integer         NOT NULL,
-    stock_money     integer         NOT NULL,
-    total_return    integer         NOT NULL,
-    rank_range      numeric(10, 2)  NOT NULL,
+    customer_id     varchar(15)    NOT NULL,
+    password        varchar(20)    NOT NULL,
+    e_mail          text           NOT NULL,
+    total_money     integer        NOT NULL,
+    yesterday_money integer        NOT NULL,
+    simul_money     integer        NOT NULL,
+    stock_money     integer        NOT NULL,
+    total_return    integer        NOT NULL,
+    rank_range      numeric(10, 2) NOT NULL,
     CONSTRAINT Customer_pkey PRIMARY KEY (customer_id),
-	CONSTRAINT customer_id_check CHECK(customer_id ~ '^[A-Za-z0-9]{5,15}' AND customer_id !~ '^[0-9]{5,15}'),
-	CONSTRAINT customer_password_check CHECK(password ~ '^[A-Za-z0-9]{8,20}' AND password !~ '^[0-9]{8,20}' AND password !~ '^[A-Za-z]{8,20}'),
-	CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
+    CONSTRAINT customer_id_check CHECK (customer_id ~ '^[A-Za-z0-9]{5,15}' AND customer_id !~ '^[0-9]{5,15}'),
+    CONSTRAINT customer_password_check CHECK (password ~ '^[A-Za-z0-9]{8,20}' AND password !~ '^[0-9]{8,20}' AND
+                                              password !~ '^[A-Za-z]{8,20}'),
+    CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
 )
     TABLESPACE pg_default;
 
@@ -54,7 +55,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
     field_name varchar(100) NOT NULL,
     CONSTRAINT Stock_pkey PRIMARY KEY (stock_id),
     CONSTRAINT stock_name_unique UNIQUE (stock_name),
-	CONSTRAINT stock_id_check CHECK (stock_id ~ '\d{6}'),
+    CONSTRAINT stock_id_check CHECK (stock_id ~ '\d{6}'),
     CONSTRAINT field_name_fkey FOREIGN KEY (field_name)
         REFERENCES "AGENTMASTER"."Field" (field_name) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -71,16 +72,16 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Stock"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
 (
-    stock_id            varchar(20)   NOT NULL,
-    stock_date          date          NOT NULL,
-    stock_price         integer       NOT NULL,
-    diff_from_prevday   integer       NOT NULL,
-    range               numeric(4, 2) NOT NULL,
-    start_price         integer       NOT NULL,
-    high_price          integer       NOT NULL,
-    low_price           integer       NOT NULL,
-    trading_volume      integer       NOT NULL,
-    transaction_volume  integer       NOT NULL,
+    stock_id           varchar(20)   NOT NULL,
+    stock_date         date          NOT NULL,
+    stock_price        integer       NOT NULL,
+    diff_from_prevday  integer       NOT NULL,
+    range              numeric(4, 2) NOT NULL,
+    start_price        integer       NOT NULL,
+    high_price         integer       NOT NULL,
+    low_price          integer       NOT NULL,
+    trading_volume     integer       NOT NULL,
+    transaction_volume integer       NOT NULL,
     CONSTRAINT Stock_info_pkey PRIMARY KEY (stock_id, stock_date),
     CONSTRAINT stock_id_fk FOREIGN KEY (stock_id)
         REFERENCES "AGENTMASTER"."Stock" (stock_id) MATCH SIMPLE
@@ -98,13 +99,13 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Stock_info"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
 (
-    customer_id     varchar(20)      NOT NULL,
-    stock_id        varchar(20)      NOT NULL,
-    simul_return    integer          NOT NULL,
-    simul_range     NUMERIC(10, 2)   NOT NULL,
-    simul_holdings  integer          NOT NULL,
-    perchase_amount integer          NOT NULL,
-    average_price   integer          NOT NULL,
+    customer_id     varchar(20)    NOT NULL,
+    stock_id        varchar(20)    NOT NULL,
+    simul_return    integer        NOT NULL,
+    simul_range     NUMERIC(10, 2) NOT NULL,
+    simul_holdings  integer        NOT NULL,
+    perchase_amount integer        NOT NULL,
+    average_price   integer        NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
         REFERENCES "AGENTMASTER"."Customer" (customer_id) MATCH SIMPLE
@@ -161,20 +162,19 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 alter table if exists "AGENTMASTER"."Article_group"
     OWNER to postgres;
 
-/*기사*/
+/*기사본문*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
-    article_id      int             not null,
-    company         varchar(100)    not null,
-    reporter        varchar(100)    not null,
-    title           text            not null,
-    issue_keyword   varchar(100),
-    first_pub       timestamp       not null,
-    last_pub        timestamp       not null,
-    body            text            not null,
-    link            text            not null,
-    group_name      varchar(100),
-    field_name      varchar(100)    not null,
+    article_id    int          not null,
+    company       varchar(100) not null,
+    reporter      varchar(100) not null,
+    title         text         not null,
+    issue_keyword varchar(100),
+    first_pub     timestamp    not null,
+    last_pub      timestamp    not null,
+    body          text         not null,
+    group_name    varchar(100),
+    field_name    varchar(100) not null,
 
     constraint "Article_pkey" primary key (article_id),
     constraint "Articles_group_name_fkey" foreign key (group_name)
@@ -184,8 +184,24 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     constraint "Articles_field_name_fkey" foreign key (field_name)
         references "AGENTMASTER"."Field" (field_name) match simple
         on update cascade
-        on delete restrict,
-    constraint "article_URL_format" check (link ~ '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
+        on delete restrict
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article"
+    OWNER to postgres;
+
+/*기사링크*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
+(
+    article_id int  not null,
+    link       text not null,
+    constraint "article_id_fkey" foreign key (article_id)
+        references "AGENTMASTER"."Article" (article_id)
+        on update cascade
+        on delete cascade,
+    constraint "article_URL_format" check (link ~
+                                           '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
     tablespace pg_default;
 
