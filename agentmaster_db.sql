@@ -17,9 +17,8 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
     total_return    integer        NOT NULL,
     rank_range      numeric(10, 2) NOT NULL,
     CONSTRAINT Customer_pkey PRIMARY KEY (customer_id),
-    CONSTRAINT customer_id_check CHECK (customer_id ~ '^[A-Za-z0-9]{5,15}' AND customer_id !~ '^[0-9]{5,15}'),
-    CONSTRAINT customer_password_check CHECK (password ~ '^[A-Za-z0-9]{8,20}' AND password !~ '^[0-9]{8,20}' AND
-                                              password !~ '^[A-Za-z]{8,20}'),
+    CONSTRAINT customer_id_check CHECK (customer_id ~ '^[A-Za-z0-9]{5,15}$' AND customer_id !~ '^[0-9]{5,15}$'),
+    CONSTRAINT customer_password_check CHECK (password ~ '^[A-Za-z0-9]{8,20}$' AND password !~ '^[0-9]{8,20}$' AND password !~ '^[A-Za-z]{8,20}$'),
     CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
 )
     TABLESPACE pg_default;
