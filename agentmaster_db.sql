@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     group_name    varchar(100),
     field_name    varchar(100) not null,
 
+    constraint "Article_pkey" primary key (article_id),
     constraint "Article_fkey" foreign key (article_id)
         references "AGENTMASTER"."Article_link" (article_id)
         on update cascade
