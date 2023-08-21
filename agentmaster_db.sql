@@ -162,6 +162,20 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 alter table if exists "AGENTMASTER"."Article_group"
     OWNER to postgres;
 
+/*기사링크*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
+(
+    article_id int  not null,
+    link       text not null,
+    constraint "article_id_pkey" primary key (article_id),
+    constraint "article_URL_format" check (link ~
+                                           '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_link"
+    OWNER to postgres;
+
 /*기사본문*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
@@ -176,7 +190,10 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     group_name    varchar(100),
     field_name    varchar(100) not null,
 
-    constraint "Article_pkey" primary key (article_id),
+    constraint "Article_fkey" foreign key (article_id)
+        references "AGENTMASTER"."Article_link" (article_id)
+        on update cascade
+        on delete cascade,
     constraint "Articles_group_name_fkey" foreign key (group_name)
         references "AGENTMASTER"."Article_group" (group_name) match simple
         on update cascade
@@ -185,23 +202,6 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
         references "AGENTMASTER"."Field" (field_name) match simple
         on update cascade
         on delete restrict
-)
-    tablespace pg_default;
-
-alter table if exists "AGENTMASTER"."Article"
-    OWNER to postgres;
-
-/*기사링크*/
-CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
-(
-    article_id int  not null,
-    link       text not null,
-    constraint "article_id_fkey" foreign key (article_id)
-        references "AGENTMASTER"."Article" (article_id)
-        on update cascade
-        on delete cascade,
-    constraint "article_URL_format" check (link ~
-                                           '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
     tablespace pg_default;
 
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_Scrap"
         on update cascade
         on delete cascade,
     constraint "Article_Scrap_news_id_fkey" foreign key (article_id)
-        references "AGENTMASTER"."Article" (article_id) match simple
+        references "AGENTMASTER"."Article_link" (article_id) match simple
         on update cascade
         on delete cascade
 )
@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
     summary    text not null,
 
     constraint "Article_Summary_news_id_fkey" foreign key (article_id)
-        references "AGENTMASTER"."Article" (article_id) match simple
+        references "AGENTMASTER"."Article_link" (article_id) match simple
         on update cascade
         on delete cascade,
     constraint "Article_Summary_pkey" primary key (article_id, summary)
