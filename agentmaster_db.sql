@@ -99,7 +99,7 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Stock_info"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
 (
-    customer_id     varchar(20)    NOT NULL,
+    customer_id     varchar(15)    NOT NULL,
     stock_id        varchar(20)    NOT NULL,
     simul_return    integer        NOT NULL,
     simul_range     NUMERIC(10, 2) NOT NULL,
@@ -127,7 +127,7 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Simulation"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Bookmark"
 (
-    customer_id varchar(20) NOT NULL,
+    customer_id varchar(15) NOT NULL,
     stock_id    varchar(20) NOT NULL,
     CONSTRAINT Bookmark_pkey PRIMARY KEY (customer_id, stock_id),
     CONSTRAINT customer_id_fk FOREIGN KEY (customer_id)
@@ -212,7 +212,7 @@ alter table if exists "AGENTMASTER"."Article"
 /*스크랩*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_Scrap"
 (
-    customer_id varchar(20) not null,
+    customer_id varchar(15) not null,
     article_id  int         not null,
 
     constraint "Article_Scrap_pkey" primary key (customer_id, article_id),
