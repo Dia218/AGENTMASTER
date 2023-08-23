@@ -21,7 +21,7 @@ function Main_body() {
 
     const onClick = (e) => {        //클릭 리스너
         //console.log(e.currentTarget.id + "번 모의투자 화면으로 이동.");
-        navigate(`/simulTrade`);
+        //navigate(`/simulTrade?${stock.strnCd}`);
     }
 
     const addComma = (num) => {     //현재가, 전일비 값을 불러올 때 자동으로 3자리 마다 콤마(,)를 붙이는 코드
@@ -35,7 +35,7 @@ function Main_body() {
                 {bodyList.map((stock) => (
                     <li className="simulMainBody_li" key={stock.srtnCd}>
                     <div className="simulMainBody_div" id={stock.srtnCd} onClick={onClick}>
-                        <Link className="simulMainBody_a" to={"/simul" + stock.srtnCd}>
+                        <Link className="simulMainBody_a" to={"/simulTrade?" + stock.srtnCd}>
                             <div className="simulMainBodyStockId">{stock.srtnCd}</div>
 
                             <div className="simulMainBodyStockName">{stock.itmsNm}</div>

@@ -3,12 +3,18 @@
 //생기면 해당 props를 추가로 넘겨받을 예정
 //사유: 클릭 시 해당 기사 요약화면으로 넘어가기 구현예정
 
+import { useNavigate } from "react-router";
+import './css/ArticleLink.css';
+
 const ArticleLink = (props) => {
+    const navigate = useNavigate();
+    const onClickRA = () => {
+        navigate(`/newsDetail?id=${props.id}`);
+    }
     return (
         <>
-        <div className="pb-2">
-            {/**해당 제목 클릭 시 링크 넘어갈 수 있도록 Link 혹은 href 필요할 듯 */}
-			<h6>*{props.title}</h6>
+        <div className="RA_List pb-2">
+			<h6 className="RA_ListItem" onClick={onClickRA}>-{props.title}</h6>
         </div>
         </>
     );

@@ -9,7 +9,7 @@ function RelatedArticles({relatedArticles}){
 
     //받은 props를 map 함수와 ArticleLink 컴포넌트를 사용해 출력한다.
     //const articleList = article.map((v) => (<ArticleLink key={v.title} title={v.title} />));
-    const articleList = relatedArticles.map((v) => (<ArticleLink key={v.title} title={v.title} />));
+    const articleList = relatedArticles.map((v) => (<ArticleLink key={v.title} title={v.title} id={v.id}/>));
 
     return(
         <Stack gap={0} className='ra'>

@@ -51,8 +51,8 @@ function NewsDetail(){
         })
         //임시 데이터 추가
         setNews({text,publisher,name,title});
-        setRa([{title},{title}]);
-        //setFlow({text});
+        setRa([{"id":"00",title},{"id":"01",title}]);
+        setFlow({text});
         setFlowNews([{title,text},{title,text},{title,text}]);
         setScrapCheck(true);
 

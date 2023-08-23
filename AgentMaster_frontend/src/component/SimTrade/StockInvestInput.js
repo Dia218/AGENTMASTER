@@ -3,7 +3,7 @@ import './css/StockInvestInput.css';
 
 const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle }) => {
     return (
-        <>
+        <div className=''>
             <input
                 checked={StockInvestInputSwitchActive}
                 onChange={handleToggle}
@@ -15,11 +15,13 @@ const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle }) 
                 className="StockInvestInputLable"
                 htmlFor={`Price`}
             >
-                매수
+                <div className='StockInvestInputLable_buy'>매수</div>
                 <span className={`react-switch-button`}/>
-                매도
+                <div className='StockInvestInputLable_sell'>매도</div>
             </label>
-        </>
+            <button className='cancel'>취소</button>
+            <button className='sellAll'>전체 매도</button>
+        </div>
     );
 };
 export default function StockInvestInput({AvailableAsset, Amount}) {
@@ -45,25 +47,25 @@ export default function StockInvestInput({AvailableAsset, Amount}) {
                     <div>
                         가격:
                         < div className="StockInvestInputPrice">
-                            <input/>
+                            <input className='StockInvestInputPriceBox' placeholder='1000'/> 원
                         </div>
                     </div>
                     <div>
                         매수량:
                         <div className="StockInvestInputAmount">
-                            <input/>
+                        <input className='StockInvestInputAmountBox' placeholder='1'/> 주
                         </div>
                     </div>
                 </div>
 
                 {SwitchActive && (
-                    <div className="StockInvestInputButton">
-                        매수
+                    <div className="StockInvestInputButton_buy">
+                        <div className='StockInvestInputButton_buyText'>매수</div>
                     </div>
                 )}
                 {!SwitchActive && (
-                    <div className="StockInvestInputButton">
-                        매도
+                    <div className="StockInvestInputButton_sell">
+                        <div className='StockInvestInputButton_sellText'>매도</div>
                     </div>
                 )}
             </div>

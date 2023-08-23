@@ -1,78 +1,67 @@
 .StockInvestDataHeader {
-    border-radius: 5px;
-    background: #0890ff;
     padding: 20px;
     height: 70%;
     margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 10px;
+    margin-right: 40px;
     min-width: 430px;
+    max-width: 520px;
     min-height: 400px;
     align-items: center;
-}
-.StockInvestDataLeft {
-    float: left;
-    width: 45%;
-    font-size: calc(14px + .5vw);
-    min-height: 400px;
-    display: inline-block;
-    vertical-align: middle;
-
-}
-.StockInvestDataRight {
-    float: right;
-    width: 45%;
-    font-size: calc(14px + .5vw);
-
-}
-.PDP {
-    display: flex;
-    justify-content: space-between;
+    font-weight: bold;
+    text-align: center;
 }
 
-.DL {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataTop {
+    height: 28vh;
 }
 
-.WL {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataTop_Header {
+    border: 2px solid white;
+    background-color: #CDF7FF;
+    color: #0092F3;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-.PER {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataTop_body {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-.PTB {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataBottom {
+    height: 17vh;
 }
 
-.MCP {
-    display: flex;
-    justify-content: space-between;
+.StockInvestDataBottom_Left {
+    border: 2px solid white;
+    border-radius: 40px;
+    background-color: #0092F3;
+    min-height: 18vh;
+    padding-top: 3vh;
+    margin-right: 3px;
 }
 
-.DH {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.PR_H {
+    font-size: 21px;
+    color: white;
+}
+.PR_B {
+    margin-top: 10px;
+    font-size: 35px;
+    color: white;
 }
 
-.WH {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataBottom_Right_Header {
+    background-color: #0092F3;
+    border: 2px solid white;
+    color: white;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
 }
 
-.DY {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.StockInvestDataBottom_Right_Body {
+    border: 2px solid white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }

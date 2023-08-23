@@ -45,7 +45,7 @@ function SearchList(){
         socketIo.emit('sendKeyword',{ keyword : keyword });
 
         //임시 데이터 추가
-        /*setSearchResult([{id,title,publisher,name,date,keyword},
+        setSearchResult([{id,title,publisher,name,date,keyword},
             {"id":"01",title,publisher,name,date,keyword},
             {"id":"02",title,publisher,name,date,keyword},
             {"id":"03",title,publisher,name,date,keyword},
@@ -57,7 +57,7 @@ function SearchList(){
             {"id":"09",title,publisher,name,date,keyword},
             {"id":"10",title,publisher,name,date,keyword},
             {"id":"11",title,publisher,name,date,keyword},
-            {"id":"12",title,publisher,name,date,keyword},]);*/
+            {"id":"12",title,publisher,name,date,keyword},]);
         //setSearchResult([]);
         //setSearchResult([{id,title,publisher,name,date,keyword},])
     },[keyword]);

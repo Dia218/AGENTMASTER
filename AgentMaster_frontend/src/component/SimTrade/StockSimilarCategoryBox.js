@@ -13,7 +13,7 @@ export default function StockSimilarCategoryBox({
                     {SimilarStockname}
                 </div>
                 <div className="StockSimilarCategoryBoxBody">
-                    -{SimilarStockPrice} ({SimilarStockrates})
+                    -{SimilarStockPrice}<br/>({SimilarStockrates})
                 </div>
                 <div className="StockSimilarCategoryBoxCode">
                     {SimilarStockcode}

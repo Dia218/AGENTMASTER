@@ -1,18 +1,30 @@
 .StockSimilarCategoryBox {
-    border-radius: 5px;
-    background: #0890ff;
+    border-radius: 10px;
+    background: #95D6FF;
     padding: 10px;
-    width: 20%;
+    margin-right: 20px;
+    width: 30%;
     min-width: 140px;
     min-height: 140px;
+    max-width: 230px;
+    max-height: fit-content;
 }
 
 .StockSimilarCategoryBoxTitle {
-    font-size: 40px;
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    margin-left: 5px;
 }
 
 .StockSimilarCategoryBoxBody {
-    font-size: 25px;
-    margin-top: 10px;
+    font-size: 20px;
+    margin-left: 5px;
+    margin-bottom: 10px;
     white-space: normal;
+}
+
+.StockSimilarCategoryBoxCode {
+    margin-left: 5px;
+    margin-bottom: 10px;
 }

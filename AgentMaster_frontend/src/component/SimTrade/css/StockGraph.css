@@ -1,6 +1,6 @@
 .StockGraph {
     border-radius: 5px;
-    background: #0890ff;
+    
     padding: 20px;
     min-width: 700px;
     margin-top: 30px;
@@ -12,6 +12,7 @@
     line-height: 10px;
 }
 .StockGraphSeperationLine {
-    border: 1px solid #2067d8;
-    margin-bottom: 20px;
+    border: 1px solid #95D6FF;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }

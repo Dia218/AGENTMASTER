@@ -1,5 +1,5 @@
 .Chart_Main{
-  background-color: rgb(240, 240, 240);
+  background-color: white;
   min-height: 120vh;
 }
 .chartNews {
@@ -8,16 +8,18 @@
     width: 600px;
     justify-content: center;
     margin-top: 90px;
-    margin-left: 300px;
+    margin-left: 150px;
     margin-right: 20px;
     margin-bottom: 40px;
     background-color: #95d6ff;
+    border-radius: 20px;
   }
   
-  .news-h2 {
-    margin-top: 2px;
+  .news-title {
+    color: white;
+    margin-left: 15px;
+    margin-top: 8px;
   }
-  
   .news-container {
     height: 300px;
     width: 400px;
@@ -27,21 +29,24 @@
     margin-top: 30px;
     margin-left: 20px;
     margin-bottom: 10px;
+    color: white;
   }
-  
+  .news-divider {
+    border-top: 5px solid white; 
+    margin-top: 20px; 
+  }
   .news-description {
     margin-bottom: 15px;
   }
   .ChartMianSearch{
     background-color: rgb(240, 240, 240);
   }
+  
   .table2 {
     width: 1300px;
     border-collapse: collapse;
-    border: 1px solid #9bccfb ;
-    margin-left: 150px;
+    margin-left: 100px;
     margin-top: 10px;
-    
   }
   
   .table2 th,
@@ -49,14 +54,16 @@
     text-align: center;
     padding: 8px;
   }
-  
+  .table2 th.border-top{
+     border-right: 2px solid white;
+  } 
   .table2 th{
-    background-color:#2067d8 ;
+    background-color:#0092f3 ;
   }
   .table2 td:last-child {
     border-right: none;
   }
-
+ 
   .news-search-container {
     display: flex;
     gap: 20px;
@@ -66,27 +73,42 @@
   .table-container_main {
     margin-left: 5vh;
   }
-  
+  .table-buttons button {
+    border: 2px solid #3eb7ff; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    color: #3eb7ff;
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+    background-color: white;
+  }
   .table-buttons{
-    margin-left: 250px;
+    margin-left: 110px;
     display: flex;
-    gap: 50px;
+    gap: 100px;
   }
   .table-container{
-    width: 2000px;
+    /*width: 2000px;
+     해당 부분으로 인해 가로길이가 너무 늘어나서 생략함(생략해도 문제 없음)*/
     margin-top: 10px;
 
   }
-  .table-buttons button {
-    width: 170px;
-    height: 30px;
-  }
+
   .table-buttons button.test {
-    margin-left: 30px;
     background-color: #3eb7ff;
     border-radius: 10px;
+    color: white;
+    width: 180px;
+    height: 50px;
   }
-  
+ 
+  .thin-border{
+    border-top: 2px solid #0092f3;
+  }
+  .border-top{
+    color: white;
+  }
   .ranking-container {
     margin-top: 20px;
     text-align: center;
@@ -100,6 +122,8 @@
     width: 550px;
     margin-top: 200px;
     margin-left: -600px;
+    border-radius: 20px;
+    
   }
   
   .ranking-list {
@@ -108,6 +132,8 @@
     width: 550px;
     display: inline-block;
     margin-top: 20px;
+    background-color: white;
+    border-radius: 20px;
   }
   
   .ranking-list h2 {
@@ -130,7 +156,7 @@
     margin-bottom: 10px;
     text-align: left;
     font-weight: bold;
-    color: blue;
+    color: #0092f3;
   }
   
   .ranking-list {
@@ -165,4 +191,3 @@
     background-repeat: repeat-y;
     margin-left: 15px; 
   }
-  
