@@ -1,11 +1,9 @@
-
-                    /*1 뉴스 메인 페이지*/
+/*1 뉴스 메인 페이지*/
 
 /*1.1 해당 페이지에서 무작위로 뉴스 기사 5개를 골라 신문사 이름, 기사 제목, 분야를 출력한다. 기사의 제목을 클릭하면 해당 기사의 상세 페이지로 넘어간다. 이 때 해당 기사의 id를 속성으로 넘겨준다.*/
 SELECT article_id, company, title, field_name
 FROM "AGENTMASTER"."Article"
-ORDER BY RANDOM()
-LIMIT 5;
+ORDER BY RANDOM() LIMIT 5;
 /*
 랜담한 뉴스 기사 정보를 5튜플 출력합니다.
 출력되는 정보는 기사_id, 신문사 이름, 기사 제목, 분야명 순서로 출력됩니다.
@@ -14,17 +12,12 @@ LIMIT 5;
 
 /*1.2 해당 페이지에서 등락률 기준 최상위 4개 종목의 종목명, 주가, 전일비, 등락률을 차례대로 출력한다.*/
 SELECT result.stock_id, result.stock_name, result.stock_price, result.diff_from_prevday, result.range
-FROM
-(
-	SELECT sinfo.stock_id, sinfo.stock_date, stock.stock_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
-	FROM
-	"AGENTMASTER"."Stock" AS stock
-	JOIN
-	"AGENTMASTER"."Stock_info" AS sinfo
-	ON stock.stock_id = sinfo.stock_id
-	ORDER BY stock_info.stock_date DESC, stock_info.range DESC
-	LIMIT 4
-)	AS result;
+FROM (SELECT sinfo.stock_id, sinfo.stock_date, stock.stock_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
+      FROM "AGENTMASTER"."Stock" AS stock
+               JOIN
+           "AGENTMASTER"."Stock_info" AS sinfo
+           ON stock.stock_id = sinfo.stock_id
+      ORDER BY stock_info.stock_date DESC, stock_info.range DESC LIMIT 4) AS result;
 /*
 가장 최신일자를 기준으로 등락률 상위 종목 4튜플을 출력합니다.
 출력되는 정보는 주식_id, 기준일자, 주가, 전일비, 등락률 순서로 출력됩니다.
@@ -32,7 +25,8 @@ FROM
 
 
 /*1.3 해당 페이지에서 아이디와 비밀번호를 입력하고 로그인 버튼을 클릭 시 무조건 관리자 계정의 정보를 넘겨받고 관리자 계정의 id를 출력한다.*/
-SELECT * FROM "AGENTMASTER"."Customer"
+SELECT *
+FROM "AGENTMASTER"."Customer"
 WHERE customer_id = '{username}';
 /*
 {username}에 값을 넣어 주세요.
@@ -41,17 +35,16 @@ WHERE customer_id = '{username}';
 
 
 /*1.4 해당 페이지에서 아이디와 비밀번호, 이메일을 입력하고 회원 가입 버튼을 클릭하면 입력한 데이터를 db에 저장한다.*/
-INSERT INTO "AGENTMASTER"."Customer" VALUES (
-	'{username}',
-	'{password}',
-	'{email}',
-	100000,		/*총 자산 초기 값*/
-	0,
-	100000,		/*현금 자산 초기 값*/
-	0,
-	0,
-	0.00
-);
+INSERT INTO "AGENTMASTER"."Customer"
+VALUES ('{username}',
+        '{password}',
+        '{email}',
+        100000, /*총 자산 초기 값*/
+        0,
+        100000, /*현금 자산 초기 값*/
+        0,
+        0,
+        0.00);
 /*
 {username}, {password}, {email}에 값을 넣어 주세요.
 고객 id가 {username}이고 고객 비밀번호가 {password}이고 고객 이메일이 {email}인 고객 정보를 DB에 추가합니다.
@@ -59,22 +52,22 @@ INSERT INTO "AGENTMASTER"."Customer" VALUES (
 */
 
 
-                    /*2 뉴스 상세 페이지*/
+/*2 뉴스 상세 페이지*/
 
 /*2.1 해당 페이지에서 클릭한 기사의 기사 제목, 스크랩 여부, 신문사 이름, 기자 이름을 출력한다.*/
 ->
-SELECT Article.article_id, Article.title, Article.company, Article.reporter, 
-	CASE
-	WHEN EXISTS (
-		SELECT
-		FROM "AGENTMASTER"."Article_Scrap"
-		WHERE article_id = {article_id} AND customer_id = '{username}'
-	)
-	THEN true
-	ELSE false
-	END AS isScrap
-FROM 
-"AGENTMASTER"."Article" AS Article
+SELECT Article.article_id,
+       Article.title,
+       Article.company,
+       Article.reporter,
+       CASE
+           WHEN EXISTS (SELECT
+                        FROM "AGENTMASTER"."Article_Scrap"
+                        WHERE article_id = {article_id} AND customer_id = '{username}')
+               THEN true
+           ELSE false
+           END AS isScrap
+FROM "AGENTMASTER"."Article" AS Article
 WHERE article_id = {article_id};
 /*
 {article_id}, {username}에 값을 넣어주세요
@@ -86,8 +79,8 @@ WHERE article_id = {article_id};
 /*2.2 해당 페이지에서 클릭한 기사의 요약문과 해당 기사의 원본 링크를 출력한다.*/
 SELECT summary.summary, article.link
 FROM "AGENTMASTER"."Article" AS article
-LEFT JOIN "AGENTMASTER"."Article_summary" AS summary
-    ON article.article_id = summary.article_id
+         LEFT JOIN "AGENTMASTER"."Article_summary" AS summary
+                   ON article.article_id = summary.article_id
 WHERE article.article_id = {article_id};
 /*
 {article_id}에 값을 넣어주세요
@@ -108,23 +101,23 @@ WHERE article.article_id = {article_id};
 
 
 /*2.5 해당 페이지에서 클릭한 기사와 연관된 뉴스 기사 제목을 5~6개 출력한다. 이때 제목을 클릭할 경우 해당 기사의 상세 페이지로 넘어간다.*/
-SELECT
-    article2.article_id, article2.title
+SELECT article2.article_id,
+       article2.title
 FROM "AGENTMASTER"."Article" AS article1
-LEFT JOIN "AGENTMASTER"."Article" AS article2
-    ON article1.group_name = article2.group_name
+         LEFT JOIN "AGENTMASTER"."Article" AS article2
+                   ON article1.group_name = article2.group_name
 WHERE article1.article_id = {article_id}
   AND article2.article_id <> {article_id}
   AND article2.group_name IS NOT NULL
 ORDER BY RANDOM()
-LIMIT 5;
+    LIMIT 5;
 /*
 {article_id}에 값을 넣어주세요
 기사 id가 {article_id}인 기사의 연관된 뉴스 기사 제목 5개를 출력합니다. 연관 뉴스가 없을 때는 아무 것도 출력되지 않습니다.
 */
 
 
-                    /*3 뉴스 검색 페이지*/
+/*3 뉴스 검색 페이지*/
 
 /*3.1 해당 페이지에서 키워드를 입력해 검색하면 해당 키워드를 포함하는 뉴스 기사의 목록을 출력한다.
 이때 각 항목은 신문사 이름과 게재일, 제목을 출력한다.
@@ -132,15 +125,16 @@ LIMIT 5;
 이 때 해당 기사의 id를 속성으로 넘겨준다.*/
 SELECT article_id, company, first_pub, last_pub, title
 FROM "AGENTMASTER"."Article"
-WHERE title LIKE '%{keyword}%' OR issue_keyword LIKE '%{keyword}%';
+WHERE title LIKE '%{keyword}%'
+   OR issue_keyword LIKE '%{keyword}%';
 /*
 {keyword}에 값을 넣어주세요
 기사 이슈 키워드에 {keyword}가 포함된 기사와, 제목애 {keyword}가 포함된 기사의 기사 id와 신문사 이름, 게재일, 제목을 출력합니다.
 */
 
 
-                    /*4 주식 메인 페이지*/
-	
+/*4 주식 메인 페이지*/
+
 /*4.1 오늘의 뉴스 부분에서 무작위로 신문사 이름과 기사 요약(한줄 정도)를 띄운다.*/
 
 /*조건이 애미하여 쿼리문 두 개를 만들었습니다.*/
@@ -148,10 +142,9 @@ WHERE title LIKE '%{keyword}%' OR issue_keyword LIKE '%{keyword}%';
 /*4.1.1	오늘의 뉴스 부분에서 무작위로 신문사 이름과 기사 요약(한 줄)을 띄운다.*/
 SELECT article.company, summary.summary
 FROM "AGENTMASTER"."Article" AS article
-JOIN "AGENTMASTER"."Article_summary" AS summary
-ON article.article_id = summary.article_id
-ORDER BY RANDOM()
-LIMIT 1;
+         JOIN "AGENTMASTER"."Article_summary" AS summary
+              ON article.article_id = summary.article_id
+ORDER BY RANDOM() LIMIT 1;
 /*
 랜덤한 기사 id의 기사 요약이 출력됩니다. 요악문이 여러 개인 경우 랜덤으로 한 줄만 출력됩니다.
 출력 결과는 신문사 이름, 기사 요약 순서로 출력됩니다.
@@ -159,14 +152,11 @@ LIMIT 1;
 
 /*4.1.2	오늘의 뉴스 부분에서 무작위로 신문사 이름과 기사 요약(전부)을 띄운다.*/
 SELECT article.company, summary.summary
-FROM (
-    SELECT article_id, company
-    FROM "AGENTMASTER"."Article"
-    ORDER BY RANDOM()
-    LIMIT 1
-) AS article
-JOIN "AGENTMASTER"."Article_summary" AS summary
-ON article.article_id = summary.article_id;
+FROM (SELECT article_id, company
+      FROM "AGENTMASTER"."Article"
+      ORDER BY RANDOM() LIMIT 1) AS article
+         JOIN "AGENTMASTER"."Article_summary" AS summary
+              ON article.article_id = summary.article_id;
 /*
 랜덤한 기사 id의 기사 요약이 출력됩니다. 요약문이 여러 개인 경우 전부 출력됩니다.
 출력 결과는 신문사 이름, 기사 요약 순서로 출력됩니다.
@@ -184,7 +174,6 @@ WHERE stock_name LIKE '{keyword}%';
 */
 
 
-
 /*4.3 상한가, 하한가, 상승, 하락, 보합 버튼을 클릭했을 때 그에 맞는 순위 5위 정도의 종목을 현재가, 전일비, 등락률, 거래량, 매수호가, 매도호가, 매수총잔량, 매도총잔량의 정보를 띄운다.*/
 
 /*
@@ -196,19 +185,17 @@ WHERE stock_name LIKE '{keyword}%';
 /*4.3.1 상한가 버튼*/
 SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT *
-	FROM "AGENTMASTER"."Stock_info"
-	WHERE stock_date =(			                    /*가장 최신 기준일자를 조건으로 검색*/
-		SELECT stock_date
-		FROM "AGENTMASTER"."Stock_info"
-		ORDER BY stock_date DESC
-		LIMIT 1
-	)
-) AS sinfo
+         JOIN (SELECT *
+               FROM "AGENTMASTER"."Stock_info"
+               WHERE stock_date = ( /*가장 최신 기준일자를 조건으로 검색*/
+                   SELECT stock_date
+                   FROM "AGENTMASTER"."Stock_info"
+                   ORDER BY stock_date DESC
+                   LIMIT 1) ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
-ORDER BY range DESC			                        /*등락률 내림차순(상한가)*/
-LIMIT 5;				                            /*5튜플 출력*/
+ORDER BY range DESC /*등락률 내림차순(상한가)*/
+    LIMIT 5;
+/*5튜플 출력*/
 /*
 등락률이 높은 순서대로 주식정보를 5튜플 출력합니다.
 출력되는 정보는 종목코드, 종목명, 분야명, 주가, 전일비, 등락률 순서로 출력됩니다.
@@ -218,19 +205,17 @@ LIMIT 5;				                            /*5튜플 출력*/
 /*4.3.2 하한가 버튼*/
 SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT *
-	FROM "AGENTMASTER"."Stock_info"
-	WHERE stock_date =(			                    /*가장 최신 기준일자를 조건으로 검색*/
-		SELECT stock_date
-		FROM "AGENTMASTER"."Stock_info"
-		ORDER BY stock_date DESC
-		LIMIT 1
-	)
-) AS sinfo
+         JOIN (SELECT *
+               FROM "AGENTMASTER"."Stock_info"
+               WHERE stock_date = ( /*가장 최신 기준일자를 조건으로 검색*/
+                   SELECT stock_date
+                   FROM "AGENTMASTER"."Stock_info"
+                   ORDER BY stock_date DESC
+                   LIMIT 1) ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
-ORDER BY range ASC			                        /*등락률 오름차순(하한가)*/
-LIMIT 5; 				                            /*5튜플 출력*/
+ORDER BY range ASC /*등락률 오름차순(하한가)*/
+    LIMIT 5;
+/*5튜플 출력*/
 /*
 등락률이 낮은 순서대로 주식정보를 5튜플 출력합니다.
 출력되는 정보는 종목코드, 종목명, 분야명, 주가, 전일비, 등락률 순서로 출력됩니다.
@@ -240,38 +225,34 @@ LIMIT 5; 				                            /*5튜플 출력*/
 /*4.3.3 상승 버튼*/
 SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
-	FROM(
-		SELECT stock_id, COUNT(stock_id) AS cid
-		FROM "AGENTMASTER"."Stock_info"
-		WHERE stock_date BETWEEN	                /*최근 10일간의 기준일자를 조건으로 검색*/
-		(
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		) - 10 AND
+         JOIN (SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
+               FROM (SELECT stock_id, COUNT(stock_id) AS cid
+                     FROM "AGENTMASTER"."Stock_info"
+                     WHERE stock_date BETWEEN /*최근 10일간의 기준일자를 조건으로 검색*/
+                               (SELECT stock_date
+                                FROM "AGENTMASTER"."Stock_info"
+                                ORDER BY stock_date DESC
+                               LIMIT 1) - 10 AND
 		(
 			SELECT stock_date
 			FROM "AGENTMASTER"."Stock_info"
 			ORDER BY stock_date DESC
 			LIMIT 1
 		) AND RANGE > 0		                        /*등락률이 양수일 때를 조건으로 검색*/
-		GROUP BY stock_id
-	) AS cinfo
-	JOIN
-	"AGENTMASTER"."Stock_info" AS sinfo
-	ON sinfo.stock_id = cinfo.stock_id
-	WHERE cid > 4 AND sinfo.stock_date = (	        /*등락률이 양수였던 날이 5일 이상일 때를 조건*/
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		)
-	ORDER BY cinfo.cid DESC
-	LIMIT 5				                            /*5튜플 출력*/
-) AS sinfo
+               GROUP BY stock_id) AS cinfo
+         JOIN
+     "AGENTMASTER"."Stock_info" AS sinfo
+     ON sinfo.stock_id = cinfo.stock_id
+WHERE cid > 4
+  AND sinfo.stock_date = ( /*등락률이 양수였던 날이 5일 이상일 때를 조건*/
+    SELECT stock_date
+    FROM "AGENTMASTER"."Stock_info"
+    ORDER BY stock_date DESC
+    LIMIT 1
+    )
+ORDER BY cinfo.cid DESC
+    LIMIT 5 /*5튜플 출력*/
+    ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
 ORDER BY sinfo.cid DESC;
 /*
@@ -284,38 +265,34 @@ ORDER BY sinfo.cid DESC;
 /*4.3.4 하락 버튼*/
 SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
-	FROM(
-		SELECT tock_id, COUNT(stock_id) AS cid
-		FROM "AGENTMASTER"."Stock_info"
-		WHERE stock_date BETWEEN	                /*최근 10일간의 기준일자를 조건으로 검색*/
-		(
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		) - 10 AND
+         JOIN (SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
+               FROM (SELECT tock_id, COUNT(stock_id) AS cid
+                     FROM "AGENTMASTER"."Stock_info"
+                     WHERE stock_date BETWEEN /*최근 10일간의 기준일자를 조건으로 검색*/
+                               (SELECT stock_date
+                                FROM "AGENTMASTER"."Stock_info"
+                                ORDER BY stock_date DESC
+                               LIMIT 1) - 10 AND
 		(
 			SELECT stock_date
 			FROM "AGENTMASTER"."Stock_info"
 			ORDER BY stock_date DESC
 			LIMIT 1
 		) AND RANGE < 0		                        /*등락률이 음수일 때를 조건으로 검색*/
-		GROUP BY stock_id
-	) AS cinfo
-	JOIN
-	"AGENTMASTER"."Stock_info" AS sinfo
-	ON sinfo.stock_id = cinfo.stock_id
-	WHERE cid > 4 AND sinfo.stock_date = (	        /*등락률이 음수였던 날이 5일 이상일 때를 조건*/
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		)
-	ORDER BY cinfo.cid DESC
-	LIMIT 5				                            /*5튜플 출력*/
-) AS sinfo
+               GROUP BY stock_id) AS cinfo
+         JOIN
+     "AGENTMASTER"."Stock_info" AS sinfo
+     ON sinfo.stock_id = cinfo.stock_id
+WHERE cid > 4
+  AND sinfo.stock_date = ( /*등락률이 음수였던 날이 5일 이상일 때를 조건*/
+    SELECT stock_date
+    FROM "AGENTMASTER"."Stock_info"
+    ORDER BY stock_date DESC
+    LIMIT 1
+    )
+ORDER BY cinfo.cid DESC
+    LIMIT 5 /*5튜플 출력*/
+    ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
 ORDER BY sinfo.cid DESC;
 /*
@@ -328,38 +305,34 @@ ORDER BY sinfo.cid DESC;
 /*4.3.5 보합 버튼*/
 SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
-	FROM(
-		SELECT stock_id, COUNT(stock_id) AS cid
-		FROM "AGENTMASTER"."Stock_info"
-		WHERE stock_date BETWEEN	                /*최근 10일간의 기준일자를 조건으로 검색*/
-		(
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		) - 10 AND
+         JOIN (SELECT cinfo.stock_id, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, cinfo.cid
+               FROM (SELECT stock_id, COUNT(stock_id) AS cid
+                     FROM "AGENTMASTER"."Stock_info"
+                     WHERE stock_date BETWEEN /*최근 10일간의 기준일자를 조건으로 검색*/
+                               (SELECT stock_date
+                                FROM "AGENTMASTER"."Stock_info"
+                                ORDER BY stock_date DESC
+                               LIMIT 1) - 10 AND
 		(
 			SELECT stock_date
 			FROM "AGENTMASTER"."Stock_info"
 			ORDER BY stock_date DESC
 			LIMIT 1
 		) AND RANGE < 5 AND RANGE > -5	            /*등락률이 +-5 사이일 때를 조건으로 검색*/
-		GROUP BY stock_id
-	) AS cinfo
-	JOIN
-	"AGENTMASTER"."Stock_info" AS sinfo
-	ON sinfo.stock_id = cinfo.stock_id
-	WHERE cid > 4 AND sinfo.stock_date = (	        /*등락률이 +-5 사이인 날이 5일 이상일 때를 조건*/
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-		)
-	ORDER BY cinfo.cid DESC
-	LIMIT 5				                            /*5튜플 출력*/
-) AS sinfo
+               GROUP BY stock_id) AS cinfo
+         JOIN
+     "AGENTMASTER"."Stock_info" AS sinfo
+     ON sinfo.stock_id = cinfo.stock_id
+WHERE cid > 4
+  AND sinfo.stock_date = ( /*등락률이 +-5 사이인 날이 5일 이상일 때를 조건*/
+    SELECT stock_date
+    FROM "AGENTMASTER"."Stock_info"
+    ORDER BY stock_date DESC
+    LIMIT 1
+    )
+ORDER BY cinfo.cid DESC
+    LIMIT 5 /*5튜플 출력*/
+    ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
 ORDER BY sinfo.cid DESC;
 /*
@@ -370,21 +343,25 @@ ORDER BY sinfo.cid DESC;
 
 
 /*4.3.6 거래량 버튼*/
-SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range, sinfo.trading_volume
+SELECT stock.stock_id,
+       stock.stock_name,
+       stock.field_name,
+       sinfo.stock_price,
+       sinfo.diff_from_prevday,
+       sinfo.range,
+       sinfo.trading_volume
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN (
-	SELECT *
-	FROM "AGENTMASTER"."Stock_info"
-	WHERE stock_date =(				/*가장 최신 기준일자를 조건으로 검색*/
-		SELECT stock_date
-		FROM "AGENTMASTER"."Stock_info"
-		ORDER BY stock_date DESC
-		LIMIT 1
-	)
-) AS sinfo
+         JOIN (SELECT *
+               FROM "AGENTMASTER"."Stock_info"
+               WHERE stock_date = ( /*가장 최신 기준일자를 조건으로 검색*/
+                   SELECT stock_date
+                   FROM "AGENTMASTER"."Stock_info"
+                   ORDER BY stock_date DESC
+                   LIMIT 1) ) AS sinfo
 ON stock.stock_id = sinfo.stock_id
-ORDER BY trading_volume DESC		/*거래량 내림차순(높은 순서)*/
-LIMIT 5; 							/*5튜플 출력*/
+ORDER BY trading_volume DESC /*거래량 내림차순(높은 순서)*/
+    LIMIT 5;
+/*5튜플 출력*/
 /*
 거래량이 높은 순서대로 주식정보를 5튜플 출력합니다.
 출력되는 정보는 종목코드, 종목명, 분야명, 주가, 전일비, 등락률, 거래량 순서로 출력됩니다.
@@ -410,19 +387,25 @@ WHERE stock_name LIKE '{keyword}%';
 */
 
 
-                    /*5 주식 상세 페이지*/
+/*5 주식 상세 페이지*/
 
 /*5.1 디비에 저장된 종목 데이터를 그래프에 반영한다.*/
-SELECT stock.stock_id, stock.stock_name, stock.field_name, sinfo.stock_date, sinfo.stock_price, sinfo.diff_from_prevday, sinfo.range
+SELECT stock.stock_id,
+       stock.stock_name,
+       stock.field_name,
+       sinfo.stock_date,
+       sinfo.stock_price,
+       sinfo.diff_from_prevday,
+       sinfo.range
 FROM "AGENTMASTER"."Stock" AS stock
-JOIN "AGENTMASTER"."Stock_info" AS sinfo
-ON stock.stock_id = sinfo.stock_id
-WHERE sinfo.stock_date = (
-			SELECT stock_date
-			FROM "AGENTMASTER"."Stock_info"
-			ORDER BY stock_date DESC
-			LIMIT 1
-) AND stock.stock_id = '{stock_id}';
+         JOIN "AGENTMASTER"."Stock_info" AS sinfo
+              ON stock.stock_id = sinfo.stock_id
+WHERE sinfo.stock_date = (SELECT stock_date
+                          FROM "AGENTMASTER"."Stock_info"
+                          ORDER BY stock_date DESC
+    LIMIT 1
+    )
+  AND stock.stock_id = '{stock_id}';
 /*
 {stock_id}에 값을 넣어주세요
 특정 종목의 종목코드, 종목명, 분야이름, 기준일자, 주가, 전일비, 등락률
@@ -431,14 +414,13 @@ WHERE sinfo.stock_date = (
 
 /*5.2 디비에 저장되었던 검색한 키워드에 관한 기사들을 한줄 정도 띄운다.*/
 SELECT article_id, summary
-FROM (
-    SELECT art.article_id, artsum.summary,
-    ROW_NUMBER() OVER (PARTITION BY art.article_id ORDER BY RANDOM()) AS rn
-    FROM "AGENTMASTER"."Article" AS art
-    JOIN "AGENTMASTER"."Article_summary" AS artsum 
-	ON art.article_id = artsum.article_id
-    WHERE art.issue_keyword LIKE '%{keyword}%'
-) AS random_summaries
+FROM (SELECT art.article_id,
+             artsum.summary,
+             ROW_NUMBER() OVER (PARTITION BY art.article_id ORDER BY RANDOM()) AS rn
+      FROM "AGENTMASTER"."Article" AS art
+               JOIN "AGENTMASTER"."Article_summary" AS artsum
+                    ON art.article_id = artsum.article_id
+      WHERE art.issue_keyword LIKE '%{keyword}%') AS random_summaries
 WHERE rn = 1;
 /*
 {keyword}에 값을 넣어주세요
@@ -468,14 +450,11 @@ WHERE stock_name LIKE '{keyword}%';
 /*5.5.1 랜덤하게 5튜플 출력한다.*/
 SELECT art.article_id, art.title
 FROM "AGENTMASTER"."Article" AS art
-JOIN (
-	SELECT *
-	FROM "AGENTMASTER"."Stock"
-	WHERE stock_id = '{stock_id}'
-) AS sto
-ON art.field_name = sto.field_name
-ORDER BY RANDOM()
-LIMIT 5;
+         JOIN (SELECT *
+               FROM "AGENTMASTER"."Stock"
+               WHERE stock_id = '{stock_id}') AS sto
+              ON art.field_name = sto.field_name
+ORDER BY RANDOM() LIMIT 5;
 /*
 {stock_id}에 값을 넣어 주세요.
 {stock_id}에 해당하는 주식과 동일한 분야의 기사 제목을 랜덤하게 5튜플 출력합니다
@@ -485,14 +464,11 @@ LIMIT 5;
 /*5.5.2 최신 순으로 5튜플 출력한다.*/
 SELECT art.article_id, art.title
 FROM "AGENTMASTER"."Article" AS art
-JOIN (
-	SELECT *
-	FROM "AGENTMASTER"."Stock"
-	WHERE stock_id = '{stock_id}'
-) AS sto
-ON art.field_name = sto.field_name
-ORDER BY art.last_pub DESC
-LIMIT 5;
+         JOIN (SELECT *
+               FROM "AGENTMASTER"."Stock"
+               WHERE stock_id = '{stock_id}') AS sto
+              ON art.field_name = sto.field_name
+ORDER BY art.last_pub DESC LIMIT 5;
 /*
 {stock_id}에 값을 넣어 주세요.
 {stock_id}에 해당하는 주식과 동일한 분야의 기사 제목을 최신 순으로 5튜플 출력합니다.
@@ -517,36 +493,60 @@ WHERE article_id = '{article_id}';
 SELECT article_id, summary
 FROM "AGENTMASTER"."Article_summary"
 WHERE article_id = '{article_id}'
-ORDER BY RANDOM()
-LIMIT 1;
+ORDER BY RANDOM() LIMIT 1;
 /*
 {article_id}에 값을 넣어 주세요.
 {article_id}에 해당하는 기사의 요약문을 하나만 출력합니다.
 */
 
 
-                    /*6 사용자 페이지*/
+/*6 사용자 페이지*/
 
-/*로그인 수정 
-->
-*/
+/*6.1 로그인 수정 */
+UPDATE "AGENTMASTER"."Customer"
+SET password = CASE
+                   WHEN '{password}' != (
+        SELECT password
+        FROM "AGENTMASTER"."Customer"
+        WHERE customer_id = '{customer_id}'
+    )
+    AND '{password}' != NULL
+        THEN '{password}'
+                   ELSE password
+END
+,
+
+    e_mail   = CASE
+                   WHEN '{e_mail}' != (
+                       SELECT e_mail
+                       FROM "AGENTMASTER"."Customer"
+                       )
+       AND '{e_mail}' != NULL
+    THEN '{e_mail}'
+                   ELSE e_mail
+END
+WHERE customer_id = '{customer_id}';
+/*'{customer_id}', '{e_mail}'과 '{password}'에 값을 넣으세요.
+  '{password}' 값 입력은 선택으로, NULL값이 들어가거나, 기존의 비밀번호와 같으면 변경되지 않습니다.
+  '{e_mail}' 값 입력은 선택으로, NULL값이 들어가거나, 고객 테이블에 존재하는 이메일과 겹치면 변경되지 않습니다.
+  사용자 아이디와 이메일, 비밀번호를 선택적으로 받아 변경합니다.
+ */
 
 
-                    /*7 모의투자 메인 페이지*/
+/*7 모의투자 메인 페이지*/
 
 /*7.1 주식 거래 상위 10개 종목 순서대로 종목코드, 종목명, 현재가, 전일비, 등락률을 출력한다.*/
 SELECT s.stock_id, s.stock_name, i.stock_price, i.diff_from_prevday, i.range
-FROM
-"AGENTMASTER"."Stock" AS s
-JOIN
-"AGENTMASTER"."Stock_info" AS i
-ON s.stock_id = i.stock_id
-ORDER BY stock_date DESC, range DESC
-LIMIT 10;
+FROM "AGENTMASTER"."Stock" AS s
+         JOIN
+     "AGENTMASTER"."Stock_info" AS i
+     ON s.stock_id = i.stock_id
+ORDER BY stock_date DESC, range DESC LIMIT 10;
 
 
 /*7.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
-SELECT * FROM "AGENTMASTER"."Customer"
+SELECT *
+FROM "AGENTMASTER"."Customer"
 WHERE customer_id = '{username}';
 /*
 {username}에 값을 넣어 주세요.
@@ -555,11 +555,9 @@ WHERE customer_id = '{username}';
 
 
 /*7.3 나의 투자 정보 화면에서 모의투자 수익률과 모의투자 순위를 출력한다.*/
-SELECT inner_select.customer_id, inner_select.rank_range, inner_select.ranking 
-FROM (
-	SELECT customer_id, rank_range, ROW_NUMBER() OVER (ORDER BY rank_range DESC) AS ranking 
-	FROM "AGENTMASTER"."Customer"
-) AS inner_select
+SELECT inner_select.customer_id, inner_select.rank_range, inner_select.ranking
+FROM (SELECT customer_id, rank_range, ROW_NUMBER() OVER (ORDER BY rank_range DESC) AS ranking
+      FROM "AGENTMASTER"."Customer") AS inner_select
 WHERE customer_id = '{username}';
 /*
 {username}에 값을 넣어 주세요.
@@ -570,12 +568,11 @@ WHERE customer_id = '{username}';
 /*7.4 나의 투자 정보 화면에서 총 자산, 가용 자산, 보유 주식 총액, 보유 종목 수를 출력한다.*/
 SELECT cus.total_money, cus.simul_money, cus.stock_money, sim.sum
 FROM "AGENTMASTER"."Customer" AS cus
-JOIN (
-	SELECT customer_id , SUM(simul_holdings) AS sum FROM 
-	"AGENTMASTER"."Simulation"
-	GROUP BY customer_id
-) AS sim
-ON cus.customer_id = sim.customer_id
+         JOIN (SELECT customer_id, SUM(simul_holdings) AS sum
+               FROM
+                   "AGENTMASTER"."Simulation"
+               GROUP BY customer_id) AS sim
+              ON cus.customer_id = sim.customer_id
 WHERE cus.customer_id = '{username}';
 /*
 {username}에 값을 넣어 주세요.
@@ -586,8 +583,8 @@ WHERE cus.customer_id = '{username}';
 /*7.5 보유 종목 화면에서 종목명, 매입 금액, 수익, 등락률, 주식 보유량을 출력한다.*/
 SELECT sto.stock_name, sim.perchase_amount, sim.simul_return, sim.simul_range, sim.simul_holdings
 FROM "AGENTMASTER"."Simulation" AS sim
-JOIN "AGENTMASTER"."Stock" AS sto
-ON sim.stock_id = sto.stock_id
+         JOIN "AGENTMASTER"."Stock" AS sto
+              ON sim.stock_id = sto.stock_id
 WHERE sim.customer_id = '{username}';
 /*
 {username}에 값을 넣어 주세요.
@@ -617,16 +614,16 @@ WHERE stock_name LIKE '{keyword}%';
 */
 
 
-					/*8 모의투자 거래*/
+/*8 모의투자 거래*/
 
 /*8.1 그래프/타이틀 페이지에서 주식의 이름과 주식 정보를 불러옵니다.*/
 SELECT stock_name, stock_date, stock_price, diff_from_prevday, range
 FROM "AGENTMASTER"."Stock_info" AS stockInfo
-JOIN "AGENTMASTER"."Stock" AS Stock
-ON stockInfo.stock_id = Stock.stock_id
+         JOIN "AGENTMASTER"."Stock" AS Stock
+              ON stockInfo.stock_id = Stock.stock_id
 WHERE stockInfo.stock_id = {stock_id}
 ORDER BY stock_date DESC
-LIMIT 7;
+    LIMIT 7;
 /*선택된 주식의 7일간 정보를 불러옵니다.*/
 
 
@@ -640,15 +637,14 @@ WHERE customer_id = {customer_id};
 /*8.3 동일업종 페이지에서 가용자산과 보유량을 불러옵니다.*/
 SELECT stock_name, stock_price, diff_from_prevday, range
 FROM "AGENTMASTER"."Stock_info" AS stockInfo
-JOIN "AGENTMASTER"."Stock" AS Stock
-ON stockInfo.stock_id = Stock.stock_id
-WHERE Stock.field_name = (
-	SELECT field_name
-	FROM "AGENTMASTER"."Stock"
-	WHERE Stock.stock_id = {stock_id}
-)
+         JOIN "AGENTMASTER"."Stock" AS Stock
+              ON stockInfo.stock_id = Stock.stock_id
+WHERE Stock.field_name = (SELECT field_name
+                          FROM "AGENTMASTER"."Stock"
+                          WHERE Stock.stock_id = {stock_id}
+    )
 ORDER BY RANDOM()
-LIMIT 4;
+    LIMIT 4;
 /*동일업종 주식의 정보를 불러옵니다.*/
 
 
