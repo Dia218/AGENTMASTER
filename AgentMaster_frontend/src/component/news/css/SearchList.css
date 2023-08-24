@@ -1,0 +1,30 @@
+.searchList {
+    border-radius: 7px;
+    border: 1px solid #95d6ff;
+}
+
+.result_NO {
+    text-align: center;
+    height: 55vh;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.search_buttons {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.search_preButton {
+    border: 2px solid #50b3ff;
+    border-radius: 5px;
+    margin-right: 10px;
+    background-color:#95d6ff;
+}
+
+.search_nextButton {
+    border: 2px solid #50b3ff;
+    border-radius: 5px;
+    margin-left: 10px;
+    background-color:#95d6ff;
+}

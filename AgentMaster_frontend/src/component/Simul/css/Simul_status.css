@@ -1,0 +1,108 @@
+.Simul_status{
+    background-color: #50B3FF;
+    border-radius: 10px;
+    width: 400px;
+    height: 570px;
+    padding: 20px;
+    margin-left: 30px;
+}
+
+.simulStatusHeader {
+    height: 70px;
+}
+
+.simulStatusHeaderBar {
+    position: relative;
+}
+
+.simulStatusTitle {
+    height: 35px;
+    font-size: 25px;
+    float: left;
+    width: 200px;
+    color: white;
+}
+
+.simulStatusReset {
+    height: 35px;
+}
+
+.simulStatusResetBtn {
+    height: 35px;
+    width: 80px;
+    float: right;
+    border-radius: 20px;
+    background-color: white;
+    border: 2px solid #DB2F14;
+    color: #DB2F14;
+    font-weight: bold;
+}
+.simulStatusUserRanking{
+    border-radius: 100%;
+    background-color: #CDF7FF;
+    width: 90px;
+    margin-top: 20px;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 20px;
+    color: #0092F3;
+}
+.Ranking{
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    font-weight: bold;
+}
+
+.simulStatusUserRange{
+    border-radius: 50px;
+    background-color: #CDF7FF;
+   margin-left: 40px;
+    width: 230px;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+    color: #0092F3;
+}
+.Range{
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    font-weight: bold;
+}
+.simulStatusUser {
+    display: flex;
+    align-items: center; 
+}
+.simulStatusUser_a > div {
+    position: relative;
+    height: 25px;
+    font-weight: 1000;
+    color: black;
+    cursor: pointer;
+}
+
+
+.simulStatusInfo {
+    margin-top: 20px;
+    background-color: white;
+    height: 100px;
+    border-radius: 20px;
+}
+
+.simulStatusInfo_ul {
+    padding: 0px;
+    margin-left: 20px;
+    list-style-type: none;
+}
+.simulStatusInfo_label {
+    display: inline-block;
+    width: 120px; /* 조절할 필요가 있을 수 있습니다 */
+    font-weight: bold;
+  }
+  
+  .simulStatusInfo_value {
+    display: inline-block;
+    width: 100px; /* 조절할 필요가 있을 수 있습니다 */
+    text-align: right;
+  }

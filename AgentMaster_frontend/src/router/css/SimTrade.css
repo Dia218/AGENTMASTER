@@ -1,0 +1,52 @@
+.StockTradeScene {
+    min-width: 1300px;
+}
+
+.StockLeft {
+    float: left;
+    width: 60%;
+    margin-left: 3vh;
+}
+
+.StockSimilarCategoryGroup {
+    /*3개 이하 일땐 70, 4개일땐 90*/
+    width: 95%;
+    
+}
+
+.StockRight {
+    float: right;
+    width: 32%;
+    margin-right: 5vh;
+}
+
+.StockSimilarCategory {
+    margin-left: 7vh;
+    margin-top: 1vh;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #95D6FF;
+
+}
+
+.StockSimilarCategoryGroup {
+    margin-left: 7vh;
+    display: flex;
+}
+
+.StockSimilarCategoryGroupFlex1 {
+    flex: 1;
+}
+
+.StockSimilarCategoryGroupFlex2 {
+    flex: 2;
+}
+
+.StockSimilarCategoryGroupFlex3 {
+    flex: 3;
+}
+
+.StockSimilarCategoryGroupFlex4 {
+    flex: 4;
+}
