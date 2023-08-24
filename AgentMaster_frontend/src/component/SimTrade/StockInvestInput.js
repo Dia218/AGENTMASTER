@@ -1,7 +1,17 @@
 import React, {useState} from 'react';
 import './css/StockInvestInput.css';
+import { useNavigate } from 'react-router';
 
 const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle }) => {
+    const navigate = useNavigate();
+    const onClickCancel = () => {
+        navigate(`/SimulMain`);
+    } 
+    const onClickSA = () => {
+        const reset = window.confirm("전체 매도 하시겠습니까??");
+        if(reset === true) {
+        }
+    }
     return (
         <div className=''>
             <input
@@ -19,8 +29,8 @@ const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle }) 
                 <span className={`react-switch-button`}/>
                 <div className='StockInvestInputLable_sell'>매도</div>
             </label>
-            <button className='cancel'>취소</button>
-            <button className='sellAll'>전체 매도</button>
+            <button className='cancel' onClick={onClickCancel}>취소</button>
+            <button className='sellAll' onClick={onClickSA}>전체 매도</button>
         </div>
     );
 };
