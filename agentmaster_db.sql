@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Customer"
     rank_range      numeric(10, 2) NOT NULL,
     CONSTRAINT Customer_pkey PRIMARY KEY (customer_id),
     CONSTRAINT customer_id_check CHECK (customer_id ~ '^[A-Za-z0-9]{5,15}$' AND customer_id !~ '^[0-9]{5,15}$'),
-    CONSTRAINT customer_password_check CHECK (password ~ '^[A-Za-z0-9]{8,20}$' AND password !~ '^[0-9]{8,20}$' AND password !~ '^[A-Za-z]{8,20}$'),
+    CONSTRAINT customer_password_check CHECK (password ~ '^[A-Za-z0-9]{8,20}$' AND password !~ '^[0-9]{8,20}$' AND
+                                              password !~ '^[A-Za-z]{8,20}$'),
     CONSTRAINT customer_email_check CHECK (e_mail ~ '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$')
 )
     TABLESPACE pg_default;
@@ -35,9 +36,10 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Customer"
 
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Field"
 (
-    field_name varchar(100) not null,
+    field_id   bigserial           not null,
+    field_name varchar(100) unique not null,
 
-    constraint "Field_pkey" primary key (field_name)
+    constraint "Field_id_pkey" primary key (field_id)
 )
     TABLESPACE pg_default;
 
@@ -152,9 +154,10 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Bookmark"
 /*연관뉴스*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 (
-    group_name varchar(100) not null,
+    article_group_id bigserial           not null,
+    group_name       varchar(100) unique not null,
 
-    constraint "article_group_pkey" primary key (group_name)
+    constraint "article_group_id_pkey" primary key (article_group_id)
 )
     tablespace pg_default;
 
@@ -164,9 +167,9 @@ alter table if exists "AGENTMASTER"."Article_group"
 /*기사링크*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
 (
-    article_id int  not null,
-    link       text not null,
-    constraint "article_id_pkey" primary key (article_id),
+    article_link_id bigserial   not null,
+    link            text unique not null,
+    constraint "article_id_pkey" primary key (article_link_id),
     constraint "article_URL_format" check (link ~
                                            '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
@@ -178,28 +181,27 @@ alter table if exists "AGENTMASTER"."Article_link"
 /*기사본문*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
 (
-    article_id    int          not null,
-    company       varchar(100) not null,
-    reporter      varchar(100) not null,
-    title         text         not null,
-    issue_keyword varchar(100),
-    first_pub     timestamp    not null,
-    last_pub      timestamp    not null,
-    body          text         not null,
-    group_name    varchar(100),
-    field_name    varchar(100) not null,
+    article_id       bigserial     not null,
+    article_link_id  bigint unique not null,
+    company          varchar(100)  not null,
+    reporter         varchar(100)  not null,
+    title            text          not null,
+    issue_keyword    varchar(100),
+    first_pub        timestamp     not null,
+    last_pub         timestamp     not null,
+    body             text          not null,
+    article_group_id bigint,
+    field_id         bigint        not null,
 
     constraint "Article_pkey" primary key (article_id),
-    constraint "Article_fkey" foreign key (article_id)
-        references "AGENTMASTER"."Article_link" (article_id)
-        on update cascade
-        on delete cascade,
-    constraint "Articles_group_name_fkey" foreign key (group_name)
-        references "AGENTMASTER"."Article_group" (group_name) match simple
+    constraint "Article_link_fkey" foreign key (article_link_id)
+        references "AGENTMASTER"."Article_link" (link),
+    constraint "Articles_group_id_fkey" foreign key (article_group_id)
+        references "AGENTMASTER"."Article_group" (article_group_id) match simple
         on update cascade
         on delete set null,
-    constraint "Articles_field_name_fkey" foreign key (field_name)
-        references "AGENTMASTER"."Field" (field_name) match simple
+    constraint "Articles_field_id_fkey" foreign key (field_id)
+        references "AGENTMASTER"."Field" (field_id) match simple
         on update cascade
         on delete restrict
 )
@@ -211,15 +213,16 @@ alter table if exists "AGENTMASTER"."Article"
 /*스크랩*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_Scrap"
 (
-    customer_id varchar(15) not null,
-    article_id  int         not null,
+    scrap_id        bigserial     not null,
+    user_id         bigint unique not null,
+    article_link_id bigint unique not null,
 
-    constraint "Article_Scrap_pkey" primary key (customer_id, article_id),
-    constraint "Article_Scrap_customer_id_fkey" foreign key (customer_id)
-        references "AGENTMASTER"."Customer" (customer_id) match simple
+    constraint "Scrap_id_pkey" primary key (scrap_id),
+    constraint "Article_Scrap_customer_id_fkey" foreign key (user_id)
+        references "AGENTMASTER"."User" (user_id) match simple
         on update cascade
         on delete cascade,
-    constraint "Article_Scrap_news_id_fkey" foreign key (article_id)
+    constraint "Article_Scrap_news_id_fkey" foreign key (article_link_id)
         references "AGENTMASTER"."Article_link" (article_id) match simple
         on update cascade
         on delete cascade
@@ -232,14 +235,15 @@ alter table if exists "AGENTMASTER"."Article_Scrap"
 /*기사 요약문*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 (
-    article_id int  not null,
-    summary    text not null,
+    article_summary_id bigserial           not null,
+    article_id         bigserial unique    not null,
+    summary            varchar(100) unique not null,
 
     constraint "Article_Summary_news_id_fkey" foreign key (article_id)
-        references "AGENTMASTER"."Article_link" (article_id) match simple
+        references "AGENTMASTER"."Article" (article_id) match simple
         on update cascade
         on delete cascade,
-    constraint "Article_Summary_pkey" primary key (article_id, summary)
+    constraint "Article_Summary_pkey" primary key (article_summary_id)
 )
     tablespace pg_default;
 

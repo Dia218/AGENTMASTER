@@ -115,7 +115,17 @@ ORDER BY RANDOM()
 {article_id}에 값을 넣어주세요
 기사 id가 {article_id}인 기사의 연관된 뉴스 기사 제목 5개를 출력합니다. 연관 뉴스가 없을 때는 아무 것도 출력되지 않습니다.
 */
-
+/*2.6 선택된 뉴스 스크랩을 등록한다.*/
+INSERT INTO "AGENTMASTER"."Article_Scrap"
+    (customer_id, article_id)
+VALUES '{customer_id}', '{article_id}';
+/*customer_id와 article_id를 받아 입력합니다.*/
+/*2.6.1 선택된 뉴스 스크랩을 삭제한다.*/
+DELETE
+FROM "AGENTMASTER"."Article_Scrap"
+WHERE customer_id = '{customer_id}'
+  AND article_id = '{article_id}';
+/*customer_id와 article_id를 받아 해당 스크랩을 삭제합니다.*/
 
 /*3 뉴스 검색 페이지*/
 
@@ -510,7 +520,7 @@ SET password = CASE
         FROM "AGENTMASTER"."Customer"
         WHERE customer_id = '{customer_id}'
     )
-    AND '{password}' != NULL
+    AND '{password}' IS NOT NULL
         THEN '{password}'
                    ELSE password
 END
@@ -521,7 +531,7 @@ END
                        SELECT e_mail
                        FROM "AGENTMASTER"."Customer"
                        )
-       AND '{e_mail}' != NULL
+       AND '{e_mail}' IS NOT NULL
     THEN '{e_mail}'
                    ELSE e_mail
 END
@@ -532,6 +542,12 @@ WHERE customer_id = '{customer_id}';
   사용자 아이디와 이메일, 비밀번호를 선택적으로 받아 변경합니다.
  */
 
+/*6.2 사용자 스크랩 표시 */
+SELECT "AGENTMASTER"."Article".article_id, "AGENTMASTER"."Article".title, "AGENTMASTER"."Article".reporter, "AGENTMASTER"."Article".first_pub
+FROM "AGENTMASTER"."Article"
+         JOIN "AGENTMASTER"."Article_Scrap"
+                    ON "AGENTMASTER"."Article".article_id = "AGENTMASTER"."Article_Scrap".article_id
+WHERE customer_id = '{customer_id}';
 
 /*7 모의투자 메인 페이지*/
 
