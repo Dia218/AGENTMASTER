@@ -1,6 +1,7 @@
 .Simul_main {
-    background-color: #3eb7ff;
+    background-color: white;
     border-radius: 5px;
-    height: 550px;
-    padding: 20px;
+    height: 570px;
+    padding: 10px;
+    border: 2px solid #50B3FF;
 }

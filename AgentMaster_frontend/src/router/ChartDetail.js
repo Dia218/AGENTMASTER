@@ -1,4 +1,4 @@
-import { Rechart1, Rechart2, Search2, ArticleList, Table,} from '../component/chart/component';
+import {  Rechart1,  Rechart2, Search2, ArticleList, Table,} from '../component/chart/component';
 import './css/ChartDetail.css'
 import Header from "../component/Header";  
 import React, { useState, useEffect } from 'react';
@@ -30,14 +30,14 @@ export function ChartDetail() {
         <div>
         <p className='ChartDetailTop'>{keyword}</p>
           <Rechart1 keyword={keyword}/>
+          <ArticleList />
+        </div>
+        <div>
+          <Rechart2 keywordFromChartMain={keyword} keywordFromSearch2={value}/>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Search2 onKeywordChange={handleKeywordChange}/>
             <Table />
           </div>
-        </div>
-        <div>
-          <Rechart2 keywordFromChartMain={keyword} keywordFromSearch2={value}/>
-          <ArticleList />
         </div>
       </div>
       </div>

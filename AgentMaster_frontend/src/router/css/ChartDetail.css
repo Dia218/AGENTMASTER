@@ -1,40 +1,49 @@
+.Rechart2{
+  width: 600px;
+  margin-top: 70px;
+  margin-left: 100px;
+}
+.Rechart1{
+  width: 600px;
+  margin-left: 100px;
+  margin-top: 30px;
+}
 .chartDetail{
   background-color: rgb(240, 240, 240);
   min-height: 120vh;
 }
 .ChartDetailTop{
   font-size: 40px;
-  margin-top: 30px;
  margin-left: 200px;
  font-weight: 600;
  color: #0073e5;
 }
 .Article{
-    margin-top: 40px;
-    margin-left: 150px;
-    height: 250px;
-    width: 500px;
-    background-color: #CDF7FF;
+  margin-top: 60px;
+  margin-left: 130px;
+  height: 250px;
+  width: 550px;
+  background-color: #CDF7FF;
 }
 .article-bottom{
-  border: 3px solid white;
-  background-color: white;
- 
+border: 3px solid white;
+background-color: white;
+margin-bottom: 10px;
 }
- .Article li{
-    font-size: 20px;
-    margin-bottom: 15px;
- }
+.Article li{
+  font-size: 20px;
+  margin-bottom: 15px;
+}
 .article-title{
-  margin-left: 20px;
-  margin-top: 20px;
-  top: 10px;
+margin-left: 20px;
+
+top: 10px;
 }
  .custom-table {
-  width: 500px;
+  width: 550px;
   margin-top: 20px;
   border-collapse: collapse;
-  margin-left: 200px;
+  margin-left: 120px;
   text-align: center;
   
 }

@@ -28,43 +28,51 @@ function Simul_status() {
         <div className="Simul_status"> 
             <div className="simulStatusHeader">
                 <div className="simulStatusHeaderBar">
-                    <div className="simulStatusTitle">나의 투자 정보</div>
+                    <div className="simulStatusTitle"> {sessionStorage.getItem("user")} 님의 투자 정보</div>
                     <div className="simulStatusReset">
                         <button className="simulStatusResetBtn" onClick={onClick}>초기화</button>
                     </div>
                 </div>
-                <div className="simulStatusUsername">
-                    {sessionStorage.getItem("user")} 님
-                </div>
-                <div className="simulStatusHeaderLine"></div>
+               
             </div>
             <div className="simulStatusUser">
-                <Link className="simulStatusUser_a" to="/chartMain">
-                    <div className="simulStatusUserRange">
-                        모의투자 수익률...10%
-                    </div>
+              
                     <div className="simulStatusUserRanking">
-                        순위: #1
+                        랭킹
+                   <div className="Ranking">
+                         1
                     </div>
-                </Link>
+                    </div>
+                    <div className="simulStatusUserRange">
+                        수익률
+                        <div className="Range">
+                         +399%
+                    </div>
+                    </div>
+                    
+                
             </div>
             <div className="simulStatusInfo">
-                <ul className="simulStatusInfo_ul">
-                    <li className="simulStatusInfo_li">
-                        <div>총 자산: {total_money}</div>
-                    </li>
-                    <li className="simulStatusInfo_li">
-                        <div>가용 자산: {money}</div>
-                    </li>
-                    <li className="simulStatusInfo_li">
-                        <div>보유 주식 총액: {stock_money}</div>
-                    </li>
-                    <li className="simulStatusInfo_li">
-                        <div>보유 종목 수: {stock_holdings}</div>
-                    </li>
-                </ul>
-            </div>
-            <Status_list stock_holdings={stock_holdings} />
+  <ul className="simulStatusInfo_ul">
+    <li className="simulStatusInfo_li">
+      <div className="simulStatusInfo_label">총 자산:</div>
+      <div className="simulStatusInfo_value">{total_money}</div>
+    </li>
+    <li className="simulStatusInfo_li">
+      <div className="simulStatusInfo_label">가용 자산:</div>
+      <div className="simulStatusInfo_value">{money}</div>
+    </li>
+    <li className="simulStatusInfo_li">
+      <div className="simulStatusInfo_label">보유 주식 총액:</div>
+      <div className="simulStatusInfo_value">{stock_money}</div>
+    </li>
+    <li className="simulStatusInfo_li">
+      <div className="simulStatusInfo_label">보유 종목 수:</div>
+      <div className="simulStatusInfo_value">{stock_holdings}</div>
+    </li>
+  </ul>
+</div>
+<Status_list stock_holdings={stock_holdings} />
         </div>
     )
 }

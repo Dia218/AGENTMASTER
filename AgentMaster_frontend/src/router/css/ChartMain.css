@@ -7,8 +7,8 @@
     height: 450px;
     width: 600px;
     justify-content: center;
-    margin-top: 90px;
-    margin-left: 150px;
+    margin-top: 70px;
+    margin-left: 120px;
     margin-right: 20px;
     margin-bottom: 40px;
     background-color: #95d6ff;
@@ -36,16 +36,16 @@
     margin-top: 20px; 
   }
   .news-description {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   .ChartMianSearch{
-    background-color: rgb(240, 240, 240);
+    background-color: white; 
   }
   
   .table2 {
     width: 1300px;
     border-collapse: collapse;
-    margin-left: 100px;
+    margin-left: 80px;
     margin-top: 10px;
   }
   
@@ -74,7 +74,7 @@
     margin-left: 5vh;
   }
   .table-buttons button {
-    border: 2px solid #3eb7ff; 
+    border: 2px solid #0092F3; 
     border-radius: 20px; 
     cursor: pointer; 
     color: #3eb7ff;
@@ -84,7 +84,7 @@
     background-color: white;
   }
   .table-buttons{
-    margin-left: 110px;
+    margin-left: 90px;
     display: flex;
     gap: 100px;
   }
@@ -120,19 +120,17 @@
     justify-content: flex-start;
     align-items: center;
     width: 550px;
-    margin-top: 200px;
     margin-left: -600px;
-    border-radius: 20px;
+    border-radius: 40px;
     
   }
   
   .ranking-list {
-    border: 3px solid #9bccfb;
     text-align: left;
     width: 550px;
     display: inline-block;
     margin-top: 20px;
-    background-color: white;
+    background-color: #95d6ff;
     border-radius: 20px;
   }
   
@@ -156,7 +154,8 @@
     margin-bottom: 10px;
     text-align: left;
     font-weight: bold;
-    color: #0092f3;
+    margin-top: 10px;
+    color: white;
   }
   
   .ranking-list {
@@ -173,21 +172,53 @@
     margin-right: 15px;
   }
   
+ 
   .ranking-right {
-    margin-left: 20px;
+    margin-left: 50px;
+    margin-top: 50px;
   }
   .dot-list {
     position: relative;
+    list-style-type: none;
   }
   
   .dot-line {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 1px;
+    width: 2px;
     height: 100%;
-    background: linear-gradient(to bottom, transparent 50%, #9bccfb 50%);
+    background: linear-gradient(to bottom, transparent 50%, white 50%);
     background-size: 100% 8px;
     background-repeat: repeat-y;
     margin-left: 15px; 
+  }
+  .rank-icon{
+    width: 30px;
+    height: 30px;
+  }
+  .trophy{
+    height: 50px;
+    width: 50px;
+  }
+  .mockTitle{
+    display: flex; 
+    align-items: center;
+    margin-top: 200px;
+    margin-left: -590px;
+  }
+  .mockTitle h2{
+    color: #3eb7ff;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .item-text {
+    margin-left: 20px; /* 원하는 간격으로 조정 */
+  }
+  .item-id{
+    margin-left: 40px;
+  }
+  .item-titleId{
+    margin-left: 30px;
   }

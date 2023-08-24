@@ -3,14 +3,16 @@
 .simulStatusList {
     background-color: white;
     margin-top: 20px;
+    border-radius: 20px;
 }
 
 .simulStatusList_ul {
     padding: 0px;
     margin: 0px;
-    height: 250px;
+    height: 210px;
     list-style-type: none;
     overflow-y: auto;
+    margin-left: 20px;
 }
 
 .simulStatusList_li > div {

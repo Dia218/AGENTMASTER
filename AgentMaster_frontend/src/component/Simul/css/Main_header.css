@@ -2,17 +2,21 @@
 /*header*/
 .simulMainHeader {
     position: relative;
-    height: 70px;
+    height: 100px;
 }
 
 .simulMainHeaderTitle {
     font-size: 25px;
     height: 35px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #50B3FF;
 }
 
 .simulMainHeaderBar {
     position: relative;
-    height: 27px;
+    height: 30px;
+    margin-top: 20px;
 }
 
 .simulMainHeaderBar > div {

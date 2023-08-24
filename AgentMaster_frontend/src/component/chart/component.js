@@ -1,22 +1,14 @@
 //주식 상세 페이지
-import React, { useState, useRef,useEffect } from 'react';
+import React, { useState, useRef,useEffect} from 'react';
 import socketIOClient from 'socket.io-client';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Label,
-} from 'recharts';
 import Autosuggest from 'react-autosuggest';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
+import ReactApexChart from 'react-apexcharts';
+
+
 
 export function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -36,8 +28,7 @@ export function ArticleList() {
       { id: 1, title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
       { id: 2, title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
       { id: 3, title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
-      { id: 4, title: '뉴스 기사 3', summary: '기사 4 요약 문장입니다.' },
-      { id: 5, title: '뉴스 기사 3', summary: '기사 5 요약 문장입니다.' },
+      { id: 4, title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
     ];
     setArticles(temporaryData);
 
@@ -58,14 +49,14 @@ export function ArticleList() {
 
   return (
     <div className="Article">
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+       <ul style={{ listStyle: 'none', padding: 10 }}>
         {articles.map((article) => (
           <li key={article.id}>
             <p className="article-title" onClick={() => openModal(article)}>{article.title}</p>
             <hr className='article-bottom' />
           </li>
         ))}
-      </ul>
+    </ul>
       <Modal isOpen={isModalOpen} 
       onRequestClose={closeModal} 
       className="Custom" 
@@ -132,150 +123,94 @@ export function Table() {
 }
 //웹소켓  Rechart1()
 export function Rechart1() {
-  const [data, setData] = useState([]); // JSON 데이터를 저장할 상태 변수
-
-  useEffect(() => {
-    // 웹소켓 연결
-    const websocket = new WebSocket('ws://your-websocket-url'); // 웹소켓 URL을 여기에 입력
-
-    // 웹소켓으로부터 데이터 수신
-    websocket.onmessage = (event) => {
-      const receivedData = JSON.parse(event.data);
-      setData(receivedData); // 웹소켓으로 받은 JSON 데이터를 상태 변수에 저장
-    };
-
-    // 컴포넌트 언마운트 시 웹소켓 연결 종료
-    return () => {
-      websocket.close();
-    };
-  }, []);
-
-  // 데이터가 비어있을 때 로딩 상태 처리
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <ResponsiveContainer width={650} height={400}>
-      <LineChart
-        data={data}
-        margin={{
-          top: 50,
-          left: 100,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-
-        {/* 여기서 키워드에 해당하는 데이터 표시 */}
-        <Line type="monotone" dataKey="yourKeyword" stroke="#0092F3" activeDot={{ r: 8 }} />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-}
-//임시값을 넣은  Rechart1()
-/*export function Rechart1() {
-  const location = useLocation();
-  const [keyword, setKeyword] = useState('');
-
-  useEffect(() => {
-    if (location.state) {
-      setKeyword(decodeURIComponent(location.state.keyword));
-    } else {
-      setKeyword('');
+  const stockData = [
+    {
+      "stockId": "stockId1",
+      "stockName": "name1",
+      "stockField": "field",
+      "stockDate": "2023-08-10",
+      "stockPrice": 11000,
+      "stockDiff": 1000,
+      "stockRange": 5.0
+    },
+    {
+      "stockId": "stockId1",
+      "stockName": "name1",
+      "stockField": "field",
+      "stockDate": "2023-08-11",
+      "stockPrice": 12000,
+      "stockDiff": 1000,
+      "stockRange": 5.0
+    },
+    // ... 기타 데이터 항목 ...
+    {
+      "stockId": "stockId1",
+      "stockName": "name1",
+      "stockField": "field",
+      "stockDate": "2023-08-19",
+      "stockPrice": 20000,
+      "stockDiff": 1000,
+      "stockRange": 5.0
     }
-  }, [location]);
-
-  const data1 = [
-    {
-      name: '오전 10:00',
-      [keyword]: 4000,
-    },
-    {
-      name: '오전 12:00',
-      [keyword]: 3000,
-     
-    },
-    {
-      name: '오후 2:00',
-      [keyword]: 2000,
-      
-    },
   ];
 
+  const seriesData = [{
+    name: "종목가",
+    data: stockData.map(item => ({
+      x: new Date(item.stockDate).getTime(),
+      y: item.stockPrice,
+      stockDiff: item.stockDiff,
+      stockRange: item.stockRange
+    }))
+  }];
+
+  const options = {
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    xaxis: {
+      type: 'datetime',
+    },
+    yaxis: {
+      title: {
+        text: '가격'
+      },
+    },
+    
+    tooltip: {
+      x: {
+        format: 'dd MMM yyyy'
+      },
+      y: {
+        title: {
+          formatter: (val) => {
+            if (typeof val === 'number') {
+              return val.toFixed(2);
+            }
+            return val;
+          }
+        }
+      }
+    }
+  };
+
   return (
-    <ResponsiveContainer width={650} height={400}>
-      <LineChart
-        data={data1}
-        margin={{
-          top: 50,
-          left: 100,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey={keyword} stroke="#0092F3" activeDot={{ r: 8 }} />
-        
-      </LineChart>
-    </ResponsiveContainer>
+    <div className='Rechart1'>
+      <ReactApexChart options={options} series={seriesData} type="line" height={350} />
+    </div>
   );
 }
-*/
-//웹소켓 Rechart2
-export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
-  const location = useLocation();
-  const [data, setData] = useState([]); // JSON 데이터를 저장할 상태 변수
 
-  useEffect(() => {
-    // 웹소켓 연결
-    const websocket = new WebSocket('ws://your-websocket-url'); 
-
-    // 웹소켓으로부터 데이터 수신
-    websocket.onmessage = (event) => {
-      const receivedData = JSON.parse(event.data);
-      setData(receivedData); // 웹소켓으로 받은 JSON 데이터를 상태 변수에 저장
-    };
-
-    // 컴포넌트 언마운트 시 웹소켓 연결 종료
-    return () => {
-      websocket.close();
-    };
-  }, []);
-
-  // 데이터가 비어있을 때 로딩 상태 처리
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <ResponsiveContainer width={700} height={500}>
-      <LineChart
-        data={data}
-        margin={{
-          top: 150,
-          left: 150,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#0092F3" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#008C8C" />
-        <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-}
-//임시값 Rechart2
-/*
 export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   const location = useLocation();
   const [keyword, setKeyword] = useState('');
@@ -287,56 +222,80 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
       setKeyword('');
     }
   }, [location]);
-  
-  const data2 = [
+  const seriesData = [
     {
-      name: '오전 10:00',
-      [keywordFromChartMain]: 2400,
-      [keywordFromSearch2]: 4000,
-     
+      name: [keywordFromChartMain],
+      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8]
     },
     {
-      name: '오전 12:00',
-      [keywordFromChartMain]: 1398,
-      [keywordFromSearch2]: 3000,
-     
+      name: [keywordFromSearch2],
+      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51]
     },
-    {
-      name: '오후 2:00',
-      [keywordFromChartMain]: 9800,
-      [keywordFromSearch2]: 2000,
-      
-    },
+   
   ];
 
-  useEffect(() => {
-    if (location.state) {
-     
+  const options = {
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      width: [5, 7, 5],
+      curve: 'straight',
+      dashArray: [0, 8, 5]
+    },
+    legend: {
+      tooltipHoverFormatter: function(val, opts) {
+        return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+      }
+    },
+    markers: {
+      size: 0,
+      hover: {
+        sizeOffset: 6
+      }
+    },
+    xaxis: {
+      categories: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-15', '08-16', '08-17', '08-18',
+        '08-19'
+      ],
+    },
+    tooltip: {
+      y: [
+        {
+          title: {
+            formatter: function (val) {
+              return val + " 종목가"
+            }
+          }
+        },
+        {
+          title: {
+            formatter: function (val) {
+              return val + " 종목가"
+            }
+          }
+        },
+      ]
+    },
+    grid: {
+      borderColor: 'white',
     }
-  }, [location]);
+  };
 
   return (
-    <ResponsiveContainer width={700} height={500}>
-      <LineChart
-        data={data2}
-        margin={{
-          top: 150,
-          left: 150,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey={keywordFromChartMain} stroke="#0092F3" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey={keywordFromSearch2} stroke="#008C8C" />
-        <Label value={`${keywordFromSearch2} & ${keywordFromChartMain}`} position="top" offset={10} style={{ fill: 'black' }} />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="Rechart2">
+      <ReactApexChart options={options} series={seriesData} type="line" height={400} />
+    </div>
   );
-}
-*/
+  }
+
 
 export function Search2({ onKeywordChange }) {
   const [value, setValue] = useState('');
@@ -418,7 +377,7 @@ export function Search2({ onKeywordChange }) {
     <div style={{ position: 'relative' }}>
       <div className='ChartDetailSearch'
         ref={resultContainerRef}
-        style={{ position: 'absolute', width: '400px', background: '#9bccfb', marginTop: '80px', marginLeft: '250px', zIndex: 1 }}
+        style={{ position: 'absolute', width: '400px', background: '#9bccfb', marginTop: '80px', marginLeft: '150px', zIndex: 1 }}
       >
         {isOpen && (
           <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
@@ -445,9 +404,9 @@ export function Search2({ onKeywordChange }) {
               border: '3px solid #9bccfb',
               padding: '10px',
               borderRadius: '5px',
-              width: '500px',
-              marginLeft: '200px',
-              marginTop: '40px',
+              width: '550px',
+              marginLeft: '120px',
+              marginTop: '10px',
               height:'50px',
             },
             ref: searchInputRef,
@@ -458,7 +417,7 @@ export function Search2({ onKeywordChange }) {
           sx={{ p: '10px' }}
           aria-label="search"
           size="large"
-          style={{ marginLeft: '-70px', marginTop: '40px' }}
+          style={{ marginLeft: '-70px', marginTop: '10px' }}
           onClick={handleSearch}
         >
           <SearchIcon fontSize="large" />

@@ -3,11 +3,13 @@
 .simulSearchResult {
     position: absolute;
     z-index: 1;
-    background-color: #9bccfb;
-    width: 500px;
-    height: auto;
+    border: 2px solid #50B3FF;
+    background-color: white;
+    width: 640px;
+    height:280px;
     border-radius: 20px 20px 10px 10px;
     padding: 10px;
+    overflow: auto; /* 스크롤 생성 */
 }
 
 .simulSearchResult > ul {
@@ -25,9 +27,6 @@
     background-color: white;
 }
 
-.simulSearchResult_li:nth-child(2n) {
-    background-color: rgb(245, 245, 245);
-}
 
 .simulSearchResult_li:hover{
     background-color: rgb(200, 200, 200);

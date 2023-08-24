@@ -48,7 +48,7 @@ function Simul_search() {
         else if (event.target.id === "simulSearchBar")
             setSearchBarFocused(true);
         else if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
-            setSearchBarFocused(false); // Hide the related searches when clicking outside
+            setSearchBarFocused(false); 
         }
     };
 

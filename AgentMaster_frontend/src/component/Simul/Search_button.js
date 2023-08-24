@@ -23,7 +23,8 @@ const Search_button = ({ btnClick }) => {
                     style={{ 
                         display: 'block', 
                         margin: 'auto', 
-                        fontSize: '25px'
+                        fontSize: '35px',
+                        color:'#50B3FF'
                     }} 
                 />
             </Button>
