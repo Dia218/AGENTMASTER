@@ -150,8 +150,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
     article_link_id bigserial   not null,
     link            text        not null,
     constraint Article_id_pkey primary key (article_link_id),
-    constraint Article_URL_format check (link ~
-                                           '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
+    constraint Article_URL_format check (link ~ '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
     tablespace pg_default;
 
@@ -198,7 +197,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_scrap"
     article_scrap_id    bigserial    not null,
     user_id             bigint       not null,
     article_link_id     bigint       not null,
-
+ 
     constraint Article_scrap_pkey primary key (article_scrap_id),
     CONSTRAINT Article_scrap_unique UNIQUE (user_id, article_link_id),
     constraint Article_scrap_user_id_fkey foreign key (user_id)
