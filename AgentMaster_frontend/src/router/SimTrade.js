@@ -62,7 +62,7 @@ export default function SimTrade() {
     const [longerThenFour,setLongerThenFour] = useState(false);
     const [scList,setScList] = useState([]);
     useEffect(()=>{
-        setSiCategory([{name,price,rates,code},{name,price,rates,code},{name,price,rates,code},{name,price,rates,code}]);
+        setSiCategory([{name,price,rates,code},{name,price,rates,code},]);
     },[]);
     useEffect(()=>{
             setScList(siCategory.map((v) => (
