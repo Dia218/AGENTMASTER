@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     simul_return    integer        NOT NULL,
     simul_range     NUMERIC(10, 2) NOT NULL,
     simul_holdings  integer        NOT NULL,
-    perchase_amount integer        NOT NULL,
+    purchase_amount integer        NOT NULL,
     average_price   integer        NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (simulation_id),
     CONSTRAINT Simulation_unique UNIQUE (user_id, stock_id),
