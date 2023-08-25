@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."User"
     stock_money     integer        NOT NULL,
     total_return    integer        NOT NULL,
     rank_range      numeric(10, 2) NOT NULL,
-    simul_ranking   integer        NOT NULL,
     CONSTRAINT User_pkey PRIMARY KEY (user_id),
     CONSTRAINT User_unique UNIQUE (user_name),
     CONSTRAINT user_name_check CHECK (user_name ~ '^[A-Za-z0-9]{5,15}$' AND user_name !~ '^[0-9]{5,15}$'),
