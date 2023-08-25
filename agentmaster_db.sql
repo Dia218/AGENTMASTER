@@ -236,3 +236,42 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 
 alter table if exists "AGENTMASTER"."Article_summary"
     OWNER to postgres;
+
+/*기사 정리문*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_overview"
+(
+    article_overview_id bigserial    not null,
+    article_id          bigint       not null,
+    article_overview    text         not null,
+    event_flow_path     varchar(100) not null,
+
+    constraint Article_overview_pkey primary key (article_overview_id),
+    constraint Article_overview_news_id_fkey foreign key (article_id)
+        references "AGENTMASTER"."Article" (article_id)
+        on update cascade
+        on delete cascade,
+    constraint Article_overview_unique unique (article_id, event_flow_path)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_overview"
+    OWNER to postgres;
+
+/*뉴스 순서*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
+(
+    article_timeline_id   bigserial    not null,
+    article_id            bigint       not null,
+    article_timeline_path varchar(100) not null,
+
+    constraint Article_timeline_pkey primary key (article_timeline_id),
+    constraint Article_overview_news_id_fkey foreign key (article_id)
+        references "AGENTMASTER"."Article" (article_id)
+        on update cascade
+        on delete cascade,
+    constraint Article_overview_unique unique (article_id, article_timeline_path)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_timeline"
+    OWNER to postgres;
