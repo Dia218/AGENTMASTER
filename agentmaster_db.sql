@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
     high_price         integer       NOT NULL,
     low_price          integer       NOT NULL,
     trading_volume     bigint        NOT NULL,
-    transaction_volume bigint        NOT NULL,
+    transaction_amount bigint        NOT NULL,
     CONSTRAINT Stock_info_pkey PRIMARY KEY (stock_info_id),
     CONSTRAINT Stock_info_unique UNIQUE (stock_id, stock_date),
     CONSTRAINT stock_id_fkey FOREIGN KEY (stock_id)
@@ -218,7 +218,7 @@ alter table if exists "AGENTMASTER"."Article_scrap"
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 (
     article_summary_id bigserial           not null,
-    article_id         bigserial           not null,
+    article_id         bigint              not null,
     summary            varchar(100)        not null,
 
     constraint Article_summary_pkey primary key (article_summary_id),
