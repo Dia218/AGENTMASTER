@@ -637,7 +637,7 @@ SELECT stock_name, stock_date, stock_price, diff_from_prevday, range
 FROM "AGENTMASTER"."Stock_info" AS stockInfo
          JOIN "AGENTMASTER"."Stock" AS Stock
               ON stockInfo.stock_id = Stock.stock_id
-WHERE stockInfo.stock_id = {stock_id}
+WHERE stockInfo.stock_id = '{stock_id}'
 ORDER BY stock_date DESC
     LIMIT 7;
 /*선택된 주식의 7일간 정보를 불러옵니다.*/
@@ -646,7 +646,7 @@ ORDER BY stock_date DESC
 /*8.2 매수/매도 페이지에서 가용자산과 보유량을 불러옵니다.*/
 SELECT simul_money, stock_money
 FROM "AGENTMASTER"."Customer"
-WHERE customer_id = {customer_id};
+WHERE customer_id = '{customer_id}';
 /*선택된 사용자의 가용자산과 보유량 정보를 불러옵니다.*/
 
 
@@ -657,7 +657,7 @@ FROM "AGENTMASTER"."Stock_info" AS stockInfo
               ON stockInfo.stock_id = Stock.stock_id
 WHERE Stock.field_name = (SELECT field_name
                           FROM "AGENTMASTER"."Stock"
-                          WHERE Stock.stock_id = {stock_id}
+                          WHERE Stock.stock_id = '{stock_id}'
     )
 ORDER BY RANDOM()
     LIMIT 4;
@@ -667,5 +667,5 @@ ORDER BY RANDOM()
 /*8.4 주식정보 페이지에서 우상단 주식정보를 불러옵니다.*/
 SELECT stock_price, diff_from_prevday, range
 FROM "AGENTMASTER"."Stock_info" AS stockInfo
-WHERE stock_id = {stock_id};
+WHERE stock_id = '{stock_id}';
 /*우상단 주식정보를 불러옵니다.*/
