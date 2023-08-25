@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
     stock_date         date          NOT NULL,
     stock_price        integer       NOT NULL,
     diff_from_prevday  integer       NOT NULL,
-    range              numeric(4, 2) NOT NULL,
+    stock_range        numeric(4, 2) NOT NULL,
     start_price        integer       NOT NULL,
     high_price         integer       NOT NULL,
     low_price          integer       NOT NULL,
