@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Field"
 (
     field_id   BIGSERIAL    NOT NULL,
     field_name varchar(100) not null,
-
     constraint Field_pkey primary key (field_id),
     CONSTRAINT Field_unique UNIQUE (field_name)
 )
@@ -55,7 +54,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock"
     CONSTRAINT Stock_pkey PRIMARY KEY (stock_id),
     CONSTRAINT stock_code_unique UNIQUE (stock_code),
     CONSTRAINT stock_name_unique UNIQUE (stock_name),
-    CONSTRAINT stock_id_check CHECK (stock_code ~ '\d{6}'),
+    CONSTRAINT stock_code_check CHECK (stock_code ~ '\d{6}'),
     CONSTRAINT field_id_fkey FOREIGN KEY (field_id)
         REFERENCES "AGENTMASTER"."Field" (field_id) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -85,7 +84,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Stock_info"
     transaction_volume bigint        NOT NULL,
     CONSTRAINT Stock_info_pkey PRIMARY KEY (stock_info_id),
     CONSTRAINT Stock_info_unique UNIQUE (stock_id, stock_date),
-    CONSTRAINT stock_id_fk FOREIGN KEY (stock_id)
+    CONSTRAINT stock_id_fkey FOREIGN KEY (stock_id)
         REFERENCES "AGENTMASTER"."Stock" (stock_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -111,7 +110,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
     average_price   integer        NOT NULL,
     CONSTRAINT Simulation_pkey PRIMARY KEY (simulation_id),
     CONSTRAINT Simulation_unique UNIQUE (user_id, stock_id),
-    CONSTRAINT user_id_fk FOREIGN KEY (user_id)
+    CONSTRAINT user_id_fkey FOREIGN KEY (user_id)
         REFERENCES "AGENTMASTER"."User" (user_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -129,16 +128,17 @@ ALTER TABLE IF EXISTS "AGENTMASTER"."Simulation"
 /*
 -----------------
   merged lines
------------------
+-----------------   
 */
 
 /*연관뉴스*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 (
     article_group_id bigserial           not null,
-    group_name       varchar(100) unique not null,
+    group_name       varchar(100)        not null,
 
-    constraint "article_group_id_pkey" primary key (article_group_id)
+    constraint Article_group_id_pkey primary key (article_group_id),
+    constraint Article_group_id_unique UNIQUE (article_group_id)
 )
     tablespace pg_default;
 
@@ -149,9 +149,9 @@ alter table if exists "AGENTMASTER"."Article_group"
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
 (
     article_link_id bigserial   not null,
-    link            text unique not null,
-    constraint "article_id_pkey" primary key (article_link_id),
-    constraint "article_URL_format" check (link ~
+    link            text        not null,
+    constraint Article_id_pkey primary key (article_link_id),
+    constraint Article_URL_format check (link ~
                                            '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
 )
     tablespace pg_default;
@@ -174,14 +174,16 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     article_group_id bigint,
     field_id         bigint        not null,
 
-    constraint "Article_pkey" primary key (article_id),
-    constraint "Article_link_fkey" foreign key (article_link_id)
-        references "AGENTMASTER"."Article_link" (link),
-    constraint "Articles_group_id_fkey" foreign key (article_group_id)
+    constraint Article_pkey primary key (article_id),
+    constraint Article_link_id_fkey foreign key (article_link_id)
+        references "AGENTMASTER"."Article_link" (article_link_id) match simple
+        on update cascade
+        on delete cascade,
+    constraint Articles_group_id_fkey foreign key (article_group_id)
         references "AGENTMASTER"."Article_group" (article_group_id) match simple
         on update cascade
         on delete set null,
-    constraint "Articles_field_id_fkey" foreign key (field_id)
+    constraint Articles_field_id_fkey foreign key (field_id)
         references "AGENTMASTER"."Field" (field_id) match simple
         on update cascade
         on delete restrict
@@ -194,17 +196,18 @@ alter table if exists "AGENTMASTER"."Article"
 /*스크랩*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_scrap"
 (
-    scrap_id        bigserial     not null,
-    user_id         bigint unique not null,
-    article_link_id bigint unique not null,
+    article_scrap_id    bigserial    not null,
+    user_id             bigint       not null,
+    article_link_id     bigint       not null,
 
-    constraint "Scrap_id_pkey" primary key (scrap_id),
-    constraint "Article_scrap_customer_id_fkey" foreign key (user_id)
+    constraint Article_scrap_pkey primary key (article_scrap_id),
+    CONSTRAINT Article_scrap_unique UNIQUE (user_id, article_link_id),
+    constraint Article_scrap_user_id_fkey foreign key (user_id)
         references "AGENTMASTER"."User" (user_id) match simple
         on update cascade
         on delete cascade,
-    constraint "Article_scrap_news_id_fkey" foreign key (article_link_id)
-        references "AGENTMASTER"."Article_link" (article_id) match simple
+    constraint Article_scrap_news_id_fkey foreign key (article_link_id)
+        references "AGENTMASTER"."Article_link" (article_link_id) match simple
         on update cascade
         on delete cascade
 )
@@ -217,14 +220,15 @@ alter table if exists "AGENTMASTER"."Article_scrap"
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 (
     article_summary_id bigserial           not null,
-    article_id         bigserial unique    not null,
-    summary            varchar(100) unique not null,
+    article_id         bigserial           not null,
+    summary            varchar(100)        not null,
 
-    constraint "Article_Summary_news_id_fkey" foreign key (article_id)
+    constraint Article_summary_pkey primary key (article_summary_id),
+    CONSTRAINT Article_summary_unique UNIQUE (article_id, summary),
+    constraint Article_summary_news_id_fkey foreign key (article_id)
         references "AGENTMASTER"."Article" (article_id) match simple
         on update cascade
-        on delete cascade,
-    constraint "Article_Summary_pkey" primary key (article_summary_id)
+        on delete cascade
 )
     tablespace pg_default;
 
