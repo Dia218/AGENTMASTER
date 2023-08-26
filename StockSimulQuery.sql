@@ -370,11 +370,9 @@ FROM "AGENTMASTER"."Simulation" AS sim
 INNER JOIN "AGENTMASTER"."Stock" AS sto
 ON sim.stock_id = sto.stock_id
 WHERE field_id = (
-	SELECT sto.field_id
-	FROM "AGENTMASTER"."Simulation" AS sim
-	INNER JOIN "AGENTMASTER"."Stock" AS sto
-	ON sim.stock_id = sto.stock_id
-	WHERE sim.user_id = {user_id} AND sim.stock_id = {stock_id}
+	SELECT field_id
+	FROM "AGENTMASTER"."Stock"
+	WHERE stock_id = {stock_id}
 ) AND sim.user_id = {user_id} AND sim.stock_id != {stock_id}
 ORDER BY sim.simul_holdings DESC
 LIMIT 4;
