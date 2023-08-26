@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
         references "AGENTMASTER"."Article" (article_id)
         on update cascade
         on delete cascade,
-    constraint Article_overview_unique unique (article_id, article_timeline_path)
+    constraint Article_timeline_unique unique (article_id, article_timeline_path)
 )
     tablespace pg_default;
 
