@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
     article_timeline_path varchar(100) not null,
 
     constraint Article_timeline_pkey primary key (article_timeline_id),
-    constraint Article_overview_news_id_fkey foreign key (article_id)
+    constraint Article_timeline_news_id_fkey foreign key (article_id)
         references "AGENTMASTER"."Article" (article_id)
         on update cascade
         on delete cascade,
