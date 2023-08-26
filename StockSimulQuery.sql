@@ -369,7 +369,7 @@ SELECT sto.stock_name, sim.simul_return, sim.simul_range
 FROM "AGENTMASTER"."Simulation" AS sim
 INNER JOIN "AGENTMASTER"."Stock" AS sto
 ON sim.stock_id = sto.stock_id
-WHERE field_id = (
+WHERE sto.field_id = (
 	SELECT field_id
 	FROM "AGENTMASTER"."Stock"
 	WHERE stock_id = {stock_id}
