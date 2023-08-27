@@ -17,7 +17,19 @@
     margin-left: 5px;
 }
 
+.StockSimilarCategoryBoxTitle:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .StockSimilarCategoryBoxBody {
+    font-size: 25px;
+    margin-left: 5px;
+    margin-top: 5px;
+    white-space: normal;
+}
+
+.StockSimilarCategoryBoxCurrentPrice {
     font-size: 20px;
     margin-left: 5px;
     margin-bottom: 10px;
@@ -27,4 +39,5 @@
 .StockSimilarCategoryBoxCode {
     margin-left: 5px;
     margin-bottom: 10px;
+    font-size: 20px;
 }

@@ -14,6 +14,11 @@ export default function StockInvestData({
                                             AveragePrice
                                         }
 ) {
+    const addComma = (num) => {     //현재가, 전일비 값을 불러올 때 자동으로 3자리 마다 콤마(,)를 붙이는 코드
+        let returnString = num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return(returnString)
+    } 
+
     return (
         <div className="StockInvestDataHeader row">
             <div className='StockInvestDataTop'>
@@ -30,13 +35,13 @@ export default function StockInvestData({
                 </div>
                 <div className='row'>
                     <div className='col-4 StockInvestDataTop_body CP'>
-                        9,000
+                        {addComma(CurrentPrice)}
                     </div>
                     <div className='col-4 StockInvestDataTop_body DR'>
-                        +0.8%
+                        {DaysRange}%
                     </div>
                     <div className='col-4 StockInvestDataTop_body VOL'>
-                        21,212,222
+                        {addComma(Volume)}
                     </div>
                 </div>
                 <div className='row'>
@@ -52,13 +57,13 @@ export default function StockInvestData({
                 </div>
                 <div className='row'>
                     <div className='col-4 StockInvestDataTop_body OP'>
-                        7,500 
+                        {addComma(OpenPrice)} 
                     </div>
                     <div className='col-4 StockInvestDataTop_body HP'>
-                        11,000
+                        {addComma(HighPrice)}
                     </div>
                     <div className='col-4 StockInvestDataTop_body LP'>
-                        7,000
+                        {addComma(LowPrice)}
                     </div>
                 </div>
             </div>
@@ -69,7 +74,7 @@ export default function StockInvestData({
                             손익률
                         </div>
                         <div className='PR_B'>
-                            -12.3%
+                            {ProfitRate}%
                         </div>
                     </div>
                     <div className='StockInvestDataBottom_Right col-7'>
@@ -78,7 +83,7 @@ export default function StockInvestData({
                                 손익
                             </div>
                             <div className='col-6 StockInvestDataBottom_Right_Body PL'>
-                                +241,222
+                                {addComma(ProfitLoss)}
                             </div>
                         </div>
                         <div className='row'>
@@ -86,7 +91,7 @@ export default function StockInvestData({
                                 매입금액
                             </div>
                             <div className='col-6 StockInvestDataBottom_Right_Body PP'>
-                                88,895,236,754
+                                {addComma(PurchasePrice)}
                             </div>
                         </div>
                         <div className='row'>
@@ -94,7 +99,7 @@ export default function StockInvestData({
                                 평균단가
                             </div>
                             <div className='col-6 StockInvestDataBottom_Right_Body AP'>
-                                80,000
+                                {addComma(AveragePrice)}
                             </div>
                         </div>
                     </div>

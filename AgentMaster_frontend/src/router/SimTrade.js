@@ -7,6 +7,7 @@ import StockGraphChart from "../component/SimTrade/StockGraphChart";
 import StockInvestData from "../component/SimTrade/StockInvestData";
 import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
+import { io } from 'socket.io-client';
 
 const GraphInput = [
     {
@@ -55,21 +56,32 @@ const GraphInput = [
 
 export default function SimTrade() {
     const name = "종목명";
-    const price = "전일비";
-    const rates = "현재가";
-    const code = "등락률";
+    const profitloss = "전일비";
+    const price = "현재가";
+    const rates = "등락률";
     const [siCategory,setSiCategory] = useState([]);
-    const [longerThenFour,setLongerThenFour] = useState(false);
+    const [stockInvestData,setStockInvestData] = useState({});
+    const [stockInvestInput,setStockInvestInput] = useState({});
     const [scList,setScList] = useState([]);
     useEffect(()=>{
-        setSiCategory([{name,price,rates,code},{name,price,rates,code},]);
+        setSiCategory([{"id":0,name:"카카오",profitloss:"-5000",rates:"-0.06",price:"230000"},{"id":1,name:"넷플릭스",profitloss:"+8000",rates:"+2.09",price:"120000"},
+        {"id":2,name:"유튜브",profitloss:"+12000",rates:"+10.18",price:"4500000"}]);
     },[]);
     useEffect(()=>{
             setScList(siCategory.map((v) => (
-            <StockSimilarCategoryBox key={v.name}
-            SimilarStockname={v.name} SimilarStockPrice={v.price}
-            SimilarStockcode={v.code} SimilarStockrates={v.rates}/>)));
-    },[siCategory])
+            <StockSimilarCategoryBox key={v.id}
+            SimilarStockcode={v.id} SimilarStockname={v.name} SimilarStockPrice={v.price}
+            SimilarStockProfitloss={v.profitloss} SimilarStockrates={v.rates}/>)));
+    },[siCategory]);
+
+    const socketIo = io.connect();
+    useEffect(()=>{
+        socketIo.on();
+
+        setStockInvestData({"CurrentPrice":9000,"DaysRange":"+0.8","Volume":12663533,"OpenPrice":7500,"HighPrice":11000,"LowPrice":9000,
+        "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000});
+        setStockInvestInput({"AvailableAsset":12523000,"Amount":0});
+    },[])
     return (
         <div className="nd_body">
             <header className="mb-4"><Header /></header>
@@ -90,20 +102,22 @@ export default function SimTrade() {
                 </div>
                 <div className="StockRight">
                     <StockInvestData
-                        CurrentPrice={'bruh'}
-                        DaysRange='bruh'
-                        Volume='bruh'
-                        OpenPrice='bruh'
-                        HighPrice='bruh'
-                        LowPrice='bruh'
-                        ProfitRate='bruh'
-                        ProfitLoss='bruh'
-                        PurchasePrice='bruh'
-                        AveragePrice='bruh'
+                        CurrentPrice={stockInvestData.CurrentPrice}
+                        DaysRange={stockInvestData.DaysRange}
+                        Volume={stockInvestData.Volume}
+                        OpenPrice={stockInvestData.OpenPrice}
+                        HighPrice={stockInvestData.HighPrice}
+                        LowPrice={stockInvestData.LowPrice}
+                        ProfitRate={stockInvestData.ProfitRate}
+                        ProfitLoss={stockInvestData.ProfitLoss}
+                        PurchasePrice={stockInvestData.PurchasePrice}
+                        AveragePrice={stockInvestData.AveragePrice}
                     ></StockInvestData>
                     <StockInvestInput
-                        AvailableAsset='bruh'
-                        Amount='bruh'
+                        AvailableAsset={stockInvestInput.AvailableAsset}
+                        Amount={stockInvestInput.Amount}
+                        CurrentPrice={stockInvestData.CurrentPrice}
+                        setStockInvestInput={setStockInvestInput}
                         >
                     </StockInvestInput>
 

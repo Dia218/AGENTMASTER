@@ -9,12 +9,15 @@ import UserPage from './router/UserPage';
 import SimulMain from './router/SimulMain';
 import NotFound from './router/NotFound';
 import SimTrade from "./router/SimTrade";
+import Chart from './component/news/Chart';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path='/' element={<NewsMain />} />
+        <Route path='/' element={<NewsMain />} />
+        <Route path='/newsMain' element={<NewsMain />} />
+        <Route path='/newsMain/chart' element={<Chart />} />
         <Route path='/searchList' element={<NewsSearch />} />
         <Route path='/newsDetail' element={<NewsDetail />} />
         <Route path='/chartMain' element={<ChartMain />} />
