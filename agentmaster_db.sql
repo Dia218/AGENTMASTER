@@ -145,6 +145,21 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
 alter table if exists "AGENTMASTER"."Article_group"
     OWNER to postgres;
 
+/*사건요약문*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Issue_summary"
+(
+    Issue_summary_id bigserial    not null,
+    issue_keyword    varchar(100) not null,
+    issue_summary    varchar(100) not null,
+
+    constraint Issue_summary_pkey primary key (Issue_summary_id),
+    constraint issue_summary_unique unique (issue_keyword, issue_summary)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Issue_summary"
+    OWNER to postgres;
+
 /*기사링크*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
 (
@@ -168,12 +183,12 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     company          varchar(100) not null,
     reporter         varchar(100) not null,
     title            text         not null,
-    issue_keyword    varchar(100),
     first_pub        timestamp    not null,
     last_pub         timestamp    not null,
     body             text         not null,
-    article_group_id bigint,
     field_id         bigint       not null,
+    article_group_id bigint,
+    issue_summary_id bigint,
 
     constraint Article_pkey primary key (article_id),
     constraint Article_link_id_unique unique (article_link_id),
@@ -188,7 +203,11 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
     constraint Articles_field_id_fkey foreign key (field_id)
         references "AGENTMASTER"."Field" (field_id) match simple
         on update cascade
-        on delete restrict
+        on delete restrict,
+    constraint Article_issue_id_fkey foreign key (issue_summary_id)
+        references "AGENTMASTER"."Issue_summary" (issue_summary_id)
+        on update cascade
+        on delete set null
 )
     tablespace pg_default;
 
@@ -237,26 +256,6 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 alter table if exists "AGENTMASTER"."Article_summary"
     OWNER to postgres;
 
-/*기사 정리문*/
-CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_overview"
-(
-    article_overview_id bigserial    not null,
-    article_id          bigint       not null,
-    article_overview    text         not null,
-    event_flow_path     varchar(100) not null,
-
-    constraint Article_overview_pkey primary key (article_overview_id),
-    constraint Article_overview_news_id_fkey foreign key (article_id)
-        references "AGENTMASTER"."Article" (article_id)
-        on update cascade
-        on delete cascade,
-    constraint Article_overview_unique unique (article_id, event_flow_path)
-)
-    tablespace pg_default;
-
-alter table if exists "AGENTMASTER"."Article_overview"
-    OWNER to postgres;
-
 /*뉴스 순서*/
 CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
 (
@@ -274,4 +273,4 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
     tablespace pg_default;
 
 alter table if exists "AGENTMASTER"."Article_timeline"
-    OWNER to postgres;
+  OWNER to postgres;
