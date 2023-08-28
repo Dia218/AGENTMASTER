@@ -274,4 +274,3 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
 
 alter table if exists "AGENTMASTER"."Article_timeline"
   OWNER to postgres;
-/*테스트*/
