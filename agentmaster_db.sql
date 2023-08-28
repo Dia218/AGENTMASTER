@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Issue_summary"
 (
     Issue_summary_id bigserial    not null,
     issue_keyword    varchar(100) not null,
-    issue_summary    varchar(100) not null,
+    issue_summary    varchar(100),
 
     constraint Issue_summary_pkey primary key (Issue_summary_id),
     constraint issue_summary_unique unique (issue_keyword, issue_summary)
