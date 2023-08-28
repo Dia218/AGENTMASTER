@@ -123,3 +123,154 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Simulation"
 
 ALTER TABLE IF EXISTS "AGENTMASTER"."Simulation"
     OWNER to postgres;
+
+
+/*
+-----------------
+  merged lines
+-----------------   
+*/
+
+/*연관뉴스*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_group"
+(
+    article_group_id bigserial    not null,
+    group_name       varchar(100) not null,
+
+    constraint Article_group_id_pkey primary key (article_group_id),
+    constraint Article_group_id_unique UNIQUE (article_group_id)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_group"
+    OWNER to postgres;
+
+/*사건요약문*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Issue_summary"
+(
+    Issue_summary_id bigserial    not null,
+    issue_keyword    varchar(100) not null,
+    issue_summary    varchar(100) not null,
+
+    constraint Issue_summary_pkey primary key (Issue_summary_id),
+    constraint issue_summary_unique unique (issue_keyword, issue_summary)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Issue_summary"
+    OWNER to postgres;
+
+/*기사링크*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_link"
+(
+    article_link_id bigserial not null,
+    link            text      not null,
+    constraint article_link_unique unique (link),
+    constraint Article_id_pkey primary key (article_link_id),
+    constraint Article_URL_format check (link ~
+                                         '^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,255}\.[a-z]{2,6}(\/[-a-zA-Z0-9@:%._\+~#=]*)*(\?[-a-zA-Z0-9@:%_\+.~#()?&//=]*)?$')
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_link"
+    OWNER to postgres;
+
+/*기사본문*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article"
+(
+    article_id       bigserial    not null,
+    article_link_id  bigint       not null,
+    company          varchar(100) not null,
+    reporter         varchar(100) not null,
+    title            text         not null,
+    first_pub        timestamp    not null,
+    last_pub         timestamp    not null,
+    body             text         not null,
+    field_id         bigint       not null,
+    article_group_id bigint,
+    issue_summary_id bigint,
+
+    constraint Article_pkey primary key (article_id),
+    constraint Article_link_id_unique unique (article_link_id),
+    constraint Article_link_id_fkey foreign key (article_link_id)
+        references "AGENTMASTER"."Article_link" (article_link_id) match simple
+        on update cascade
+        on delete cascade,
+    constraint Articles_group_id_fkey foreign key (article_group_id)
+        references "AGENTMASTER"."Article_group" (article_group_id) match simple
+        on update cascade
+        on delete set null,
+    constraint Articles_field_id_fkey foreign key (field_id)
+        references "AGENTMASTER"."Field" (field_id) match simple
+        on update cascade
+        on delete restrict,
+    constraint Article_issue_id_fkey foreign key (issue_summary_id)
+        references "AGENTMASTER"."Issue_summary" (issue_summary_id)
+        on update cascade
+        on delete set null
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article"
+    OWNER to postgres;
+
+/*스크랩*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_scrap"
+(
+    article_scrap_id bigserial not null,
+    user_id          bigint    not null,
+    article_link_id  bigint    not null,
+
+    constraint Article_scrap_pkey primary key (article_scrap_id),
+    CONSTRAINT Article_scrap_unique UNIQUE (user_id, article_link_id),
+    constraint Article_scrap_user_id_fkey foreign key (user_id)
+        references "AGENTMASTER"."User" (user_id) match simple
+        on update cascade
+        on delete cascade,
+    constraint Article_scrap_news_id_fkey foreign key (article_link_id)
+        references "AGENTMASTER"."Article_link" (article_link_id) match simple
+        on update cascade
+        on delete cascade
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_scrap"
+    OWNER to postgres;
+
+/*기사 요약문*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
+(
+    article_summary_id bigserial    not null,
+    article_id         bigint       not null,
+    summary            varchar(100) not null,
+
+    constraint Article_summary_pkey primary key (article_summary_id),
+    CONSTRAINT Article_summary_unique UNIQUE (article_id, summary),
+    constraint Article_summary_news_id_fkey foreign key (article_id)
+        references "AGENTMASTER"."Article" (article_id) match simple
+        on update cascade
+        on delete cascade
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_summary"
+    OWNER to postgres;
+
+/*뉴스 순서*/
+CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
+(
+    article_timeline_id   bigserial    not null,
+    article_id            bigint       not null,
+    article_timeline_path varchar(100) not null,
+
+    constraint Article_timeline_pkey primary key (article_timeline_id),
+    constraint Article_timeline_news_id_fkey foreign key (article_id)
+        references "AGENTMASTER"."Article" (article_id)
+        on update cascade
+        on delete cascade,
+    constraint Article_timeline_unique unique (article_id, article_timeline_path)
+)
+    tablespace pg_default;
+
+alter table if exists "AGENTMASTER"."Article_timeline"
+  OWNER to postgres;
