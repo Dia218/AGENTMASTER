@@ -273,4 +273,4 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
     tablespace pg_default;
 
 alter table if exists "AGENTMASTER"."Article_timeline"
-  OWNER to postgres;
+    OWNER to postgres;
