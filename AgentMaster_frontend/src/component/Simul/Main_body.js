@@ -38,7 +38,9 @@ function Main_body() {
                 {bodyList.map((stock) => (
                     <li className="simulMainBody_li" key={stock.srtnCd}>
                     <div className="simulMainBody_div" id={stock.srtnCd} onClick={onClick}>
+
                         <Link className="simulMainBody_a" to={"/simulTrade?keyword=" + stock.itmsNm}>
+
                             <div className="simulMainBodyStockId">{stock.srtnCd}</div>
 
                             <div className="simulMainBodyStockName">{stock.itmsNm}</div>
