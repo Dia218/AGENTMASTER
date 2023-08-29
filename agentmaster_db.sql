@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Issue_summary"
     issue_summary    varchar(100),
 
     constraint Issue_summary_pkey primary key (Issue_summary_id),
-    constraint issue_summary_unique unique (issue_keyword, issue_summary)
+    constraint issue_summary_unique unique (issue_keyword)
 )
     tablespace pg_default;
 
