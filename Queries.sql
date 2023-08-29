@@ -703,7 +703,7 @@ WHERE simulation_id = '{simulation_id}';
 
 
 /*8.5 선택 종목 모의투자 자산 SELECT*/
-SELECT u.total_money, s.simul_holdings
+SELECT u.simul_money, s.simul_holdings
 FROM "AGENTMASTER"."Simulation" AS s
 INNER JOIN "AGENTMASTER"."User" AS u
 ON s.user_id = u.user_id
@@ -750,7 +750,7 @@ WHERE user_id = {user_id};
 
 
 /*8.8 동일 분야 종목 주식 정보 거래량 기준 상위 4개 SELECT*/
-SELECT sto.stock_name, sin.diff_from_prevday, sin.stock_range
+SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
 FROM "AGENTMASTER"."Stock" AS sto
 INNER JOIN "AGENTMASTER"."Stock_info" AS sin
 ON sto.stock_id = sin.stock_id
