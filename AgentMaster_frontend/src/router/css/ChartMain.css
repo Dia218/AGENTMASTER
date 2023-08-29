@@ -1,6 +1,6 @@
 .Chart_Main{
-  background-color: rgb(240, 240, 240);
-  min-height: 150vh;
+  background-color: white;
+  min-height: 120vh;
 }
 .chartNews {
     border: 3px solid #9bccfb;
@@ -38,8 +38,9 @@
   .news-description {
     margin-bottom: 30px;
   }
-  .ChartMianSearch{
-    background-color: rgb(240, 240, 240);
+  .chart_search{
+    margin-top: 70px;
+    margin-left: 50px;
   }
   
   .table2 {
@@ -89,7 +90,8 @@
     gap: 100px;
   }
   .table-container{
-    width: 2000px;
+    /*width: 2000px;
+     해당 부분으로 인해 가로길이가 너무 늘어나서 생략함(생략해도 문제 없음)*/
     margin-top: 10px;
 
   }
@@ -119,7 +121,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 550px;
-    margin-left: -600px;
+    margin-left: -570px;
     border-radius: 40px;
     
   }
@@ -203,8 +205,8 @@
   .mockTitle{
     display: flex; 
     align-items: center;
-    margin-top: 200px;
-    margin-left: -590px;
+    margin-top: 180px;
+    margin-left: -560px;
   }
   .mockTitle h2{
     color: #3eb7ff;
@@ -220,4 +222,8 @@
   }
   .item-titleId{
     margin-left: 30px;
+  }
+  .chart_main_search{
+    margin-top: 10px;
+    margin-left: 10px;
   }

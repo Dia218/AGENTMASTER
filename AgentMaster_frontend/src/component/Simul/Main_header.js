@@ -5,7 +5,7 @@ import "./css/Main_header.css";
 function Main_header() {
     return(
     <div className="simulMainHeader">
-        <div className="simulMainHeaderTitle">거래 상위</div>
+        <div className="simulMainHeaderTitle">급상승 주식</div>
         <div className="simulMainHeaderBar">
             <div className="simulMainHeaderStockId">종목코드</div>
             <div className="simulMainHeaderStockName">종목명</div>

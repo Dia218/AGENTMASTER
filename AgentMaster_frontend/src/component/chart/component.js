@@ -1,19 +1,18 @@
 //주식 상세 페이지
 import React, { useState, useRef,useEffect} from 'react';
 import socketIOClient from 'socket.io-client';
-import Autosuggest from 'react-autosuggest';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import ReactApexChart from 'react-apexcharts';
 
+import { useNavigate } from 'react-router-dom';
 
 
 export function ArticleList() {
-  const [articles, setArticles] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [articles, setArticles] = useState([]); // 초기값 빈 배열로 설정
+  const [isSearchVisible, setIsSearchVisible] = useState(true);
 
   useEffect(() => {
     const socket = socketIOClient('/'); // 소켓 연결
@@ -40,46 +39,58 @@ export function ArticleList() {
   const openModal = (article) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
+    setIsSearchVisible(false); // 모달 열 때 검색창 숨김
   };
 
   const closeModal = () => {
     setSelectedArticle(null);
     setIsModalOpen(false);
+    setIsSearchVisible(true); // 모달 닫을 때 검색창 보이게 설정
+  };
+
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/NewsDetail`, { state: selectedArticle });
   };
 
   return (
     <div className="Article">
-       <ul style={{ listStyle: 'none', padding: 10 }}>
+      <ul style={{ listStyle: 'none', padding: 10 }}>
         {articles.map((article) => (
           <li key={article.id}>
-            <p className="article-title" onClick={() => openModal(article)}>{article.title}</p>
-            <hr className='article-bottom' />
+            <p className="article-title" onClick={() => openModal(article)}>
+              {article.title}
+            </p>
+            <hr className="article-bottom" />
           </li>
         ))}
-    </ul>
-      <Modal isOpen={isModalOpen} 
-      onRequestClose={closeModal} 
-      className="Custom" 
-      overlayClassName="CustomOverlay">
-
-  {selectedArticle && (
-    <div className='Modal_main'>
-      <div className='ModalTop'>
-        <p className='ModalMove' onClick={() => window.location.href=`/news/${selectedArticle.id}`}>&lt;- 상세페이지로</p>
-        <p className='ModalClose' onClick={closeModal}>X</p>
-      </div>
-      <h2>{selectedArticle.title}</h2>
-      <div className='ModalBox'>
-      <p className="ModalText">{selectedArticle.summary}</p>
-      </div>
+      </ul>
+       <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        className="Custom"
+        overlayClassName="CustomOverlay"
+      >
+        {selectedArticle && (
+          <div className="Modal_main">
+            <div className="ModalTop">
+              <p className="ModalMove" onClick={handleClick}>
+                &lt;- 상세페이지로
+              </p>
+              <p className="ModalClose" onClick={closeModal}>
+                X
+              </p>
+            </div>
+            <h2>{selectedArticle.title}</h2>
+            <div className="ModalBox">
+              <p className="ModalText">{selectedArticle.summary}</p>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
-  )}
-</Modal>
-</div>
-  
   );
 }
-
 
 
 export function Table() {
@@ -186,20 +197,27 @@ export function Rechart1() {
         text: '가격'
       },
     },
-    
     tooltip: {
       x: {
         format: 'dd MMM yyyy'
       },
       y: {
         title: {
-          formatter: (val) => {
-            if (typeof val === 'number') {
-              return val.toFixed(2);
-            }
-            return val;
-          }
+          formatter: (val) => val 
         }
+      },
+      custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+        const item = stockData[dataPointIndex];
+        if (item && item.stockDiff !== undefined && item.stockRange !== undefined) {
+          return (
+            `<div class="custom-tooltip">
+              <span>종목가: ${item.stockPrice}</span><br>
+              <span>전일대비: ${item.stockDiff}</span><br>
+              <span>등락률: ${item.stockRange}%</span>
+            </div>`
+          );
+        }
+        return '';
       }
     }
   };
@@ -214,6 +232,8 @@ export function Rechart1() {
 export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
   const location = useLocation();
   const [keyword, setKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
+
 
   useEffect(() => {
     if (location.state) {
@@ -222,17 +242,26 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
       setKeyword('');
     }
   }, [location]);
+
+  useEffect(() => {
+    setSearchKeyword(keywordFromSearch2); // 검색어 변경 시 상태 업데이트
+  }, [keywordFromSearch2]);
+
+
+
   const seriesData = [
     {
       name: [keywordFromChartMain],
-      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8]
+      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8],
     },
-    {
-      name: [keywordFromSearch2],
-      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51]
-    },
-   
   ];
+
+  if (keywordFromSearch2 === '카카오') {
+    seriesData.push({
+      name: [keywordFromSearch2],
+      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51],
+    });
+  }
 
   const options = {
     chart: {
@@ -285,144 +314,15 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
       ]
     },
     grid: {
-      borderColor: 'white',
+      borderColor: '#D5D5D5',
     }
   };
 
   return (
     <div className="Rechart2">
-      <ReactApexChart options={options} series={seriesData} type="line" height={400} />
+      
+        <ReactApexChart options={options} series={seriesData} type="line" height={400} />
+  
     </div>
   );
   }
-
-
-export function Search2({ onKeywordChange }) {
-  const [value, setValue] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [searchHistory, setSearchHistory] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const searchInputRef = useRef(null);
-  const resultContainerRef = useRef(null);
-  const webSocketRef = useRef(null);
-
-  useEffect(() => {
-    webSocketRef.current = new WebSocket('ws:/your-websocket-server-url'); //웹소켓 주소
-
-    webSocketRef.current.onopen = () => {
-      console.log('웹소켓 연결이 성립되었습니다.');
-    };
-
-    webSocketRef.current.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setSuggestions(data);
-      setIsOpen(data.length > 0);
-    };
-
-    webSocketRef.current.onclose = () => {
-      console.log('웹소켓 연결이 종료되었습니다.');
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (webSocketRef.current) {
-        webSocketRef.current.close();
-      }
-    };
-  }, []);
-
-  const sendWebSocketMessage = (message) => {
-    if (webSocketRef.current && webSocketRef.current.readyState === WebSocket.OPEN) {
-      webSocketRef.current.send(JSON.stringify({ query: message }));
-    }
-  };
-
-  const onSuggestionsFetchRequested = ({ value }) => {
-    sendWebSocketMessage(value);
-  };
-
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-    setIsOpen(false);
-  };
-
-  const handleClickOutside = (event) => {
-    if (resultContainerRef.current && !resultContainerRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  const handleSearch = () => {
-    console.log('검색어:', value);
-    setSearchHistory([...searchHistory, value]);
-    onKeywordChange(value); 
-  }
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const onSuggestionSelected = (event, { suggestion }) => {
-    setValue(suggestion);
-    setIsOpen(false);
-  };
-
-  const renderSuggestion = (suggestion) => {
-    return <div>{suggestion}</div>;
-  };
-
-  return (
-    <div style={{ position: 'relative' }}>
-      <div className='ChartDetailSearch'
-        ref={resultContainerRef}
-        style={{ position: 'absolute', width: '400px', background: '#9bccfb', marginTop: '80px', marginLeft: '150px', zIndex: 1 }}
-      >
-        {isOpen && (
-          <ul className='search-list' style={{ listStyle: 'none', padding: 0 }}>
-            {searchHistory.map((searchItem, index) => (
-              <li key={index}>{searchItem}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={onSuggestionsClearRequested}
-          onSuggestionSelected={onSuggestionSelected}
-          getSuggestionValue={(suggestion) => suggestion}
-          renderSuggestion={renderSuggestion}
-          inputProps={{
-            value: value,
-            onChange: (event, { newValue }) => setValue(newValue),
-            style: {
-              backgroundColor: 'white',
-              border: '3px solid #9bccfb',
-              padding: '10px',
-              borderRadius: '5px',
-              width: '550px',
-              marginLeft: '120px',
-              marginTop: '10px',
-              height:'50px',
-            },
-            ref: searchInputRef,
-          }}
-        />
-        <IconButton
-          type="submit"
-          sx={{ p: '10px' }}
-          aria-label="search"
-          size="large"
-          style={{ marginLeft: '-70px', marginTop: '10px' }}
-          onClick={handleSearch}
-        >
-          <SearchIcon fontSize="large" />
-        </IconButton>
-      </div>
-    </div>
-  );
-}

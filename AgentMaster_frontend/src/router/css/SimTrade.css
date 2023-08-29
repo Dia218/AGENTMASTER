@@ -50,3 +50,10 @@
 .StockSimilarCategoryGroupFlex4 {
     flex: 4;
 }
+.simultradetitle{
+    font-size: 40px;
+    font-weight: bold;
+    margin-left: 80px;
+    margin-top: -50px;
+    color: #0073e5;
+}

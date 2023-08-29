@@ -33,6 +33,10 @@ function Join({show,setShow,socketIo}){
             setCheckJoin(false);
             alert("아이디는 5-15자의 영문 혹은 영문+숫자 조합만 가능합니다.");
         }
+        else if (checkDup==null) {
+            setCheckJoin(false);
+            alert("아이디의 중복확인이 필요합니다.");
+        }
         else if(pw===""){
             setCheckJoin(false);
             alert("비밀번호를 입력해주세요.");
@@ -64,6 +68,8 @@ function Join({show,setShow,socketIo}){
             setId("");
             setPw("");
             setEmail("");
+            setCheckDup();
+            setCheckMessage("");
         }
     },[checkJoin])
 

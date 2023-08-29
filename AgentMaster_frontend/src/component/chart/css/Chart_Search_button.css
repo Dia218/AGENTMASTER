@@ -1,0 +1,19 @@
+.chartSearchBtn {
+    position: absolute;
+    height:50px;
+    width: 50px;
+    right: 0%; 
+    z-index: 2;
+}
+
+.chartSearchBtn > button {
+    position: relative;
+    height: 45px;
+    width: 45px;
+    top: 5px;
+    left: -5px;
+}
+.chartSearchBtnLink {
+    height: 45px;
+    width: 45px;
+}
