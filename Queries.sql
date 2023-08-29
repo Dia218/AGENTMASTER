@@ -545,7 +545,7 @@ WHERE user_id = '{user_id}';
 /*7 모의투자 메인 페이지*/
 
 /*7.1 주식 정보 거래량 기준 상위 10개 SELECT*/
-SELECT sto.stock_code, sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
+SELECT sto.stock_id, sto.stock_code, sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
 FROM "AGENTMASTER"."Stock" AS sto
          INNER JOIN "AGENTMASTER"."Stock_info" AS sin
                     ON sto.stock_id = sin.stock_id
@@ -592,7 +592,7 @@ GROUP BY u.user_id;
 
 
 /*7.5 사용자가 보유한 종목 정보 SELECT*/
-SELECT sto.stock_name, sim.purchase_amount, sim.simul_range, sim.simul_holdings
+SELECT sto.stock_name, sim.purchase_amount, sim.simul_return, sim.simul_range, sim.simul_holdings
 FROM "AGENTMASTER"."Simulation" AS sim
          INNER JOIN "AGENTMASTER"."Stock" AS sto
                     ON sim.stock_id = sto.stock_id
@@ -606,7 +606,7 @@ WHERE sim.user_id = '{user_id}';
 /*7.6 검색 키워드가 포함된 종목 SELECT*/
 
 /*7.6.1 종목코드 검색 시*/
-SELECT stock_code, stock_name
+SELECT stock_id, stock_code, stock_name
 FROM "AGENTMASTER"."Stock"
 WHERE stock_code ~ '^{keyword}';
 /*
@@ -616,7 +616,7 @@ WHERE stock_code ~ '^{keyword}';
 
 
 /*7.6.2 종목명 검색 시*/
-SELECT stock_code, stock_name
+SELECT stock_id, stock_code, stock_name
 FROM "AGENTMASTER"."Stock"
 WHERE stock_name ~ '^{keyword}';
 /*
@@ -653,14 +653,14 @@ WHERE user_id = '{user_id}'
 
 /*8.2 선택 종목 그래프 정보 SELECT*/
 
-/*8.1.1 종목 정보*/
+/*8.2.1 종목 정보*/
 SELECT sto.stock_code, sto.stock_name, fie.field_name
 FROM "AGENTMASTER"."Stock" AS sto
          INNER JOIN "AGENTMASTER"."Field" AS fie
                     ON sto.field_id = fie.field_id
 WHERE stock_id = '{stock_id}';
 
-/*8.1.2 종목 그래프 정보*/
+/*8.2.2 종목 그래프 정보*/
 SELECT stock_date,
        stock_price,
        diff_from_prevday,
@@ -678,7 +678,7 @@ WHERE stock_date > (SELECT stock_date
   AND stock_id = '{stock_id}';
 
 
-/*8.2선택 종목 주식 상세 정보 SELECT*/
+/*8.3선택 종목 주식 상세 정보 SELECT*/
 SELECT stock_date,
        stock_price,
        diff_from_prevday,
@@ -696,41 +696,72 @@ WHERE stock_date = (SELECT stock_date
   AND stock_id = '{stock_id}';
 
 
-/*8.3 선택 종목 모의투자 상세 정보 SELECT*/
+/*8.4 선택 종목 모의투자 상세 정보 SELECT*/
 SELECT simul_return, simul_range, simul_holdings, purchase_amount, average_price
 FROM "AGENTMASTER"."Simulation"
 WHERE simulation_id = '{simulation_id}';
 
 
-/*8.4 선택 종목 모의투자 자산 SELECT*/
-SELECT purchase_amount, simul_holdings
-FROM "AGENTMASTER"."Simulation"
+/*8.5 선택 종목 모의투자 자산 SELECT*/
+SELECT u.total_money, s.simul_holdings
+FROM "AGENTMASTER"."Simulation" AS s
+INNER JOIN "AGENTMASTER"."User" AS u
+ON s.user_id = u.user_id
 WHERE simulation_id = '{simulation_id}';
 
 
-/*8.5 모의투자 거래 결과 UPDATE*/
-UPDATE "AGENTMASTER"."Simulation"
-SET simul_holdings  = simul_holdings + '{price}',
-    purchase_amount = purchase_amount + '{amount * price}'
-WHERE simulation_id = '{simulation_id}';
+/*8.6 모의투자 거래 결과 INSERT AND UPDATE*/
+INSERT INTO "AGENTMASTER"."Simulation" AS simul (
+	user_id,
+	stock_id,
+	simul_return,
+	simul_range,
+	simul_holdings,
+	purchase_amount,
+	average_price
+)
+VALUES(
+	{user_id},
+	{stock_id},
+	{simul_return},
+	{simul_range},
+	{simul_holdings},
+	{purchase_amount},
+	{average_price}
+)
+ON CONFLICT(user_id, stock_id)
+DO UPDATE SET
+	simul_return = {simul_return}, 
+	simul_range = {simul_range},
+	simul_holdings = {simul_holdings},
+	purchase_amount = {purchase_amount},
+	average_price = {average_price}
+WHERE simul.user_id = {user_id} AND simul.stock_id = {stock_id};
 
 
-/*8.6 사용자 자산 정보 UPDATE*/
+/*8.7 사용자 자산 정보 UPDATE*/
 UPDATE "AGENTMASTER"."User"
-SET simul_money = simul_money - '{amount * price}',
-    stock_money = stock_money + '{amount * price}'
-WHERE user_id = '{user_id}';
+SET total_money = {total_money},
+    simul_money = {simul_money},
+    stock_money = {stock_money},
+    total_return = {total_return},
+    rank_range = {rank_range}
+WHERE user_id = {user_id};
 
 
-/*8.7 동일 분야 종목 자산 보유량 기준 상위 4개 SELECT*/
-SELECT sto.stock_name, sim.simul_return, sim.simul_range
-FROM "AGENTMASTER"."Simulation" AS sim
-         INNER JOIN "AGENTMASTER"."Stock" AS sto
-                    ON sim.stock_id = sto.stock_id
-WHERE sto.field_id = (SELECT field_id
-                      FROM "AGENTMASTER"."Stock"
-                      WHERE stock_id = '{stock_id}')
-  AND sim.user_id = '{user_id}'
-  AND sim.stock_id != '{stock_id}'
-ORDER BY sim.simul_holdings DESC
-LIMIT 4;
+/*8.8 동일 분야 종목 주식 정보 거래량 기준 상위 4개 SELECT*/
+SELECT sto.stock_name, sin.diff_from_prevday, sin.stock_range
+FROM "AGENTMASTER"."Stock" AS sto
+INNER JOIN "AGENTMASTER"."Stock_info" AS sin
+ON sto.stock_id = sin.stock_id
+WHERE field_id = (
+	SELECT field_id
+    FROM "AGENTMASTER"."Stock"
+    WHERE stock_id = 1
+) AND sin.stock_date = (
+	SELECT stock_date
+	FROM "AGENTMASTER"."Stock_info"
+	ORDER BY stock_date DESC
+	LIMIT 1
+) ORDER BY sin.trading_volume DESC
+
