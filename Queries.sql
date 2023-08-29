@@ -79,7 +79,7 @@ WHERE article_id = '{article_id}';
 
 
 /*2.2 해당 페이지에서 클릭한 기사의 요약문과 해당 기사의 원본 링크를 출력한다.*/
-SELECT summary.summary, article.article_id
+SELECT summary.article_summary, article.article_id
 FROM "AGENTMASTER"."Article" AS article
          LEFT JOIN "AGENTMASTER"."Article_summary" AS summary
                    ON article.article_id = summary.article_id
@@ -168,7 +168,7 @@ LIMIT 1;
 */
 
 /*4.1.2	오늘의 뉴스 부분에서 무작위로 신문사 이름과 기사 요약(전부)을 띄운다.*/
-SELECT article.company, summary.summary
+SELECT article.company, summary.article_summary
 FROM (SELECT article_id, company
       FROM "AGENTMASTER"."Article"
       ORDER BY RANDOM()
@@ -450,9 +450,9 @@ WHERE sinfo.stock_date = (SELECT stock_date
 
 
 /*5.2 디비에 저장되었던 검색한 키워드에 관한 기사들을 한줄 정도 띄운다.*/
-SELECT article_id, summary
+SELECT article_id, article_summary
 FROM (SELECT art.article_id,
-             artsum.summary,
+             artsum.article_summary,
              ROW_NUMBER() OVER (PARTITION BY art.article_id ORDER BY RANDOM()) AS rn
       FROM "AGENTMASTER"."Article" AS art
                JOIN "AGENTMASTER"."Article_summary" AS artsum
@@ -519,7 +519,7 @@ LIMIT 5;
 /*요약문을 하나만 출력할지 전체 출력할 지에 따라 쿼리문을 작성하였습니다.*/
 
 /*5.6.1 기사의 요약문을 전부 출력한다.*/
-SELECT article_id, summary
+SELECT article_id, article_summary
 FROM "AGENTMASTER"."Article_summary"
 WHERE article_id = '{article_id}';
 /*
@@ -529,7 +529,7 @@ WHERE article_id = '{article_id}';
 
 
 /*5.6.2 기사의 요약문을 하나만 출력한다.*/
-SELECT article_id, summary
+SELECT article_id, article_summary
 FROM "AGENTMASTER"."Article_summary"
 WHERE article_id = '{article_id}'
 ORDER BY RANDOM()
@@ -592,7 +592,7 @@ FROM "AGENTMASTER"."Stock" AS s
          JOIN
      "AGENTMASTER"."Stock_info" AS i
      ON s.stock_id = i.stock_id
-ORDER BY stock_date DESC, range DESC
+ORDER BY stock_date DESC, stock_range DESC
 LIMIT 10;
 
 
