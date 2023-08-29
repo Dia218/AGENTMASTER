@@ -150,10 +150,10 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Issue_summary"
 (
     Issue_summary_id bigserial    not null,
     issue_keyword    varchar(100) not null,
-    issue_summary    varchar(100) not null,
+    issue_summary    varchar(100),
 
     constraint Issue_summary_pkey primary key (Issue_summary_id),
-    constraint issue_summary_unique unique (issue_keyword, issue_summary)
+    constraint issue_summary_unique unique (issue_keyword)
 )
     tablespace pg_default;
 
@@ -242,10 +242,10 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_summary"
 (
     article_summary_id bigserial    not null,
     article_id         bigint       not null,
-    summary            varchar(100) not null,
+    article_summary    varchar(100) not null,
 
     constraint Article_summary_pkey primary key (article_summary_id),
-    CONSTRAINT Article_summary_unique UNIQUE (article_id, summary),
+    CONSTRAINT Article_summary_unique UNIQUE (article_id, article_summary),
     constraint Article_summary_news_id_fkey foreign key (article_id)
         references "AGENTMASTER"."Article" (article_id) match simple
         on update cascade
@@ -273,4 +273,4 @@ CREATE TABLE IF NOT EXISTS "AGENTMASTER"."Article_timeline"
     tablespace pg_default;
 
 alter table if exists "AGENTMASTER"."Article_timeline"
-  OWNER to postgres;
+    OWNER to postgres;
