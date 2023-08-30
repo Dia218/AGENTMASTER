@@ -9,6 +9,8 @@ import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
 import { useLocation } from 'react-router-dom';
 
+import io from 'socket.io-client';
+
 const GraphInput = [
     {
         name: 'day 1',
@@ -55,6 +57,7 @@ const GraphInput = [
 ];
 
 export default function SimTrade() {
+  
     const name = "종목명";
     const profitloss = "전일비";
     const price = "현재가";
