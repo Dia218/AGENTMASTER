@@ -66,12 +66,18 @@ export function UserInfoForm() {
       { id: 1, title: 'News Article 1', author: 'Author 1', date: '2023-07-28', url: 'https://example.com/article1' },
       { id: 2, title: 'News Article 2', author: 'Author 2', date: '2023-07-29', url: 'https://example.com/article2' },
       { id: 3, title: 'News Article 3', author: 'Author 3', date: '2023-07-30', url: 'https://example.com/article3' },
+      { id: 4, title: 'News Article 4', author: 'Author 4', date: '2023-07-31', url: 'https://example.com/article3' },
     ]);
-  
-    const handleArticleClick = (url) => {
-      window.open(url, '_blank');
+    const navigate = useNavigate();
+    const handleClick = (articleId) => {
+      navigate(`/newsDetail?id=${articleId}`, {
+        state: {
+          id: articleId
+        }
+      });
     };
   
+   
     return (
       <div className="userForm2">
         <h1>스크랩한 기사</h1>
@@ -86,8 +92,8 @@ export function UserInfoForm() {
           </thead>
           <tbody>
             {articles.map((article) => (
-              <tr key={article.id} className="news-article" onClick={() => handleArticleClick(article.url)}>
-                <td>{article.title}</td>
+              <tr key={article.id} className="news-article" onClick={() => handleClick(article.id)}>
+                <td >{article.title}</td>
                 <td>{article.author}</td>
                 <td>{article.date}</td>
                 <td><a href={article.url} target="_blank" rel="noopener noreferrer">기사 링크</a></td>

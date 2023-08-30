@@ -5,16 +5,20 @@
     margin-top: 20px;
     border-radius: 20px;
 }
-
-.simulStatusList_ul {
-    padding: 0px;
-    margin: 0px;
-    height: 210px;
-    list-style-type: none;
-    overflow-y: auto;
-    margin-left: 20px;
+.simulStatusList_tableContainer {
+    max-height: 210px;
+    overflow: auto;
+  }
+  .simulStatusList_table{
+   width: 350px;
+   text-align: center;
+  }
+.simulStatusList_row{
+    text-align: center;
 }
-
+.simulStatusList_title{
+    color: #0092f3;
+}
 .simulStatusList_li > div {
     height: 25px;
 }

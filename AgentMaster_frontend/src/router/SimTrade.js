@@ -7,7 +7,7 @@ import StockGraphChart from "../component/SimTrade/StockGraphChart";
 import StockInvestData from "../component/SimTrade/StockInvestData";
 import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
-
+import { useLocation } from 'react-router-dom';
 const GraphInput = [
     {
         name: 'day 1',
@@ -58,6 +58,9 @@ export default function SimTrade() {
     const price = "전일비";
     const rates = "현재가";
     const code = "등락률";
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const keywordFromURL = queryParams.get('keyword');
     const [siCategory,setSiCategory] = useState([]);
     const [longerThenFour,setLongerThenFour] = useState(false);
     const [scList,setScList] = useState([]);
@@ -76,7 +79,7 @@ export default function SimTrade() {
             <div className="StockTradeScene">
                 <div className="StockLeft">
                     <div className="StockGraph">
-                        <StockGraph stockName="종목명"/>
+                    <p className='simultradetitle'>{keywordFromURL}</p>
                         <div className="StockGraphChart">
                             <StockGraphChart GraphChartInput={GraphInput}/>
                         </div>
