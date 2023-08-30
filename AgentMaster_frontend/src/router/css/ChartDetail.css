@@ -9,7 +9,7 @@
   margin-top: 30px;
 }
 .chartDetail{
-  background-color: rgb(240, 240, 240);
+  background-color: white;
   min-height: 120vh;
 }
 .ChartDetailTop{
@@ -40,7 +40,7 @@ margin-left: 20px;
 top: 10px;
 }
  .custom-table {
-  width: 550px;
+  width: 570px;
   margin-top: 20px;
   border-collapse: collapse;
   margin-left: 120px;
@@ -123,6 +123,10 @@ top: 10px;
     margin-left: 10px;
     font-size: 20px;
     margin-top: 30px;
+  }
+  .chart_detail_search{
+    margin-left: 70px;
+    margin-top: -40px;
   }
 
   

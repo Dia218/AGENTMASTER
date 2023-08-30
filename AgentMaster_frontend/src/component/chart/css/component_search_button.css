@@ -1,0 +1,19 @@
+.componentSearchBtn {
+    position: absolute;
+    height:50px;
+    width: 50px;
+    right: 0%; 
+    
+}
+
+.componentSearchBtn > button {
+    position: relative;
+    height: 45px;
+    width: 45px;
+    top: 5px;
+    left: -5px;
+}
+.componentSearchBtnLink {
+    height: 45px;
+    width: 45px;
+}

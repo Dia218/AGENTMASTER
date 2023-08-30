@@ -1,0 +1,63 @@
+
+/*result*/
+.chartSearchResult {
+    position: absolute;
+    z-index: 1;
+    border: 2px solid #50B3FF;
+    background-color: white;
+    width: 570px;
+    height:280px;
+    border-radius: 20px 20px 10px 10px;
+    padding: 10px;
+    overflow: auto; /* 스크롤 생성 */
+}
+
+
+.chartSearchResult > ul {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.chartSearchResultFrame {
+    position: relative;
+    height: 55px;
+}
+
+.chartSearchResult_li:nth-child(2n -1){
+    background-color: white;
+}
+
+
+.chartSearchResult_li:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.chartSearchResult_div {
+    position: relative;
+    height: 50px;
+}
+
+.chartSearchResult_a {
+    text-decoration: none;
+    color: black;
+}
+
+.chartSearchResult_a > div {
+    float: left;
+    padding: 13px 0px;
+    font-weight: 1000;
+    overflow: hidden;
+}
+
+.chartSearchResultId {
+    width: 100px;
+}
+
+.chartSearchResultName {
+    width: 300px;
+}
+
+.chartSearchResultMarket {
+    width: 80px;
+}

@@ -1,9 +1,6 @@
 //주식페이지 메인
 import React, { useState, useEffect } from 'react';
-import Autosuggest from 'react-autosuggest';
 import io from 'socket.io-client';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import trophy from './icons/trophy.png'; 
 import rank1 from './icons/rank1.png'; 
@@ -16,189 +13,65 @@ import rank7 from './icons/rank7.png';
 import rank8 from './icons/rank8.png';
 import rank9 from './icons/rank9.png'; 
 import rank10 from './icons/rank10.png';
-const socket = io(); // 웹소켓 서버 주소
+
 
 export function News() {
-  const [news, setNews] = useState([]);
+  const navigate = useNavigate();
 
   const tempNews = [
     {
-      id: 1,
+      id: "01",
       description: '뉴스 기사 1',
     },
     {
-      id: 2,
+      id: "02",
       description: '뉴스 기사 2',
     },
     {
-      id: 3,
+      id: "03",
       description: '뉴스 기사 3',
     },
     {
-      id: 4,
+      id: "04",
       description: '뉴스 기사 4',
     },
     {
-      id: 5,
+      id: "05",
       description: '뉴스 기사 5',
     },
   ];
 
-  useEffect(() => {
-    const updateNews = (updatedNews) => {
-      setNews(updatedNews);
-    };
-
-    // 웹소켓으로 실시간 뉴스 업데이트 수신
-    socket.on('newsUpdate', updateNews);
-
-    // 임시값 설정
-    setNews(tempNews);
-
-    return () => {
-      socket.off('newsUpdate', updateNews); // 이벤트 리스너 해제
-      socket.disconnect(); // 컴포넌트가 언마운트될 때 웹소켓 연결 해제
-    };
-  }, [tempNews]);
+  const handleClick = (articleId) => {
+    navigate(`/newsDetail?id=${articleId}`, {
+      state: {
+        id: articleId
+      }
+    });
+  };
 
   return (
     <div className="chartNews">
       <h1 className="news-title">오늘의 뉴스</h1>
       <hr className="news-divider" />
       <div className="news-container">
-        {news.map((article) => (
-          <p key={article.id} className="news-description">
+        {tempNews.map((article) => (
+          <p
+            key={article.id}
+            className="news-description"
+            onClick={() => handleClick(article.id)}
+          >
             {article.description}
           </p>
         ))}
       </div>
-      
     </div>
   );
 }
 
-export function Search() {
-  const [value, setValue] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const navigate = useNavigate();
-  const getKeyword = async (inputValue) => {
-    try {
-      if (isNaN(inputValue)) {
-        const response = await fetch(
-          "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=YOUR_SERVICE_KEY&resultType=json&basDt=20230802&likeItmsNm=" +
-            encodeURIComponent(inputValue)
-        );
-        const data = await response.json();
-        return data.response.body.items.item;
-      } else {
-        const response = await fetch(
-          "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=YOUR_SERVICE_KEY&resultType=json&basDt=20230802&likeSrtnCd=" +
-            encodeURIComponent(inputValue)
-        );
-        const data = await response.json();
-        return data.response.body.items.item;
-      }
-    } catch (error) {
-      console.error('Error fetching keyword suggestions:', error);
-      return [];
-    }
-  };
 
-  const fetchSuggestions = async (inputValue) => {
-    const keywordSuggestions = await getKeyword(inputValue);
-    setSuggestions(keywordSuggestions);
-  };
 
-  const handleInputChange = (event, { newValue }) => {
-    setValue(newValue);
-    fetchSuggestions(newValue);
-  };
 
-  const handleSearch = () => {
-    if (value.trim() !== '') {
-      navigate(`/chartDetail?result=${encodeURIComponent(value)}`, {
-        state: {
-          keyword: value,
-        },
-      });
-    }
-  };
 
-  const onSuggestionSelected = (event, { suggestionValue }) => {
-    // Implement your suggestion selection logic here
-  };
-
-  return (
-    <div>
-      <div style={{ position: 'relative' }}>
-        <div className='ChartMianSearch' style={{ borderRadius: '10px', padding: '30px' }}>
-        <Autosuggest
-  suggestions={suggestions}
-  onSuggestionsFetchRequested={({ value }) => fetchSuggestions(value)}
-  onSuggestionsClearRequested={() => setSuggestions([])}
-  onSuggestionSelected={onSuggestionSelected}
-  getSuggestionValue={(suggestion) => suggestion}
-  renderSuggestion={(suggestion) => (
-    <div key={suggestion} style={{ margin: '5px 0', listStyle: 'none' }}>
-      {suggestion}
-    </div>
-  )}
-  inputProps={{
-    value: value,
-    onChange: handleInputChange,
-    style: {
-      border: '3px solid #9bccfb',
-      padding: '30px',
-      borderRadius: '10px',
-      width: '550px',
-      marginTop: '40px',
-      fontSize: '20px',
-      marginLeft: '60px',
-      listStyle: 'none',
-    },
-  }}
-/>
-        </div>
-        {suggestions.length > 0 && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '60%',
-              left: 50,
-              right: 0,
-              borderRadius: '5px',
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
-              padding: '10px',
-              width: '600px',
-              margin: 'auto',
-              listStyle: 'none',
-            }}
-          >
-            {suggestions.map((suggestion) => (
-              <div key={suggestion} style={{ margin: '5px 0', listStyle: 'none' }}>
-                {suggestion}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <IconButton
-        type="submit"
-        sx={{ p: '10px' }}
-        aria-label="search"
-        size="large"
-        style={{
-          position: 'absolute',
-          top: '170px',
-          marginLeft: '560px',
-        }}
-        onClick={handleSearch}
-      >
-        <SearchIcon fontSize="large" />
-      </IconButton>
-    </div>
-  );
-}
 
 
 //상한가, 하한가 등등 데이터 필요해서 웹소켓 코드로 변경
@@ -379,7 +252,15 @@ export function Table() {
               <React.Fragment key={item.rank}>
                 <tr>
                   <td> {item.rank}</td>
-                  <td >{item.name}</td>
+                  <td
+                      className="link-button"
+                      onClick={() => {
+                        navigate(`/ChartDetail?keyword=${item.name}`);
+                      }}
+                    >
+                      {item.name}
+                    
+                  </td>
                   <td>{item.price}</td>
                   <td>{item.change}</td>
                   <td>{item.changeRate}</td>
