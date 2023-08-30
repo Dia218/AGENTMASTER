@@ -14,8 +14,12 @@ function Scrap({setScrap,scrapCheck,setScrapCheck}){
 
     //아이콘을 클릭하면 실행하는 함수. 이후 저장 기능을 추가할 예정
     const clickIcon = () => {
-        scrapCheck ? setScrapCheck(false) : setScrapCheck(true);
-        setScrap(location.state.id);
+        if(sessionStorage.getItem("user")==null){
+            alert("로그인이 필요한 기능입니다!");
+        } else {
+            scrapCheck ? setScrapCheck(false) : setScrapCheck(true);
+            setScrap(location.state.id);
+        }
     };
 
     useEffect(()=>{

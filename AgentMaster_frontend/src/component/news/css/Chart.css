@@ -6,3 +6,7 @@
 .table {
     min-width: 100px;
 }
+
+.chart_td:hover {
+    cursor: pointer;
+}

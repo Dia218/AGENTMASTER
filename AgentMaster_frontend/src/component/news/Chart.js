@@ -3,11 +3,14 @@
 
 import { useTable } from "react-table";
 import './css/Chart.css';
+import { useLocation, useNavigate } from "react-router";
 
 function Chart({columns, data}) {
-    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
-
+    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({ columns, data });
+    const navigate = useNavigate();
+    const onClickTd = () => {
+        
+    }
     return (
         <div className="chart">
             <table className="table" {...getTableProps()}>
@@ -26,7 +29,7 @@ function Chart({columns, data}) {
                         return(
                             <tr {...row.getRowProps()}>
                                 {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                                    <td {...cell.getCellProps()} className="chart_td" onClick={onClickTd}>{cell.render("Cell")}</td>
                                 ))}
                             </tr>
                         );
