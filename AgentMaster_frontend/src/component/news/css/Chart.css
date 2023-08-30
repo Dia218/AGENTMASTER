@@ -1,12 +1,45 @@
-.chart {
-    margin-left: 10px;
-    margin-right: 10px;
+.newsMain_table {
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.table {
-    min-width: 100px;
+.newsMain_chart_titlehead_name {
+    border: 0px solid gray;
+    padding-left: 5px;
+    padding-right: 17vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px;
+    color: #0073e5;
 }
 
-.chart_td:hover {
-    cursor: pointer;
+.newsMain_chart_titlehead {
+    border: 0px solid gray;
+    padding-left: 5px;
+    padding-right: 7vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px;
+    color: #0073e5;
+}
+
+.newsMain_chart_row {
+    border-top: 1px solid #0092F3;
+    font-size: 17px;
+}
+
+.newsMain_chart_rowdata {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.newsMain_chart_a {
+    text-decoration: none;
+    color: black;
+}
+
+.newsMain_chart_a:hover {
+    text-decoration: underline;
+    color: black;
 }

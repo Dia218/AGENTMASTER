@@ -17,7 +17,6 @@ function App() {
       <Routes>
         <Route path='/' element={<NewsMain />} />
         <Route path='/newsMain' element={<NewsMain />} />
-        <Route path='/newsMain/chart' element={<Chart />} />
         <Route path='/searchList' element={<NewsSearch />} />
         <Route path='/newsDetail' element={<NewsDetail />} />
         <Route path='/chartMain' element={<ChartMain />} />

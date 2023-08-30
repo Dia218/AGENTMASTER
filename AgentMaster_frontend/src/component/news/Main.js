@@ -141,7 +141,7 @@ function Main() {
                         <div className='news_main'><MainNews news={news[4]}/></div>
                         <div className='stock_main'>
                             <Stack direction='horizontal' className='stock_title'>
-                                <div><h4>증시</h4></div>
+                                <div className='stock_title_text'>증시</div>
                                 <div className="ms-auto text-center moveToStock" onClick={handleClick}><h3>+</h3></div>
                             </Stack>
                             <Chart columns={columns} data={stockData} />

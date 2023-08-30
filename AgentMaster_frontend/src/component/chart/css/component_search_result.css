@@ -1,0 +1,63 @@
+
+/*result*/
+.componentSearchResult {
+    position: absolute;
+    border: 2px solid #50B3FF;
+    background-color: white;
+    width: 570px;
+    height:200px;
+    border-radius: 5px;
+    padding: 10px;
+    overflow: auto; 
+    margin-top: 50px;
+}
+
+
+.componentSearchResult > ul {
+    padding: 0px;
+    list-style-type: none;
+    margin-top: -60px;
+}
+
+.componentSearchResultFrame {
+    position: relative;
+    height: 55px;
+}
+
+.componentSearchResult_li:nth-child(2n -1){
+    background-color: white;
+}
+
+
+.componentSearchResult_li:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.componentSearchResult_div {
+    position: relative;
+    height: 50px;
+}
+
+.componentSearchResult_a {
+    text-decoration: none;
+    color: black;
+}
+
+.componentSearchResult_a > div {
+    float: left;
+    padding: 13px 0px;
+    font-weight: 1000;
+    overflow: hidden;
+}
+
+.componentSearchResultId {
+    width: 100px;
+}
+
+.componentSearchResultName {
+    width: 300px;
+}
+
+.componentSearchResultMarket {
+    width: 80px;
+}
