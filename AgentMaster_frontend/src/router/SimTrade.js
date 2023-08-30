@@ -8,7 +8,9 @@ import StockInvestData from "../component/SimTrade/StockInvestData";
 import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
 import { useLocation } from 'react-router-dom';
+
 import io from 'socket.io-client';
+
 const GraphInput = [
     {
         name: 'day 1',
