@@ -53,12 +53,14 @@ function Main() {
     //이후 백엔드에게 요청해서 주식 데이터를 담을 부분.
     const data = useMemo(() => [
             {
+            "code":"000000",
             "name": "주식 이름1",
             "price": "1294.00",
             "compare": "+101",
             "Fluctuations": "+8.47%"
             },
             {
+            "code":"000001",
             "name": "주식 이름2",
             "price": "1567.00",
             "compare": "+84",
