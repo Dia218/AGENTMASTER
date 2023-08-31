@@ -80,10 +80,7 @@ export default function SimTrade() {
             SimilarStockProfitloss={v.profitloss} SimilarStockrates={v.rates}/>)));
     },[siCategory]);
 
-    const socketIo = io.connect();
     useEffect(()=>{
-        socketIo.on();
-
         setStockInvestData({"CurrentPrice":9000,"DaysRange":"+0.8","Volume":12663533,"OpenPrice":7500,"HighPrice":11000,"LowPrice":9000,
         "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000});
         setStockInvestInput({"AvailableAsset":12523000,"Amount":0});
