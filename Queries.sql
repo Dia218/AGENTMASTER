@@ -461,7 +461,7 @@ SELECT art.article_id, art.title, art.company
 FROM "AGENTMASTER"."Stock" AS sto
          INNER JOIN "AGENTMASTER"."Article" AS art
                     ON sto.field_id = art.field_id
-WHERE sto.stock_id = '1'
+WHERE sto.stock_id = '{stock_id}'
 ORDER BY art.last_pub DESC
 LIMIT 5;
 /*
