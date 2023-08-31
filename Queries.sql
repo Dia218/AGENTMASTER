@@ -340,7 +340,7 @@ LIMIT 5;
 출력되는 정보는 종목코드, 종목명, 분야명, 주가, 전일비, 등락률 순서로 출력됩니다.
 */
 
-/*4.3.6 거래량*/
+/*4.3.5 거래량*/
 SELECT sto.stock_code,
        sto.stock_name,
        sto.field_name,
