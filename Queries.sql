@@ -152,11 +152,17 @@ WHERE title LIKE '%{keyword}%'
 
 /*4 주식 메인 페이지*/
 
-/*4.1 뉴스 미리보기 정보 랜덤 5개 SELECT*/
+/*4.1 최신 뉴스 미리보기 정보 랜덤 5개 SELECT*/
 SELECT arti.company, summ.article_summary
 FROM "AGENTMASTER"."Article" AS arti
          INNER JOIN "AGENTMASTER"."Article_summary" AS summ
                     ON arti.article_id = summ.article_id
+WHERE arti.last_pub = (
+	SELECT last_pub
+	FROM "AGENTMASTER"."Article"
+	ORDER BY last_pub DESC
+	LIMIT 1
+)
 ORDER BY RANDOM()
 LIMIT 5;
 /*
@@ -451,11 +457,11 @@ LIMIT 5;
 
 
 /*5.5.2 최신 순으로 5튜플 출력한다.*/
-SELECT art.title
+SELECT art.article_id, art.title, art.company
 FROM "AGENTMASTER"."Stock" AS sto
          INNER JOIN "AGENTMASTER"."Article" AS art
                     ON sto.field_id = art.field_id
-WHERE sto.stock_id = '{stock_id}'
+WHERE sto.stock_id = '1'
 ORDER BY art.last_pub DESC
 LIMIT 5;
 /*
