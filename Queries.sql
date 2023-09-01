@@ -143,7 +143,10 @@ WHERE user_id = '{customer_id}'
 SELECT article_id, company, first_pub, last_pub, title
 FROM "AGENTMASTER"."Article"
 WHERE title LIKE '%{keyword}%'
-   OR issue_keyword LIKE '%{keyword}%';
+   OR (SELECT issue_keyword
+       FROM "AGENTMASTER"."Issue_summary"
+       WHERE "AGENTMASTER"."Issue_summary".Issue_summary_id =
+             "AGENTMASTER"."Article".Issue_summary_id) LIKE '%{keyword}%';
 /*
 {keyword}에 값을 넣어주세요
 기사 이슈 키워드에 {keyword}가 포함된 기사와, 제목애 {keyword}가 포함된 기사의 기사 id와 신문사 이름, 게재일, 제목을 출력합니다.
@@ -157,12 +160,10 @@ SELECT arti.company, summ.article_summary
 FROM "AGENTMASTER"."Article" AS arti
          INNER JOIN "AGENTMASTER"."Article_summary" AS summ
                     ON arti.article_id = summ.article_id
-WHERE arti.last_pub = (
-	SELECT last_pub
-	FROM "AGENTMASTER"."Article"
-	ORDER BY last_pub DESC
-	LIMIT 1
-)
+WHERE arti.last_pub = (SELECT last_pub
+                       FROM "AGENTMASTER"."Article"
+                       ORDER BY last_pub DESC
+                       LIMIT 1)
 ORDER BY RANDOM()
 LIMIT 5;
 /*
@@ -409,7 +410,7 @@ ORDER BY sin.stock_date DESC;
 */
 
 
-/*5.2 디비에 저장되었던 검색한 키워드에 관한 기사들을 한줄 정도 띄운다. - 수정 필요*/
+/*5.2 디비에 저장되었던 검색한 키워드에 관한 기사들을 한줄 정도 띄운다. - 수정 필요
 SELECT article_id, article_summary
 FROM (SELECT art.article_id,
              artsum.article_summary,
@@ -419,6 +420,17 @@ FROM (SELECT art.article_id,
                     ON art.article_id = artsum.article_id
       WHERE art.issue_keyword LIKE '%{keyword}%') AS random_summaries
 WHERE rn = 1;
+*/
+SELECT "AGENTMASTER"."Article".article_id, article_summary
+FROM "AGENTMASTER"."Article"
+         JOIN "AGENTMASTER"."Article_summary"
+              ON "AGENTMASTER"."Article_summary".article_id = "AGENTMASTER"."Article".article_id
+WHERE (SELECT issue_summary
+       FROM "AGENTMASTER"."Issue_summary"
+       WHERE "Article".issue_summary_id = "AGENTMASTER"."Article".issue_summary_id)
+          LIKE '{keyword}'
+ORDER BY RANDOM()
+LIMIT 1;
 /*
 {keyword}에 값을 넣어주세요
 고객이 입력한 키워드가 기사.이슈_키워드에 포함된 기사들의 요약문을 랜덤하게 1줄 출력합니다.
@@ -711,63 +723,57 @@ WHERE simulation_id = '{simulation_id}';
 /*8.5 선택 종목 모의투자 자산 SELECT*/
 SELECT u.simul_money, s.simul_holdings
 FROM "AGENTMASTER"."Simulation" AS s
-INNER JOIN "AGENTMASTER"."User" AS u
-ON s.user_id = u.user_id
+         INNER JOIN "AGENTMASTER"."User" AS u
+                    ON s.user_id = u.user_id
 WHERE simulation_id = '{simulation_id}';
 
 
 /*8.6 모의투자 거래 결과 INSERT AND UPDATE*/
-INSERT INTO "AGENTMASTER"."Simulation" AS simul (
-	user_id,
-	stock_id,
-	simul_return,
-	simul_range,
-	simul_holdings,
-	purchase_amount,
-	average_price
-)
-VALUES(
-	{user_id},
-	{stock_id},
-	{simul_return},
-	{simul_range},
-	{simul_holdings},
-	{purchase_amount},
-	{average_price}
-)
+INSERT INTO "AGENTMASTER"."Simulation" AS simul (user_id,
+                                                 stock_id,
+                                                 simul_return,
+                                                 simul_range,
+                                                 simul_holdings,
+                                                 purchase_amount,
+                                                 average_price)
+VALUES ('{user_id}',
+        '{stock_id}',
+        '{simul_return}',
+        '{simul_range}',
+        '{simul_holdings}',
+        '{purchase_amount}',
+        '{average_price}')
 ON CONFLICT(user_id, stock_id)
-DO UPDATE SET
-	simul_return = {simul_return}, 
-	simul_range = {simul_range},
-	simul_holdings = {simul_holdings},
-	purchase_amount = {purchase_amount},
-	average_price = {average_price}
-WHERE simul.user_id = {user_id} AND simul.stock_id = {stock_id};
+    DO UPDATE SET simul_return    = '{simul_return}',
+                  simul_range     = '{simul_range}',
+                  simul_holdings  = '{simul_holdings}',
+                  purchase_amount = '{purchase_amount}',
+                  average_price   = '{average_price}'
+WHERE simul.user_id = '{user_id}'
+  AND simul.stock_id = '{stock_id}';
 
 
 /*8.7 사용자 자산 정보 UPDATE*/
 UPDATE "AGENTMASTER"."User"
-SET total_money = {total_money},
-    simul_money = {simul_money},
-    stock_money = {stock_money},
-    total_return = {total_return},
-    rank_range = {rank_range}
-WHERE user_id = {user_id};
+SET total_money  = '{total_money}',
+    simul_money  = '{simul_money}',
+    stock_money  = '{stock_money}',
+    total_return = '{total_return}',
+    rank_range   = '{rank_range}'
+WHERE user_id = '{user_id}';
 
 
 /*8.8 동일 분야 종목 주식 정보 거래량 기준 상위 4개 SELECT*/
 SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
 FROM "AGENTMASTER"."Stock" AS sto
-INNER JOIN "AGENTMASTER"."Stock_info" AS sin
-ON sto.stock_id = sin.stock_id
-WHERE field_id = (
-	SELECT field_id
-    FROM "AGENTMASTER"."Stock"
-    WHERE stock_id = 1
-) AND sin.stock_date = (
-	SELECT stock_date
-	FROM "AGENTMASTER"."Stock_info"
-	ORDER BY stock_date DESC
-	LIMIT 1
-) ORDER BY sin.trading_volume DESC
+         INNER JOIN "AGENTMASTER"."Stock_info" AS sin
+                    ON sto.stock_id = sin.stock_id
+WHERE field_id = (SELECT field_id
+                  FROM "AGENTMASTER"."Stock"
+                  WHERE stock_id = 1)
+  AND sin.stock_date = (SELECT stock_date
+                        FROM "AGENTMASTER"."Stock_info"
+                        ORDER BY stock_date DESC
+                        LIMIT 1)
+ORDER BY sin.trading_volume DESC
 
