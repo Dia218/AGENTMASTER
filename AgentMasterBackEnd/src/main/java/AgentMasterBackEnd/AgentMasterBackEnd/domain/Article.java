@@ -11,6 +11,7 @@ public class Article {
     private String repoter;
     private String company;
     private String scrap;
+    private String summary;
     private String flowSummary;
     private String fieldName;
     private Date firstPub;
