@@ -792,7 +792,7 @@ WHERE article_id NOT IN (
 
 /*9.2 [INSERT] 기사 요약문의 저장*/
 
-INSERT article_id, article_summary INTO "AGENTMASTER"."Article_summary" VALUES(
+INSERT INTO "AGENTMASTER"."Article_summary"(article_id, article_summary) VALUES(
     {article_id},
     '{article_summary}'
 );
