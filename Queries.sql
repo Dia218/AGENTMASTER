@@ -771,3 +771,30 @@ WHERE field_id = (
 	LIMIT 1
 ) ORDER BY sin.trading_volume DESC
 
+
+/*9 기사 요약문*/
+
+/*9.1 [SELECT] 기사 요약문이 없는 기사의 본문 필요*/
+
+SELECT article_id, body
+FROM "AGENTMASTER"."Article"
+WHERE article_id NOT IN (
+    SELECT DISTINCT article_id
+    FROM "AGENTMASTER"."Article_summary"
+);
+
+
+/*9.2 [INSERT] 기사 요약문의 저장*/
+
+INSERT article_id, summary INTO "AGENTMASTER"."Article_summary" VALUES(
+    {article_id},
+    '{summary}'
+);
+
+
+/*9.3 [UPDATE] 기사 요약문의 수정*/
+
+UPDATE "AGENTMASTER"."Article_summary"
+SET
+    summary = '{New summary}'
+WHERE article_id = {article_id} AND summary = '{Previous summary}';
