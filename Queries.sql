@@ -792,9 +792,9 @@ WHERE article_id NOT IN (
 
 /*9.2 [INSERT] 기사 요약문의 저장*/
 
-INSERT article_id, summary INTO "AGENTMASTER"."Article_summary" VALUES(
+INSERT article_id, article_summary INTO "AGENTMASTER"."Article_summary" VALUES(
     {article_id},
-    '{summary}'
+    '{article_summary}'
 );
 
 
@@ -802,5 +802,5 @@ INSERT article_id, summary INTO "AGENTMASTER"."Article_summary" VALUES(
 
 UPDATE "AGENTMASTER"."Article_summary"
 SET
-    summary = '{New summary}'
-WHERE article_id = {article_id} AND summary = '{Previous summary}';
+    article_summary = '{new_article_summary}'
+WHERE article_id = {article_id} AND article_summary = '{previous_article_summary}';
