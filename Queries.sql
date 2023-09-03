@@ -648,7 +648,7 @@ SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
            ON sto.stock_id = sin.stock_id
  WHERE field_id = (SELECT field_id FROM "AGENTMASTER"."Stock" WHERE stock_id = 1)
    AND sin.stock_date = (SELECT stock_date FROM "AGENTMASTER"."Stock_info" ORDER BY stock_date DESC LIMIT 1)
- ORDER BY sin.trading_volume DESC
+ ORDER BY sin.trading_volume DESC;
 
 
 /*9 기사 요약문*/
