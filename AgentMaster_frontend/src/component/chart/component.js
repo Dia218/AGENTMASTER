@@ -1,51 +1,50 @@
 //주식 상세 페이지
 import React, { useState, useRef,useEffect} from 'react';
-import socketIOClient from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import ReactApexChart from 'react-apexcharts';
-
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-
+//그래프 아래 관련 뉴스 띄우는 부분
 export function ArticleList() {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [articles, setArticles] = useState([]); // 초기값 빈 배열로 설정
-  const [isSearchVisible, setIsSearchVisible] = useState(true);
-
+ 
+/*
   useEffect(() => {
-    const socket = socketIOClient('/'); // 소켓 연결
-
-    // 서버로부터 업데이트된 데이터 수신
-    socket.on('articles', (data) => {
-      setArticles(data);
-    });
-
     // 임시 데이터
     const temporaryData = [
-      { id: 1, title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
-      { id: 2, title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
-      { id: 3, title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
-      { id: 4, title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
+      { id: 1, publisher: '신문사1', title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
+      { id: 2, publisher: '신문사2', title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
+      { id: 3, publisher: '신문사3', title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
+      { id: 4, publisher: '신문사4', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
+      { id: 5, publisher: '신문사5', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
     ];
     setArticles(temporaryData);
-
-    return () => {
-      socket.disconnect(); // 컴포넌트가 언마운트될 때 소켓 연결 해제
-    };
   }, []);
+*/
+
+  useEffect(() => {
+    // Axios를 사용하여 데이터를 백엔드에서 요청
+    axios.get('http://localhost:8080/articles') //url 임시 설정
+      .then((response) => {
+        setArticles(response.data.articles); // 받아온 데이터의 articles 필드를 articles 상태로 설정
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); // 빈 배열을 전달하여 한 번만 데이터를 가져오도록 설정
 
   const openModal = (article) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
-    setIsSearchVisible(false); // 모달 열 때 검색창 숨김
   };
 
   const closeModal = () => {
     setSelectedArticle(null);
     setIsModalOpen(false);
-    setIsSearchVisible(true); // 모달 닫을 때 검색창 보이게 설정
   };
 
   const navigate = useNavigate();
@@ -57,15 +56,15 @@ export function ArticleList() {
     <div className="Article">
       <ul style={{ listStyle: 'none', padding: 10 }}>
         {articles.map((article) => (
-          <li key={article.id}>
+          <li key={article.articleId}>
             <p className="article-title" onClick={() => openModal(article)}>
-              {article.title}
+              {`[${article.articleId}]  ${article.articleTitle}`} 
             </p>
             <hr className="article-bottom" />
           </li>
         ))}
       </ul>
-       <Modal
+      <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         className="Custom"
@@ -81,10 +80,15 @@ export function ArticleList() {
                 X
               </p>
             </div>
-            <h2>{selectedArticle.title}</h2>
-            <div className="ModalBox">
-              <p className="ModalText">{selectedArticle.summary}</p>
-            </div>
+            {selectedArticle.articleContent ? (
+              <div className="ModalBox">
+                <p className="ModalText">{selectedArticle.articleContent}</p>
+              </div>
+            ) : (
+              <div className="ModalBox">
+                <p className="ModalText">기사 내용이 없습니다.</p>
+              </div>
+            )}
           </div>
         )}
       </Modal>
@@ -92,78 +96,80 @@ export function ArticleList() {
   );
 }
 
-
 export function Table() {
-  const data = [
-    { id: 1, name: '전일', price: 7730 },
-    { id: 2, name: '고가', price: 9630 },
-    { id: 3, name: '거래량', price: 39193815 },
-    { id: 4, name: '시가', price: 7930 },
-    { id: 5, name: '저가', price: 7930 },
-    { id: 6, name: '거래대금', price: '349,695백만' },
-  ];
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Axios를 사용하여 데이터를 백엔드에서 요청
+    axios.get('http://localhost:8080/StockData') //url 임시 설정
+      .then((response) => {
+        // 요청이 성공하면 데이터 업데이트
+        setData(response.data);
+        setLoading(false); // 로딩 완료
+      })
+      .catch((err) => {
+        // 요청이 실패하면 에러 처리
+        setError(err);
+        setLoading(false); // 로딩 완료
+      });
+  }, []);
 
   return (
     <div>
       <table className="custom-table">
         <tbody>
           <tr>
-            <th className="divider">전일</th>
-            <th className="divider">고가</th>
-            <th className="divider">거래량</th>
-          </tr>
-          <tr>
-            <td>{data[0].price}</td>
-            <td>{data[1].price}</td>
-            <td>{data[2].price}</td>
-          </tr>
-          <tr>
+            <th className="divider">전일비</th>
             <th className="divider">시가</th>
-            <th className="divider">저가</th>
+            <th className="divider">금일 최고가</th>
+          </tr>
+          <tr>
+            <td>{data.stockDiff}</td>
+            <td>{data.stockStartPrice}</td>
+            <td>{data.stockhighPrice}</td>
+          </tr>
+          <tr>
+            <th className="divider">금일 최저가</th>
+            <th className="divider">거래량</th>
             <th className="divider">거래대금</th>
           </tr>
           <tr>
-            <td>{data[3].price}</td>
-            <td>{data[4].price}</td>
-            <td>{data[5].price}</td>
+            <td>{data.stocklowPrice}</td>
+            <td>{data.stockTradingAmount}</td>
+            <td>{data.stockTradingTotalPrice}</td>
           </tr>
         </tbody>
       </table>
     </div>
   );
 }
-//웹소켓  Rechart1()
+
+
 export function Rechart1() {
-  const stockData = [
-    {
-      "stockId": "stockId1",
-      "stockName": "name1",
-      "stockField": "field",
-      "stockDate": "2023-08-10",
-      "stockPrice": 11000,
-      "stockDiff": 1000,
-      "stockRange": 5.0
-    },
-    {
-      "stockId": "stockId1",
-      "stockName": "name1",
-      "stockField": "field",
-      "stockDate": "2023-08-11",
-      "stockPrice": 12000,
-      "stockDiff": 1000,
-      "stockRange": 5.0
-    },
-    // ... 기타 데이터 항목 ...
-    {
-      "stockId": "stockId1",
-      "stockName": "name1",
-      "stockField": "field",
-      "stockDate": "2023-08-19",
-      "stockPrice": 20000,
-      "stockDiff": 1000,
-      "stockRange": 5.0
-    }
-  ];
+const [stockData, setStockData] = useState([]);
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState(null);
+useEffect(() => {
+  // 데이터 요청 시작 시 로딩 상태 설정
+  setLoading(true);
+  // 에러 초기화
+  setError(null);
+
+  // Axios를 사용하여 데이터 요청
+  axios.get('http://localhost:8080/ChartData') 
+    .then((response) => {
+      // 요청이 성공하면 데이터 업데이트
+      setStockData(response.data);
+      setLoading(false); // 로딩 완료
+    })
+    .catch((err) => {
+      // 요청이 실패하면 에러 처리
+      setError(err);
+      setLoading(false); // 로딩 완료
+    });
+}, []);
 
   const seriesData = [{
     name: "종목가",
@@ -224,16 +230,19 @@ export function Rechart1() {
 
   return (
     <div className='Rechart1'>
+    
       <ReactApexChart options={options} series={seriesData} type="line" height={350} />
-    </div>
+   
+  </div>
   );
 }
 
-export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
+export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
   const location = useLocation();
   const [keyword, setKeyword] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
-
+  const [chartData, setChartData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
     if (location.state) {
@@ -247,21 +256,41 @@ export function Rechart2({ keywordFromChartMain ,keywordFromSearch2}) {
     setSearchKeyword(keywordFromSearch2); // 검색어 변경 시 상태 업데이트
   }, [keywordFromSearch2]);
 
+  useEffect(() => {
+    // Axios를 사용하여 차트 데이터를 백엔드에서 요청
+    axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
+      .then((response) => {
+        setChartData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching chart data:', error);
+      });
 
+    // Axios를 사용하여 다른 주식 데이터를 백엔드에서 요청
+    // 이 부분에서 다른 주식 데이터를 요청하고 응답을 setSearchData를 통해 저장합니다.
+    axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromSearch2}`)
+      .then((response) => {
+        setSearchData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching search data:', error);
+      });
+  }, [keywordFromChartMain]);
 
   const seriesData = [
     {
       name: [keywordFromChartMain],
-      data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8],
+      data: chartData.map((data) => data.stockPrice),
     },
   ];
 
-  if (keywordFromSearch2 === '카카오') {
+  if (searchData.length > 0) {
     seriesData.push({
-      name: [keywordFromSearch2],
-      data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51],
+      name: [ keywordFromSearch2],
+      data: searchData.map((data) => data.stockPrice),
     });
   }
+
 
   const options = {
     chart: {
