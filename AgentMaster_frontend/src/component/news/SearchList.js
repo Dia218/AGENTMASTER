@@ -4,10 +4,10 @@
 
 import { useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { io } from "socket.io-client";
 import SearchItem from "./SearchItem";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./css/SearchList.css"
+import axios from "axios";
 
 function SearchList(){
     //임시 데이터
@@ -17,35 +17,33 @@ function SearchList(){
     const date = "모월 모일";
     const id = "00";
 
-    const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
     const [items, setItems] = useState([]);
     const [page, setPage] = useState(0);
     const [lastPage,setLastPage] = useState();
     const offset = searchParams.get('offset');
     const limit = searchParams.get('limit');
-    //소켓 연결
-    const socketIo = io.connect('');
 
     //location을 통해 keyword를 받아와 저장하고, 저장한 키워드로 searchResult를 요청한다.
     //받아온 리스트를 map 함수를 이용해 resultList에 저장하고 출력한다.
     const [searchResult, setSearchResult] = useState([]);
-    const [resultList, setResultList] = useState([]);
     const [checkEmpty,setCheckEmpty] = useState(false);
     const [keyword,setKeyword] = useState("");
 
-    //검색을 통해 url이 변경되고 그에 따른 keyword가 변경될때마다 실행하여 keyword를 받아온다.
-    useEffect(()=>{
-        setKeyword(searchParams.get('result'));
-        setPage(parseInt(searchParams.get('page')))
-    },[searchParams]);
+    //GET함수를 이용해 백엔드에 유저가 입력한 keyword를 전송하고 검색 결과를 전달받아 state에 저장하는 함수
+    const getSearchList = async() => {
+        try {
+            /*const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
+            setSearchResult(responseSearchList);*/
+            const responseSearchList = await searchData();
+            setSearchResult(responseSearchList);
+        } catch (error) {
+            console.error('Error fetching searchList data:', error);
+        }
+    }
 
-    useEffect(() => {
-        //서버로 keyword 데이터 요청
-        socketIo.emit('sendKeyword',{ keyword : keyword });
-
-        //임시 데이터 추가
-        setSearchResult([{id,title,publisher,name,date,keyword},
+    async function searchData() {
+        const json = [{id,title,publisher,name,date,keyword},
             {"id":"01",title,publisher,name,date,keyword},
             {"id":"02",title,publisher,name,date,keyword},
             {"id":"03",title,publisher,name,date,keyword},
@@ -57,18 +55,24 @@ function SearchList(){
             {"id":"09",title,publisher,name,date,keyword},
             {"id":"10",title,publisher,name,date,keyword},
             {"id":"11",title,publisher,name,date,keyword},
-            {"id":"12",title,publisher,name,date,keyword},]);
+            {"id":"12",title,publisher,name,date,keyword},];
+        
+        return json;
+    }
+
+    //검색을 통해 url이 변경되고 그에 따른 keyword가 변경될때마다 실행하여 keyword를 받아온다.
+    useEffect(()=>{
+        setKeyword(searchParams.get('result'));
+        setPage(parseInt(searchParams.get('page')))
+    },[searchParams]);
+    //keyword가 변경될 때 마다 백엔드로부터 검색 결과를 받아온다.
+    useEffect(() => {
+        getSearchList();
         //setSearchResult([]);
         //setSearchResult([{id,title,publisher,name,date,keyword},])
     },[keyword]);
 
-    useEffect(()=>{
-        //서버로부터 데이터 수신후 저장
-        socketIo.on('callSearchResult',(data) => {
-            setSearchResult([data]);
-        });
-    },[socketIo])
-
+    //페이지가 변경되거나 새로 검색 결과를 불러오면 데이터를 slice해서 item에 저장한다. 이후 데이터의 크기에 따라 맨 마지막 페이지를 저장한다.
     useEffect(() => {
         // Simulate fetching data from an API
         const fetchData = async () => {
@@ -77,22 +81,12 @@ function SearchList(){
         };
         fetchData();
         setLastPage(Math.floor(searchResult.length / 10)+1);
-        console.log(lastPage);
-    }, [page,searchResult]);
-
-    //키워드가 변경되어 searchResult가 변경될때마다 다시 실행하여 resultList를 다시 저장한다.
-    //각 기사의 전체 데이터(id, 제목, 기자 이름 등)을 props로 넘겨준다.
-    useEffect(()=>{
-        setResultList(items.map((v) => (
-            <SearchItem key={v.id} props={v}/>
-            )
-        ));
         if(searchResult.length<1) {
             setCheckEmpty(true);
         } else {
             setCheckEmpty(false);
         }
-    },[searchResult]);
+    }, [page,searchResult]);
 
     const handleNextPage = () => {
         const nextPage = page + 1;

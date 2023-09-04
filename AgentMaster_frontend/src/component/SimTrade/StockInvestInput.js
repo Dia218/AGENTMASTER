@@ -1,16 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import './css/StockInvestInput.css';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
-const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, setStockInvestInput, AvailableAsset, Amount, CurrentPrice}) => {
+const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, CurrentPrice, stockName}) => {
     const navigate = useNavigate();
     const onClickCancel = () => {
         navigate(`/SimulMain`);
     } 
+    const url = "http://localhost:8080/simulTrade/sellAll";
+    const data = {
+        'userId':sessionStorage.getItem("user"),
+        'stockName':stockName,
+        'currentPrice':CurrentPrice,
+    };
+    const config = {"Content-Type": 'application/json'};
     const onClickSA = () => {
         const reset = window.confirm("전체 매도 하시겠습니까?");
         if(reset === true) {
-            setStockInvestInput({"AvailableAsset":(AvailableAsset+(Amount*CurrentPrice)),"Amount":0});
+            //axios.post(url,data,config);
+            //setStockInvestInput({"AvailableAsset":(AvailableAsset+(Amount*CurrentPrice)),"simulHoldingsnum":0});
+            alert("전체 매도 되었습니다!");
+            navigate(`/SimulMain`);
         }
     }
     return (
@@ -35,10 +46,27 @@ const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, se
         </div>
     );
 };
-export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, setStockInvestInput}) {
+export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, stockName}) {
     const [SwitchActive, setSwitch] = useState(true);
     const [availableAsset, setAvailableAsset] = useState();
     const [amount, setAmount] = useState();
+    const navigate = useNavigate();
+    
+    const urlSell = "http://localhost:8080/simulTrade/sell";
+    const urlBuy = "http://localhost:8080/simulTrade/Buy";
+    const dataSell = {
+        'userId':sessionStorage.getItem("user"),
+        'stockName':stockName,
+        'currentPrice':CurrentPrice,
+        'amount':amount
+    }
+    const dataBuy = {
+        'userId':sessionStorage.getItem("user"),
+        'stockName':stockName,
+        'currentPrice':CurrentPrice,
+        'amount':amount
+    }
+    const config = {"Content-Type": 'application/json'};
 
     const handleAA = (e) => {
         setAvailableAsset(e.target.value);
@@ -54,7 +82,10 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
         } else if(parseInt(amount)<1||amount==null||amount==="") {
             alert("매수량을 입력해주세요.");
         } else {
-            setStockInvestInput({"AvailableAsset":(AvailableAsset-(availableAsset*amount)),"Amount":(Amount+parseInt(amount))});
+            //axios.post(urlBuy,dataBuy,config);
+            //setStockInvestInput({"AvailableAsset":(AvailableAsset-(availableAsset*amount)),"simulHoldingsnum":(Amount+parseInt(amount))});
+            alert("선택하신 수량만큼 매수되었습니다.");
+            navigate(`/SimulMain`);
         }
     }
     const onClickSell = () => {
@@ -63,7 +94,10 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
         } else if(parseInt(amount)<1||amount==null||amount==="") {
             alert("매도량을 입력해주세요.");
         } else {
-            setStockInvestInput({"AvailableAsset":(AvailableAsset+(amount*CurrentPrice)),"Amount":(Amount-amount)});
+            //axios.post(urlSell,urlSell,config);
+            //setStockInvestInput({"AvailableAsset":(AvailableAsset+(amount*CurrentPrice)),"simulHoldingsnum":(Amount-amount)});
+            alert("선택하신 수량만큼 매도되었습니다.");
+            navigate(`/SimulMain`);
         }
     }
 
@@ -85,10 +119,8 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
             <StockInvestInputSwitch
                 StockInvestInputSwitchActive= {SwitchActive}
                 handleToggle={()=>setSwitch(!SwitchActive)}
-                setStockInvestInput={setStockInvestInput}
-                AvailableAsset={AvailableAsset}
-                Amount={Amount}
                 CurrentPrice={CurrentPrice}
+                stockName={stockName}
             />
             <div className="StockInvestInputData">
                 <div>
