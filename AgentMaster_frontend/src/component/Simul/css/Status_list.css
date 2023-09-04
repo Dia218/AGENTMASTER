@@ -10,7 +10,7 @@
     overflow: auto;
   }
   .simulStatusList_table{
-   width: 350px;
+   width: 450px;
    text-align: center;
   }
 .simulStatusList_row{
@@ -42,4 +42,8 @@
 .simulStatusList_a {
     color: black;
     text-decoration: none;
+    
+}
+.simulStatusList_name{
+    width: 150px;
 }

@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Button, Container, Stack } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import { HomeFilled } from '@ant-design/icons';
+import { HomeFilled, HomeTwoTone } from '@ant-design/icons';
 
 function Header(){
     const navigate = useNavigate();
