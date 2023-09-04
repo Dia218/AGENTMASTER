@@ -14,7 +14,12 @@
     background-color: #95d6ff;
     border-radius: 20px;
   }
-  
+  .news-summary {
+    width: 400px; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
   .news-title {
     color: white;
     margin-left: 15px;
@@ -22,14 +27,16 @@
   }
   .news-container {
     height: 300px;
-    width: 400px;
+    width: 550px;
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: white;
+    overflow: hidden;
+    overflow-y: scroll;
   }
   .news-divider {
     border-top: 5px solid white; 
@@ -91,8 +98,7 @@
     gap: 100px;
   }
   .table-container{
-    /*width: 2000px;
-     해당 부분으로 인해 가로길이가 너무 늘어나서 생략함(생략해도 문제 없음)*/
+   
     margin-top: 10px;
 
   }
@@ -104,7 +110,13 @@
     width: 180px;
     height: 50px;
   }
- 
+  .top-list td{
+    text-align: center;
+  }
+  .top-list tr {
+    height: 1rem; 
+    
+  }
   .thin-border{
     border-top: 2px solid #0092f3;
   }

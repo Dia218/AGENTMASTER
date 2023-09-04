@@ -10,6 +10,8 @@ import Header from '../component/Header';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
+import io from 'socket.io-client';
+
 const GraphInput = [
     {
         name: 'day 1',

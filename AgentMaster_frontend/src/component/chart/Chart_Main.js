@@ -1,6 +1,5 @@
 //주식페이지 메인
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import trophy from './icons/trophy.png'; 
 import rank1 from './icons/rank1.png'; 
@@ -13,222 +12,117 @@ import rank7 from './icons/rank7.png';
 import rank8 from './icons/rank8.png';
 import rank9 from './icons/rank9.png'; 
 import rank10 from './icons/rank10.png';
+import axios from 'axios';
 
-
+//오늘의 뉴스
 export function News() {
   const navigate = useNavigate();
+  const [newsData, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const tempNews = [
-    {
-      id: "01",
-      description: '뉴스 기사 1',
-    },
-    {
-      id: "02",
-      description: '뉴스 기사 2',
-    },
-    {
-      id: "03",
-      description: '뉴스 기사 3',
-    },
-    {
-      id: "04",
-      description: '뉴스 기사 4',
-    },
-    {
-      id: "05",
-      description: '뉴스 기사 5',
-    },
-  ];
+  useEffect(() => {
+    // 백엔드에서 데이터 요청
+    axios
+      .get('http://localhost:8080/Today')
+      .then((response) => {
+        // 요청이 성공하면 데이터를 state에 저장
+        setNewsData(response.data.Today);
+        setLoading(false); // 로딩 완료
+      })
+      .catch((err) => {
+        // 요청이 실패하면 에러 처리
+        setError(err);
+        setLoading(false);
+      });
+  }, []);
 
-  const handleClick = (articleId) => {
-    navigate(`/newsDetail?id=${articleId}`, {
+  const handleClick = (articleTitle) => {
+    navigate(`/newsDetail?id=${articleTitle}`, {
       state: {
-        id: articleId
-      }
+        id: articleTitle,
+      },
     });
   };
+
 
   return (
     <div className="chartNews">
       <h1 className="news-title">오늘의 뉴스</h1>
       <hr className="news-divider" />
       <div className="news-container">
-        {tempNews.map((article) => (
-          <p
-            key={article.id}
-            className="news-description"
-            onClick={() => handleClick(article.id)}
-          >
-            {article.description}
-          </p>
-        ))}
+        {newsData.length === 0 ? (
+          <div>No news available.</div> // 데이터가 없는 경우에 대한 처리
+        ) : (
+          newsData.map((article) => (
+            <div key={article.title} className="news-item" onClick={() => handleClick(article.title)}>
+              <p>{article.title}</p>
+              <p className="news-summary">{article.summary}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-//상한가, 하한가 등등 데이터 필요해서 웹소켓 코드로 변경
-/*
+ 
+//top5의 주식 종목 데이터 테이블
 export function Table() {
-  const [data, setData] = useState([]);
-  const [showFullTable, setShowFullTable] = useState(false);
-  const socket = io();
+  const [data, setData] = useState([]); // 데이터를 저장할 상태
   const navigate = useNavigate();
-  useEffect(() => {
-    socket.on('dataUpdate', (newData) => {
-      setData(newData);
-    });
+  const [loading, setLoading] = useState(false); // 데이터 로딩 상태
+  const [error, setError] = useState(null); // 에러 상태
 
-    return () => {
-      socket.disconnect();
-    };
+  // 버튼 클릭 시 필요한 데이터 요청
+  const handleButtonClick = (type) => {
+    setLoading(true);
+
+    // Axios를 사용하여 데이터를 백엔드에서 요청
+    axios.get(`http://localhost:8080/${type}`) // "상한가", "하한가", "상승" 등의 타입에 따라 요청 URL 변경
+      .then((response) => {
+        // 요청이 성공하면 데이터 업데이트
+        setData(response.data.TopRate); // "TopRate" 필드에서 데이터를 가져옴
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    // 데이터 요청 시작 시 로딩 상태 설정
+    setLoading(true);
+    // 에러 초기화
+    setError(null);
+
+    // 초기 데이터 로딩 (상한가 데이터)
+    axios.get('http://localhost:8080/TopRate')
+      .then((response) => {
+        // 요청이 성공하면 데이터 업데이트
+        setData(response.data.TopRate); // "TopRate" 필드에서 데이터를 가져옴
+        setLoading(false); // 로딩 완료
+      })
+      .catch((err) => {
+        // 요청이 실패하면 에러 처리
+        setError(err);
+        setLoading(false); // 로딩 완료
+      });
   }, []);
 
-  const handleButtonClick = (type) => {
-    socket.emit('buttonClick', type);
-  };
-
   const handleClick = () => {
-    if(sessionStorage.getItem("user")!=null){
+    if (sessionStorage.getItem("user") != null) {
       navigate(`/SimulMain`);
-    } else if (sessionStorage.getItem("user")==null) {
+    } else if (sessionStorage.getItem("user") == null) {
       alert("로그인이 필요한 기능입니다!");
       navigate(`/`);
     }
-};
-
- return (
-    <div className="table-parent-container">
-      <div className="table-buttons">
-      <button onClick={() => handleButtonClick('상한가')}>상한가</button>
-        <button onClick={() => handleButtonClick('하한가')}>하한가</button>
-        <button onClick={() => handleButtonClick('상승')}>상승</button>
-        <button onClick={() => handleButtonClick('하락')}>하락</button>
-        <button onClick={() => handleButtonClick('거래량상위')}>거래량상위</button>
-        <button className='test' onClick={handleClick}>모의투자 해보기</button>
-      </div>
-      <div className="table-container">
-        <table className="table2">
-          <thead>
-            <tr>
-              <th className="border-top">순위</th>
-              <th className="border-top">종목명</th>
-              <th className="border-top">현재가</th>
-              <th className="border-top">전일비</th>
-              <th className="border-top">등락률</th>
-              <th className="border-top">거래량</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <React.Fragment key={item.rank}>
-                <tr>
-                  <td> {item.rank}</td>
-                  <td >{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>{item.change}</td>
-                  <td>{item.changeRate}</td>
-                  <td>{item.volume}</td>
-                </tr>
-                <tr className="thin-border">
-                <td colSpan={showFullTable ? 10 : 5}></td>
-                </tr>
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-*/
-
-
-export function Table() {
-  const [data, setData] = useState([]);
-  const [showFullTable, setShowFullTable] = useState(false);
-  const navigate = useNavigate();
-  const handleButtonClick = (type) => {
-    if (type === '상한가') {
-      const newData = [
-        { rank: 1, name: '종목1', price: 100, change: '+10%', changeRate: '1.0%', volume: 1000 },
-        { rank: 2, name: '종목2', price: 200, change: '-20%', changeRate: '-2.0%', volume: 2000 },
-        { rank: 3, name: '종목3', price: 300, change: '+30%', changeRate: '3.0%', volume: 3000 },
-        { rank: 4, name: '종목4', price: 400, change: '-40%', changeRate: '-4.0%', volume: 4000 },
-        { rank: 5, name: '종목5', price: 500, change: '+50%', changeRate: '5.0%', volume: 5000 },
-        { rank: 6, name: '종목6', price: 600, change: '-60%', changeRate: '-6.0%', volume: 6000 },
-      ];
-      setData(newData);
-      setShowFullTable(false); //전체 테이블 안보여주기
-    } 
-    else if(type === '하한가') {
-      const newData = [
-        { rank: 1, name: '종목1', price: 100, change: '-10%', changeRate: '1.0%', volume: 1000 },
-        { rank: 2, name: '종목2', price: 200, change: '+20%', changeRate: '-2.0%', volume: 2000 },
-        { rank: 3, name: '종목3', price: 300, change: '-30%', changeRate: '3.0%', volume: 3000 },
-        { rank: 4, name: '종목4', price: 400, change: '-40%', changeRate: '-4.0%', volume: 4000 },
-        { rank: 5, name: '종목5', price: 500, change: '+50%', changeRate: '5.0%', volume: 5000 },
-        { rank: 6, name: '종목6', price: 600, change: '-60%', changeRate: '-6.0%', volume: 6000 },
-      ];
-      setData(newData);
-      setShowFullTable(false);
-    } 
-    else if (type === '상승') {
-      const newData = [
-        { rank: 1, name: '종목1', price: 100, change: '+10%', changeRate: '1.0%', volume: 1000},
-        { rank: 2, name: '종목2', price: 200, change: '-20%', changeRate: '-2.0%', volume: 2000},
-        { rank: 3, name: '종목3', price: 300, change: '+30%', changeRate: '3.0%', volume: 3000},
-        { rank: 4, name: '종목4', price: 400, change: '-40%', changeRate: '-4.0%', volume: 4000 },
-        { rank: 5, name: '종목5', price: 500, change: '+50%', changeRate: '5.0%', volume: 5000},
-        { rank: 6, name: '종목6', price: 600, change: '-60%', changeRate: '-6.0%', volume: 6000},
-      ];
-      setData(newData);
-      setShowFullTable(true);
-    }
-    else if (type === '거래량상위') {
-      const newData = [
-        { rank: 1, name: '종목1', price: 100, change: '+10%', changeRate: '1.0%', volume: 1000},
-        { rank: 2, name: '종목2', price: 200, change: '-22%', changeRate: '-2.0%', volume: 2000},
-        { rank: 3, name: '종목3', price: 300, change: '+33%', changeRate: '3.0%', volume: 3000},
-        { rank: 4, name: '종목4', price: 400, change: '-42%', changeRate: '-4.0%', volume: 4000},
-        { rank: 5, name: '종목5', price: 500, change: '+56%', changeRate: '5.0%', volume: 5000},
-        { rank: 6, name: '종목6', price: 600, change: '-60%', changeRate: '-6.0%', volume: 6000},
-      ];
-      setData(newData);
-      setShowFullTable(true);
-    }
-    else if (type === '하락') {
-      const newData = [
-        { rank: 1, name: '종목1', price: 100, change: '+10%', changeRate: '1.0%', volume: 1000},
-        { rank: 2, name: '종목2', price: 200, change: '-20%', changeRate: '-2.0%', volume: 2000},
-        { rank: 3, name: '종목3', price: 300, change: '+30%', changeRate: '3.0%', volume: 3000},
-        { rank: 4, name: '종목4', price: 400, change: '-48%', changeRate: '-4.0%', volume: 4000},
-        { rank: 5, name: '종목5', price: 500, change: '+51%', changeRate: '5.0%', volume: 5000},
-        { rank: 6, name: '종목6', price: 600, change: '-65%', changeRate: '-6.0%', volume: 6000},
-      ];
-      setData(newData);
-      setShowFullTable(true);
-    }
   };
-  const handleClick = () => {
-    if(sessionStorage.getItem("user")!=null){
-      navigate(`/SimulMain`);
-    } else if (sessionStorage.getItem("user")==null) {
-      alert("로그인이 필요한 기능입니다!");
-      navigate(`/`);
-    }
-};
+
   return (
     <div className="table-parent-container">
       <div className="table-buttons">
-      <button onClick={() => handleButtonClick('상한가')}>상한가</button>
+        <button onClick={() => handleButtonClick('상한가')}>상한가</button>
         <button onClick={() => handleButtonClick('하한가')}>하한가</button>
         <button onClick={() => handleButtonClick('상승')}>상승</button>
         <button onClick={() => handleButtonClick('하락')}>하락</button>
@@ -247,27 +141,25 @@ export function Table() {
               <th className="border-top">거래량</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='top-list'>
             {data.map((item, index) => (
-              <React.Fragment key={item.rank}>
+              <React.Fragment key={item.stockId}>
                 <tr>
                   <td> {item.rank}</td>
                   <td
-                      className="link-button"
-                      onClick={() => {
-                        navigate(`/ChartDetail?keyword=${item.name}`);
-                      }}
-                    >
-                      {item.name}
-                    
+                    className="link-button"
+                    onClick={() => {
+                      navigate(`/ChartDetail?keyword=${item.stockName}`);
+                    }}
+                  >
+                    {item.stockName}
                   </td>
-                  <td>{item.price}</td>
-                  <td>{item.change}</td>
-                  <td>{item.changeRate}</td>
-                  <td>{item.volume}</td>
+                  <td>{item.stockPrice}</td>
+                  <td>{item.stockDiff}</td>
+                  <td>{item.stockRange}</td>
+                  <td>{item.stockVolume}</td>
                 </tr>
                 <tr className="thin-border">
-                <td colSpan={showFullTable ? 10 : 5}></td>
                 </tr>
               </React.Fragment>
             ))}
@@ -278,30 +170,13 @@ export function Table() {
   );
 }
 
-
+//모의투자 랭킹
 export function MockInvestmentRanking() {
   const [showRanking, setShowRanking] = useState(true); // 모의투자 랭킹 표시 여부
   const [rankingData, setRankingData] = useState([]); // 모의투자 랭킹 데이터
-  const socket = io();
-
-  // 임시 데이터
-  const mockData = [
-    { rank: 1, id: 'ID1',returns: '10.0%' },
-    { rank: 2, id: 'ID2', returns: '8.0%' },
-    { rank: 3, id: 'ID3', returns: '6.0%' },
-    { rank: 4, id: 'ID4',  returns: '4.0%' },
-    { rank: 5, id: 'ID5',returns: '2.0%' },
-    { rank: 6, id: 'ID6',  returns: '1.0%' },
-    { rank: 7, id: 'ID7', returns: '0.5%' },
-    { rank: 8, id: 'ID8',  returns: '0.3%' },
-    { rank: 9, id: 'ID9', returns: '0.1%' },
-    { rank: 10, id: 'ID10',  returns: '0.05%' },
-  ];
-
+  //순위 아이콘들
   const getRankIcon = (rank) => {
     let iconSrc = ''; 
-
-    
     if (rank === 1) {
       iconSrc = rank1;
     } else if (rank === 2) {
@@ -331,30 +206,21 @@ export function MockInvestmentRanking() {
     else if (rank === 10) {
       iconSrc = rank10;
     }
-    
-
     return <img src={iconSrc} alt={`Rank ${rank}`} className="rank-icon" />;
   };
 
   useEffect(() => {
-    const updateRankingData = () => {
-      const updatedRankingData = mockData.map((item) => ({
-        ...item,
-        returns: getRandomReturns(),
-      }));
-      setRankingData(updatedRankingData);
-    };
-
-    const intervalId = setInterval(updateRankingData, 2000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    // Axios를 사용하여 백엔드에서 데이터 요청
+    axios.get('http://localhost:8080/Ranking') 
+      .then((response) => {
+        // 요청이 성공하면 데이터를 state에 저장
+        setRankingData(response.data.Ranking);
+      })
+      .catch((error) => {
+        // 요청이 실패하면 에러 처리
+        console.error('Error fetching ranking data:', error);
+      });
   }, []);
-
-  const getRandomReturns = () => {
-    return (Math.random() * 10).toFixed(1) + '%';
-  };
 
   return (
     <div>

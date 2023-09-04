@@ -1,7 +1,7 @@
 .Simul_status{
     background-color: #50B3FF;
     border-radius: 10px;
-    width: 400px;
+    width: 500px;
     height: 570px;
     padding: 20px;
     margin-left: 30px;
@@ -43,7 +43,7 @@
     width: 90px;
     margin-top: 20px;
     text-align: center;
-    margin-left: 10px;
+    margin-left: 50px;
     font-size: 20px;
     color: #0092F3;
 }
