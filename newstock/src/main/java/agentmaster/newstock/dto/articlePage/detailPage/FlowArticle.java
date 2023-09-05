@@ -1,4 +1,4 @@
-package AgentMasterBackEnd.AgentMasterBackEnd.dto.articlePage.detailPage;
+package agentmaster.newstock.dto.articlePage.detailPage;
 
 import lombok.Builder;
 import lombok.Getter;

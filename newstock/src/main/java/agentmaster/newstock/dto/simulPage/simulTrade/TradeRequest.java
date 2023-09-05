@@ -1,4 +1,4 @@
-package AgentMasterBackEnd.AgentMasterBackEnd.dto.simulPage.simulTrade;
+package agentmaster.newstock.dto.simulPage.simulTrade;
 
 import lombok.Builder;
 import lombok.Getter;
