@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import "./css/Join.css";
+import axios from "axios";
 
-function Join({show,setShow,socketIo}){
+function Join({show,setShow}){
 
     const [id,setId] = useState("");
     const [pw,setPw] = useState("");
     const [email,setEmail] = useState("");
-    const [idList,setIdList] = useState([]);
     const [checkDup,setCheckDup] = useState();
     const [checkJoin,setCheckJoin] = useState(false);
     const [checkMessage,setCheckMessage] = useState("");
@@ -18,13 +18,9 @@ function Join({show,setShow,socketIo}){
     const pwCheck = /^[a-zA-Z0-9]{8,20}$/;
     const emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    //임의 데이터 지정(중복 확인용), 삭제 예정
-    useEffect(()=>{
-        setIdList([{"id":"idd"},{"id":"iddd"},{"id":"no"},{"id":"yes"}]);
-    },[]);
-
-    //회원가입 예외처리 부분
-    const checkData = () => {
+    //회원가입 예외처리 부분, 조건 만족 시 백엔드에 데이터를 보내고 회원가입 성공 여부를 돌려받는다.
+    //GET함수를 이용해 백엔드에 id와 pw,email을 전달하고 회원가입 성공 여부를 전달받아 state에 저장하는 함수.
+    const checkData = async () => {
         if(id===""){
             setCheckJoin(false);
             alert("아이디를 입력해주세요.");
@@ -52,26 +48,18 @@ function Join({show,setShow,socketIo}){
         else if(!(emailCheck.test(email))){
             setCheckJoin(false);
             alert("이메일의 형식이 올바르지 않습니다.");
+        }
+        else if(checkDup!=true){
+            setCheckJoin(false);
+            alert("아이디의 중복을 확인해주세요.");
         } 
         else {
-            setCheckJoin(true);
+            /*const responseCheck_Join = await axios.get(`http://localhost:8080/newsMain/join/checkJoin?userId=${id}&userPassword=${pw}&userEmail=${email}`);
+            setCheckJoin(responseCheck_Join.data);*/
+            const responseCheck_Join = await success();
+            setCheckJoin(responseCheck_Join);
         }
     }
-    const handleJoin = () => {
-        checkData();
-    };
-    useEffect(()=>{
-        if(checkJoin){
-            alert("회원가입이 완료되었습니다!");
-            socketIo.emit('joinCheck',{ id:id,pw:pw,email:email });
-            setShow(false);
-            setId("");
-            setPw("");
-            setEmail("");
-            setCheckDup();
-            setCheckMessage("");
-        }
-    },[checkJoin])
 
     //창 닫는 버튼 구현
     const handleClose = () => {
@@ -83,8 +71,9 @@ function Join({show,setShow,socketIo}){
         setCheckMessage("");
     };
 
-    //아이디 중복확인 구현
-    const handleDupCheck = () => {
+    //아이디 중복확인 구현, 백엔드에 id를 넘겨주고 중복 결과를 돌려받는다.
+    //GET함수를 이용해 백엔드에 id를 넘겨주고 중복 결과를 돌려받아 state에 저장하는 함수.
+    const handleDupCheck = async () => {
         if(id===""){
             setCheckDup(true)
             setCheckMessage("아이디를 입력해주세요.");
@@ -93,20 +82,40 @@ function Join({show,setShow,socketIo}){
             setCheckMessage("아이디의 형식이 올바르지 않습니다.");
         }
         else {
-            socketIo.emit('doubleCheckId',{ id:id });
-            //임의로 중복x
-            setCheckDup(true)
-            setCheckMessage("사용 가능한 아이디 입니다.");
-            //임의로 중복o
-            //setCheckDup(false);
+            try {
+                /*const responseCheckDupId = await axios.get(`http://localhost:8080/newsMain/join/doubleCheck?userId=${id}`);
+                setCheckDup(responseCheckDupId.data);
+                if(checkDup){ setCheckMessage("사용 가능한 아이디 입니다."); }*/
+                const checkDupId = await success();
+                setCheckDup(checkDupId);
+                setCheckMessage("사용 가능한 아이디 입니다.");
+            } catch (error) {
+                console.error('Error fetching checkDupId data:', error);
+            }
         }
     };
+    //임시 중복 확인 성공 함수
+    async function success() {
+        return true;
+    }
+
+    //회원가입 버튼 클릭 시 조건을 비교하고, 회원가입 성공 시 useEffect 훅을 통해 안내한다.
+    const handleJoin = () => {
+        checkData();
+    };
     useEffect(()=>{
-        socketIo.on('doubleCheckIdResult',(data)=>{setCheckDup(data)});
-        if(checkDup){
-            setCheckMessage("사용 가능한 아이디 입니다.");
+        if(checkJoin){
+            alert("회원가입이 완료되었습니다!");
+            setShow(false);
+            setId("");
+            setPw("");
+            setEmail("");
+            setCheckDup();
+            setCheckMessage("");
         }
-    },[socketIo])
+    },[checkJoin])
+
+    //중복 확인용 메세지 작성.
     const ShowMessage = () => {
         if(checkDup!=null){
             return <div className="doubleCheck_message">

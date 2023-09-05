@@ -5,22 +5,63 @@
 import { Stack } from 'react-bootstrap';
 import './css/Flow.css';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function Flow({flow,flownews}){
+function Flow(){
 
+    //임시 데이터
+    const text = "테스트코드1\n테스트코드2\n테스트코드3\n";
+    const title = "신문기사 제목이 올라갈 공간"
+
+    const [flow,setFlow] = useState([]);
+    const [flowNews,setFlowNews] = useState([]);
     const [flow_text,setFlow_text] = useState("");
     const [check,setCheck] = useState(false);
-    useEffect(()=>{
-        if(flow.text){
-            setCheck(true);
-            setFlow_text(flow.text)
-        } else {
-            setFlow_text("이슈가 존재하지 않습니다.");
+
+    const getNewsFlowIssue = async() => {
+        try {
+            //const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
+            //setFlow(responseNewsFlowIssue);
+            const responseNewsFlowIssue = await issueData();
+            setFlow(responseNewsFlowIssue);
+            if(responseNewsFlowIssue){
+                setCheck(true);
+                setFlow_text(responseNewsFlowIssue[0].text);
+            } else {
+                setFlow_text("이슈가 존재하지 않습니다.");
+            }
+        } catch (error) {
+            console.error('Error fetching flowIssue data:', error);
         }
-    },[flow])
+    }
+    const getNewsFlowList = async() => {
+        try {
+            //const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
+            //setFlowNews(responseNewsFlowList);
+            const responseNewsFlowList = await listData();
+            setFlowNews(responseNewsFlowList);
+        } catch (error) {
+            console.error('Error fetching flowList data:', error);
+        }
+    }
+
+    async function issueData() {
+        const json = [{text}];
+        return json;
+    }
+
+    async function listData() {
+        const json = [{title,text},{title,text},{title,text}];
+        return json;
+    }
+
+    useEffect(()=>{
+        getNewsFlowIssue();
+        getNewsFlowList();
+    },[])
 
     //사건의 흐름 중 요약 기사를 map함수를 통해 순서대로 출력.
-    const articleList = flownews.map((article) => (
+    const articleList = flowNews.map((article) => (
         <>
         <div className='col-5 flow_summary' key={article.title}>
             <h5 className='as_title'>{article.title}</h5>
@@ -31,20 +72,6 @@ function Flow({flow,flownews}){
         </div>
         </>
     ));
-
-    const noArticleList = () => {
-        return(
-        <>
-        <div className='col-5 flow_summary'>
-            <h5 className='as_title'>사건</h5>
-            <hr/>
-            <div className='flow_summary_body'>
-                사건의 흐름이 없는 뉴스입니다.
-            </div>
-        </div>
-        </>
-        )
-    }; 
 
     return(
         <div className='row flow'>

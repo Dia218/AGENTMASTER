@@ -5,13 +5,13 @@
 
 import { Stack } from 'react-bootstrap';
 import './css/Main.css'
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainNews from './MainNews';
-import { io } from 'socket.io-client';
 import Login_after from './Login_after';
 import Login_before from './Login_before';
 import Chart from './Chart';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Main() {
 
@@ -21,105 +21,50 @@ function Main() {
     const name = "기자 이름";
     const title = "신문기사 제목이 올라갈 공간입니다"
 
-    //뉴스 데이터와 주식 데이터를 담을 useState 훅
-    const [socket, setSocket] = useState();
+    //뉴스 데이터를 담을 useState 훅
     const [news, setNews] = useState(['','','','','']);
-    const [stockData, setStockData] = useState([]);
 
-    //테이블 차트의 헤더 액세서 설정. 
-    const columns = useMemo(
-        () => [
-            {
-                accessor: "name",
-                Header: "종목명",
-            },
-            {
-                accessor: "price",
-                Header: "현재가",
-            },
-            {
-                accessor: "compare",
-                Header: "전일비",
-            },
-            {
-                accessor: "Fluctuations",
-                Header: "등락률",
-            },
-        ],
-        []
-    );
+    //GET함수를 이용해 백엔드에 메인페이지 랜덤 뉴스 데이터 5개를 요청하고 state에 저장하는 함수.
+    const getNews_Main = async () => {
+        try {
+            /*const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
+            setNews(responseNews_Main.data);*/
+            const responseNews_Main = await data();
+            setNews(responseNews_Main);
+        } catch (error) {
+            console.error('Error fetching news data:', error);
+        }
+    };
 
-    //테이블 차트 임시 데이터. 헤더 액세서를 알맞게 설정해줘야함.
-    //이후 백엔드에게 요청해서 주식 데이터를 담을 부분.
-    const data = useMemo(() => [
-            {
-            "code":"000000",
-            "name": "주식 이름1",
-            "price": "1294.00",
-            "compare": "+101",
-            "Fluctuations": "+8.47%"
-            },
-            {
-            "code":"000001",
-            "name": "주식 이름2",
-            "price": "1567.00",
-            "compare": "+84",
-            "Fluctuations": "+2.41%"
-            },
-    ],[]);
+    //임시 뉴스값 반환 함수
+    async function data() {
+        const json = [{"id":"00",text,publisher,name,title},
+        {"id":"01",text,"publisher":"시험용",name,title},
+        {"id":"02",text,publisher,name,title},
+        {"id":"03",text,publisher,name,title},
+        {"id":"04",text,publisher,name,title}];
+        
+        return json;
+    }
 
-    //소켓 연결
-    const socketIo = io.connect('');
-
-    useEffect(() => {
-        //서버로부터 데이터 수신. 백엔드로부터 데이터를 요청하고 받아와 각각의 state에 저장함.
-        socketIo.on('callNews',(data) => {
-            setNews([data]);
-        });
-        socketIo.on('callStockData',(data) => {
-            setStockData(data);
-        });
-
-        //임시 데이터 추가
-            setNews([{"id":"00",text,publisher,name,title},
-                {"id":"01",text,"publisher":"시험용",name,title},
-                {"id":"02",text,publisher,name,title},
-                {"id":"03",text,publisher,name,title},
-                {"id":"04",text,publisher,name,title}]);
-            setStockData(data);
-
-            setSocket(socketIo);
-    },[])
-
-    /*useEffect(()=>{
-        return(()=>{
-            if(socket){
-                socketIo.disconnect();//소켓 연결 헤제
-            }
-        })
-    },[socket])*/
-
-    //로그인 성공 시 값을 true로 변경.
+    //로그인 성공 시 값을 true로 변경하여 로그인 성공 처리.
     const [isLogin, setIsLogin] = useState(false);
     const [userName,setUserName] = useState("");
-    useEffect(()=>{
+
+    //화면을 불러오면서 백엔드에 데이터를 요청하고 sesion에 로그인 기록이 있을 경우 불러와 성공 처리를 한다.
+    useEffect(() => {
+        getNews_Main();
         setIsLogin(sessionStorage.getItem("isLogin"));
-        setUserName(sessionStorage.getItem("user"));
     },[])
 
     useEffect(()=>{
         if(isLogin===true){
-            socketIo.emit(`sendUserid`,{userId:sessionStorage.getItem("user_id")});
-            socketIo.on('receive_userData',(data)=>{
-                sessionStorage.setItem("user",data.userId);
-            });
             //임시 유저 데이터 추가
-            sessionStorage.setItem("user","admin1234");
+            //sessionStorage.setItem("user","admin1234");
             setUserName(sessionStorage.getItem("user"));
         }
     },[isLogin])
         
-
     const navigate = useNavigate();
     const handleClick = () => {
         navigate(`/chartMain`);
@@ -133,7 +78,7 @@ function Main() {
                         <div className='news_main'><MainNews news={news[1]}/></div>
                         <div className='news_main'><MainNews news={news[2]}/></div>
                         <div className='login_main'>
-                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin} socketIo={socketIo}/>}
+                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin} />}
                         </div>
                     </Stack>
                     <Stack direction='horizontal'>
@@ -144,7 +89,7 @@ function Main() {
                                 <div className='stock_title_text'>증시</div>
                                 <div className="ms-auto text-center moveToStock" onClick={handleClick}><h3>+</h3></div>
                             </Stack>
-                            <Chart columns={columns} data={stockData} />
+                            <Chart />
                         </div>
                     </Stack>
                 </Stack>

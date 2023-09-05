@@ -8,6 +8,7 @@ import StockInvestData from "../component/SimTrade/StockInvestData";
 import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 import io from 'socket.io-client';
 
@@ -57,21 +58,72 @@ const GraphInput = [
 ];
 
 export default function SimTrade() {
-  
-    const name = "종목명";
-    const profitloss = "전일비";
-    const price = "현재가";
-    const rates = "등락률";
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const keywordFromURL = queryParams.get('keyword');
     const [siCategory,setSiCategory] = useState([]);
-    const [stockInvestData,setStockInvestData] = useState({});
-    const [stockInvestInput,setStockInvestInput] = useState({});
+    const [stockInvestData,setStockInvestData] = useState([{"stockPrice":9000,"stockRange":"+0.8","stockAmount":12663533,"stockStartPrice":7500,"stockHighPrice":11000,"stockLowPrice":9000,
+    "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000}]);
+    const [stockInvestInput,setStockInvestInput] = useState([{"AvailableAsset":12523000,"simulHoldingsnum":0}]);
     const [scList,setScList] = useState([]);
+
+    const getStockInvestData = async () => {
+        try {
+            //const responseStockInvestData = await axios.get(`http://localhost:8080/simulTrade/stockInvestData?keyword=${keywordFromURL}&userId=${sessionStorage.get("user")}`);
+            //setStockInvestData(responseStockInvestData);
+            const responseStockInvestData = await stockData();
+            setStockInvestData(responseStockInvestData);
+        } catch (error) {
+            console.error('Error fetching stockInvestData data:', error);
+        }
+    }
+
+    const getStockInvestInput = async () => {
+        try {
+            //const responseStockInvestInput = await axios.get(`http://localhost:8080/simulTrade/stockInvestInput?userId=${sessionStorage.get("user")}`);
+            //setStockInvestInput(responseStockInvestInput);
+            const responseStockInvestInput = await stockInputData();
+            setStockInvestInput(responseStockInvestInput);
+        } catch (error) {
+            console.error('Error fetching stockInvestInput data:', error);
+        }
+    }
+
+    const getSiCategory = async () => {
+        try {
+            //const responseSiCategory = await axios.get(`http://localhost:8080/simulTrade/stockInvestInput?userId=${sessionStorage.get("user")}`);
+            //setSiCategory(responseSiCategory);
+            const responseSiCategory = await siCategoryData();
+            setSiCategory(responseSiCategory);
+        } catch (error) {
+            console.error('Error fetching siCategory data:', error);
+        }
+    }
+
+    async function stockData() {
+        const json = [{"stockPrice":9000,"stockRange":"+0.8","stockAmount":12663533,"stockStartPrice":7500,"stockHighPrice":11000,"stockLowPrice":9000,
+        "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000}];
+        
+        return json;
+    }
+
+    async function stockInputData() {
+        const json = [{"AvailableAsset":12523000,"simulHoldingsnum":10}];
+        
+        return json;
+    }
+
+    async function siCategoryData() {
+        const json = [{"id":0,name:"카카오",profitloss:"-5000",rates:"-0.06",price:"230000"},{"id":1,name:"넷플릭스",profitloss:"+8000",rates:"+2.09",price:"120000"},
+        {"id":2,name:"유튜브",profitloss:"+12000",rates:"+10.18",price:"4500000"}];
+        
+        return json;
+    }
+
     useEffect(()=>{
-        setSiCategory([{"id":0,name:"카카오",profitloss:"-5000",rates:"-0.06",price:"230000"},{"id":1,name:"넷플릭스",profitloss:"+8000",rates:"+2.09",price:"120000"},
-        {"id":2,name:"유튜브",profitloss:"+12000",rates:"+10.18",price:"4500000"}]);
+        getSiCategory();
+        getStockInvestData();
+        getStockInvestInput()
     },[]);
     useEffect(()=>{
             setScList(siCategory.map((v) => (
@@ -80,18 +132,13 @@ export default function SimTrade() {
             SimilarStockProfitloss={v.profitloss} SimilarStockrates={v.rates}/>)));
     },[siCategory]);
 
-    useEffect(()=>{
-        setStockInvestData({"CurrentPrice":9000,"DaysRange":"+0.8","Volume":12663533,"OpenPrice":7500,"HighPrice":11000,"LowPrice":9000,
-        "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000});
-        setStockInvestInput({"AvailableAsset":12523000,"Amount":0});
-    },[])
     return (
         <div className="nd_body">
             <header className="mb-4"><Header /></header>
             <div className="StockTradeScene">
                 <div className="StockLeft">
                     <div className="StockGraph">
-                    <p className='simultradetitle'>{keywordFromURL}</p>
+                        <p className='simultradetitle'>{keywordFromURL}</p>
                         <div className="StockGraphChart">
                             <StockGraphChart GraphChartInput={GraphInput}/>
                         </div>
@@ -105,22 +152,22 @@ export default function SimTrade() {
                 </div>
                 <div className="StockRight">
                     <StockInvestData
-                        CurrentPrice={stockInvestData.CurrentPrice}
-                        DaysRange={stockInvestData.DaysRange}
-                        Volume={stockInvestData.Volume}
-                        OpenPrice={stockInvestData.OpenPrice}
-                        HighPrice={stockInvestData.HighPrice}
-                        LowPrice={stockInvestData.LowPrice}
-                        ProfitRate={stockInvestData.ProfitRate}
-                        ProfitLoss={stockInvestData.ProfitLoss}
-                        PurchasePrice={stockInvestData.PurchasePrice}
-                        AveragePrice={stockInvestData.AveragePrice}
+                        CurrentPrice={stockInvestData[0].stockPrice}
+                        DaysRange={stockInvestData[0].stockRange}
+                        Volume={stockInvestData[0].stockAmount}
+                        OpenPrice={stockInvestData[0].stockStartPrice}
+                        HighPrice={stockInvestData[0].stockHighPrice}
+                        LowPrice={stockInvestData[0].stockLowPrice}
+                        ProfitRate={stockInvestData[0].ProfitRate}
+                        ProfitLoss={stockInvestData[0].ProfitLoss}
+                        PurchasePrice={stockInvestData[0].PurchasePrice}
+                        AveragePrice={stockInvestData[0].AveragePrice}
                     ></StockInvestData>
                     <StockInvestInput
-                        AvailableAsset={stockInvestInput.AvailableAsset}
-                        Amount={stockInvestInput.Amount}
-                        CurrentPrice={stockInvestData.CurrentPrice}
-                        setStockInvestInput={setStockInvestInput}
+                        AvailableAsset={stockInvestInput[0].AvailableAsset}
+                        Amount={stockInvestInput[0].simulHoldingsnum}
+                        CurrentPrice={stockInvestData[0].stockPrice}
+                        stockName={keywordFromURL}
                         >
                     </StockInvestInput>
 
