@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class StockDetial {
+public class StockDetail {
     private Integer stockPrice;
     private Integer highPrice;
     private Integer startPrice;
