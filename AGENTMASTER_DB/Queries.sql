@@ -679,10 +679,10 @@ INSERT INTO "AGENTMASTER"."Issue_summary" (issue_keyword)
 VALUES ('{issue_keyword}');
 
 /*10.2 사건흐름 - 사건정리, 사건 키워드 수정
-  old_issue_summary에 옛 값을 삽입하면 issue_summary에 new_issue_summary를 입력합니다.  */
+  old_issue_keyword에 옛 값을 삽입하면 issue_keyword에 new_issue_keyword를 입력합니다.  */
 UPDATE "AGENTMASTER"."Issue_summary"
-   SET issue_summary = '{new_issue_summary}'
- WHERE issue_summary_id = '{old_issue_summary}';
+   SET issue_keyword = '{new_issue_keyword}'
+ WHERE issue_keyword = '{old_issue_keyword}';
 
 /*10.3 사건흐름 - 사건정리, 사건 키워드에 해당하는 본문 불러오기
   issue_keyword에 대한 사건 요약번호와 본문을 가져옵니다.*/
