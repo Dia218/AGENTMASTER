@@ -14,7 +14,7 @@ function Summary(){
     const publisher = "신문사 이름";
     const name = "기자 이름";
     const title = "신문기사 제목이 올라갈 공간";
-    const link = "http://www.naver.com";
+    const link = "https://imnews.imbc.com";
 
     const [news, setNews] = useState([{text,publisher,name,title,link}]);
     const [scrapCheck,setScrapCheck] = useState();

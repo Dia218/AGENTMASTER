@@ -6,6 +6,7 @@ import { Stack } from 'react-bootstrap';
 import './css/Flow.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function Flow(){
 
@@ -17,6 +18,7 @@ function Flow(){
     const [flowNews,setFlowNews] = useState([]);
     const [flow_text,setFlow_text] = useState("");
     const [check,setCheck] = useState(false);
+    const navigate = useNavigate();
 
     const getNewsFlowIssue = async() => {
         try {
@@ -51,7 +53,7 @@ function Flow(){
     }
 
     async function listData() {
-        const json = [{title,text},{title,text},{title,text}];
+        const json = [{title,text,'id':11},{title,text,'id':22},{title,text,'id':33}];
         return json;
     }
 
@@ -60,11 +62,19 @@ function Flow(){
         getNewsFlowList();
     },[])
 
+    const onClickTitle = (article) => {
+        navigate(`/newsDetail?id=${article.id}`,{
+            state: {
+                id: article.id
+            }
+        });
+    }
+
     //사건의 흐름 중 요약 기사를 map함수를 통해 순서대로 출력.
     const articleList = flowNews.map((article) => (
         <>
         <div className='col-5 flow_summary' key={article.title}>
-            <h5 className='as_title'>{article.title}</h5>
+            <h5 className='as_title' onClick={()=>onClickTitle(article)}>{article.title}</h5>
             <hr/>
             <div className='flow_summary_body'>
                 {article.text}
