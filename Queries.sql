@@ -649,7 +649,6 @@ SET total_money     = 100000,
     yesterday_money = 100000,
     simul_money     = 100000,
     stock_money     = 0,
-    total_return    = 0,
     rank_range      = 0
 WHERE user_id = '{user_id}';
 
@@ -758,7 +757,6 @@ UPDATE "AGENTMASTER"."User"
 SET total_money  = '{total_money}',
     simul_money  = '{simul_money}',
     stock_money  = '{stock_money}',
-    total_return = '{total_return}',
     rank_range   = '{rank_range}'
 WHERE user_id = '{user_id}';
 

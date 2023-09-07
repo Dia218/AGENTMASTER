@@ -14,7 +14,6 @@ create table if not exists "AGENTMASTER"."User"
     yesterday_money integer        not null,
     simul_money     integer        not null,
     stock_money     integer        not null,
-    total_return    integer        not null,
     rank_range      numeric(10, 2) not null,
     constraint User_pkey primary key (user_id),
     constraint User_unique unique (user_name),
