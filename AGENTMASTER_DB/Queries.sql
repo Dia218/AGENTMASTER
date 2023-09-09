@@ -146,7 +146,10 @@ SELECT arti.company, summ.article_summary
   FROM "AGENTMASTER"."Article" AS arti
            INNER JOIN "AGENTMASTER"."Article_summary" AS summ
            ON arti.article_id = summ.article_id
- WHERE arti.last_pub = (SELECT last_pub FROM "AGENTMASTER"."Article" ORDER BY last_pub DESC LIMIT 1)
+ WHERE TO_CHAR(arti.last_pub, 'YYYY-MM-DD') = (
+     SELECT MAX(TO_CHAR(last_pub, 'YYYY-MM-DD')) 
+     FROM "AGENTMASTER"."Article"
+ )
  ORDER BY RANDOM()
  LIMIT 5;
 /*
