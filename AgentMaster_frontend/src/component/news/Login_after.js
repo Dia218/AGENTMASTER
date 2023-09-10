@@ -22,7 +22,7 @@ function Login_after({setIsLogin,userName}) {
     return (
         <div className="loginForm">
             <div className="welcomeUser">
-                <p>{userName}님{"\n"}환영합니다!</p>
+                <p>{sessionStorage.getItem("user")}님{"\n"}환영합니다!</p>
             </div>
             <div className="buttons">
                 <Stack direction='horizontal' gap={3}>

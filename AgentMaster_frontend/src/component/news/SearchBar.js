@@ -16,16 +16,34 @@ function SearchBar() {
     //엔터키 입력 시 실행. 키워드를 수정하고 콘솔로 출력한다.
     const handleKeyDown = (e) =>{
         if(e.key === "Enter" && (isEnterCurrent.current === undefined || isEnterCurrent.current === false)){
-            isEnterCurrent.current = true;
+            if(keyword==""){
+                isEnterCurrent.current = false;
+                alert("검색어를 입력해주세요.");
+            } else {
+                isEnterCurrent.current = true;
+                setKeyword('');
+                navigate(`/searchList?result=${keyword}&offset=0&limit=10&page=1`,{
+                    state: {
+                        keyword: keyword
+                    }
+                });
+            }
+        } else if(isEnterCurrent.current === true) {
+            isEnterCurrent.current = false;
+            setKeyword('');
+        }
+    }
+
+    const handleClickSearch = () => {
+        if(keyword==""){
+            alert("검색어를 입력해주세요.");
+        } else {
             setKeyword('');
             navigate(`/searchList?result=${keyword}&offset=0&limit=10&page=1`,{
                 state: {
                     keyword: keyword
                 }
             });
-        } else if(isEnterCurrent.current === true) {
-            isEnterCurrent.current = false;
-            setKeyword('');
         }
     }
 
@@ -33,7 +51,7 @@ function SearchBar() {
     return(
         <>
         <div className="col-xl-10 searchBar">
-            <InputGroup className="mb-1">
+            <InputGroup className="mb-1 searchBar_component">
                 <Form.Control 
                 placeholder="Search"
                 aria-label="Search"
@@ -42,7 +60,7 @@ function SearchBar() {
                 onChange={(e)=>{setKeyword(e.target.value)}}
                 onKeyDown={(e)=> handleKeyDown(e)}
                 />
-                <Button variant="outline-secondary" id="searchbar">
+                <Button variant="outline-primary" id="searchbar" onClick={handleClickSearch}>
                     <div className=""><SearchOutlined style={{fontSize:'27px'}}/></div>
                 </Button>
             </InputGroup>

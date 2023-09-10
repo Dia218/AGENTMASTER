@@ -16,7 +16,7 @@ export default function StockSimilarCategoryBox({
     } 
     const navigate = useNavigate();
     const onClickTitle = () => {
-        navigate(`/simulTrade?id=${SimilarStockcode}`)
+        navigate(`/simulTrade?keyword=${SimilarStockname}`)
     }
 
     return (

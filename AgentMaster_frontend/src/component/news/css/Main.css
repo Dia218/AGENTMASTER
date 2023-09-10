@@ -25,7 +25,7 @@
     margin: 15px;
     border: 2px solid #50B3FF;
     border-radius: 15px;
-    background-color: white;
+    background-color:white;
 }
 
 .stock_title {
@@ -38,9 +38,9 @@
 }
 
 .stock_title_text {
-    margin-left: 5px;
     margin-bottom: 5px;
     font-size: 28px;
+    font-weight: bold;
     color: #0073e5;
 }
 
