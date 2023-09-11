@@ -1,12 +1,18 @@
 //모의투자 메인 페이지의 보유중인 주식 리스트를 나타내는 부분
-import "./css/Status_list.css";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import './css/Status_list.css';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function StatusList() {
   const [stockHoldings, setStockHoldings] = useState([]);
+
+  const addComma = (num) => {
+    // 현재가, 전일비 값을 불러올 때 자동으로 3자리마다 콤마(,)를 붙이는 함수
+    let returnString = num?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return returnString;
+  };
 
   useEffect(() => {
     // 백엔드에서 데이터를 가져오는 함수
@@ -15,7 +21,7 @@ function StatusList() {
         const response = await axios.get('http://localhost:8080/getHoldingInfo'); // 백엔드에서 보유 주식 정보를 가져오는 엔드포인트
         setStockHoldings(response.data.HoldingInfo); // 받아온 데이터를 stockHoldings 상태로 설정
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('데이터 가져오기 오류:', error);
       }
     };
 
@@ -47,8 +53,16 @@ function StatusList() {
                       {holding.stockName}
                     </Link>
                   </td>
-                  <td>{holding.simulReturn} ({holding.stockPerchaseAmount})</td>
-                  <td>{holding.simulRange}%</td>
+                  <td>
+                    {holding.simulReturn} ({addComma(holding.stockPerchaseAmount)})
+                  </td>
+                  <td>
+                    {holding.simulRange > 0 ? (
+                      <div style={{ color: 'red' }}>▼{addComma(holding.simulRange)}</div>
+                    ) : (
+                      <div style={{ color: 'blue' }}>▲{addComma(holding.simulRange)}</div>
+                    )}
+                  </td>
                   <td>{holding.simulHoldingsnum}</td>
                 </tr>
               ))

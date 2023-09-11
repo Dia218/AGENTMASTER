@@ -24,7 +24,7 @@ export function News() {
   useEffect(() => {
     // 백엔드에서 데이터 요청
     axios
-      .get('http://localhost:8080/Today')
+      .get('http://localhost:8080/ChartMain/TodayNews')
       .then((response) => {
         // 요청이 성공하면 데이터를 state에 저장
         setNewsData(response.data.Today);
