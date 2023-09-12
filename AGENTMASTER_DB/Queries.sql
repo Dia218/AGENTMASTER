@@ -58,10 +58,12 @@ VALUES ('{username}',
 
 /*2.1 해당 페이지에서 클릭한 기사의 기사 제목, 스크랩 여부, 신문사 이름, 기자 이름을 출력한다.*/
 SELECT article.article_id, article.title, article.company, article.reporter,
-       CASE WHEN EXISTS (SELECT
-                           FROM "AGENTMASTER"."Article_scrap"
-                          WHERE article_id = '{article_id}' AND user_id = '{username}') THEN TRUE
-            ELSE FALSE END AS isscrap
+       CASE
+           WHEN EXISTS (SELECT
+                          FROM "AGENTMASTER"."Article_scrap"
+                         WHERE article_id = '{article_id}'
+                           AND user_id = '{username}') THEN TRUE
+           ELSE FALSE END AS isscrap
   FROM "AGENTMASTER"."Article" AS article
  WHERE article_id = '{article_id}';
 /*
@@ -441,14 +443,16 @@ VALUES ('{user_id}', '{user_name}', '{password]', '{e_mail}');
 
 /*6.1 로그인 수정 */
 UPDATE "AGENTMASTER"."User"
-   SET password = CASE WHEN '{password}' !=
-                            (SELECT password FROM "AGENTMASTER"."User" WHERE user_id = '{customer_id}') AND
-                            '{password}' IS NOT NULL THEN '{password}'
-                       ELSE password END,
+   SET password = CASE
+                      WHEN '{password}' !=
+                           (SELECT password FROM "AGENTMASTER"."User" WHERE user_id = '{customer_id}') AND
+                           '{password}' IS NOT NULL THEN '{password}'
+                      ELSE password END,
 
-       e_mail = CASE WHEN '{e_mail}' != (SELECT e_mail FROM "AGENTMASTER"."User") AND '{e_mail}' IS NOT NULL
-                         THEN '{e_mail}'
-                     ELSE e_mail END
+       e_mail = CASE
+                    WHEN '{e_mail}' != (SELECT e_mail FROM "AGENTMASTER"."User") AND '{e_mail}' IS NOT NULL
+                        THEN '{e_mail}'
+                    ELSE e_mail END
  WHERE user_id = '{User_id}';
 /*'{customer_id}', '{e_mail}'과 '{password}'에 값을 넣으세요.
   '{password}' 값 입력은 선택으로, NULL값이 들어가거나, 기존의 비밀번호와 같으면 변경되지 않습니다.
