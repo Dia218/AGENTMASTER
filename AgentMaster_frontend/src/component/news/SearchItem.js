@@ -10,18 +10,18 @@ const SearchItem = ({props}) => {
     
     //클릭 시 뉴스 요약 페이지로 이동, 기사의 id를 state로 넘겨준다.
     const handleClick = () =>{
-        navigate(`/newsDetail?id=${props.id}`,{
+        navigate(`/newsDetail?id=${props.articleId}`,{
             state: {
-                id: props.id
+                id: props.articleId
             }
         });
     }
     
     return (
         <div className="py-1 px-4">
-            <h6 className="mx-2">({props.publisher}) - 입력: {props.date}</h6>
+            <h6 className="mx-2">({props.company}) - 입력: {props.firstPub}</h6>
             <button className="itemButton">
-                <h4 onClick={handleClick}>{props.title} (키워드: {props.keyword})</h4>
+                <h4 onClick={handleClick}>{props.title} (키워드: {props.issueKeyword})</h4>
             </button>
             <hr className="underline"/>
         </div>

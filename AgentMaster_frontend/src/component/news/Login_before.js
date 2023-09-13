@@ -12,7 +12,7 @@ const Login_before = ({setIsLogin}) => {
     const [id,setId] = useState("");
     const [pw, setPw] = useState("");
     const [show,setShow] = useState(false);
-    const [result,setResult] = useState(false);
+    const [result,setResult] = useState("");
     const [click,setClick] = useState(false);
 
     //input에 변화가 있을때마다 value 값을 변경해서 state에 저장한다.
@@ -26,18 +26,26 @@ const Login_before = ({setIsLogin}) => {
     //GET함수를 이용해 백엔드에 유저가 입력한 id와 pw를 전송하고 로그인 결과를 전달받아 state에 저장하는 함수
     const checkLogin = async () => {
         try {
-            //const responseCheck_Login = await axios.get(`http://localhost:8080/newsMain/login?userId=${id}&userPassword=${pw}`);
-            //setResult(responseCheck_Login.data);
-            const responseCheck_Login = await success();
+            const responseCheck_Login = await axios.get(`http://localhost:8080/newsMain/login?userId=${id}&userPassword=${pw}`);
             setResult(responseCheck_Login);
         } catch (error) {
+            const responseCheck_Login = await success();
+            setResult(responseCheck_Login);
             console.error('Error fetching login data:', error);
         }
     }
 
     //임시 로그인 성공/실패 함수
     async function success() {
-        return true;
+        const json = {
+            "UserInfo" : [
+                {	
+                    "customerId" : "customerid1"
+                }
+        	]
+        };
+        
+        return json;
     }
 
     //로그인 버튼 클릭 시 실행. 현재는 자동으로 성공 처리함.
@@ -45,14 +53,14 @@ const Login_before = ({setIsLogin}) => {
         if(id==""||pw=="") {
             alert("아이디와 비밀번호를 입력해주세요!");
         } else {
-            checkLogin();
+            await checkLogin();
             setClick(true);
         }
     }
 
     useEffect(()=>{
         if(click){
-            if(result){
+            if(result.UserInfo[0].customerId==id){
                 sessionStorage.setItem("user","admin1234");
                 sessionStorage.setItem("isLogin",true);
                 setIsLogin(true);

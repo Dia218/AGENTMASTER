@@ -16,10 +16,9 @@ import axios from 'axios';
 function Main() {
 
     //임시 데이터
-    const text = "테스트코드1\n테스트코드2\n테스트코드3\n";
-    const publisher = "신문사 이름";
-    const name = "기자 이름";
-    const title = "신문기사 제목이 올라갈 공간입니다"
+    const company = "신문사 이름";
+    const title = "신문기사 제목이 올라갈 공간입니다";
+    const fieldName = "분야/키워드 예시";
 
     //뉴스 데이터를 담을 useState 훅
     const [news, setNews] = useState(['','','','','']);
@@ -27,22 +26,25 @@ function Main() {
     //GET함수를 이용해 백엔드에 메인페이지 랜덤 뉴스 데이터 5개를 요청하고 state에 저장하는 함수.
     const getNews_Main = async () => {
         try {
-            /*const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
-            setNews(responseNews_Main.data);*/
-            const responseNews_Main = await data();
-            setNews(responseNews_Main);
+            const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
+            setNews(responseNews_Main.PreviewNews);
         } catch (error) {
+            const responseNews_Main = await data();
+            setNews(responseNews_Main.PreviewNews);
             console.error('Error fetching news data:', error);
         }
     };
 
     //임시 뉴스값 반환 함수
     async function data() {
-        const json = [{"id":"00",text,publisher,name,title},
-        {"id":"01",text,"publisher":"시험용",name,title},
-        {"id":"02",text,publisher,name,title},
-        {"id":"03",text,publisher,name,title},
-        {"id":"04",text,publisher,name,title}];
+        const json = {
+            "PreviewNews" : [{articleId:1,company,title,fieldName},
+                {articleId:2,company,title,fieldName},
+                {articleId:3,company,title,fieldName},
+                {articleId:4,company,title,fieldName},
+                {articleId:5,company,title,fieldName},
+            ]
+        }
         
         return json;
     }

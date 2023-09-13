@@ -3,7 +3,6 @@ import './css/StockSimilarCategoryBox.css'
 import { useNavigate } from 'react-router';
 
 export default function StockSimilarCategoryBox({
-                                                    SimilarStockcode,
                                                     SimilarStockname,
                                                     SimilarStockProfitloss,
                                                     SimilarStockPrice,

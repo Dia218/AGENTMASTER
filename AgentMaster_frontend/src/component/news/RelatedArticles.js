@@ -6,20 +6,22 @@ import ArticleLink from './ArticleLink';
 import './css/RelatedArticles.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router';
 
 function RelatedArticles(){
     //임시 데이터
     const title = "신문기사 제목이 올라갈 공간"
 
     const [ra, setRa] = useState([]);
+    const location = useLocation();
 
     const getNewsRA = async() => {
         try {
-            //const responseNewsRA = await axios.get(`http://localhost:8080/newsDetail/relatedArticle?newsId=${location.state.id}`);
-            //setRa(responseNewsRA);
-            const responseNewsRA = await RAData();
+            const responseNewsRA = await axios.get(`http://localhost:8080/newsDetail/relatedArticle?newsId=${location.state.id}`);
             setRa(responseNewsRA);
         } catch (error) {
+            const responseNewsRA = await RAData();
+            setRa(responseNewsRA);
             console.error('Error fetching newsRA data:', error);
         }
     }

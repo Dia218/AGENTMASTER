@@ -18,7 +18,13 @@ const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, Cu
     const onClickSA = () => {
         const reset = window.confirm("전체 매도 하시겠습니까?");
         if(reset === true) {
-            //axios.post(url,data,config);
+            axios.post(url,data,config)
+            .then(function (response) {
+                console.log("check to true");
+            })
+            .catch(function (error) {
+                console.error('Error fetching sellAll data:', error);
+            });
             //setStockInvestInput({"AvailableAsset":(AvailableAsset+(Amount*CurrentPrice)),"simulHoldingsnum":0});
             alert("전체 매도 되었습니다!");
             navigate(`/SimulMain`);
@@ -82,7 +88,13 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
         } else if(parseInt(amount)<1||amount==null||amount==="") {
             alert("매수량을 입력해주세요.");
         } else {
-            //axios.post(urlBuy,dataBuy,config);
+            axios.post(urlBuy,dataBuy,config)
+            .then(function (response) {
+                console.log("check to true");
+            })
+            .catch(function (error) {
+                console.error('Error fetching buy data:', error);
+            });
             //setStockInvestInput({"AvailableAsset":(AvailableAsset-(availableAsset*amount)),"simulHoldingsnum":(Amount+parseInt(amount))});
             alert("선택하신 수량만큼 매수되었습니다.");
             navigate(`/SimulMain`);
@@ -94,7 +106,13 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
         } else if(parseInt(amount)<1||amount==null||amount==="") {
             alert("매도량을 입력해주세요.");
         } else {
-            //axios.post(urlSell,urlSell,config);
+            axios.post(urlSell,dataSell,config)
+            .then(function (response) {
+                console.log("check to true");
+            })
+            .catch(function (error) {
+                console.error('Error fetching sell data:', error);
+            });
             //setStockInvestInput({"AvailableAsset":(AvailableAsset+(amount*CurrentPrice)),"simulHoldingsnum":(Amount-amount)});
             alert("선택하신 수량만큼 매도되었습니다.");
             navigate(`/SimulMain`);
