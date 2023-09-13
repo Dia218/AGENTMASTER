@@ -1,3 +1,20 @@
+/*0.1 선택 종목 모의투자_id SELECT*/
+SELECT simulation_id
+  FROM "AGENTMASTER"."Simulation"
+ WHERE user_id = '{user_id}'
+   AND stock_id = '{stock_id}';
+
+   
+/*0.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
+SELECT *
+  FROM "AGENTMASTER"."User"
+ WHERE user_id = '{user_id}';
+/*
+{user_id}에 값을 넣어 주세요.
+고객 id가 {user_id}인 고객 정보를 출력합니다.
+*/
+
+
 /*1 뉴스 메인 페이지*/
 
 /*1.1 해당 페이지에서 무작위로 뉴스 기사 5개를 골라 신문사 이름, 기사 제목, 분야를 출력한다. 기사의 제목을 클릭하면 해당 기사의 상세 페이지로 넘어간다. 이 때 해당 기사의 id를 속성으로 넘겨준다.*/
@@ -477,13 +494,25 @@ SELECT sto.stock_id, sto.stock_code, sto.stock_name, sin.stock_price, sin.diff_f
  LIMIT 10;
 
 
-/*7.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
-SELECT *
-  FROM "AGENTMASTER"."User"
- WHERE user_id = '{user_id}';
+/*7.2 검색 키워드가 포함된 종목 SELECT*/
+
+/*7.2.1 종목코드 검색 시*/
+SELECT stock_id, stock_code, stock_name
+  FROM "AGENTMASTER"."Stock"
+ WHERE stock_code ~ '^{keyword}';
 /*
-{user_id}에 값을 넣어 주세요.
-고객 id가 {user_id}인 고객 정보를 출력합니다.
+{keyword}에 값을 넣어 주세요.
+{keyword}로 시작하는 종목코드 정보를 출력합니다.
+*/
+
+
+/*7.2.2 종목명 검색 시*/
+SELECT stock_id, stock_code, stock_name
+  FROM "AGENTMASTER"."Stock"
+ WHERE stock_name ~ '^{keyword}';
+/*
+{keyword}에 값을 넣어 주세요.
+{keyword}로 시작하는 종목명 정보를 출력합니다.
 */
 
 
@@ -523,29 +552,7 @@ SELECT sto.stock_name, sim.purchase_amount, sim.simul_return, sim.simul_range, s
 */
 
 
-/*7.6 검색 키워드가 포함된 종목 SELECT*/
-
-/*7.6.1 종목코드 검색 시*/
-SELECT stock_id, stock_code, stock_name
-  FROM "AGENTMASTER"."Stock"
- WHERE stock_code ~ '^{keyword}';
-/*
-{keyword}에 값을 넣어 주세요.
-{keyword}로 시작하는 종목코드 정보를 출력합니다.
-*/
-
-
-/*7.6.2 종목명 검색 시*/
-SELECT stock_id, stock_code, stock_name
-  FROM "AGENTMASTER"."Stock"
- WHERE stock_name ~ '^{keyword}';
-/*
-{keyword}에 값을 넣어 주세요.
-{keyword}로 시작하는 종목명 정보를 출력합니다.
-*/
-
-
-/*7.7 사용자 자산 정보 UPDATE*/
+/*7.6 사용자 자산 정보 UPDATE*/
 UPDATE "AGENTMASTER"."User"
    SET total_money = 100000,
        yesterday_money = 100000,
@@ -555,7 +562,7 @@ UPDATE "AGENTMASTER"."User"
  WHERE user_id = '{user_id}';
 
 
-/*7.8 모의투자 거래 정보 초기화 DELETE*/
+/*7.7 모의투자 거래 정보 초기화 DELETE*/
 DELETE
   FROM "AGENTMASTER"."Simulation"
  WHERE user_id = '{user_id}';
@@ -563,23 +570,15 @@ DELETE
 
 /*8 모의투자 거래*/
 
-/*8.1 선택 종목 모의투자_id SELECT*/
-SELECT simulation_id
-  FROM "AGENTMASTER"."Simulation"
- WHERE user_id = '{user_id}'
-   AND stock_id = '{stock_id}';
-
-
-/*8.2 선택 종목 그래프 정보 SELECT*/
-
-/*8.2.1 종목 정보*/
+/*8.1 선택 종목 정보 SELECT*/
 SELECT sto.stock_code, sto.stock_name, fie.field_name
   FROM "AGENTMASTER"."Stock" AS sto
            INNER JOIN "AGENTMASTER"."Field" AS fie
            ON sto.field_id = fie.field_id
  WHERE stock_id = '{stock_id}';
 
-/*8.2.2 종목 그래프 정보*/
+
+/*8.2 선택 종목 그래프 정보 SELECT*/
 SELECT stock_date, stock_price, diff_from_prevday, stock_range, start_price, high_price, low_price, trading_volume,
        transaction_amount
   FROM "AGENTMASTER"."Stock_info"
