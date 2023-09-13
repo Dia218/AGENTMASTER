@@ -18,7 +18,7 @@ export function UserInfoForm() {
     setEmail(enteredEmail);
 
     // 이메일 형식을 검증하는 정규 표현식
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const emailRegex = ^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$;
 
     if (!emailRegex.test(enteredEmail)) {
       setEmailError('유효한 이메일 형식이 아닙니다.');
