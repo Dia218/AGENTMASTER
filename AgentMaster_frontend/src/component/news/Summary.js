@@ -23,12 +23,13 @@ function Summary(){
 
     const getNewsSummary = async() => {
         try {
-            //const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}`);
-            //setNews(responseNewsSummary);
+            const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}`);
+            setNews(responseNewsSummary);
+            setScrapCheck(responseNewsSummary.scrapCheck);
+        } catch (error) {
             const responseNewsSummary = await summaryData();
             setNews(responseNewsSummary);
             setScrapCheck(false);
-        } catch (error) {
             console.error('Error fetching newsSummary data:', error);
         }
     }

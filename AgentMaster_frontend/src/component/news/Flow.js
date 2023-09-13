@@ -6,7 +6,7 @@ import { Stack } from 'react-bootstrap';
 import './css/Flow.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 function Flow(){
 
@@ -18,13 +18,12 @@ function Flow(){
     const [flowNews,setFlowNews] = useState([]);
     const [flow_text,setFlow_text] = useState("");
     const [check,setCheck] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
 
     const getNewsFlowIssue = async() => {
         try {
-            //const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
-            //setFlow(responseNewsFlowIssue);
-            const responseNewsFlowIssue = await issueData();
+            const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
             setFlow(responseNewsFlowIssue);
             if(responseNewsFlowIssue){
                 setCheck(true);
@@ -33,17 +32,25 @@ function Flow(){
                 setFlow_text("이슈가 존재하지 않습니다.");
             }
         } catch (error) {
+            const responseNewsFlowIssue = await issueData();
+            setFlow(responseNewsFlowIssue);
+            if(responseNewsFlowIssue){
+                setCheck(true);
+                setFlow_text(responseNewsFlowIssue[0].text);
+            } else {
+                setFlow_text("이슈가 존재하지 않습니다.");
+            }
             console.error('Error fetching flowIssue data:', error);
         }
     }
     const getNewsFlowList = async() => {
         try {
-            //const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
-            //setFlowNews(responseNewsFlowList);
-            const responseNewsFlowList = await listData();
+            const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
             setFlowNews(responseNewsFlowList);
         } catch (error) {
             console.error('Error fetching flowList data:', error);
+            const responseNewsFlowList = await listData();
+            setFlowNews(responseNewsFlowList);
         }
     }
 

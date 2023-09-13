@@ -33,14 +33,24 @@ function Scrap({scrapCheck,setScrapCheck}){
 
     const checkToFalse = () => {
         setScrapCheck(false);
-        //axios.post(url,data,config);
-        console.log("i send id off"+scrap+sessionStorage.getItem("user"));
+        axios.post(url,data,config)
+        .then(function (response) {
+            console.log("check to false");
+          })
+        .catch(function (error) {
+            console.error('Error fetching scrapfalse data:', error);
+          });
     }
 
     const checkToTrue = () => {
         setScrapCheck(true);
-        //axios.post(url,data,config);
-        console.log("i send id on"+scrap+sessionStorage.getItem("user"));
+        axios.post(url,data,config)
+        .then(function (response) {
+            console.log("check to true");
+          })
+        .catch(function (error) {
+            console.error('Error fetching scraptrue data:', error);
+          });
     }
 
     useEffect(()=>{

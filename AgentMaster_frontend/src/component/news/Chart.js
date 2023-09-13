@@ -15,21 +15,24 @@ function Chart() {
     //GET함수를 이용해 백엔드에 메인페이지 주식 데이터 4개를 요청하고 state에 저장하는 함수.
     const getStock_Main = async () => {
         try {
-            /*const responseStock_Main = await axios.get('http://localhost:8080/newsMain/stockChart');
-            setStockData(responseStock_Main.data);*/
-            const responseStock_Main = await data();
-            setStockData(responseStock_Main);
+            const responseStock_Main = await axios.get('http://localhost:8080/newsMain/stockChart');
+            setStockData(responseStock_Main.FluctuationStockInfo);
         } catch (error) {
+            const responseStock_Main = await data();
+            setStockData(responseStock_Main.FluctuationStockInfo);
             console.error('Error fetching chart data:', error);
         }
     };
 
     //임시 주식차트 데이터 반환 함수
     async function data() {
-        const json = [{ name: "카나리아 바이오 주식회사", price: 1000.00, compare: +100, Fluctuations: +8.47 },
-        { name: "종목2", price: 1294.00, compare: -250, Fluctuations: -9.00 },
-        { name: "종목3", price: 3021.12, compare: +250, Fluctuations: +12.34 },
-        { name: "종목4", price: 23400, compare: -330, Fluctuations: -12.78 },];
+        const json = {
+            "FluctuationStockInfo" : [{ stockId:"stock1", stockName: "카나리아 바이오 주식회사", stockPrice: 1000, diffFromPrevday: +100, range: +25.00 },
+                { stockId:"stock2", stockName: "종목2", stockPrice: 1294, diffFromPrevday: -250, range: -9.00 },
+                { stockId:"stock3", stockName: "종목3", stockPrice: 3021, diffFromPrevday: +250, range: +12.34 },
+                { stockId:"stock4", stockName: "종목4", stockPrice: 23400, diffFromPrevday: -330, range: -12.78 },
+            ]
+        };
         
         return json;
     }
@@ -60,13 +63,13 @@ function Chart() {
                         {stockData.map((data, index) => (
                             <tr className="newsMain_chart_row" key={index + 1}>
                             <td className='newsMain_chart_rowdata'>
-                                <Link className="newsMain_chart_a" to={"/chartDetail?keyword="+ data.name}>
-                                {data.name}
+                                <Link className="newsMain_chart_a" to={"/chartDetail?keyword="+ data.stockName}>
+                                {data.stockName}
                                 </Link>
                             </td>
-                            <td className='newsMain_chart_rowdata'>{addComma(data.price)}</td>
-                            <td className='newsMain_chart_rowdata'>{data.compare<0?addComma(data.compare):"+"+addComma(data.compare)}</td>
-                            <td className='newsMain_chart_rowdata'>{data.Fluctuations<0?data.Fluctuations:"+"+data.Fluctuations}%</td>
+                            <td className='newsMain_chart_rowdata'>{addComma(data.stockPrice)}</td>
+                            <td className='newsMain_chart_rowdata'>{data.diffFromPrevday<0?addComma(data.diffFromPrevday):"+"+addComma(data.diffFromPrevday)}</td>
+                            <td className='newsMain_chart_rowdata'>{data.range<0?data.range:"+"+data.range}%</td>
                             </tr>
                         ))
                         }

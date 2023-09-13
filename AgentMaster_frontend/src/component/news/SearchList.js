@@ -11,11 +11,10 @@ import axios from "axios";
 
 function SearchList(){
     //임시 데이터
-    const publisher = "신문사 이름";
+    const company = "신문사 이름";
     const name = "기자 이름";
     const title = "신문기사 제목이 올라갈 공간";
-    const date = "모월 모일";
-    const id = "00";
+    const firstPub = "모월 모일";
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [items, setItems] = useState([]);
@@ -33,29 +32,31 @@ function SearchList(){
     //GET함수를 이용해 백엔드에 유저가 입력한 keyword를 전송하고 검색 결과를 전달받아 state에 저장하는 함수
     const getSearchList = async() => {
         try {
-            /*const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
-            setSearchResult(responseSearchList);*/
-            const responseSearchList = await searchData();
-            setSearchResult(responseSearchList);
+            const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
+            setSearchResult(responseSearchList.SearchNewsInfo);
         } catch (error) {
+            const responseSearchList = await searchData();
+            setSearchResult(responseSearchList.SearchNewsInfo);
             console.error('Error fetching searchList data:', error);
         }
     }
 
     async function searchData() {
-        const json = [{id,title,publisher,name,date,keyword},
-            {"id":"01",title,publisher,name,date,keyword},
-            {"id":"02",title,publisher,name,date,keyword},
-            {"id":"03",title,publisher,name,date,keyword},
-            {"id":"04",title,publisher,name,date,keyword},
-            {"id":"05",title,publisher,name,date,keyword},
-            {"id":"06",title,publisher,name,date,keyword},
-            {"id":"07",title,publisher,name,date,keyword},
-            {"id":"08",title,publisher,name,date,keyword},
-            {"id":"09",title,publisher,name,date,keyword},
-            {"id":"10",title,publisher,name,date,keyword},
-            {"id":"11",title,publisher,name,date,keyword},
-            {"id":"12",title,publisher,name,date,keyword},];
+        const json = {
+            "SearchNewsInfo" : [{"articleId" : 1,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 2,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 3,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 4,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 5,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 6,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 7,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 8,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 9,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 10,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 11,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 12,title,company,name,firstPub,issueKeyword:keyword},
+            {"articleId" : 13,title,company,name,firstPub,issueKeyword:keyword},]
+        };
         
         return json;
     }
@@ -63,11 +64,14 @@ function SearchList(){
     //검색을 통해 url이 변경되고 그에 따른 keyword가 변경될때마다 실행하여 keyword를 받아온다.
     useEffect(()=>{
         setKeyword(searchParams.get('result'));
-        setPage(parseInt(searchParams.get('page')))
+        setPage(parseInt(searchParams.get('page')));
     },[searchParams]);
     //keyword가 변경될 때 마다 백엔드로부터 검색 결과를 받아온다.
     useEffect(() => {
-        getSearchList();
+        async function fetchDataList() {
+            await getSearchList();
+        }
+        fetchDataList();
         //setSearchResult([]);
         //setSearchResult([{id,title,publisher,name,date,keyword},])
     },[keyword]);
@@ -117,7 +121,7 @@ function SearchList(){
         <div className="bg-white searchList">
             <Stack>
                 <div className="py-3"></div>
-                <div>{checkEmpty ? <NoResult/> : items.map((v) => ( <SearchItem key={v.id} props={v}/>)) }</div>
+                <div>{checkEmpty ? <NoResult/> : items.map((v) => ( <SearchItem key={v.articleId} props={v}/>)) }</div>
             </Stack>
             <div className="search_buttons">
                 <button className="search_preButton" onClick={handlePreviousPage} disabled={page === 1}>

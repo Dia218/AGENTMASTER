@@ -16,7 +16,8 @@ function Join({show,setShow}){
     const idCheck1 = /^[a-zA-Z]{5,15}$/;
     const idCheck2 = /^[a-zA-Z0-9]{5,15}$/;
     const pwCheck = /^[a-zA-Z0-9]{8,20}$/;
-    const emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailCheck = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/;
+    
 
     //회원가입 예외처리 부분, 조건 만족 시 백엔드에 데이터를 보내고 회원가입 성공 여부를 돌려받는다.
     //GET함수를 이용해 백엔드에 id와 pw,email을 전달하고 회원가입 성공 여부를 전달받아 state에 저장하는 함수.
@@ -54,10 +55,14 @@ function Join({show,setShow}){
             alert("아이디의 중복을 확인해주세요.");
         } 
         else {
-            /*const responseCheck_Join = await axios.get(`http://localhost:8080/newsMain/join/checkJoin?userId=${id}&userPassword=${pw}&userEmail=${email}`);
-            setCheckJoin(responseCheck_Join.data);*/
-            const responseCheck_Join = await success();
-            setCheckJoin(responseCheck_Join);
+            try{
+                const responseCheck_Join = await axios.get(`http://localhost:8080/newsMain/join/checkJoin?userId=${id}&userPassword=${pw}&userEmail=${email}`);
+                setCheckJoin(responseCheck_Join.data);
+            } catch (error) {
+                const responseCheck_Join = await success();
+                setCheckJoin(responseCheck_Join);
+                console.error('Error fetching checkDupId data:', error);
+            }
         }
     }
 
@@ -83,14 +88,14 @@ function Join({show,setShow}){
         }
         else {
             try {
-                /*const responseCheckDupId = await axios.get(`http://localhost:8080/newsMain/join/doubleCheck?userId=${id}`);
+                const responseCheckDupId = await axios.get(`http://localhost:8080/newsMain/join/doubleCheck?userId=${id}`);
                 setCheckDup(responseCheckDupId.data);
-                if(checkDup){ setCheckMessage("사용 가능한 아이디 입니다."); }*/
+                if(checkDup){ setCheckMessage("사용 가능한 아이디 입니다."); }
+            } catch (error) {
+                console.error('Error fetching checkDupId data:', error);
                 const checkDupId = await success();
                 setCheckDup(checkDupId);
                 setCheckMessage("사용 가능한 아이디 입니다.");
-            } catch (error) {
-                console.error('Error fetching checkDupId data:', error);
             }
         }
     };
