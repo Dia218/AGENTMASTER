@@ -6,6 +6,7 @@ import axios from 'axios';
 export function UserInfoForm() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState(''); // 이메일 형식 오류 상태
   const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
@@ -13,15 +14,31 @@ export function UserInfoForm() {
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const enteredEmail = e.target.value;
+    setEmail(enteredEmail);
+
+    // 이메일 형식을 검증하는 정규 표현식
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    if (!emailRegex.test(enteredEmail)) {
+      setEmailError('유효한 이메일 형식이 아닙니다.');
+    } else {
+      setEmailError('');
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (emailError) {
+     
+      console.error('이메일 형식 오류:', emailError);
+      return;
+    }
+
     console.log('수정된 개인정보:', password, email);
 
-    // 백엔드에 수정된 정보를 전송하는 Axios 요청 코드 추가
+   
     axios
       .post('http://localhost:8080/updateUserInfo', { password, email })
       .then((response) => {
@@ -32,7 +49,7 @@ export function UserInfoForm() {
       })
       .catch((error) => {
         console.error('개인정보 수정 실패:', error);
-        // 오류 처리 로직 추가
+       
       });
   };
 
@@ -49,7 +66,6 @@ export function UserInfoForm() {
       })
       .catch((error) => {
         console.error('사용자 정보 가져오기 실패:', error);
-        
       });
   }, []);
 
@@ -62,7 +78,6 @@ export function UserInfoForm() {
       })
       .catch((error) => {
         console.error('사용자 정보 가져오기 실패:', error);
-       
       });
   }, []);
 
@@ -93,6 +108,7 @@ export function UserInfoForm() {
             value={email}
             onChange={handleEmailChange}
           />
+          {emailError && <p className="error-message">{emailError}</p>}
         </div>
         <div className="form-group" style={{ marginTop: 'auto' }}>
           <button className="cancel" onClick={handleClickBack}>
