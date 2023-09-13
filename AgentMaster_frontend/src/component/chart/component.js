@@ -267,7 +267,7 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
       });
 
     // Axios를 사용하여 다른 주식 데이터를 백엔드에서 요청
-    // 이 부분에서 다른 주식 데이터를 요청하고 응답을 setSearchData를 통해 저장합니다.
+    
     axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromSearch2}`)
       .then((response) => {
         setSearchData(response.data);

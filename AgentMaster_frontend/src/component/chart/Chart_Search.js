@@ -1,4 +1,3 @@
-//모의투자 메인화면에서 종목을 검색하는 부분입니다.
 
 import "./css/Chart_Search.css";
 import React, { useState, useEffect, useRef } from 'react';
