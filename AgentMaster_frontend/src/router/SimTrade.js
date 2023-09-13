@@ -20,6 +20,7 @@ export default function SimTrade() {
     "ProfitRate":"-12.3","ProfitLoss":-124000,"PurchasePrice":2342300,"AveragePrice":80000}]);
     const [stockInvestInput,setStockInvestInput] = useState([{"AvailableAsset":12523000,"simulHoldingsnum":0}]);
     const [scList,setScList] = useState([]);
+
     const [graphInput, setGraphInput] = useState([]);
 
     const fetchData = async () => {
