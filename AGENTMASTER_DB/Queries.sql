@@ -426,6 +426,63 @@ SELECT sin.stock_date, sin.stock_price, sin.diff_from_prevday, sin.stock_range, 
 {stock_id}에 해당하는 주식의 차트 정보를 출력합니다.
 */
 
+/*5.6 주식 INSERT*/
+INSERT INTO "AGENTMASTER"."Stock" (
+  stock_code,
+  stock_name,
+  field_id)
+VALUES (
+  '{stock_code}',
+  '{stock_name}',
+  '{field_id}');
+
+/*5.7 주식정보 INSERT*/
+INSERT INTO "AGENTMASTER","Stock_info" (
+  stock_id,
+  stock_date,
+  stock_price,
+  diff_from_prevday,
+  stock_range,
+  start_price,
+  high_price,
+  low_price,
+  trading_volume,
+  transaction_amount)
+VALUES (
+  '{stock_id}',
+  '{stock_date}',
+  '{stock_price}',
+  '{diff_from_prevday}',
+  '{stock_range}',
+  '{start_price}',
+  '{high_price}',
+  '{low_price}',
+  '{trading_volume}',
+  '{transaction_amount}');
+
+
+/*5.8 주식 UPDATE*/
+UPDATE "AGENTMASTER"."Stock"
+SET stock_code = '{stock_code}',
+  stock_name = '{stock_name}',
+  field_id = '{field_id}'
+WHERE stock_id = '{stock_id}';
+
+
+/*5.9 주식정보 UPDATE*/
+UPDATE "AGENTMASTER"."Stock_info"
+SET stock_id = '{stock_id}',
+  stock_date = '{stock_date}',
+  stock_price = '{stock_price}',
+  diff_from_prevday = '{diff_from_prevday}',
+  stock_range = '{stock_range}',
+  start_price = '{stock_price}',
+  high_price = '{high_price}',
+  low_price = '{low_price}',
+  trading_volume = '{trading_volume}',
+  transaction_amount = '{transaction_amount}' 
+WHERE stock_info_id = '{stock_info_id}';
+
 
 /*6 사용자 페이지*/
 
