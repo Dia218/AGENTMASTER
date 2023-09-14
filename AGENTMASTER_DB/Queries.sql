@@ -46,7 +46,7 @@ SELECT result.stock_id, result.stock_name, result.stock_price, result.diff_from_
 /*1.3 해당 페이지에서 아이디와 비밀번호를 입력하고 로그인 버튼을 클릭 시 무조건 관리자 계정의 정보를 넘겨받고 관리자 계정의 id를 출력한다.*/
 SELECT *
   FROM "AGENTMASTER"."User"
- WHERE user_id = '{username}';
+ WHERE user_name = '{user_name}';
 /*
 {username}에 값을 넣어 주세요.
 고객 id가 {username}인 고객 정보를 출력합니다.
@@ -323,16 +323,6 @@ SELECT ROW_NUMBER() OVER (ORDER BY rank_range DESC) AS ranking, user_name, rank_
 */
 
 
-/*4.5 검색창 부분에서 사용자가 검색한 키워드로 시작하는 종목명 정보를 출력한다.*/
-SELECT stock_code, stock_name
-  FROM "AGENTMASTER"."Stock"
- WHERE stock_name LIKE '{keyword}%';
-/*
-{keyword}에 값을 넣어 주세요.
-{keyword}로 시작하는 종목명 정보를 출력합니다.
-*/
-
-
 /*5 주식 상세 페이지*/
 
 /*5.1 선택한 주식 그래프 정보 SELECT*/
@@ -350,6 +340,9 @@ SELECT sto.stock_code, sto.stock_name, sto.field_name, sin.stock_date, sin.stock
 {stock_id}에 값을 넣어주세요
 특정 종목의 종목코드, 종목명, 분야이름, 기준일자, 주가, 전일비, 등락률
 */
+
+
+/*검색 키워드가 포함된 주식 종목 SELECT -> 4.2과 동일*/
 
 
 /*5.2 디비에 저장되었던 검색한 키워드에 관한 기사들을 한줄 정도 띄운다. - 수정 필요
@@ -378,24 +371,9 @@ SELECT "AGENTMASTER"."Article".article_id, article_summary
 */
 
 
-/*5.3 디비에 저장된 종목 데이터(전일, 고가, 거래량, 시가, 저가, 거래대금)을 테이블 형식으로 출력한다. - 수정 필요
-->
-//종목 데이터를 그래프에 반영하는 쿼리문과 같습니다.*/
+/*5.3 동일 분야 뉴스 정보 최신(또는 랜덤) 5개 SELECT*/
 
-
-/*5.4 검색 키워드가 포함된 주식 종목 SELECT*/
-SELECT stock_code, stock_name
-  FROM "AGENTMASTER"."Stock"
- WHERE stock_name ~ '^{keyword}';
-/*
-{keyword}에 값을 넣어 주세요.
-{keyword}로 시작하는 종목코드, 종목명 정보를 출력합니다.
-*/
-
-
-/*5.5 동일 분야 뉴스 정보 최신(또는 랜덤) 5개 SELECT*/
-
-/*5.5.1 랜덤하게 5튜플 출력한다.*/
+/*5.3.1 랜덤하게 5튜플 출력한다.*/
 SELECT art.title
   FROM "AGENTMASTER"."Stock" AS sto
            INNER JOIN "AGENTMASTER"."Article" AS art
@@ -409,7 +387,7 @@ SELECT art.title
 */
 
 
-/*5.5.2 최신 순으로 5튜플 출력한다.*/
+/*5.3.2 최신 순으로 5튜플 출력한다.*/
 SELECT art.article_id, art.title, art.company
   FROM "AGENTMASTER"."Stock" AS sto
            INNER JOIN "AGENTMASTER"."Article" AS art
@@ -423,7 +401,7 @@ SELECT art.article_id, art.title, art.company
 */
 
 
-/*5.6 클릭한 뉴스 요약문 SELECT*/
+/*5.4 클릭한 뉴스 요약문 SELECT*/
 SELECT summ.article_summary
   FROM "AGENTMASTER"."Article" AS arti
            INNER JOIN "AGENTMASTER"."Article_summary" AS summ
@@ -435,7 +413,7 @@ SELECT summ.article_summary
 */
 
 
-/*5.7 선택한 주식 차트 정보 SELECT*/
+/*5.5 선택한 주식 차트 정보 SELECT*/
 SELECT sin.stock_date, sin.stock_price, sin.diff_from_prevday, sin.stock_range, sin.start_price, sin.high_price,
        sin.low_price, sin.trading_volume, sin.transaction_amount
   FROM "AGENTMASTER"."Stock" AS sto
@@ -447,6 +425,63 @@ SELECT sin.stock_date, sin.stock_price, sin.diff_from_prevday, sin.stock_range, 
 {stock_id}에 값을 넣어 주세요.
 {stock_id}에 해당하는 주식의 차트 정보를 출력합니다.
 */
+
+/*5.6 주식 INSERT*/
+INSERT INTO "AGENTMASTER"."Stock" (
+  stock_code,
+  stock_name,
+  field_id)
+VALUES (
+  '{stock_code}',
+  '{stock_name}',
+  '{field_id}');
+
+/*5.7 주식정보 INSERT*/
+INSERT INTO "AGENTMASTER","Stock_info" (
+  stock_id,
+  stock_date,
+  stock_price,
+  diff_from_prevday,
+  stock_range,
+  start_price,
+  high_price,
+  low_price,
+  trading_volume,
+  transaction_amount)
+VALUES (
+  '{stock_id}',
+  '{stock_date}',
+  '{stock_price}',
+  '{diff_from_prevday}',
+  '{stock_range}',
+  '{start_price}',
+  '{high_price}',
+  '{low_price}',
+  '{trading_volume}',
+  '{transaction_amount}');
+
+
+/*5.8 주식 UPDATE*/
+UPDATE "AGENTMASTER"."Stock"
+SET stock_code = '{stock_code}',
+  stock_name = '{stock_name}',
+  field_id = '{field_id}'
+WHERE stock_id = '{stock_id}';
+
+
+/*5.9 주식정보 UPDATE*/
+UPDATE "AGENTMASTER"."Stock_info"
+SET stock_id = '{stock_id}',
+  stock_date = '{stock_date}',
+  stock_price = '{stock_price}',
+  diff_from_prevday = '{diff_from_prevday}',
+  stock_range = '{stock_range}',
+  start_price = '{stock_price}',
+  high_price = '{high_price}',
+  low_price = '{low_price}',
+  trading_volume = '{trading_volume}',
+  transaction_amount = '{transaction_amount}' 
+WHERE stock_info_id = '{stock_info_id}';
 
 
 /*6 사용자 페이지*/
