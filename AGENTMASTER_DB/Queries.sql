@@ -56,6 +56,11 @@ SELECT article_scrap_id
   FROM "AGENTMASTER"."Article_scrap"
  WHERE user_id = 'user_id';
 
+/*0.11 Article_summary id 출력*/
+SELECT article_summary_id
+  FROM "AGENTMASTER"."Article_summary"
+ WHERE article_id = 'article_id';
+
 /*1 뉴스 메인 페이지*/
 
 /*1.1 해당 페이지에서 무작위로 뉴스 기사 5개를 골라 신문사 이름, 기사 제목, 분야를 출력한다. 기사의 제목을 클릭하면 해당 기사의 상세 페이지로 넘어간다. 이 때 해당 기사의 id를 속성으로 넘겨준다.*/
