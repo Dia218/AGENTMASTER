@@ -4,7 +4,7 @@ SELECT simulation_id
  WHERE user_id = '{user_id}'
    AND stock_id = '{stock_id}';
 
-   
+
 /*0.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
 SELECT *
   FROM "AGENTMASTER"."User"
@@ -14,6 +14,47 @@ SELECT *
 고객 id가 {user_id}인 고객 정보를 출력합니다.
 */
 
+/*0.3  Article_group id 출력*/
+SELECT article_group_id
+  FROM "AGENTMASTER"."Article_group"
+ WHERE group_name = '{group_name}';
+/*그룹명 {group_name}의 id를 불러옵니다.*/
+
+/*0.4 Issue_summary id 출력*/
+SELECT issue_summary_id
+  FROM "AGENTMASTER"."Issue_summary"
+ WHERE issue_keyword = '{issue_keyword}';
+/*키워드가 {issue_keyword}인 이슈요약문의 id를 불러옵니다.*/
+
+/*0.5 Article_link id 출력*/
+SELECT article_link_id
+  FROM "AGENTMASTER"."Article_link"
+ WHERE link = 'link';
+
+/*0.6 Field id 출력*/
+SELECT field_id
+  FROM "AGENTMASTER"."Field"
+ WHERE field_name = 'field_name';
+
+/*0.7 Article id 출력*/
+SELECT article_id
+  FROM "AGENTMASTER"."Article"
+ WHERE title = 'title';
+
+/*0.8 Stock id 출력*/
+SELECT stock_id
+  FROM "AGENTMASTER"."Stock"
+ WHERE field_id = 'field_id';
+
+/*0.9 Stock_info id 출력*/
+SELECT stock_info_id
+  FROM "AGENTMASTER"."Stock_info"
+ WHERE stock_id = 'stock_id';
+
+/*0.10 Article_scrap id 출력*/
+SELECT article_scrap_id
+  FROM "AGENTMASTER"."Article_scrap"
+ WHERE user_id = 'user_id';
 
 /*1 뉴스 메인 페이지*/
 
@@ -165,10 +206,8 @@ SELECT arti.company, summ.article_summary
   FROM "AGENTMASTER"."Article" AS arti
            INNER JOIN "AGENTMASTER"."Article_summary" AS summ
            ON arti.article_id = summ.article_id
- WHERE TO_CHAR(arti.last_pub, 'YYYY-MM-DD') = (
-     SELECT MAX(TO_CHAR(last_pub, 'YYYY-MM-DD')) 
-     FROM "AGENTMASTER"."Article"
- )
+ WHERE TO_CHAR(arti.last_pub, 'YYYY-MM-DD') = (SELECT MAX(TO_CHAR(last_pub, 'YYYY-MM-DD'))
+                                                 FROM "AGENTMASTER"."Article")
  ORDER BY RANDOM()
  LIMIT 5;
 /*
@@ -429,61 +468,57 @@ SELECT sin.stock_date, sin.stock_price, sin.diff_from_prevday, sin.stock_range, 
 */
 
 /*5.6 주식 INSERT*/
-INSERT INTO "AGENTMASTER"."Stock" (
-  stock_code,
-  stock_name,
-  field_id)
-VALUES (
-  '{stock_code}',
-  '{stock_name}',
-  '{field_id}');
+INSERT INTO "AGENTMASTER"."Stock" (stock_code,
+                                   stock_name,
+                                   field_id)
+VALUES ('{stock_code}',
+        '{stock_name}',
+        '{field_id}');
 
 /*5.7 주식정보 INSERT*/
-INSERT INTO "AGENTMASTER","Stock_info" (
-  stock_id,
-  stock_date,
-  stock_price,
-  diff_from_prevday,
-  stock_range,
-  start_price,
-  high_price,
-  low_price,
-  trading_volume,
-  transaction_amount)
-VALUES (
-  '{stock_id}',
-  '{stock_date}',
-  '{stock_price}',
-  '{diff_from_prevday}',
-  '{stock_range}',
-  '{start_price}',
-  '{high_price}',
-  '{low_price}',
-  '{trading_volume}',
-  '{transaction_amount}');
+INSERT INTO "AGENTMASTER","Stock_info" (stock_id,
+                                        stock_date,
+                                        stock_price,
+                                        diff_from_prevday,
+                                        stock_range,
+                                        start_price,
+                                        high_price,
+                                        low_price,
+                                        trading_volume,
+                                        transaction_amount)
+VALUES ('{stock_id}',
+        '{stock_date}',
+        '{stock_price}',
+        '{diff_from_prevday}',
+        '{stock_range}',
+        '{start_price}',
+        '{high_price}',
+        '{low_price}',
+        '{trading_volume}',
+        '{transaction_amount}');
 
 
 /*5.8 주식 UPDATE*/
 UPDATE "AGENTMASTER"."Stock"
-SET stock_code = '{stock_code}',
-  stock_name = '{stock_name}',
-  field_id = '{field_id}'
-WHERE stock_id = '{stock_id}';
+   SET stock_code = '{stock_code}',
+       stock_name = '{stock_name}',
+       field_id = '{field_id}'
+ WHERE stock_id = '{stock_id}';
 
 
 /*5.9 주식정보 UPDATE*/
 UPDATE "AGENTMASTER"."Stock_info"
-SET stock_id = '{stock_id}',
-  stock_date = '{stock_date}',
-  stock_price = '{stock_price}',
-  diff_from_prevday = '{diff_from_prevday}',
-  stock_range = '{stock_range}',
-  start_price = '{stock_price}',
-  high_price = '{high_price}',
-  low_price = '{low_price}',
-  trading_volume = '{trading_volume}',
-  transaction_amount = '{transaction_amount}' 
-WHERE stock_info_id = '{stock_info_id}';
+   SET stock_id = '{stock_id}',
+       stock_date = '{stock_date}',
+       stock_price = '{stock_price}',
+       diff_from_prevday = '{diff_from_prevday}',
+       stock_range = '{stock_range}',
+       start_price = '{stock_price}',
+       high_price = '{high_price}',
+       low_price = '{low_price}',
+       trading_volume = '{trading_volume}',
+       transaction_amount = '{transaction_amount}'
+ WHERE stock_info_id = '{stock_info_id}';
 
 
 /*6 사용자 페이지*/
