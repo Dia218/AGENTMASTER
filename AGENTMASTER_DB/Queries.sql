@@ -1,65 +1,65 @@
-/*0.1 선택 종목 모의투자_id SELECT*/
-SELECT simulation_id
-  FROM "AGENTMASTER"."Simulation"
- WHERE user_id = '{user_id}'
-   AND stock_id = '{stock_id}';
+/*0 id 반환 쿼리*/
 
-
-/*0.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
+/*0.1 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
 SELECT *
   FROM "AGENTMASTER"."User"
  WHERE user_id = '{user_id}';
-/*
-{user_id}에 값을 넣어 주세요.
+/*{user_id}에 값을 넣어 주세요.
 고객 id가 {user_id}인 고객 정보를 출력합니다.
 */
 
-/*0.3  Article_group id 출력*/
+/*0.2 Article_link id 출력*/
+SELECT article_link_id
+  FROM "AGENTMASTER"."Article_link"
+ WHERE link = 'link';
+
+/*0.3 Article id 출력*/
+SELECT article_id
+  FROM "AGENTMASTER"."Article"
+ WHERE title = 'title';
+
+/*0.4 Article_summary id 출력*/
+SELECT article_summary_id
+  FROM "AGENTMASTER"."Article_summary"
+ WHERE article_id = 'article_id';
+
+/*0.5  Article_group id 출력*/
 SELECT article_group_id
   FROM "AGENTMASTER"."Article_group"
  WHERE group_name = '{group_name}';
 /*그룹명 {group_name}의 id를 불러옵니다.*/
 
-/*0.4 Issue_summary id 출력*/
+/*0.6 Issue_summary id 출력*/
 SELECT issue_summary_id
   FROM "AGENTMASTER"."Issue_summary"
  WHERE issue_keyword = '{issue_keyword}';
 /*키워드가 {issue_keyword}인 이슈요약문의 id를 불러옵니다.*/
 
-/*0.5 Article_link id 출력*/
-SELECT article_link_id
-  FROM "AGENTMASTER"."Article_link"
- WHERE link = 'link';
-
-/*0.6 Field id 출력*/
-SELECT field_id
-  FROM "AGENTMASTER"."Field"
- WHERE field_name = 'field_name';
-
-/*0.7 Article id 출력*/
-SELECT article_id
-  FROM "AGENTMASTER"."Article"
- WHERE title = 'title';
-
-/*0.8 Stock id 출력*/
-SELECT stock_id
-  FROM "AGENTMASTER"."Stock"
- WHERE field_id = 'field_id';
-
-/*0.9 Stock_info id 출력*/
-SELECT stock_info_id
-  FROM "AGENTMASTER"."Stock_info"
- WHERE stock_id = 'stock_id';
-
-/*0.10 Article_scrap id 출력*/
+/*0.7 Article_scrap id 출력*/
 SELECT article_scrap_id
   FROM "AGENTMASTER"."Article_scrap"
  WHERE user_id = 'user_id';
 
-/*0.11 Article_summary id 출력*/
-SELECT article_summary_id
-  FROM "AGENTMASTER"."Article_summary"
- WHERE article_id = 'article_id';
+/*0.8 Field id 출력*/
+SELECT field_id
+  FROM "AGENTMASTER"."Field"
+ WHERE field_name = 'field_name';
+
+/*0.9 Stock id 출력*/
+SELECT stock_id
+  FROM "AGENTMASTER"."Stock"
+ WHERE field_id = 'field_id';
+
+/*0.10 Stock_info id 출력*/
+SELECT stock_info_id
+  FROM "AGENTMASTER"."Stock_info"
+ WHERE stock_id = 'stock_id';
+
+/*0.11 선택 종목 모의투자_id SELECT*/
+SELECT simulation_id
+  FROM "AGENTMASTER"."Simulation"
+ WHERE user_id = '{user_id}'
+   AND stock_id = '{stock_id}';
 
 /*1 뉴스 메인 페이지*/
 
