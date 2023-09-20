@@ -20,10 +20,9 @@ function Summary(){
     const [scrapCheck,setScrapCheck] = useState();
 
     const location = useLocation();
-
     const getNewsSummary = async() => {
         try {
-            const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}`);
+            const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}&userId=${sessionStorage.getItem("user")}`);
             setNews(responseNewsSummary);
             setScrapCheck(responseNewsSummary.scrapCheck);
         } catch (error) {

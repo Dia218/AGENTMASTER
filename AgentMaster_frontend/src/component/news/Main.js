@@ -23,14 +23,18 @@ function Main() {
     //뉴스 데이터를 담을 useState 훅
     const [news, setNews] = useState(['','','','','']);
 
+    const [loading,setLoading] = useState(true);
+
     //GET함수를 이용해 백엔드에 메인페이지 랜덤 뉴스 데이터 5개를 요청하고 state에 저장하는 함수.
     const getNews_Main = async () => {
         try {
             const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
             setNews(responseNews_Main.PreviewNews);
+            setLoading(false);
         } catch (error) {
             const responseNews_Main = await data();
             setNews(responseNews_Main.PreviewNews);
+            setLoading(false);
             console.error('Error fetching news data:', error);
         }
     };
@@ -74,27 +78,31 @@ function Main() {
 
     return(
         <div className='main'>
-                <Stack>
-                    <Stack direction='horizontal' gap={0}>
-                        <div className='news_main'><MainNews news={news[0]}/></div>
-                        <div className='news_main'><MainNews news={news[1]}/></div>
-                        <div className='news_main'><MainNews news={news[2]}/></div>
-                        <div className='login_main'>
-                            {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin} />}
-                        </div>
+            {
+                loading ? <div>loading...</div> : (
+                    <Stack>
+                        <Stack direction='horizontal' gap={0}>
+                            <div className='news_main'><MainNews news={news[0]}/></div>
+                            <div className='news_main'><MainNews news={news[1]}/></div>
+                            <div className='news_main'><MainNews news={news[2]}/></div>
+                            <div className='login_main'>
+                                {isLogin?<Login_after setIsLogin={setIsLogin} userName={userName}/>:<Login_before setIsLogin={setIsLogin} />}
+                            </div>
+                        </Stack>
+                        <Stack direction='horizontal'>
+                            <div className='news_main'><MainNews news={news[3]}/></div>
+                            <div className='news_main'><MainNews news={news[4]}/></div>
+                            <div className='stock_main'>
+                                <Stack direction='horizontal' className='stock_title'>
+                                    <div className='stock_title_text'>증시</div>
+                                    <div className="ms-auto text-center moveToStock" onClick={handleClick}><h3>+</h3></div>
+                                </Stack>
+                                <Chart />
+                            </div>
+                        </Stack>
                     </Stack>
-                    <Stack direction='horizontal'>
-                        <div className='news_main'><MainNews news={news[3]}/></div>
-                        <div className='news_main'><MainNews news={news[4]}/></div>
-                        <div className='stock_main'>
-                            <Stack direction='horizontal' className='stock_title'>
-                                <div className='stock_title_text'>증시</div>
-                                <div className="ms-auto text-center moveToStock" onClick={handleClick}><h3>+</h3></div>
-                            </Stack>
-                            <Chart />
-                        </div>
-                    </Stack>
-                </Stack>
+                )
+            }
         </div>
     );
 }
