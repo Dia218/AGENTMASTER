@@ -1,19 +1,65 @@
-/*0.1 선택 종목 모의투자_id SELECT*/
+/*0 id 반환 쿼리*/
+
+/*0.1 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
+SELECT *
+  FROM "AGENTMASTER"."User"
+ WHERE user_id = '{user_id}';
+/*{user_id}에 값을 넣어 주세요.
+고객 id가 {user_id}인 고객 정보를 출력합니다.
+*/
+
+/*0.2 Article_link id 출력*/
+SELECT article_link_id
+  FROM "AGENTMASTER"."Article_link"
+ WHERE link = 'link';
+
+/*0.3 Article id 출력*/
+SELECT article_id
+  FROM "AGENTMASTER"."Article"
+ WHERE title = 'title';
+
+/*0.4 Article_summary id 출력*/
+SELECT article_summary_id
+  FROM "AGENTMASTER"."Article_summary"
+ WHERE article_id = 'article_id';
+
+/*0.5  Article_group id 출력*/
+SELECT article_group_id
+  FROM "AGENTMASTER"."Article_group"
+ WHERE group_name = '{group_name}';
+/*그룹명 {group_name}의 id를 불러옵니다.*/
+
+/*0.6 Issue_summary id 출력*/
+SELECT issue_summary_id
+  FROM "AGENTMASTER"."Issue_summary"
+ WHERE issue_keyword = '{issue_keyword}';
+/*키워드가 {issue_keyword}인 이슈요약문의 id를 불러옵니다.*/
+
+/*0.7 Article_scrap id 출력*/
+SELECT article_scrap_id
+  FROM "AGENTMASTER"."Article_scrap"
+ WHERE user_id = 'user_id';
+
+/*0.8 Field id 출력*/
+SELECT field_id
+  FROM "AGENTMASTER"."Field"
+ WHERE field_name = 'field_name';
+
+/*0.9 Stock id 출력*/
+SELECT stock_id
+  FROM "AGENTMASTER"."Stock"
+ WHERE field_id = 'field_id';
+
+/*0.10 Stock_info id 출력*/
+SELECT stock_info_id
+  FROM "AGENTMASTER"."Stock_info"
+ WHERE stock_id = 'stock_id';
+
+/*0.11 선택 종목 모의투자_id SELECT*/
 SELECT simulation_id
   FROM "AGENTMASTER"."Simulation"
  WHERE user_id = '{user_id}'
    AND stock_id = '{stock_id}';
-
-   
-/*0.2 나의 투자 정보 화면에서 사용자_id를 출력한다.*/
-SELECT *
-  FROM "AGENTMASTER"."User"
- WHERE user_id = '{user_id}';
-/*
-{user_id}에 값을 넣어 주세요.
-고객 id가 {user_id}인 고객 정보를 출력합니다.
-*/
-
 
 /*1 뉴스 메인 페이지*/
 
@@ -75,10 +121,12 @@ VALUES ('{username}',
 
 /*2.1 해당 페이지에서 클릭한 기사의 기사 제목, 스크랩 여부, 신문사 이름, 기자 이름을 출력한다.*/
 SELECT article.article_id, article.title, article.company, article.reporter,
-       CASE WHEN EXISTS (SELECT
-                           FROM "AGENTMASTER"."Article_scrap"
-                          WHERE article_id = '{article_id}' AND user_id = '{username}') THEN TRUE
-            ELSE FALSE END AS isscrap
+       CASE
+           WHEN EXISTS (SELECT
+                          FROM "AGENTMASTER"."Article_scrap"
+                         WHERE article_id = '{article_id}'
+                           AND user_id = '{username}') THEN TRUE
+           ELSE FALSE END AS isscrap
   FROM "AGENTMASTER"."Article" AS article
  WHERE article_id = '{article_id}';
 /*
@@ -128,13 +176,13 @@ SELECT article2.article_id, article2.title
 */
 /*2.6 선택된 뉴스 스크랩을 등록한다.*/
 INSERT INTO "AGENTMASTER"."Article_scrap" (user_id, article_link_id)
-VALUES ('{customer_id}', '{article_id}');
+VALUES ('{user_id}', '{article_id}');
 /*customer_id와 article_id를 받아 입력합니다.*/
 /*2.6.1 선택된 뉴스 스크랩을 삭제한다.*/
 DELETE
   FROM "AGENTMASTER"."Article_scrap"
- WHERE user_id = '{customer_id}'
-   AND article_link_id = '{article_id}';
+ WHERE user_id = '{user_id}'
+   AND article_link_id = '{article_link_id}';
 /*customer_id와 article_id를 받아 해당 스크랩을 삭제합니다.*/
 
 /*3 뉴스 검색 페이지*/
@@ -163,10 +211,8 @@ SELECT arti.company, summ.article_summary
   FROM "AGENTMASTER"."Article" AS arti
            INNER JOIN "AGENTMASTER"."Article_summary" AS summ
            ON arti.article_id = summ.article_id
- WHERE TO_CHAR(arti.last_pub, 'YYYY-MM-DD') = (
-     SELECT MAX(TO_CHAR(last_pub, 'YYYY-MM-DD')) 
-     FROM "AGENTMASTER"."Article"
- )
+ WHERE TO_CHAR(arti.last_pub, 'YYYY-MM-DD') = (SELECT MAX(TO_CHAR(last_pub, 'YYYY-MM-DD'))
+                                                 FROM "AGENTMASTER"."Article")
  ORDER BY RANDOM()
  LIMIT 5;
 /*
@@ -427,61 +473,57 @@ SELECT sin.stock_date, sin.stock_price, sin.diff_from_prevday, sin.stock_range, 
 */
 
 /*5.6 주식 INSERT*/
-INSERT INTO "AGENTMASTER"."Stock" (
-  stock_code,
-  stock_name,
-  field_id)
-VALUES (
-  '{stock_code}',
-  '{stock_name}',
-  '{field_id}');
+INSERT INTO "AGENTMASTER"."Stock" (stock_code,
+                                   stock_name,
+                                   field_id)
+VALUES ('{stock_code}',
+        '{stock_name}',
+        '{field_id}');
 
 /*5.7 주식정보 INSERT*/
-INSERT INTO "AGENTMASTER","Stock_info" (
-  stock_id,
-  stock_date,
-  stock_price,
-  diff_from_prevday,
-  stock_range,
-  start_price,
-  high_price,
-  low_price,
-  trading_volume,
-  transaction_amount)
-VALUES (
-  '{stock_id}',
-  '{stock_date}',
-  '{stock_price}',
-  '{diff_from_prevday}',
-  '{stock_range}',
-  '{start_price}',
-  '{high_price}',
-  '{low_price}',
-  '{trading_volume}',
-  '{transaction_amount}');
+INSERT INTO "AGENTMASTER"."Stock_info" (stock_id,
+                                        stock_date,
+                                        stock_price,
+                                        diff_from_prevday,
+                                        stock_range,
+                                        start_price,
+                                        high_price,
+                                        low_price,
+                                        trading_volume,
+                                        transaction_amount)
+VALUES ('{stock_id}',
+        '{stock_date}',
+        '{stock_price}',
+        '{diff_from_prevday}',
+        '{stock_range}',
+        '{start_price}',
+        '{high_price}',
+        '{low_price}',
+        '{trading_volume}',
+        '{transaction_amount}');
 
 
 /*5.8 주식 UPDATE*/
 UPDATE "AGENTMASTER"."Stock"
-SET stock_code = '{stock_code}',
-  stock_name = '{stock_name}',
-  field_id = '{field_id}'
-WHERE stock_id = '{stock_id}';
+   SET stock_code = '{stock_code}',
+       stock_name = '{stock_name}',
+       field_id = '{field_id}'
+ WHERE stock_id = '{stock_id}';
 
 
 /*5.9 주식정보 UPDATE*/
 UPDATE "AGENTMASTER"."Stock_info"
-SET stock_id = '{stock_id}',
-  stock_date = '{stock_date}',
-  stock_price = '{stock_price}',
-  diff_from_prevday = '{diff_from_prevday}',
-  stock_range = '{stock_range}',
-  start_price = '{stock_price}',
-  high_price = '{high_price}',
-  low_price = '{low_price}',
-  trading_volume = '{trading_volume}',
-  transaction_amount = '{transaction_amount}' 
-WHERE stock_info_id = '{stock_info_id}';
+   SET stock_id = '{stock_id}',
+       stock_date = '{stock_date}',
+       stock_price = '{stock_price}',
+       diff_from_prevday = '{diff_from_prevday}',
+       stock_range = '{stock_range}',
+       start_price = '{stock_price}',
+       high_price = '{high_price}',
+       low_price = '{low_price}',
+       trading_volume = '{trading_volume}',
+       transaction_amount = '{transaction_amount}'
+ WHERE stock_info_id = '{stock_info_id}';
 
 
 /*6 사용자 페이지*/
@@ -493,14 +535,16 @@ VALUES ('{user_id}', '{user_name}', '{password]', '{e_mail}');
 
 /*6.1 로그인 수정 */
 UPDATE "AGENTMASTER"."User"
-   SET password = CASE WHEN '{password}' !=
-                            (SELECT password FROM "AGENTMASTER"."User" WHERE user_id = '{customer_id}') AND
-                            '{password}' IS NOT NULL THEN '{password}'
-                       ELSE password END,
+   SET password = CASE
+                      WHEN '{password}' !=
+                           (SELECT password FROM "AGENTMASTER"."User" WHERE user_id = '{customer_id}') AND
+                           '{password}' IS NOT NULL THEN '{password}'
+                      ELSE password END,
 
-       e_mail = CASE WHEN '{e_mail}' != (SELECT e_mail FROM "AGENTMASTER"."User") AND '{e_mail}' IS NOT NULL
-                         THEN '{e_mail}'
-                     ELSE e_mail END
+       e_mail = CASE
+                    WHEN '{e_mail}' != (SELECT e_mail FROM "AGENTMASTER"."User") AND '{e_mail}' IS NOT NULL
+                        THEN '{e_mail}'
+                    ELSE e_mail END
  WHERE user_id = '{User_id}';
 /*'{customer_id}', '{e_mail}'과 '{password}'에 값을 넣으세요.
   '{password}' 값 입력은 선택으로, NULL값이 들어가거나, 기존의 비밀번호와 같으면 변경되지 않습니다.
