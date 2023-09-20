@@ -345,7 +345,7 @@ id, 비밀번호, 이메일 입력 후 회원가입 INSERT [4]
 
 사건 키워드 UPDATE [2]
     입력: new_issue_keyword, old_issue_keyword (새로운 사건키워드, 이전 사건키워드)
-    수정: new_issue_keyword, old_issue_keyword
+    수정: issue_keyword
 
 사건키워드에 해당하는 본문 SELECT [3]
     입력: issue_keyword (사건키워드)
