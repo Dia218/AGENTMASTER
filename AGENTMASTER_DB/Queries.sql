@@ -176,13 +176,13 @@ SELECT article2.article_id, article2.title
 */
 /*2.6 선택된 뉴스 스크랩을 등록한다.*/
 INSERT INTO "AGENTMASTER"."Article_scrap" (user_id, article_link_id)
-VALUES ('{customer_id}', '{article_id}');
+VALUES ('{user_id}', '{article_id}');
 /*customer_id와 article_id를 받아 입력합니다.*/
 /*2.6.1 선택된 뉴스 스크랩을 삭제한다.*/
 DELETE
   FROM "AGENTMASTER"."Article_scrap"
- WHERE user_id = '{customer_id}'
-   AND article_link_id = '{article_id}';
+ WHERE user_id = '{user_id}'
+   AND article_link_id = '{article_link_id}';
 /*customer_id와 article_id를 받아 해당 스크랩을 삭제합니다.*/
 
 /*3 뉴스 검색 페이지*/
@@ -481,7 +481,7 @@ VALUES ('{stock_code}',
         '{field_id}');
 
 /*5.7 주식정보 INSERT*/
-INSERT INTO "AGENTMASTER","Stock_info" (stock_id,
+INSERT INTO "AGENTMASTER"."Stock_info" (stock_id,
                                         stock_date,
                                         stock_price,
                                         diff_from_prevday,
