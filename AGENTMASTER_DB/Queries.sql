@@ -725,9 +725,14 @@ SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
   FROM "AGENTMASTER"."Stock" AS sto
            INNER JOIN "AGENTMASTER"."Stock_info" AS sin
            ON sto.stock_id = sin.stock_id
- WHERE field_id = (SELECT field_id FROM "AGENTMASTER"."Stock" WHERE stock_id = 1)
+ WHERE field_id = (SELECT field_id FROM "AGENTMASTER"."Stock" WHERE stock_id = '{stock_id}')
    AND sin.stock_date = (SELECT stock_date FROM "AGENTMASTER"."Stock_info" ORDER BY stock_date DESC LIMIT 1)
- ORDER BY sin.trading_volume DESC;
+ ORDER BY sin.trading_volume DESC
+ LIMIT 4;
+/*
+{stock_id}에 값을 넣어 주세요.
+주식 id에 해당하는 분야 id값 중에서 거래량 기준 상위 4개 종목의 종목명, 주가, 전일비, 등락률 정보를 출력합니다.
+*/
 
 
 /*9 기사 요약문*/
