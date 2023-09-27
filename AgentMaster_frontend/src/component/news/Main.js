@@ -12,6 +12,7 @@ import Login_before from './Login_before';
 import Chart from './Chart';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 function Main() {
 
@@ -42,11 +43,37 @@ function Main() {
     //임시 뉴스값 반환 함수
     async function data() {
         const json = {
-            "PreviewNews" : [{articleId:1,company,title,fieldName},
-                {articleId:2,company,title,fieldName},
-                {articleId:3,company,title,fieldName},
-                {articleId:4,company,title,fieldName},
-                {articleId:5,company,title,fieldName},
+            "PreviewNews" : [
+                {	
+                    "articleId" : 1,
+                    "company" : "company1",
+                    "title" : "전 세계 클럽 주장 중 가장 높은 가치를 지닌 선수 베스트11'이라는 이름으로 스쿼드를 구성해 공개했다",
+                    "fieldName" : "fieldname1"
+                },
+                {	
+                    "articleId" : 2,
+                    "company" : "company2",
+                    "title" : "title2",
+                    "fieldName" : "fieldname2"
+                },
+                {	
+                    "articleId" : 3,
+                    "company" : "company3",
+                    "title" : "title3",
+                    "fieldName" : "fieldname3"
+                },
+                {	
+                    "articleId" : 4,
+                    "company" : "company4",
+                    "title" : "title4",
+                    "fieldName" : "fieldname4"
+                },
+                {	
+                    "articleId" : 5,
+                    "company" : "company5",
+                    "title" : "title5",
+                    "fieldName" : "fieldname5",
+                }
             ]
         }
         
@@ -79,7 +106,7 @@ function Main() {
     return(
         <div className='main'>
             {
-                loading ? <div>loading...</div> : (
+                loading ? <div className='loading_main'><LoadingOutlined />loading...</div> : (
                     <Stack>
                         <Stack direction='horizontal' gap={0}>
                             <div className='news_main'><MainNews news={news[0]}/></div>

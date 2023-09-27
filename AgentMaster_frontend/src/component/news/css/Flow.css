@@ -46,3 +46,9 @@ div.scroll_horizental {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.loading_flow {
+    height: 20vh;
+    line-height: 20vh;
+    text-align: center;
+}

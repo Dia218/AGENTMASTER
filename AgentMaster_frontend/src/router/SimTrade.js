@@ -9,6 +9,7 @@ import StockInvestInput from "../component/SimTrade/StockInvestInput";
 import Header from '../component/Header';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 
 export default function SimTrade() {
@@ -16,10 +17,11 @@ export default function SimTrade() {
     const queryParams = new URLSearchParams(location.search);
     const keywordFromURL = queryParams.get('keyword');
     const [siCategory,setSiCategory] = useState([]);
-    const [stockInvestData,setStockInvestData] = useState([{"stockPrice":9000,"stockRange":"+0.8","stockAmount":12663533,"stockStartPrice":7500,"stockHighPrice":11000,"stockLowPrice":9000,
-    "simulRange":"-12.3","simulReturn":-124000,"PurchasePrice":2342300,"stockAveragePrice":80000}]);
-    const [stockInvestInput,setStockInvestInput] = useState([{"AvailableAsset":12523000,"simulHoldingsnum":0}]);
+    const [stockInvestData,setStockInvestData] = useState([{"stockPrice":'-',"stockRange":'-',"stockAmount":'-',"stockStartPrice":'-',"stockHighPrice":'-',"stockLowPrice":'-',
+    "simulRange":'-',"simulReturn":'-',"PurchasePrice":'-',"stockAveragePrice":'-'}]);
+    const [stockInvestInput,setStockInvestInput] = useState([{"AvailableAsset":'-',"simulHoldingsnum":'-'}]);
     const [scList,setScList] = useState([]);
+    const [loadingSi,setLoadingSi] = useState(true);
 
     const [graphInput, setGraphInput] = useState([]);
 
@@ -59,9 +61,11 @@ export default function SimTrade() {
         try {
             const responseSiCategory = await axios.get(`http://localhost:8080/simulTrade/SiCategory?keyword=${keywordFromURL}`);
             setSiCategory(responseSiCategory.sameFieldStock);
+            setLoadingSi(false);
         } catch (error) {
             const responseSiCategory = await siCategoryData();
             setSiCategory(responseSiCategory.sameFieldStock);
+            setLoadingSi(false);
             console.error('Error fetching siCategory data:', error);
         }
     }
@@ -77,7 +81,7 @@ export default function SimTrade() {
 
     async function stockInputData() {
         const json = {
-            "StockHodingData": [{"AvailableAsset":12523000,"simulHoldingsnum":10}]
+            "StockHodingData": [{"AvailableAsset":12523000,"simulHoldingsnum":17}]
         };
         
         return json;
@@ -120,9 +124,14 @@ export default function SimTrade() {
                     <div className="StockSimilarCategory">
                         동일 분야 투자 종목
                     </div>
+                    <>
+                    { loadingSi ? <div className='loading_si'><LoadingOutlined />loading...</div> : (
                     <div className="StockSimilarCategoryGroup">
                         {scList}
                     </div>
+                    )
+                    }
+                    </>
                 </div>
                 <div className="StockRight">
                     <StockInvestData
