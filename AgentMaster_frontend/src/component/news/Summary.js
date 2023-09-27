@@ -25,7 +25,7 @@ function Summary(){
             const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}&userId=${sessionStorage.getItem("user")}`);
             setNews(responseNewsSummary);
             setScrapCheck(responseNewsSummary.scrapCheck);
-        } catch (error) {
+        }catch (error) {
             const responseNewsSummary = await summaryData();
             setNews(responseNewsSummary);
             setScrapCheck(false);
