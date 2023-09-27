@@ -6,6 +6,7 @@ import { Stack } from 'react-bootstrap';
 import './css/Flow.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router';
 
 function Flow(){
 
@@ -17,12 +18,12 @@ function Flow(){
     const [flowNews,setFlowNews] = useState([]);
     const [flow_text,setFlow_text] = useState("");
     const [check,setCheck] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const getNewsFlowIssue = async() => {
         try {
-            //const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
-            //setFlow(responseNewsFlowIssue);
-            const responseNewsFlowIssue = await issueData();
+            const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
             setFlow(responseNewsFlowIssue);
             if(responseNewsFlowIssue){
                 setCheck(true);
@@ -31,17 +32,25 @@ function Flow(){
                 setFlow_text("이슈가 존재하지 않습니다.");
             }
         } catch (error) {
+            const responseNewsFlowIssue = await issueData();
+            setFlow(responseNewsFlowIssue);
+            if(responseNewsFlowIssue){
+                setCheck(true);
+                setFlow_text(responseNewsFlowIssue[0].text);
+            } else {
+                setFlow_text("이슈가 존재하지 않습니다.");
+            }
             console.error('Error fetching flowIssue data:', error);
         }
     }
     const getNewsFlowList = async() => {
         try {
-            //const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
-            //setFlowNews(responseNewsFlowList);
-            const responseNewsFlowList = await listData();
+            const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
             setFlowNews(responseNewsFlowList);
         } catch (error) {
             console.error('Error fetching flowList data:', error);
+            const responseNewsFlowList = await listData();
+            setFlowNews(responseNewsFlowList);
         }
     }
 
@@ -51,7 +60,7 @@ function Flow(){
     }
 
     async function listData() {
-        const json = [{title,text},{title,text},{title,text}];
+        const json = [{title,text,'id':11},{title,text,'id':22},{title,text,'id':33}];
         return json;
     }
 
@@ -60,11 +69,19 @@ function Flow(){
         getNewsFlowList();
     },[])
 
+    const onClickTitle = (article) => {
+        navigate(`/newsDetail?id=${article.id}`,{
+            state: {
+                id: article.id
+            }
+        });
+    }
+
     //사건의 흐름 중 요약 기사를 map함수를 통해 순서대로 출력.
     const articleList = flowNews.map((article) => (
         <>
         <div className='col-5 flow_summary' key={article.title}>
-            <h5 className='as_title'>{article.title}</h5>
+            <h5 className='as_title' onClick={()=>onClickTitle(article)}>{article.title}</h5>
             <hr/>
             <div className='flow_summary_body'>
                 {article.text}

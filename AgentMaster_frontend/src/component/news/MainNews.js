@@ -10,9 +10,9 @@ function MainNews({news}) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/newsDetail?id=${news.id}`,{
+        navigate(`/newsDetail?id=${news.articleId}`,{
             state: {
-                id: news.id
+                id: news.articleId
             }
         });
     }
@@ -21,7 +21,7 @@ function MainNews({news}) {
         <>
         <Stack gap={0}>
             <div className="mt-1 publisher">
-                <h5>{news.publisher}</h5>
+                <h5>{news.company}</h5>
             </div>
             <div className="mt-1 MainNews">
                 <button 
@@ -29,7 +29,7 @@ function MainNews({news}) {
                 onClick={handleClick}><h3>{news.title}</h3></button>
             </div>
             <div className="category">
-                키워드:
+                키워드:{" "+news.fieldName}
             </div>
         </Stack>
         </>

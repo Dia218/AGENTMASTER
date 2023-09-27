@@ -14,21 +14,21 @@ function Summary(){
     const publisher = "신문사 이름";
     const name = "기자 이름";
     const title = "신문기사 제목이 올라갈 공간";
-    const link = "http://www.naver.com";
+    const link = "https://imnews.imbc.com";
 
     const [news, setNews] = useState([{text,publisher,name,title,link}]);
     const [scrapCheck,setScrapCheck] = useState();
 
     const location = useLocation();
-
     const getNewsSummary = async() => {
         try {
-            //const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}`);
-            //setNews(responseNewsSummary);
+            const responseNewsSummary = await axios.get(`http://localhost:8080/newsDetail/newsSummary?newsId=${location.state.id}&userId=${sessionStorage.getItem("user")}`);
+            setNews(responseNewsSummary);
+            setScrapCheck(responseNewsSummary.scrapCheck);
+        } catch (error) {
             const responseNewsSummary = await summaryData();
             setNews(responseNewsSummary);
             setScrapCheck(false);
-        } catch (error) {
             console.error('Error fetching newsSummary data:', error);
         }
     }

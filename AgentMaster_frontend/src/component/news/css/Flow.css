@@ -41,3 +41,8 @@ div.scroll_horizental {
 .as_title {
     margin-inline: 8px;
 }
+
+.as_title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

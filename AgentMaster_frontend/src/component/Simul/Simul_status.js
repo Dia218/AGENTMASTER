@@ -3,7 +3,7 @@ import axios from 'axios';
 import Status_list from './Status_list';
 import "./css/Simul_status.css";
 
-function Simul_status() {
+function Simul_status({ userName }) {
   const [money, setMoney] = useState(320000);
   const [stock_money, setStockMoney] = useState(443200);
   const [total_money, setTotalMoney] = useState(money + stock_money);
@@ -11,12 +11,24 @@ function Simul_status() {
   const [customerRank, setCustomerRank] = useState('');
   const [customerRankRange, setCustomerRankRange] = useState('');
 
-  const onClick = () => {
-    const reset = window.confirm('모의투자 정보를 초기화 하시겠습니까?');
-    if (reset === true) {
-      setMoney(10000);
-      setStockMoney(0);
-      setStockHoldings(0);
+  const resetAccount = () => {
+    const resetConfirmed = window.confirm('모의투자 정보를 초기화 하시겠습니까?');
+
+    if (resetConfirmed) {
+     
+      axios.post(`http://localhost:8080/resetAccount`, { userName })
+        .then((response) => {
+          
+          //console.log('초기화 성공', response.data);
+          
+          setMoney(10000);
+          setStockMoney(0);
+          setStockHoldings(0);
+        })
+        .catch((error) => {
+          
+          console.error('초기화 실패', error);
+        });
     }
   };
 
@@ -26,7 +38,7 @@ function Simul_status() {
 
   useEffect(() => {
     // 사용자 모의투자 순위 정보를 백엔드에서 요청
-    axios.get('http://localhost:8080/RankInfo')
+    axios.get(`http://localhost:8080/RankInfo?userName=${userName}`)
       .then((response) => {
         const rankInfo = response.data.RankInfo[0]; // 첫 번째 사용자 순위 정보를 가져옴
         setCustomerRank(rankInfo.customerRank);
@@ -37,7 +49,7 @@ function Simul_status() {
       });
 
     // 사용자 계좌 정보를 백엔드에서 요청
-    axios.get('http://localhost:8080/AccountInfo')
+    axios.get(`http://localhost:8080/AccountInfo?userName=${userName}`)
       .then((response) => {
         const accountInfo = response.data.AccountInfo[0]; // 첫 번째 사용자 계좌 정보를 가져옴
         // 백엔드에서 제공되는 필드 이름에 따라 설정
@@ -56,9 +68,9 @@ function Simul_status() {
         <div className="simulStatusHeaderBar">
           <div className="simulStatusTitle">{sessionStorage.getItem('user')} 님의 투자 정보</div>
           <div className="simulStatusReset">
-            <button className="simulStatusResetBtn" onClick={onClick}>
-              초기화
-            </button>
+          <button className="simulStatusResetBtn" onClick={resetAccount}>
+          초기화
+        </button>
           </div>
         </div>
       </div>
