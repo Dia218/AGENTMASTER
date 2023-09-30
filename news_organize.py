@@ -1,7 +1,7 @@
 # 뉴스 정리 기능
 import openai
 
-openai.api_key = "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"
+openai.api_key = ""
 
 def llm_request(content):
     """
