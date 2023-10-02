@@ -354,3 +354,7 @@ id, 비밀번호, 이메일 입력 후 회원가입 INSERT [4]
 사건요약문 UPDATE [4]
     입력: issue_summary_id (사건요약문고유번호)
     수정: issue_summary_id
+
+사건키워드 SELECT [5]
+    입력: issue_summary_id (사건요약문고유번호)
+    반환: issue_keyword (사건키워드)
