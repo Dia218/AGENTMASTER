@@ -1,0 +1,62 @@
+
+/*result*/
+.simulSearchResult {
+    position: absolute;
+    z-index: 1;
+    border: 2px solid #50B3FF;
+    background-color: white;
+    width: 640px;
+    height:280px;
+    border-radius: 20px 20px 10px 10px;
+    padding: 10px;
+    overflow: auto; /* 스크롤 생성 */
+}
+
+.simulSearchResult > ul {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.simulSearchResultFrame {
+    position: relative;
+    height: 55px;
+}
+
+.simulSearchResult_li:nth-child(2n -1){
+    background-color: white;
+}
+
+
+.simulSearchResult_li:hover{
+    background-color: rgb(200, 200, 200);
+}
+
+.simulSearchResult_div {
+    position: relative;
+    height: 50px;
+}
+
+.simulSearchResult_a {
+    text-decoration: none;
+    color: black;
+}
+
+.simulSearchResult_a > div {
+    float: left;
+    padding: 13px 0px;
+    font-weight: 1000;
+    overflow: hidden;
+}
+
+.simulSearchResultId {
+    width: 100px;
+}
+
+.simulSearchResultName {
+    width: 300px;
+}
+
+.simulSearchResultMarket {
+    width: 80px;
+}

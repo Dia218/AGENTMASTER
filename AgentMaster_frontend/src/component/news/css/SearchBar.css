@@ -1,0 +1,10 @@
+.searchBar {
+    margin: 0 auto;
+    margin-bottom: 80px;
+    margin-top: 25px;
+}
+
+.searchBar_component {
+    border: 1px solid #0073e5;
+    border-radius: 7px;
+}

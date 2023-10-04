@@ -1,0 +1,67 @@
+.StockInvestDataHeader {
+    padding: 20px;
+    height: 70%;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 40px;
+    min-width: 430px;
+    max-width: 520px;
+    min-height: 400px;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+}
+
+.StockInvestDataTop {
+    height: 28vh;
+}
+
+.StockInvestDataTop_Header {
+    border: 2px solid white;
+    background-color: #CDF7FF;
+    color: #0092F3;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.StockInvestDataTop_body {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.StockInvestDataBottom {
+    height: 17vh;
+}
+
+.StockInvestDataBottom_Left {
+    border: 2px solid white;
+    border-radius: 40px;
+    background-color: #0092F3;
+    min-height: 18vh;
+    padding-top: 3vh;
+    margin-right: 3px;
+}
+
+.PR_H {
+    font-size: 21px;
+    color: white;
+}
+.PR_B {
+    margin-top: 10px;
+    font-size: 35px;
+    color: white;
+}
+
+.StockInvestDataBottom_Right_Header {
+    background-color: #0092F3;
+    border: 2px solid white;
+    color: white;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+
+.StockInvestDataBottom_Right_Body {
+    border: 2px solid white;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}

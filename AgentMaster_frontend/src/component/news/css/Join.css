@@ -1,0 +1,18 @@
+.joinTitle {
+    background-color: #50b3ff;
+}
+
+.joinBody {
+    margin: 30px;
+    line-height: 40px;
+}
+
+.warningId {
+    width: fit-content;
+    float: right;
+}
+
+.doubleCheck_message {
+    padding-left: 10vh;
+    font-size: small;
+}

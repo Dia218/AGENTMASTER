@@ -1,0 +1,247 @@
+.Chart_Main{
+  background-color: white;
+  min-height: 120vh;
+}
+.chartNews {
+    border: 3px solid #9bccfb;
+    height: 450px;
+    width: 600px;
+    justify-content: center;
+    margin-top: 70px;
+    margin-left: 120px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    background-color: #95d6ff;
+    border-radius: 20px;
+  }
+  .news-summary {
+    width: 400px; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+  .news-title {
+    color: white;
+    margin-left: 15px;
+    margin-top: 8px;
+  }
+  .news-container {
+    height: 300px;
+    width: 550px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    color: white;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .news-divider {
+    border-top: 5px solid white; 
+    margin-top: 20px; 
+  }
+  .news-description {
+    margin-bottom: 30px;
+  }
+
+  .chart_search{
+    margin-top: 70px;
+    margin-left: 50px;
+  }
+  
+  .table2 {
+    width: 1300px;
+    border-collapse: collapse;
+    margin-left: 80px;
+    margin-top: 10px;
+  }
+  
+  .table2 th,
+  .table2 td {
+    text-align: center;
+    padding: 8px;
+  }
+  .table2 th.border-top{
+     border-right: 2px solid white;
+  } 
+  .table2 th{
+    background-color:#0092f3 ;
+  }
+  .table2 td:last-child {
+    border-right: none;
+  }
+ 
+  .news-search-container {
+    display: flex;
+    gap: 20px;
+   
+  }
+
+  .table-container_main {
+    margin-left: 5vh;
+  }
+  .table-buttons button {
+    border: 2px solid #0092F3; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    color: #3eb7ff;
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+    background-color: white;
+  }
+  .table-buttons{
+    margin-left: 90px;
+    display: flex;
+    gap: 100px;
+  }
+  .table-container{
+   
+    margin-top: 10px;
+
+  }
+
+  .table-buttons button.test {
+    background-color: #3eb7ff;
+    border-radius: 10px;
+    color: white;
+    width: 180px;
+    height: 50px;
+  }
+  .top-list td{
+    text-align: center;
+  }
+  .top-list tr {
+    height: 1rem; 
+    
+  }
+  .thin-border{
+    border-top: 2px solid #0092f3;
+  }
+  .border-top{
+    color: white;
+  }
+  .ranking-container {
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 100px;
+  }
+
+  .mock-ranking-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 550px;
+    margin-left: -280px;
+    border-radius: 40px;
+    margin-top: 100px;
+  }
+  
+  .ranking-list {
+    text-align: left;
+    width: 550px;
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #95d6ff;
+    border-radius: 20px;
+  }
+  
+  .ranking-list h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 25px;
+  }
+  
+  .ranking-list ol {
+    margin-left: 10px;
+    text-align: left;
+  }
+  
+  .ranking-list li {
+    margin-bottom: 10px;
+    margin-left: 2px;
+  }
+  
+  .ranking-list li.title {
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  .ranking-list {
+    position: relative;
+  }
+  
+  .ranking-left,
+  .ranking-right {
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .ranking-left {
+    margin-right: 15px;
+  }
+  
+ 
+  .ranking-right {
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+  .dot-list {
+    position: relative;
+    list-style-type: none;
+  }
+  
+  .dot-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, white 50%);
+    background-size: 100% 8px;
+    background-repeat: repeat-y;
+    margin-left: 15px; 
+  }
+  .rank-icon{
+    width: 30px;
+    height: 30px;
+  }
+  .trophy{
+    height: 50px;
+    width: 50px;
+  }
+  .mockTitle{
+    display: flex; 
+    align-items: center;
+    margin-top: 120px;
+    margin-left: -560px;
+  }
+  .mockTitle h2{
+    color: #3eb7ff;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .item-text {
+    margin-left: 20px; /* 원하는 간격으로 조정 */
+  }
+  .item-id{
+    margin-left: 40px;
+  }
+  .item-titleId{
+    margin-left: 30px;
+  }
+  .chart_main_search{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+.loading_main {
+  height: 60vh;
+  line-height: 60vh;
+  text-align: center;
+}
