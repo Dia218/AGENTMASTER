@@ -29,7 +29,9 @@ function MainNews({news}) {
                 onClick={handleClick}><h3>{news.title}</h3></button>
             </div>
             <div className="category">
-                키워드:{news.fieldName}
+
+                키워드:{" "+news.fieldName}
+
             </div>
         </Stack>
         </>

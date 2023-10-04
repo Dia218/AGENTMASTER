@@ -28,7 +28,7 @@ export function ArticleList() {
 
   useEffect(() => {
     // Axios를 사용하여 데이터를 백엔드에서 요청
-    axios.get('http://localhost:8080/articles') //url 임시 설정
+    axios.get('localhost:8080/article?stockCode=${selectedArticle.stockCode}') //url 임시 설정
       .then((response) => {
         setArticles(response.data.articles); // 받아온 데이터의 articles 필드를 articles 상태로 설정
       })
@@ -103,7 +103,7 @@ export function Table() {
 
   useEffect(() => {
     // Axios를 사용하여 데이터를 백엔드에서 요청
-    axios.get('http://localhost:8080/StockData') //url 임시 설정
+    axios.get('http://localhost:8080/stockData?stockCode=${stockCode}') //url 임시 설정
       .then((response) => {
         // 요청이 성공하면 데이터 업데이트
         setData(response.data);
@@ -243,6 +243,7 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [chartData, setChartData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [date, setDate] = useState([]);
 
   useEffect(() => {
     if (location.state) {
@@ -253,29 +254,35 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
   }, [location]);
 
   useEffect(() => {
-    setSearchKeyword(keywordFromSearch2); // 검색어 변경 시 상태 업데이트
+    setSearchKeyword(keywordFromSearch2);
   }, [keywordFromSearch2]);
 
   useEffect(() => {
-    // Axios를 사용하여 차트 데이터를 백엔드에서 요청
-    axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
+    axios
+      .get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
       .then((response) => {
         setChartData(response.data);
+        updateXAxisCategories(response.data);
       })
       .catch((error) => {
         console.error('Error fetching chart data:', error);
       });
 
-    // Axios를 사용하여 다른 주식 데이터를 백엔드에서 요청
-    
-    axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromSearch2}`)
+    axios
+      .get(`http://localhost:8080/ChartData?stockId=${keywordFromSearch2}`)
       .then((response) => {
         setSearchData(response.data);
+        updateXAxisCategories(response.data);
       })
       .catch((error) => {
         console.error('Error fetching search data:', error);
       });
-  }, [keywordFromChartMain]);
+  }, [keywordFromChartMain, keywordFromSearch2]);
+
+  const updateXAxisCategories = (data) => {
+    const uniqueDates = [...new Set(data.map((item) => item.stockDate))];
+    setDate(uniqueDates); 
+  };
 
   const seriesData = [
     {
@@ -286,72 +293,76 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
 
   if (searchData.length > 0) {
     seriesData.push({
-      name: [ keywordFromSearch2],
+      name: [keywordFromSearch2],
       data: searchData.map((data) => data.stockPrice),
     });
   }
-
 
   const options = {
     chart: {
       height: 350,
       type: 'line',
       zoom: {
-        enabled: false
+        enabled: false,
       },
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
       width: [5, 7, 5],
       curve: 'straight',
-      dashArray: [0, 8, 5]
+      dashArray: [0, 8, 5],
     },
     legend: {
-      tooltipHoverFormatter: function(val, opts) {
-        return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-      }
+      tooltipHoverFormatter: function (val, opts) {
+       let legendText = val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex];
+        
+        if (opts.seriesIndex === 0) {
+          legendText += ` (${keywordFromChartMain})`;
+        } else if (opts.seriesIndex === 1) {
+          legendText += ` (${keywordFromSearch2})`;
+        }
+  
+        return legendText;
+      },
     },
     markers: {
       size: 0,
       hover: {
-        sizeOffset: 6
-      }
+        sizeOffset: 6,
+      },
     },
     xaxis: {
-      categories: ['08-10', '08-11', '08-12', '08-13', '08-14', '08-15', '08-16', '08-17', '08-18',
-        '08-19'
-      ],
+      categories: date, 
     },
     tooltip: {
       y: [
         {
           title: {
             formatter: function (val) {
-              return val + " 종목가"
-            }
-          }
+              return val + ' 종목가';
+            },
+          },
         },
         {
           title: {
             formatter: function (val) {
-              return val + " 종목가"
-            }
-          }
+              return val + ' 종목가';
+            },
+          },
         },
-      ]
+      ],
     },
     grid: {
       borderColor: '#D5D5D5',
-    }
+    },
   };
 
   return (
     <div className="Rechart2">
-      
-        <ReactApexChart options={options} series={seriesData} type="line" height={400} />
-  
+      <ReactApexChart options={options} series={seriesData} type="line" height={400} />
     </div>
   );
-  }
+}
+

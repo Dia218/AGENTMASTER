@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function StatusList() {
+function StatusList({ userName }) {
   const [stockHoldings, setStockHoldings] = useState([]);
 
   const addComma = (num) => {
@@ -18,7 +18,7 @@ function StatusList() {
     // 백엔드에서 데이터를 가져오는 함수
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/getHoldingInfo'); // 백엔드에서 보유 주식 정보를 가져오는 엔드포인트
+        const response = await axios.get('http://localhost:8080/getHoldingInfo?userName=${userName}`'); // 백엔드에서 보유 주식 정보를 가져오는 엔드포인트
         setStockHoldings(response.data.HoldingInfo); // 받아온 데이터를 stockHoldings 상태로 설정
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
@@ -26,7 +26,7 @@ function StatusList() {
     };
 
     fetchData(); // 데이터 가져오는 함수 호출
-  }, []);
+  }, [userName]);
 
   return (
     <div className="simulStatusList">

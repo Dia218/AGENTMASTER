@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export function UserInfoForm() {
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(''); // 이메일 형식 오류 상태
@@ -18,7 +19,7 @@ export function UserInfoForm() {
     setEmail(enteredEmail);
 
     // 이메일 형식을 검증하는 정규 표현식
-    const emailRegex = ^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$;
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$/;
 
     if (!emailRegex.test(enteredEmail)) {
       setEmailError('유효한 이메일 형식이 아닙니다.');
@@ -40,10 +41,11 @@ export function UserInfoForm() {
 
    
     axios
-      .post('http://localhost:8080/updateUserInfo', { password, email })
+    .post('http://localhost:8080/updateUserInfo', { userName, password, email })
       .then((response) => {
         console.log('개인정보 수정 성공:', response.data);
         // 필요한 처리 완료 후 입력값 초기화
+        setUserName('');
         setPassword('');
         setEmail('');
       })
@@ -60,7 +62,7 @@ export function UserInfoForm() {
   useEffect(() => {
     // Axios를 사용하여 백엔드에서 현재 사용자의 정보를 가져와서 email 상태 업데이트
     axios
-      .get('http://localhost:8080/getUserInfo')
+    .get('http://localhost:8080/getUserEmail')
       .then((response) => {
         setEmail(response.data.email);
       })
@@ -72,7 +74,7 @@ export function UserInfoForm() {
   useEffect(() => {
     // Axios를 사용하여 백엔드에서 현재 사용자의 정보를 가져와서 password 상태 업데이트
     axios
-      .get('http://localhost:8080/getUserInfo')
+    .get('http://localhost:8080/getUserPassword')
       .then((response) => {
         setPassword(response.data.password);
       })
@@ -126,7 +128,7 @@ export function UserInfoForm() {
 }
 
 //스크랩한 기사 
-export function ScrapedArticles() {
+export function ScrapedArticles({ userName }) {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
@@ -134,7 +136,7 @@ export function ScrapedArticles() {
     // 데이터 요청 시작 시 로딩 상태 설정
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/getScrapedArticles'); // 백엔드에서 스크랩된 기사 목록을 가져오는 엔드포인트
+        const response = await axios.get(`http://localhost:8080/getScrapedArticles?userName=${userName}`); // 백엔드에서 스크랩된 기사 목록을 가져오는 엔드포인트
         setArticles(response.data); // 받아온 데이터를 articles 상태로 설정
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -142,7 +144,7 @@ export function ScrapedArticles() {
     };
 
     fetchData(); // 데이터 가져오는 함수 호출
-  }, []);
+  }, [userName]);
 
   const handleClick = (articleId) => {
     navigate(`/newsDetail?id=${articleId}`, {

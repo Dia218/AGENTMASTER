@@ -28,15 +28,20 @@ function SearchList(){
     const [searchResult, setSearchResult] = useState([]);
     const [checkEmpty,setCheckEmpty] = useState(false);
     const [keyword,setKeyword] = useState("");
+    const [loading,setLoading] = useState(false);
 
     //GET함수를 이용해 백엔드에 유저가 입력한 keyword를 전송하고 검색 결과를 전달받아 state에 저장하는 함수
     const getSearchList = async() => {
         try {
             const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
             setSearchResult(responseSearchList.SearchNewsInfo);
+
+            setLoading(true);
+      
         } catch (error) {
             const responseSearchList = await searchData();
             setSearchResult(responseSearchList.SearchNewsInfo);
+            setLoading(true);
             console.error('Error fetching searchList data:', error);
         }
     }
@@ -66,12 +71,15 @@ function SearchList(){
         setKeyword(searchParams.get('result'));
         setPage(parseInt(searchParams.get('page')));
     },[searchParams]);
+
     //keyword가 변경될 때 마다 백엔드로부터 검색 결과를 받아온다.
     useEffect(() => {
         async function fetchDataList() {
             await getSearchList();
         }
         fetchDataList();
+
+        setLoading(false);
         //setSearchResult([]);
         //setSearchResult([{id,title,publisher,name,date,keyword},])
     },[keyword]);
@@ -84,13 +92,20 @@ function SearchList(){
             setItems(itemsToDisplay);
         };
         fetchData();
-        setLastPage(Math.floor(searchResult.length / 10)+1);
-        if(searchResult.length<1) {
-            setCheckEmpty(true);
-        } else {
-            setCheckEmpty(false);
-        }
+        //setLastPage(Math.floor(searchResult.length / 10)+1);
     }, [page,searchResult]);
+
+    useEffect(() => {
+        setLastPage(1);
+        if(loading){
+            if(searchResult.length<1) {
+                setCheckEmpty(true);
+            } else {
+                setCheckEmpty(false);
+                setLastPage(Math.floor(searchResult.length / 10)+1);
+            }
+        }
+    },[loading])
 
     const handleNextPage = () => {
         const nextPage = page + 1;
@@ -117,11 +132,25 @@ function SearchList(){
         )
     }
 
+    const ResultPage = () => {
+        return(
+                <div>{checkEmpty ? <NoResult/> : items.map((v) => ( <SearchItem key={v.articleId} props={v}/>))}</div>
+        )
+    }
+
+    const LoadingMessage = () => {
+        return(
+            <div className="loadingMessage">
+                loading...
+            </div>
+        )
+    }
+
     return(
         <div className="bg-white searchList">
             <Stack>
                 <div className="py-3"></div>
-                <div>{checkEmpty ? <NoResult/> : items.map((v) => ( <SearchItem key={v.articleId} props={v}/>)) }</div>
+                <div>{loading ? <ResultPage/> : <LoadingMessage/> }</div>
             </Stack>
             <div className="search_buttons">
                 <button className="search_preButton" onClick={handlePreviousPage} disabled={page === 1}>
