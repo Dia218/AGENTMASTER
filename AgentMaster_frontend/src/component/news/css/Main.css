@@ -51,3 +51,9 @@
 .moveToStock:hover {
     cursor: pointer;
 }
+
+.loading_main {
+    height: 60vh;
+    line-height: 60vh;
+    text-align: center;
+}

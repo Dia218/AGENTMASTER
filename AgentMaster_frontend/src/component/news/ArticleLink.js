@@ -5,11 +5,16 @@
 
 import { useNavigate } from "react-router";
 import './css/ArticleLink.css';
+import { useEffect } from "react";
 
 const ArticleLink = (props) => {
     const navigate = useNavigate();
     const onClickRA = () => {
-        navigate(`/newsDetail?id=${props.id}`);
+        navigate(`/newsDetail?id=${props.id}`,{
+            state: {
+                id: props.id
+            }
+        });
     }
     return (
         <>

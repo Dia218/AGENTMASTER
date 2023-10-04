@@ -4,10 +4,12 @@
 import { Stack } from "react-bootstrap";
 import './css/MainNews.css';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function MainNews({news}) {
 
     const navigate = useNavigate();
+    //const [newsTitle, setNewsTitle] = useState(news.title);
 
     const handleClick = () => {
         navigate(`/newsDetail?id=${news.articleId}`,{
@@ -26,7 +28,7 @@ function MainNews({news}) {
             <div className="mt-1 MainNews">
                 <button 
                 className="titleButton" 
-                onClick={handleClick}><h3>{news.title}</h3></button>
+                onClick={handleClick}><h3>{ news.title.length < 30 ? news.title : news.title.slice(0,30)+'...'}</h3></button>
             </div>
             <div className="category">
                 키워드:{" "+news.fieldName}

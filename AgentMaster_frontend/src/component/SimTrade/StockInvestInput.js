@@ -3,16 +3,17 @@ import './css/StockInvestInput.css';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 
-const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, CurrentPrice, stockName}) => {
+const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, CurrentPrice, stockName, amount}) => {
     const navigate = useNavigate();
     const onClickCancel = () => {
         navigate(`/SimulMain`);
     } 
-    const url = "http://localhost:8080/simulTrade/sellAll";
+    const url = "http://localhost:8080/simulTrade/sell";
     const data = {
         'userId':sessionStorage.getItem("user"),
         'stockName':stockName,
         'currentPrice':CurrentPrice,
+        'amount':amount
     };
     const config = {"Content-Type": 'application/json'};
     const onClickSA = () => {
@@ -27,6 +28,7 @@ const StockInvestInputSwitch = ({ StockInvestInputSwitchActive, handleToggle, Cu
             });
             //setStockInvestInput({"AvailableAsset":(AvailableAsset+(Amount*CurrentPrice)),"simulHoldingsnum":0});
             alert("전체 매도 되었습니다!");
+            console.log(amount);
             navigate(`/SimulMain`);
         }
     }
@@ -139,6 +141,7 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
                 handleToggle={()=>setSwitch(!SwitchActive)}
                 CurrentPrice={CurrentPrice}
                 stockName={stockName}
+                amount={Amount}
             />
             <div className="StockInvestInputData">
                 <div>
@@ -147,7 +150,6 @@ export default function StockInvestInput({AvailableAsset, Amount, CurrentPrice, 
                 <div>
                     보유량: {addComma(Amount)}
                 </div>
-
             </div>
             <div className="StockInvestInputLower">
                 <div className="StockInvestInputBox">

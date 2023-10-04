@@ -23,7 +23,7 @@ function Search_result({searchBarRef, isSearchBarFocused, relatedSearches}) {
                 {relatedSearches.map((stock, index) => (
                     <li className='simulSearchResult_li' key={index}>
                         <div className="simulSearchResult_div" id={stock.itmsNm} onClick={onClick}>
-                         <Link className='simulSearchResult_a' to={"/simulTrade?keyword=" + stock.itmsNm}>  
+                        <Link className='simulSearchResult_a' to={"/simulTrade?keyword=" + stock.itmsNm}>  
                                 <div className="simulSearchResultId">{stock.srtnCd}</div>
 
                                 <div className="simulSearchResultName">{stock.itmsNm}</div>

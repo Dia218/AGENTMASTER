@@ -57,3 +57,9 @@
     margin-top: -50px;
     color: #0073e5;
 }
+
+.loading_si {
+    height: 20vh;
+    line-height: 20vh;
+    text-align: center;
+}

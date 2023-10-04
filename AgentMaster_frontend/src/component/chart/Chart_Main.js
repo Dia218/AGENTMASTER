@@ -13,28 +13,27 @@ import rank8 from './icons/rank8.png';
 import rank9 from './icons/rank9.png'; 
 import rank10 from './icons/rank10.png';
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 //오늘의 뉴스
 export function News() {
   const navigate = useNavigate();
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
+  const getNews = async () => {
+    try {
+      const getNewsRep = await axios.get('http://localhost:8080/ChartMain/TodayNews');
+      setNewsData(getNewsRep.data.Today);
+      setLoading(false); // 로딩 완료
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     // 백엔드에서 데이터 요청
-    axios
-      .get('http://localhost:8080/ChartMain/TodayNews')
-      .then((response) => {
-        // 요청이 성공하면 데이터를 state에 저장
-        setNewsData(response.data.Today);
-        setLoading(false); // 로딩 완료
-      })
-      .catch((err) => {
-        // 요청이 실패하면 에러 처리
-        setError(err);
-        setLoading(false);
-      });
+    getNews();
   }, []);
 
   const handleClick = (articleTitle) => {
@@ -45,26 +44,32 @@ export function News() {
     });
   };
 
-
   return (
     <div className="chartNews">
-      <h1 className="news-title">오늘의 뉴스</h1>
-      <hr className="news-divider" />
-      <div className="news-container">
-        {newsData.length === 0 ? (
-          <div>No news available.</div> // 데이터가 없는 경우에 대한 처리
-        ) : (
-          newsData.map((article) => (
-            <div key={article.title} className="news-item" onClick={() => handleClick(article.title)}>
-              <p>{article.title}</p>
-              <p className="news-summary">{article.summary}</p>
-            </div>
-          ))
-        )}
-      </div>
+      {loading ? (
+        <div className='loading_main'><LoadingOutlined />loading...</div>
+      ) : (
+        <>
+          <h1 className="news-title">오늘의 뉴스</h1>
+          <hr className="news-divider" />
+          <div className="news-container">
+            {newsData.length === 0 ? (
+              <div>No news available.</div> // 데이터가 없는 경우에 대한 처리
+            ) : (
+              newsData.map((article) => (
+                <div key={article.title} className="news-item" onClick={() => handleClick(article.title)}>
+                  <p>{article.title}</p>
+                  <p className="news-summary">{article.summary}</p>
+                </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
+
  
 //top5의 주식 종목 데이터 테이블
 export function Table() {
@@ -174,6 +179,8 @@ export function Table() {
 export function MockInvestmentRanking() {
   const [showRanking, setShowRanking] = useState(true); // 모의투자 랭킹 표시 여부
   const [rankingData, setRankingData] = useState([]); // 모의투자 랭킹 데이터
+  const [loading, setLoading] = useState(true);
+
   //순위 아이콘들
   const getRankIcon = (rank) => {
     let iconSrc = ''; 
@@ -208,56 +215,65 @@ export function MockInvestmentRanking() {
     }
     return <img src={iconSrc} alt={`Rank ${rank}`} className="rank-icon" />;
   };
-
+  const getRanking=async () => {
+    try {
+      const getRankingRep= await axios.get('http://localhost:8080/Ranking');
+      setRankingData(getRankingRep.data.Ranking);
+      setLoading(false); // 로딩 완료
+    } catch (error) {
+      setLoading(false);
+    }
+  }
   useEffect(() => {
-    // Axios를 사용하여 백엔드에서 데이터 요청
-    axios.get('http://localhost:8080/Ranking') 
-      .then((response) => {
-        // 요청이 성공하면 데이터를 state에 저장
-        setRankingData(response.data.Ranking);
-      })
-      .catch((error) => {
-        // 요청이 실패하면 에러 처리
-        console.error('Error fetching ranking data:', error);
-      });
+    getRanking();
   }, []);
 
   return (
     <div>
-      <div className='mockTitle'>
-        <img className='trophy' src={trophy} alt="trophy" />
+      <div className="mockTitle">
+        <img className="trophy" src={trophy} alt="trophy" />
         <h2>모의투자 랭킹</h2>
-      </div>
-
-      <div className="mock-ranking-container">
-        {showRanking && (
-          <div className="ranking-list">
-
-            <div className="ranking-left">
-              <ul style={{ listStyleType: 'none' }}>
-                <li className='title'>순위 <span className="item-text">수익률</span> <span className="item-titleId"> ID </span> </li>
-              </ul>
-              <ul className="dot-list" start={1}>
-                {rankingData.slice(0, 5).map((item, index) => (
-                  <li key={item.rank} className="ranking-item">
-                    {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span> <span className="item-id">{item.id}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="mock-ranking-container">
+          {loading ? (
+            <div className="loading_main">
+              <LoadingOutlined />loading...
             </div>
-            <div className="ranking-right">
-              <ul className="dot-list" start={6}>
-                {rankingData.slice(5, 10).map((item, index) => (
-                  <li key={item.rank} className="ranking-item">
-                  {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span> <span className="item-id">{item.id}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="dot-line"></div>
-            </div>
-          </div>
-        )}
+          ) : (
+            showRanking && (
+              <div className="ranking-list">
+                <div className="ranking-left">
+                  <ul style={{ listStyleType: 'none' }}>
+                    <li className="title">
+                      순위 <span className="item-text">수익률</span> <span className="item-titleId"> ID </span>
+                    </li>
+                  </ul>
+                  <ul className="dot-list" start={1}>
+                    {rankingData.slice(0, 5).map((item) => (
+                      <li key={item.rank} className="ranking-item">
+                        {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span>{' '}
+                        <span className="item-id">{item.id}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="ranking-right">
+                  <ul className="dot-list" start={6}>
+                    {rankingData.slice(5, 10).map((item) => (
+                      <li key={item.rank} className="ranking-item">
+                        {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span>{' '}
+                        <span className="item-id">{item.id}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="dot-line"></div>
+                </div>
+              </div>
+            )
+          )}
+        </div>
       </div>
     </div>
   );
-}
+  
+  
+ }
