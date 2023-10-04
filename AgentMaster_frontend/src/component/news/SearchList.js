@@ -36,7 +36,9 @@ function SearchList(){
         try {
             const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
             setSearchResult(responseSearchList.SearchNewsInfo);
+
             setLoading(true);
+      
         } catch (error) {
             const responseSearchList = await searchData();
             setSearchResult(responseSearchList.SearchNewsInfo);
@@ -84,6 +86,7 @@ function SearchList(){
             await getSearchList();
         }
         fetchDataList();
+
         setLoading(false);
         //setSearchResult([]);
         //setSearchResult([{id,title,publisher,name,date,keyword},])
