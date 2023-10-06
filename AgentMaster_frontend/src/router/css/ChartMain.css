@@ -134,9 +134,9 @@
     justify-content: flex-start;
     align-items: center;
     width: 550px;
-    margin-left: -570px;
+    margin-left: -280px;
     border-radius: 40px;
-    
+    margin-top: 100px;
   }
   
   .ranking-list {
@@ -218,7 +218,7 @@
   .mockTitle{
     display: flex; 
     align-items: center;
-    margin-top: 180px;
+    margin-top: 120px;
     margin-left: -560px;
   }
   .mockTitle h2{
@@ -240,3 +240,8 @@
     margin-top: 10px;
     margin-left: 10px;
   }
+.loading_main {
+  height: 60vh;
+  line-height: 60vh;
+  text-align: center;
+}

@@ -27,7 +27,7 @@ export default function SimTrade() {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/simulTrade/ChartData?keyword=${keywordFromURL}`);
+          const response = await axios.get(`http://localhost:8080/simulTrade/ChartData?stockCode=${keywordFromURL}`);
           const fetchedData = response.data.ChartData;
           setGraphInput(fetchedData);
         } catch (error) {
@@ -159,4 +159,4 @@ export default function SimTrade() {
         </div>
 
     )
-}
+              }      

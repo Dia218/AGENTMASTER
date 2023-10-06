@@ -5,36 +5,32 @@ import Modal from 'react-modal';
 import ReactApexChart from 'react-apexcharts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 //그래프 아래 관련 뉴스 띄우는 부분
 export function ArticleList() {
-  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [articles, setArticles] = useState([]); // 초기값 빈 배열로 설정
- 
-/*
-  useEffect(() => {
-    // 임시 데이터
-    const temporaryData = [
-      { id: 1, publisher: '신문사1', title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
-      { id: 2, publisher: '신문사2', title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
-      { id: 3, publisher: '신문사3', title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
-      { id: 4, publisher: '신문사4', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
-      { id: 5, publisher: '신문사5', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
-    ];
-    setArticles(temporaryData);
-  }, []);
-*/
+  const [articles, setArticles] = useState([
+    { id: 1, publisher: '신문사1', title: '뉴스 기사 1', summary: '기사 1 요약 문장입니다.' },
+    { id: 2, publisher: '신문사2', title: '뉴스 기사 2', summary: '기사 2 요약 문장입니다.' },
+    { id: 3, publisher: '신문사3', title: '뉴스 기사 3', summary: '기사 3 요약 문장입니다.' },
+    { id: 4, publisher: '신문사4', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
+    { id: 5, publisher: '신문사5', title: '뉴스 기사 4', summary: '기사 4 요약 문장입니다.' },
+  ]); // 초기값 빈 배열로 설정
+  const [loading, setLoading] = useState(true);
 
+  const getArticle=async () =>{
+   try{
+    const getArticleRep= await axios.get('localhost:8080/article?stockCode=${selectedArticle.stockCode}');
+    setArticles(getArticleRep.data.articles);
+    setLoading(false); // 로딩 완료
+   }catch (error) {
+    setLoading(false);
+  }
+  } 
   useEffect(() => {
-    // Axios를 사용하여 데이터를 백엔드에서 요청
-    axios.get('localhost:8080/article?stockCode=${selectedArticle.stockCode}') //url 임시 설정
-      .then((response) => {
-        setArticles(response.data.articles); // 받아온 데이터의 articles 필드를 articles 상태로 설정
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    getArticle();
   }, []); // 빈 배열을 전달하여 한 번만 데이터를 가져오도록 설정
 
   const openModal = (article) => {
@@ -54,16 +50,22 @@ export function ArticleList() {
 
   return (
     <div className="Article">
-      <ul style={{ listStyle: 'none', padding: 10 }}>
-        {articles.map((article) => (
-          <li key={article.articleId}>
-            <p className="article-title" onClick={() => openModal(article)}>
-              {`[${article.articleId}]  ${article.articleTitle}`} 
-            </p>
-            <hr className="article-bottom" />
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <div className="loading_main">
+          <LoadingOutlined />loading...
+        </div>
+      ) : (
+        <ul style={{ listStyle: 'none', padding: 10 }}>
+          {articles.map((article) => (
+            <li key={article.articleId}>
+              <p className="article-title" onClick={() => openModal(article)}>
+                {`[${article.publisher}]  ${article.title}`}
+              </p>
+              <hr className="article-bottom" />
+            </li>
+          ))}
+        </ul>
+      )}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -82,7 +84,7 @@ export function ArticleList() {
             </div>
             {selectedArticle.articleContent ? (
               <div className="ModalBox">
-                <p className="ModalText">{selectedArticle.articleContent}</p>
+                <p className="ModalText">{selectedArticle.summary}</p>
               </div>
             ) : (
               <div className="ModalBox">
@@ -94,10 +96,12 @@ export function ArticleList() {
       </Modal>
     </div>
   );
-}
+   }  
 
 export function Table() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([{"stockDiff":'-',"stockStartPrice":'-',"stockhighPrice":'-',"stocklowPrice":'-',
+  "stockTradingAmount":'-',"stockTradingTotalPrice":'-',
+  }]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -126,9 +130,9 @@ export function Table() {
             <th className="divider">금일 최고가</th>
           </tr>
           <tr>
-            <td>{data.stockDiff}</td>
-            <td>{data.stockStartPrice}</td>
-            <td>{data.stockhighPrice}</td>
+            <td>{data[0].stockDiff}</td>
+            <td>{data[0].stockStartPrice}</td>
+            <td>{data[0].stockhighPrice}</td>
           </tr>
           <tr>
             <th className="divider">금일 최저가</th>
@@ -136,9 +140,9 @@ export function Table() {
             <th className="divider">거래대금</th>
           </tr>
           <tr>
-            <td>{data.stocklowPrice}</td>
-            <td>{data.stockTradingAmount}</td>
-            <td>{data.stockTradingTotalPrice}</td>
+            <td>{data[0].stocklowPrice}</td>
+            <td>{data[0].stockTradingAmount}</td>
+            <td>{data[0].stockTradingTotalPrice}</td>
           </tr>
         </tbody>
       </table>
@@ -149,26 +153,22 @@ export function Table() {
 
 export function Rechart1() {
 const [stockData, setStockData] = useState([]);
-const [loading, setLoading] = useState(false);
+const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
-useEffect(() => {
-  // 데이터 요청 시작 시 로딩 상태 설정
-  setLoading(true);
-  // 에러 초기화
-  setError(null);
 
-  // Axios를 사용하여 데이터 요청
-  axios.get('http://localhost:8080/ChartData') 
-    .then((response) => {
-      // 요청이 성공하면 데이터 업데이트
-      setStockData(response.data);
-      setLoading(false); // 로딩 완료
-    })
-    .catch((err) => {
-      // 요청이 실패하면 에러 처리
-      setError(err);
-      setLoading(false); // 로딩 완료
-    });
+const getChart1 = async () => {
+  try{
+    const queryParams = new URLSearchParams(window.location.search);
+    const keywordFromURL = queryParams.get('keyword');
+    const getChart1Rep= await axios.get('http://localhost:8080/ChartData?stockId=${keywordFromURL}');
+    setStockData(getChart1Rep.data);
+    setLoading(false);
+  }catch(error) {
+    setLoading(false);
+  }
+}
+useEffect(() => {
+ getChart1();
 }, []);
 
   const seriesData = [{
@@ -230,11 +230,13 @@ useEffect(() => {
 
   return (
     <div className='Rechart1'>
-    
-      <ReactApexChart options={options} series={seriesData} type="line" height={350} />
-   
-  </div>
-  );
+      {loading ? (
+        <div className='loading_main'><LoadingOutlined />loading...</div>
+      ) : (
+        <ReactApexChart options={options} series={seriesData} type="line" height={350} />
+      )}
+    </div>
+  );  
 }
 
 export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
@@ -244,6 +246,7 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
   const [chartData, setChartData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [date, setDate] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (location.state) {
@@ -263,9 +266,11 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
       .then((response) => {
         setChartData(response.data);
         updateXAxisCategories(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching chart data:', error);
+        setLoading(false);
       });
 
     axios
@@ -273,9 +278,11 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
       .then((response) => {
         setSearchData(response.data);
         updateXAxisCategories(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching search data:', error);
+        setLoading(false);
       });
   }, [keywordFromChartMain, keywordFromSearch2]);
 
@@ -361,8 +368,12 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
 
   return (
     <div className="Rechart2">
-      <ReactApexChart options={options} series={seriesData} type="line" height={400} />
+      {loading ? (
+        <div className='loading_main'><LoadingOutlined />loading...</div>
+      ) : (
+        <ReactApexChart options={options} series={seriesData} type="line" height={400} />
+      )}
     </div>
   );
+  
 }
-
