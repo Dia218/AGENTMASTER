@@ -13,16 +13,53 @@ from bs4 import BeautifulSoup
 
 import Link
 
-articleTemplate = {
-    "title": None,
-    "link": None,
-    "body": None,
-    "summary": None,
-    "reporter": None,
-    "first_pub": None,
-    "last_pub": None,
-    "company": None,
-}
+class ExceptionMessageFormat:
+    def __init__(self, msg):
+        self.msg = msg
+
+    def set_msg(
+            self, 
+            context: str = "",
+            problem: str = "",
+            solution: str = "") -> dict:
+        self.msg_format = { "context": context, "problem": problem, "solution": solution }
+
+    def __str__(self):
+        return "context:" + self.msg_format['context'] + "\n" \
+               "problem:" + self.msg_format['problem'] + "\n" \
+               "solution" + self.msg_format['solution'] + "\n" \
+               "This message appears when a problem occured in article-related service. Contact admin. \n" \
+               "Admin should share this message to ai department immediately. \n" \
+               "Additional information for debudding: \n "
+    
+class ArticleAggregatorException(Exception):
+    def __init__(self, msg): self.msg = msg
+    def __str__(self):
+        return "context:" + self.msg_format['context'] + "\n" \
+               "problem:" + self.msg_format['problem'] + "\n" \
+               "solution" + self.msg_format['solution'] + "\n" \
+               "This message appears when a problem occured in the article-related service. Contact an admin. \n" \
+               "The admin should report this message to ai team immediately. \n" \
+               "Additional information for debudding: \n " + self.msg
+
+class InvalidBeautifulSoupInstanceException(ArticleAggregatorException):
+    def __str__(self):
+
+        return "context:" + self.msg_format['context'] + "\n" \
+               "problem:" + self.msg_format['problem'] + "\n" \
+               "solution" + self.msg_format['solution'] + "\n" \
+               "This message appears when a problem occured in the article-related service. Contact an admin. \n" \
+               "The admin should report this message to ai team immediately. \n" \
+               "Additional information for debudding: \n " + self.msg
+
+class InvalidArticleDictException(ArticleAggregatorException):
+    def __str__(self):
+        return "context:" + self.msg_format['context'] + "\n" \
+               "problem:" + self.msg_format['problem'] + "\n" \
+               "solution" + self.msg_format['solution'] + "\n" \
+               "This message appears when a problem occured in the article-related service. Contact an admin. \n" \
+               "The admin should report this message to ai team immediately. \n" \
+               "Additional information for debudding: \n " + self.msg
 
 class ArticleAggregator:
     """
@@ -69,6 +106,8 @@ class ArticleAggregator:
         # The number of articles in section general web page. 
         self._section_general_narticles = 20
 
+        self.tag_class_type = ["type06_headline", "type06"]
+
     def _date(self, dayOffset: int = 0) -> str:
         """
             _date()
@@ -78,8 +117,8 @@ class ArticleAggregator:
                 dayOffset(int)
                 Offset changes the date by day from today.
                     example:
-                        dayOffset = -1 means yesterday.
-                        dayOffset = +2 means the day after tomorrow.             
+                        dayOffset = -1 means yesterday. 
+                        dayOffset = +2 means the day after tomorrow. 
 
             Returns.
                 str
@@ -90,7 +129,28 @@ class ArticleAggregator:
         )
         return (date.today() + dt).strftime("%Y%m%d")
 
-    def _parse_section_general(self, document: BeautifulSoup = None) -> list:
+    def _generate_article_template(self, document: BeautifulSoup = None) -> dict:
+        """
+            _generate_aritcle_template
+                A function
+
+        """
+        if not document: raise SOMETHING_YET
+
+        template = {
+                        "title": None,
+                        "link": None,
+                        "body": None,
+                        "summary": None,
+                        "reporter": None,
+                        "first_pub": None,
+                        "last_pub": None,
+                        "company": None,
+                    }
+
+        return template
+
+    def _parse_article_section_general(self, document: BeautifulSoup = None) -> list:
         """
             _parse_article_section_general
                 A function creates article dictionary instances, and fills the title and link,
@@ -130,10 +190,8 @@ class ArticleAggregator:
         
         try:
             # Parse data into a dictionary instance from BeautifulSoup instance. [v]
-            nameContainer = ("type06_headline", "type06")
-
-            for name in nameContainer:
-                for dl in document.find("ul", class_=name).find_all("dl"):
+            for tag_class in ("type06_headline", "type06"):
+                for dl in document.find("ul", class_=tag_class).find_all("dl"):
                     templateArticle = {
                         "title": dl.find_all("dt")[-1].find("a").text.strip(),
                         "link": dl.find_all("dt")[-1].find("a")['href'].strip(),
@@ -188,7 +246,7 @@ class ArticleAggregator:
             try:
                 # Generate a complete url to request. [v]   
                 url = Link.assemble_link(base="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm",
-                                   parameters=["sid1", "sid2", "date", "page"],
+                                   keys=["sid1", "sid2", "date", "page"],
                                    values=[str(self.codeSection[nameSection]), str(self.codeSectionGeneral[nameSection]), self._date(dayOffset), str(page + 1)])
             
                 # Request a html document. [v]
@@ -197,7 +255,7 @@ class ArticleAggregator:
                 raise le
 
             # Gather aggregated articles. [v]
-            additionalAggregatedArticles = self._parse_section_general(document)
+            additionalAggregatedArticles = self._parse_article_section_general(document)
             articlesAggregated.extend(additionalAggregatedArticles)
             narticles += len(additionalAggregatedArticles)
 
@@ -240,17 +298,15 @@ class ArticleAggregator:
 
             for i in range(0, nround):
                 # Generate a complete url to request. [v]
-                linkBase = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm" \
-                        "&sid1=" + str(self.codeSection[nameSection]) + "" \
-                        "&sid2=" + str(self.codeSectionGeneral[nameSection]) + "" \
-                        "&date=" + lastDate
-                page = lastPage+i; linkpartPage = "&page=" + str(page)
+                url = Link.assemble_link(base="https://news.naver.com/main/list.naver?mode=LS2D&mid=shm",
+                                   keys=["sid1", "sid2", "date", "page"],
+                                   values=[str(self.codeSection[nameSection]), str(self.codeSectionGeneral[nameSection]), lastDate, str(lastPage+i)])
 
                 # Request a html document. [v]
-                document = BeautifulSoup(requests.get(linkBase + linkpartPage, headers=self.header).text, "html.parser")
+                document = BeautifulSoup(requests.get(url, headers=self.header).text, "html.parser")
 
                 # Gather aggregated articles. [v]
-                additionalAggregatedArticles = self._parse_section_general(document)
+                additionalAggregatedArticles = self._parse_article_section_general(document)
                 aggregated['articles'].extend(additionalAggregatedArticles)
                 narticles += len(additionalAggregatedArticles)
 
@@ -264,7 +320,44 @@ class ArticleAggregator:
             return aggregated
         
         return aggregated
-           
+    
+    def _parse_article_body(self, document: BeautifulSoup = None) -> str:
+        """
+        
+        """
+
+        bodyText = document.find("article", id="dic_area")
+                
+        for t in bodyText.find_all() if bodyText else []:
+            t.decompose()
+        
+        return bodyText.text.strip() if bodyText else ""
+    
+    def _parse_article_reporter(self, document: BeautifulSoup = None) -> str:
+        """
+        
+        """
+        nameReporter = ""
+                
+        reporter = document.find_all("em", class_="media_end_head_journalist_layer_name")
+        if len(reporter) > 0: nameReporter = ', '.join([r.text for r in reporter])
+
+        return nameReporter
+    
+    def _parse_article_pub_date(self, document: BeautifulSoup = None) -> tuple:
+        """
+        
+        """
+        firstPubDate = document.find("div", class_="media_end_head_info_datestamp") \
+                    .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_DATE_TIME")
+        lastPubDate = document.find("div", class_="media_end_head_info_datestamp") \
+        .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME")
+        
+        first_pub = firstPubDate["data-date-time"]
+        last_pub = firstPubDate["data-date-time"] if not lastPubDate else lastPubDate["data-modify-date-time"]
+
+        return first_pub, last_pub
+        
     def aggregate_continous_article(self, aggregated: dict = None) -> dict:
         """
             aggregate_continous_article
@@ -283,36 +376,20 @@ class ArticleAggregator:
         for i, arti in enumerate(aggregated['articles']):
             if arti['body'] == None:
                 iCtntless = i
-                break        
+                break
         try:
             for article in aggregated['articles'][iCtntless:]:
                 document = BeautifulSoup(requests.get(article['link'], headers=self.header).text, "html.parser")
 
                 # Extract body [v]
-
-                bodyText = document.find("div", id="dic_area")
-                
-                for t in bodyText.find_all() if bodyText else []:
-                    t.decompose()
-                
-                article['body'] = bodyText.text.strip() if bodyText else ""
+                article['body'] = self._parse_article_body(document=document)
 
                 # Extract reporter [v]
-                nameReporter = ""
-                
-                reporter = document.find_all("em", class_="media_end_head_journalist_name")
-                if len(reporter) > 0: nameReporter = ', '.join([r.text for r in reporter])
+                article['reporter'] = self._parse_article_reporter(document=document)
 
-                article['reporter'] = nameReporter
+                # Extract first_pub & last_pub [v]               
+                article['first_pub'], article['last_pub'] = self._parse_article_pub_date(document=document)
 
-                # Extract first_pub & last_pub [v]
-                firstPubDate = document.find("div", class_="media_end_head_info_datestamp") \
-                    .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_DATE_TIME")
-                lastPubDate = document.find("div", class_="media_end_head_info_datestamp") \
-                .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME")
-                
-                article['first_pub'] = firstPubDate["data-date-time"]
-                article['last_pub'] = firstPubDate["data-date-time"] if not lastPubDate else lastPubDate["data-modify-date-time"]
         except KeyError:
             print("[ai] ArticleAggregator::aggregate_articles\n", 
                   "CONTEXT: Checking the link of an aggregated article.\n",
@@ -340,29 +417,13 @@ class ArticleAggregator:
                 document = BeautifulSoup(requests.get(article['link'], headers=self.header).text, "html.parser")
 
                 # Extract body [v]
-                bodyText = document.find("div", id="dic_area")
-
-                for t in bodyText.find_all() if bodyText else []:
-                    t.decompose()
-                
-                article['body'] = bodyText.text.strip() if bodyText else ""
+                article['body'] = self._parse_article_body(document=document)
 
                 # Extract reporter [v]
-                nameReporter = ""
-                
-                reporter = document.find_all("em", class_="media_end_head_journalist_name")
-                if len(reporter) > 0: nameReporter = ', '.join([r.text for r in reporter])
+                article['reporter'] = self._parse_article_reporter(document=document)
 
-                article['reporter'] = nameReporter
-
-                # Extract first_pub & last_pub [v]
-                firstPubDate = document.find("div", class_="media_end_head_info_datestamp") \
-                    .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_DATE_TIME")
-                lastPubDate = document.find("div", class_="media_end_head_info_datestamp") \
-                .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME")
-                
-                article['first_pub'] = firstPubDate["data-date-time"]
-                article['last_pub'] = firstPubDate["data-date-time"] if not lastPubDate else lastPubDate["data-modify-date-time"]
+                # Extract first_pub & last_pub [v]               
+                article['first_pub'], article['last_pub'] = self._parse_article_pub_date(document=document)
         except KeyError:
             print("[ai] ArticleAggregator::aggregate_articles\n", 
                   "CONTEXT: Checking the link of an aggregated article.\n",
@@ -378,7 +439,8 @@ class ArticleAggregator:
             narticlesLB=narticlesLB, 
             dayOffset=dayOffset)
         return self.aggregate_articles(linkAggregated)
-
+"""
+#### Example use
 model = ArticleAggregator()
 
 arts = model.aggregate_section_general()
@@ -392,3 +454,4 @@ for i, a in enumerate(arts['articles']):
 
 with open("article_example.json", "w", encoding="UTF-8") as jsn:
     json.dump(arts, jsn, indent=4)
+"""

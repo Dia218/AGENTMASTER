@@ -37,7 +37,7 @@ def _has_duplicated_elements(l: list):
 
 def assemble_link(
     base: str = None, 
-    parameters: list = list(),
+    keys: list = list(),
     values: list = None) -> str:
     """
         assemble_link
@@ -46,7 +46,7 @@ def assemble_link(
         parameters
             base('str')
                 The address of end point url. 
-            parameters('list' of 'str')
+            keys('list' of 'str')
                 The name of parameters. 
             values('list' of 'str' or 'None')
                 The values of parameters. 
@@ -64,46 +64,22 @@ def assemble_link(
         # 1) base addr has not given.
         # 2) parameters has not given but values are given. 
     if not base or type(base) != str: raise InvalidBaseException()
-    if not parameters and values: InvalidParameterValuePairException()
+    if not keys and values: InvalidParameterValuePairException()
 
-    # When the number of parameters and values are not matching up.
+    # When the number of keys and values are not matching up.
     if not values: values = list()
-    if len(parameters) != len(values): raise InvalidParameterValuePairException()
+    if len(keys) != len(values): raise InvalidParameterValuePairException()
 
-    # When some elements in parameters are not 'str'.
-    if list(filter(lambda p: (type(p) != str), parameters)): raise InvalidParameterException()
+    # When some elements in keys are not 'str'.
+    if list(filter(lambda p: (type(p) != str), keys)): raise InvalidParameterException()
 
     # When some elements in values are not 'str' or 'None'.
     if list(filter(lambda v: (type(v) == str) or v is None , values)) != values: raise InvalidValueException()
 
-    # When the elements in parameters is duplicated.
-    if _has_duplicated_elements(parameters): raise DuplicatedParameterException()
+    # When the elements in keys is duplicated.
+    if _has_duplicated_elements(keys): raise DuplicatedParameterException()
 
     # Assemble the given link. 
-    assembledPV = list(param + "=" + (val if val else "") for param, val in zip(parameters, values))
+    assembledPV = list(param + "=" + (val if val else "") for param, val in zip(keys, values))
     query = '&'.join(assembledPV)
-    return base + ("" if query == "" else "?") + query 
-
-"""test = {
-    "base": "www.testing.com",
-    "PV": [
-        { "P": [], "V": [] },
-        { "P": ["foo", "bar"], "V": ["1", "2"] },
-        { "P": ["foo", "bar"], "V": [None, None] },
-        { "P": ["foo", "bar"], "V": [None] },
-        { "P": ["foo", "bar"], "V": ["1", None] },
-        { "P": [132, 312], "V": ["11", "11"] },
-        { "P": ["foo", "bar"], "V": [11, 11]}, 
-        { "P": ["foo", "foo"], "V": ["11", "11"] },
-        { "P": ["foo", "bar", "baz"], "V": ["1", 2, "3"] }
-    ]
-}
-
-for itc, tc in enumerate(test['PV']):
-    b = test['base']
-
-    try:
-        l = assemble_link(base=b, parameters=tc["P"], values=tc["V"])
-        print(f"{itc+1:2} / {len(test['PV'])}", l)
-    except InvalidLinkException as e:
-        print(f"{itc+1:2} / {len(test['PV'])} ERROR", e)"""
+    return base + ("" if query == "" else "?") + query
