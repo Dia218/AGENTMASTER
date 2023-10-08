@@ -82,4 +82,4 @@ def assemble_link(
     # Assemble the given link. 
     assembledPV = list(param + "=" + (val if val else "") for param, val in zip(keys, values))
     query = '&'.join(assembledPV)
-    return base + ("" if query == "" else "?") + query
+    return base + ("" if query == "" else "?") + query 

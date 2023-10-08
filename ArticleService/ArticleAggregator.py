@@ -439,14 +439,19 @@ class ArticleAggregator:
             narticlesLB=narticlesLB, 
             dayOffset=dayOffset)
         return self.aggregate_articles(linkAggregated)
-
+"""
+#### Example use
 model = ArticleAggregator()
 
 arts = model.aggregate_section_general()
 arts = model.aggregate_articles(aggregated=arts)
+arts = model.aggregate_continous_section_general(aggregated=arts)
+arts = model.aggregate_continous_article(arts)
+arts = model.aggregate_articles(aggregated=arts)
 
 for i, a in enumerate(arts['articles']):
-    print(f'{i+1:02}: {a["title"]} \n - {a["reporter"]}, {a["first_pub"]}')
+    print(f'{i:2}: {a["title"]}\n{ a["body"][:30] +"..." if a["body"] else "NONE"} \n', sep='')
 
 with open("article_example.json", "w", encoding="UTF-8") as jsn:
     json.dump(arts, jsn, indent=4)
+"""
