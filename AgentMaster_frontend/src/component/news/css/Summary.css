@@ -9,3 +9,9 @@ div.summary {
     padding: 15px;
     
 }
+
+.loading_summary {
+    height: 30vh;
+    line-height: 30vh;
+    text-align: center;
+}

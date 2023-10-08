@@ -8,6 +8,7 @@ import SearchItem from "./SearchItem";
 import { useSearchParams } from "react-router-dom";
 import "./css/SearchList.css"
 import axios from "axios";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function SearchList(){
     //임시 데이터
@@ -48,19 +49,26 @@ function SearchList(){
 
     async function searchData() {
         const json = {
-            "SearchNewsInfo" : [{"articleId" : 1,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 2,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 3,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 4,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 5,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 6,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 7,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 8,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 9,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 10,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 11,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 12,title,company,name,firstPub,issueKeyword:keyword},
-            {"articleId" : 13,title,company,name,firstPub,issueKeyword:keyword},]
+            "SearchNewsInfo" : [
+                {"articleId" : 1,
+                "company" : "company1",
+                "firstPub" : "2023-07-15 17:36:24",
+                "lastPub" : "2023-08-18 16:26:36",
+                "title" : "신문기사 제목이 올라갈 공간이고 말줄임표를 테스트해야하는 공간입니다. 다음으로 말줄임표를 사용해보세요. 이 뒤로는 표시되지 않는 문구입니다.",
+                "issueKeyword" : "keyword1"},
+                {"articleId" : 2,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 3,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 4,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 5,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 6,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 7,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 8,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 9,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 10,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 11,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 12,title,company,name,firstPub,issueKeyword:keyword},
+                {"articleId" : 13,title,company,name,firstPub,issueKeyword:keyword},
+            ]
         };
         
         return json;
@@ -141,7 +149,7 @@ function SearchList(){
     const LoadingMessage = () => {
         return(
             <div className="loadingMessage">
-                loading...
+                <LoadingOutlined />loading...
             </div>
         )
     }

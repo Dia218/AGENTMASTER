@@ -6,31 +6,36 @@ import './css/Chart.css';
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom/dist";
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 function Chart() {
 
     //주식 데이터를 담을 useState 훅
     const [stockData, setStockData] = useState([]);
 
+    const [loading,setLoading] = useState(true);
+
     //GET함수를 이용해 백엔드에 메인페이지 주식 데이터 4개를 요청하고 state에 저장하는 함수.
     const getStock_Main = async () => {
         try {
             const responseStock_Main = await axios.get('http://localhost:8080/newsMain/stockChart');
             setStockData(responseStock_Main.FluctuationStockInfo);
+            setLoading(false);
         } catch (error) {
             const responseStock_Main = await data();
             setStockData(responseStock_Main.FluctuationStockInfo);
             console.error('Error fetching chart data:', error);
+            setLoading(false);
         }
     };
 
     //임시 주식차트 데이터 반환 함수
     async function data() {
         const json = {
-            "FluctuationStockInfo" : [{ stockId:"stock1", stockName: "카나리아 바이오 주식회사", stockPrice: 1000, diffFromPrevday: +100, range: +25.00 },
-                { stockId:"stock2", stockName: "종목2", stockPrice: 1294, diffFromPrevday: -250, range: -9.00 },
-                { stockId:"stock3", stockName: "종목3", stockPrice: 3021, diffFromPrevday: +250, range: +12.34 },
-                { stockId:"stock4", stockName: "종목4", stockPrice: 23400, diffFromPrevday: -330, range: -12.78 },
+            "FluctuationStockInfo" : [{ "stockId":"stock1", "stockName": "카나리아 바이오 주식회사", "stockPrice": 1000, "diffFromPrevday": +100, "range": +25.00 },
+                { "stockId":"stock2", "stockName": "종목2", "stockPrice": 1294, "diffFromPrevday": -250, "range": -9.00 },
+                { "stockId":"stock3", "stockName": "종목3", "stockPrice": 3021, "diffFromPrevday": +250, "range": +12.34 },
+                { "stockId":"stock4", "stockName": "종목4", "stockPrice": 23400, "diffFromPrevday": -330, "range": -12.78 },
             ]
         };
         
@@ -48,8 +53,9 @@ function Chart() {
     },[])
 
     return (
-        
             <div className="newsMain_chart">
+            {
+                loading ? <div className='loading_chart'><LoadingOutlined />loading...</div> : (
                 <table className="newsMain_table">
                     <thead>
                         <tr className="newsMain_chart_title">
@@ -73,10 +79,11 @@ function Chart() {
                             </tr>
                         ))
                         }
-                    </tbody>
+                    </tbody> 
                 </table>
+                )
+            }
             </div>
-        
     );
   }
   

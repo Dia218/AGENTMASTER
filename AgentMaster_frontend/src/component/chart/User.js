@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export function UserInfoForm() {
   const [userName, setUserName] = useState('');
@@ -131,6 +132,7 @@ export function UserInfoForm() {
 export function ScrapedArticles({ userName }) {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // 데이터 요청 시작 시 로딩 상태 설정
@@ -138,8 +140,10 @@ export function ScrapedArticles({ userName }) {
       try {
         const response = await axios.get(`http://localhost:8080/getScrapedArticles?userName=${userName}`); // 백엔드에서 스크랩된 기사 목록을 가져오는 엔드포인트
         setArticles(response.data); // 받아온 데이터를 articles 상태로 설정
+        setLoading(false); // 로딩 완료
       } catch (error) {
         console.error('Error fetching data:', error);
+        setLoading(false); // 로딩 완료
       }
     };
 
@@ -157,30 +161,34 @@ export function ScrapedArticles({ userName }) {
   return (
     <div className="userForm2">
       <h1>스크랩한 기사</h1>
-      <table className="article-table">
-        <thead>
-          <tr>
-            <th>제목</th>
-            <th>기자</th>
-            <th>날짜</th>
-            <th>기사</th>
-          </tr>
-        </thead>
-        <tbody>
-          {articles.map((article) => (
-            <tr key={article.id} className="news-article" onClick={() => handleClick(article.id)}>
-              <td>{article.title}</td>
-              <td>{article.author}</td>
-              <td>{article.date}</td>
-              <td>
-                <a href={article.url} target="_blank" rel="noopener noreferrer">
-                  기사 링크
-                </a>
-              </td>
+      {loading ? (
+        <div className='loading_main'><LoadingOutlined />loading...</div>
+      ) : (
+        <table className="article-table">
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>기자</th>
+              <th>날짜</th>
+              <th>기사</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {articles.map((article) => (
+              <tr key={article.id} className="news-article" onClick={() => handleClick(article.id)}>
+                <td>{article.title}</td>
+                <td>{article.author}</td>
+                <td>{article.date}</td>
+                <td>
+                  <a href={article.url} target="_blank" rel="noopener noreferrer">
+                    기사 링크
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
-  );
+  );  
 }

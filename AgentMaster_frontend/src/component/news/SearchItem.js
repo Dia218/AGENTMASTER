@@ -19,9 +19,9 @@ const SearchItem = ({props}) => {
     
     return (
         <div className="py-1 px-4">
-            <h6 className="mx-2">({props.company}) - 입력: {props.firstPub}</h6>
+            <h6 className="mx-2">{props.company} - 입력: {props.firstPub}</h6>
             <button className="itemButton">
-                <h4 onClick={handleClick}>{props.title} (키워드: {props.issueKeyword})</h4>
+                <h4 onClick={handleClick}>{props.title.length < 60 ? props.title : props.title.slice(0,55)+"..."}</h4>
             </button>
             <hr className="underline"/>
         </div>
