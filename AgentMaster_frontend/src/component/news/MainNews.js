@@ -31,9 +31,7 @@ function MainNews({news}) {
                 onClick={handleClick}><h3>{ news.title.length < 30 ? news.title : news.title.slice(0,30)+'...'}</h3></button>
             </div>
             <div className="category">
-
                 키워드:{" "+news.fieldName}
-
             </div>
         </Stack>
         </>

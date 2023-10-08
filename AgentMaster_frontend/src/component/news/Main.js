@@ -32,11 +32,10 @@ function Main() {
             const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
             setNews(responseNews_Main.PreviewNews);
             setLoading(false);
-       
         } catch (error) {
             const responseNews_Main = await data();
             setNews(responseNews_Main.PreviewNews);
-
+            setLoading(false);
             console.error('Error fetching news data:', error);
         }
     };
