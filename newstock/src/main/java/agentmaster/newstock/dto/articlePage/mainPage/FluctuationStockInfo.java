@@ -4,7 +4,6 @@ package agentmaster.newstock.dto.articlePage.mainPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 public class FluctuationStockInfo {
     private String stockCode;
@@ -12,4 +11,5 @@ public class FluctuationStockInfo {
     private Integer stockPrice;
     private Integer stockDiff;
     private Double stockRange;
+
 }

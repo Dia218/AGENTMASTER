@@ -1,12 +1,18 @@
 package agentmaster.newstock.dto.stockPage.detailPage;
 
 
+
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+
 @Getter
 public class ArticleByStock {
-    private Long articleId;
-    private String title;
+    private final Long articleId;
+    private final String summary;
+
+    public ArticleByStock(Long articleId, String summary){
+        this.articleId = articleId;
+        this.summary = summary;
+    }
 }

@@ -1,4 +1,4 @@
-package agentmaster.newstock;
+package agentmaster.newstock.domain;
 
 import lombok.Getter;
 import lombok.Setter;

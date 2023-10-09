@@ -1,9 +1,12 @@
-package agentmaster.newstock;
+package agentmaster.newstock.domain;
+
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 public class StockInfo {
 
     // 현재 DB는 H2를 이용하기에 AUTO(디폴트 값)을 이용중 추후 POSTGRE를 이용시 다음과 같이 수정

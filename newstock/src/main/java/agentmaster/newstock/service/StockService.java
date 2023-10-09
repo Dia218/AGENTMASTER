@@ -1,6 +1,6 @@
 package agentmaster.newstock.service;
 
-import agentmaster.newstock.Stock;
+import agentmaster.newstock.domain.Stock;
 import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;

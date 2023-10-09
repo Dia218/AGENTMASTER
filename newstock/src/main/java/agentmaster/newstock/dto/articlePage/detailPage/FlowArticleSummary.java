@@ -4,8 +4,12 @@ import lombok.Builder;
 
 import lombok.Getter;
 
-@Builder
+
 @Getter
 public class FlowArticleSummary {
-    private String issueSummary;
+    private final String issueSummary;
+
+    public FlowArticleSummary(String issueSummary){
+        this.issueSummary = issueSummary;
+    }
 }

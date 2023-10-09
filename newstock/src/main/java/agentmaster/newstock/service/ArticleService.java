@@ -1,8 +1,9 @@
 package agentmaster.newstock.service;
 
-import agentmaster.newstock.Article;
-import agentmaster.newstock.Stock;
-import agentmaster.newstock.User;
+import agentmaster.newstock.domain.Article;
+import agentmaster.newstock.domain.Field;
+import agentmaster.newstock.domain.Stock;
+import agentmaster.newstock.domain.User;
 import agentmaster.newstock.dto.articlePage.detailPage.FlowArticle;
 import agentmaster.newstock.dto.articlePage.detailPage.FlowArticleSummary;
 import agentmaster.newstock.dto.articlePage.detailPage.RealViewArticle;
@@ -42,6 +43,8 @@ public interface ArticleService {
 
     //주식 메인 페이지 오늘의 뉴스 전달부
     public List<TodayArticle> provideTodayArticle();
+
+    public List<Field> provideField();
 
 
 
