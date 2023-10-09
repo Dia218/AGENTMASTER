@@ -1,8 +1,10 @@
 package agentmaster.newstock.repository;
 
 import agentmaster.newstock.domain.Stock;
+import agentmaster.newstock.domain.StockInfo;
 import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
+import agentmaster.newstock.dto.simulPage.simulTrade.StockDto;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;
 import agentmaster.newstock.dto.stockPage.detailPage.StockBase;
 import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
@@ -43,11 +45,16 @@ public interface StockRepository {
     List<StockBase> findStockByBase(Stock stock);
 
     //모의투자 주식 상세 정보 DB SELECT
-    List<StockDetail> findStockByMoreInfo(Stock stock);
+    List<StockBase> findStockByMoreInfo(Stock stock);
 
+    //모의투자 거래 페이지 주식 그래프 정보 DB SELECT
+    List<StockBase> findStockBySimulChartData(Stock stock);
     //뉴스 메인 페이지 주식 증시 정보 DB SELECT
     List<FluctuationStockInfo> findStockByFluctuation();
 
     //주기적으로 주식 API 정보 DB저장
-    void insertStock(Stock stock);
+    void insertStock(StockInfo stockInfo);
+
+    List<StockDto> findByStockId(Stock stock);
+     List<StockDto> findAll();
 }

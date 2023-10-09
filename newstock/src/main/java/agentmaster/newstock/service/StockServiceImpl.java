@@ -10,6 +10,7 @@ import agentmaster.newstock.dto.stockPage.mainPage.StockRanking;
 import agentmaster.newstock.repository.StockRepository;
 import agentmaster.newstock.repository.StockRepositoryImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ import java.util.List;
 
 
 @Service
-//@Transactional(readOnly = true)
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService{
 
@@ -37,12 +38,12 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public List<StockRanking> provideStockByTopReturn() {
-        return null;
+        return stockRepository.findStockByTopReturn();
     }
 
     @Override
     public List<StockRanking> provideStockByBottomReturn() {
-        return null;
+        return stockRepository.findStockByBottomReturn();
     }
 
     @Override
@@ -52,36 +53,57 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public List<StockRanking> provideStockByBottomRate() {
-        return null;
+        return stockRepository.findStockByBottomRate();
     }
 
     @Override
     public List<StockRanking> provideStockByTopVolume() {
-        return null;
+        return stockRepository.findStockByTopVolume();
     }
 
     @Override
     public List<KeyWordStock> provideSearchStock(String search) {
-        return null;
+        return stockRepository.findStockBySearch(search);
     }
 
     @Override
     public List<ChartData> provideStockByChartData(Stock stock) {
-        return null;
+        Stock target;
+        if(stock.getStockCode() == null){
+            target = stockRepository.findIdByName(stock).get(0);
+        }
+        else{
+            target = stockRepository.findIdByCode(stock).get(0);
+        }
+        List<ChartData> results = stockRepository.findStockByChartData(target);
+        List<ChartData> result = new ArrayList<>();
+        for(int i = results.size()-1 ; i>=0;i--){
+            result.add(results.get(i));
+        }
+        return result;
     }
 
     @Override
     public List<StockBase> provideStockByBase(Stock stock) {
-        return null;
+        Stock target = stockRepository.findIdByName(stock).get(0);
+        return stockRepository.findStockByBase(target);
     }
 
     @Override
-    public List<StockDetail> provideStockByMoreInfo(Stock stock) {
-        return null;
+    public List<StockBase> provideStockByMoreInfo(Stock stock) {
+        Stock target = stockRepository.findIdByCode(stock).get(0);
+        return stockRepository.findStockByMoreInfo(target);
+    }
+
+    @Override
+    public List<StockBase> provideStockBySimulChartData(Stock stock) {
+        Stock targer = stockRepository.findIdByCode(stock).get(0);
+        return stockRepository.findStockBySimulChartData(stock);
     }
 
     @Override
     public List<FluctuationStockInfo> provideStockByFluctuation() {
-        return null;
+        return stockRepository.findStockByFluctuation();
     }
+
 }

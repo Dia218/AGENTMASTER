@@ -1,8 +1,10 @@
 package agentmaster.newstock.repository;
 
 import agentmaster.newstock.domain.*;
+import agentmaster.newstock.dto.articlePage.detailPage.FlowArticleSummary;
 import agentmaster.newstock.dto.articlePage.detailPage.RealViewArticle;
 import agentmaster.newstock.dto.articlePage.detailPage.RealViewArticleInfo;
+import agentmaster.newstock.dto.articlePage.detailPage.RelationArticle;
 import agentmaster.newstock.dto.articlePage.mainPage.PreviewArticle;
 import agentmaster.newstock.dto.articlePage.searchPage.SearchArticle;
 import agentmaster.newstock.dto.stockPage.detailPage.ArticleByStock;
@@ -25,8 +27,11 @@ public interface ArticleRepository {
     //뉴스 상세페이지 기사 상세 정보 DB SELECT
     public List<RealViewArticleInfo> findArticleByDetail(Article article);
 
+    //뉴스 상세페이지 연관 기사 정보 DB SELECT
+    public List<RelationArticle> findArticleByRelation(Article article);
+
     //특정 사건에 대한 사건 흐름 요약 정보 DB SELECT
-    public List<ArticleSummary> findArticleByFlowSummary(Article article);
+    public List<FlowArticleSummary> findArticleByFlowSummary(Article article);
 
     //기사 스크랩 여부 DB SELECT
     public Boolean findArticleScrapState(Article article, User user);
@@ -46,5 +51,7 @@ public interface ArticleRepository {
     //주식 메인 페이지 오늘의 뉴스 정보 DB SELECT
     public List<TodayArticle> findTodayArticle();
 
-    public List<Field> findField();
+
+    public Long findUserIdByName(User user);
+
 }

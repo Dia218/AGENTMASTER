@@ -43,8 +43,12 @@ public interface StockService {
     List<StockBase> provideStockByBase(Stock stock);
 
     //모의투자 거래 페이지 주식 추가 정보 전달부
-    List<StockDetail> provideStockByMoreInfo(Stock stock);
+    List<StockBase> provideStockByMoreInfo(Stock stock);
+
+    //모의투자 거래 페이지 주식 그래프 정보 전달부(주식 상세의 그래프와 다름)
+    List<StockBase> provideStockBySimulChartData(Stock stock);
 
     //뉴스 메인 페이지 증시 부분 주식 전달부
     List<FluctuationStockInfo> provideStockByFluctuation();
+
 }

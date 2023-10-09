@@ -6,22 +6,30 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "\"Simulation\"")
 @Getter @Setter
 public class Simulation {
 
     // 현재 DB는 H2를 이용하기에 AUTO(디폴트 값)을 이용중 추후 POSTGRE를 이용시 다음과 같이 수정
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "simulation_id")
     private Long id;
 
+    @Column (name = "simul_return")
     private int simulReturn;
 
     //이것과 rankRange의 차이점을 모르겠음. 따라서 수정을 현재는 안했으나 두개가 같다면 db를 정리하여 엔티티 수정예정
+    @Column (name = "simul_range")
     private double simulRange;
 
+    @Column (name = "simul_holdings")
     private int simulHoldings;
+
+    @Column (name = "purchase_amount")
     private int purchaseAmount;
+
+    @Column (name = "average_price")
     private int averagePrice;
 
     /**

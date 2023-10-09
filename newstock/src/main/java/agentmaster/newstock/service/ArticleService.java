@@ -4,9 +4,7 @@ import agentmaster.newstock.domain.Article;
 import agentmaster.newstock.domain.Field;
 import agentmaster.newstock.domain.Stock;
 import agentmaster.newstock.domain.User;
-import agentmaster.newstock.dto.articlePage.detailPage.FlowArticle;
-import agentmaster.newstock.dto.articlePage.detailPage.FlowArticleSummary;
-import agentmaster.newstock.dto.articlePage.detailPage.RealViewArticle;
+import agentmaster.newstock.dto.articlePage.detailPage.*;
 import agentmaster.newstock.dto.articlePage.searchPage.SearchArticle;
 import agentmaster.newstock.dto.stockPage.detailPage.ArticleByStock;
 import agentmaster.newstock.dto.stockPage.mainPage.TodayArticle;
@@ -24,10 +22,14 @@ public interface ArticleService {
     public List<SearchArticle> provideArticleBySearch(String search);
 
     //뉴스 상세페이지 기사 상세 정보 전달부
-    public List<RealViewArticle> provideArticleByDetail(Article article);
+    public RealView provideArticleByDetail(Article article, User user);
+
 
     //특정 사건에 대한 사건 흐름 기사들 전달부
-    public List<FlowArticle> provideArticleByRelation(Article article);
+    public List<FlowArticle> provideArticleByFlow(Article article);
+
+    //뉴스 상세 페이지 기사 연관 기사 전달부
+    public List<RelationArticle> provideArticleByRelation(Article articel);
 
     //특정 사건에 대한 전체 요약문 전달부
     public List<FlowArticleSummary> provideArticleByFlowSummary(Article article);
@@ -43,8 +45,6 @@ public interface ArticleService {
 
     //주식 메인 페이지 오늘의 뉴스 전달부
     public List<TodayArticle> provideTodayArticle();
-
-    public List<Field> provideField();
 
 
 

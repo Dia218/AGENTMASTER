@@ -6,10 +6,18 @@ import lombok.Getter;
 
 @Getter
 public class FluctuationStockInfo {
-    private String stockCode;
-    private String stockName;
-    private Integer stockPrice;
-    private Integer stockDiff;
-    private Double stockRange;
+    private final String stockId;
+    private final String stockName;
+    private final Integer stockPrice;
+    private final Integer diffFromPrevday;
+    private final Double range;
+
+    public FluctuationStockInfo(String stockCode, String stockName, Integer stockPrice, Integer stockDiff, Double stockRange){
+        this.stockId = stockCode;
+        this.stockName = stockName;
+        this.stockPrice = stockPrice;
+        this.diffFromPrevday = stockDiff;
+        this.range = stockRange;
+    }
 
 }

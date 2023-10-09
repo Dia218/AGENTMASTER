@@ -7,10 +7,14 @@ import lombok.Getter;
 @Getter
 public class RealViewArticleInfo {
     private final String articleSummary;
-    private final String link;
+    private  String link;
 
     public RealViewArticleInfo(String articleSummary, String link){
         this.articleSummary = articleSummary;
         this.link = link;
+    }
+
+    public void setLink(String link){
+        this.link =link;
     }
 }

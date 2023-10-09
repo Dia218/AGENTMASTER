@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "\"Stock\"")
 @Getter @Setter
 public class Stock {
 
     // 현재 DB는 H2를 이용하기에 AUTO(디폴트 값)을 이용중 추후 POSTGRE를 이용시 다음과 같이 수정
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "stock_id")
     private Long id;
 
@@ -22,7 +23,11 @@ public class Stock {
      * 지정하려면 할 수 있으나 보통은 일대일 관계일 때 외래키에 유니크를 같이 집어넣는 것이 디폴트값이다.
      * 혼란이 생길 수 있으므로 우선은 제약조건을 DB에서만 지정하고 JPA에서는 지정하지 않으려 한다.
      */
+
+    @Column (name = "stock_code")
     private String stockCode;
+
+    @Column (name = "stock_name")
     private String stockName;
 
     @ManyToOne (fetch = FetchType.LAZY)

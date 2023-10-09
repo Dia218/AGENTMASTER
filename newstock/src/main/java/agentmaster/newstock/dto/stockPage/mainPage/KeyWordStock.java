@@ -9,9 +9,9 @@ public class KeyWordStock {
     private final String stockCode;
     private final String stockName;
 
-    public KeyWordStock(Long stockId,String stockCode, String StockName){
+    public KeyWordStock(Long stockId,String stockCode, String stockName){
         this.stockId = stockId;
         this.stockCode = stockCode;
-        this.stockName = stockCode;
+        this.stockName = stockName;
     }
 }

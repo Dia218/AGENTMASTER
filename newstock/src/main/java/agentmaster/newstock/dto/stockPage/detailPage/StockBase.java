@@ -15,21 +15,24 @@ public class StockBase {
     private final Integer stockPrice;
     private final Integer stockDiff;
     private final Double stockRange;
-    private final Integer startPrice;
-    private final Integer highPrice;
-    private final Integer lowPrice;
-    private final Long tradingVolume;
-    private final Long transactionAmount;
+    private final Integer stockStartPrice;
+    private final Integer stockhighPrice;
+    private final Integer stocklowPrice;
+    private final Long stockTradingAmount;
+    private final Long stockTradingTotalPrice;
 
+
+
+    @Builder
     public StockBase(Date stockDate, Integer stockPrice, Integer stockDiff, Double stockRange, Integer startPrice, Integer highPrice, Integer lowPrice, Long tradingVolume, Long transactionAmount){
         this.stockDate = stockDate;
         this.stockPrice = stockPrice;
         this.stockDiff = stockDiff;
         this. stockRange =stockRange;
-        this.startPrice = startPrice;
-        this.highPrice = highPrice;
-        this.lowPrice = lowPrice;
-        this.tradingVolume = tradingVolume;
-        this.transactionAmount = transactionAmount;
+        this.stockStartPrice = startPrice;
+        this.stockhighPrice = highPrice;
+        this.stocklowPrice = lowPrice;
+        this.stockTradingAmount = tradingVolume;
+        this.stockTradingTotalPrice = transactionAmount;
     }
 }
