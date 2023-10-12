@@ -1,3 +1,5 @@
+# 기사 정리 기능
+
 from db_main import ServicePreparer
 import openai
 
