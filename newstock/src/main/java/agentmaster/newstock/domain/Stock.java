@@ -1,5 +1,6 @@
 package agentmaster.newstock.domain;
 
+import agentmaster.newstock.domain.StockInfo;
 import lombok.Getter;
 import lombok.Setter;
 

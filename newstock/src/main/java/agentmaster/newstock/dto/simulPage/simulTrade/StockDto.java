@@ -43,8 +43,10 @@ public class StockDto {
         return this.stockCode;
     }
 
-    public Integer getTradePrice(){
-        return this.stockPrice.intValue();
+    public BigDecimal getTradePrice(){
+        return this.stockPrice;
     }
+
+
 }
 

@@ -1,22 +1,16 @@
 package agentmaster.newstock.controller;
 
 import agentmaster.newstock.domain.Article;
-import agentmaster.newstock.domain.Field;
 import agentmaster.newstock.domain.Stock;
-import agentmaster.newstock.domain.User;
-import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
-import agentmaster.newstock.dto.stockPage.mainPage.TodayArticle;
 import agentmaster.newstock.etc.ScrapRequest;
 import agentmaster.newstock.service.ArticleService;
-import agentmaster.newstock.service.ArticleServiceImpl;
+import agentmaster.newstock.user.entitiy.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @CrossOrigin
@@ -42,7 +36,7 @@ public class ArticleController {
         Map<String, Object> result = new HashMap<>();
         Article article = new Article();
     
-        User user = new User();
+        User user = User.builder().name(userName).build();
         article.setId(articleId);
         if(userName.equals("null")) {
             user.setName("exdadabmausr");
@@ -95,7 +89,7 @@ public class ArticleController {
     public Map<String, Object> requestScrap(@RequestBody ScrapRequest request){
         Map<String, Object> result = new HashMap<>();
         Article article = new Article();
-        User user = new User();
+        User user = User.builder().name(request.getUserName()).build();
         System.out.println(request.getArticleId());
         System.out.println(request.getUserName());
 

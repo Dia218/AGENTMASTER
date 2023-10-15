@@ -1,9 +1,7 @@
 package agentmaster.newstock.service;
 
 import agentmaster.newstock.domain.Article;
-import agentmaster.newstock.domain.Field;
 import agentmaster.newstock.domain.Stock;
-import agentmaster.newstock.domain.User;
 import agentmaster.newstock.dto.articlePage.detailPage.*;
 import agentmaster.newstock.dto.articlePage.searchPage.SearchArticle;
 import agentmaster.newstock.dto.stockPage.detailPage.ArticleByStock;
@@ -11,6 +9,7 @@ import agentmaster.newstock.dto.stockPage.mainPage.TodayArticle;
 import agentmaster.newstock.dto.userPage.ScrapArticle;
 
 import agentmaster.newstock.dto.articlePage.mainPage.PreviewArticle;
+import agentmaster.newstock.user.entitiy.User;
 
 import java.util.List;
 

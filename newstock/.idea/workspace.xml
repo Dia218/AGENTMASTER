@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/QueryDslConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/common/converter/BooleanToYnConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/common/entity/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/entity/Ranking.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/service/RankingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/entity/Simulation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/exception/NotSufficientBalanceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/exception/NotSufficientVolumeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/request/SimulationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/response/SimulationDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/response/SimulationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationStatusConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/entity/SimulationStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/exception/StockNotExistException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/SimulationStockDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/NotLoginException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/PasswordMismatchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/UserDuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepositoryCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/request/SigninRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/request/SignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SigninResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SignupResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/UserDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleScrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleScrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/IssueSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/IssueSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Simulation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/TestRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/TestService.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2Us8mRZjCC1TVkdRwNKeXSwzEpB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging 0-server-stock-b",
+    "last_opened_file_path": "C:/Users/82109/Desktop/대학생활/3학년 여름방학/상상기업/프로젝트/AGENTMASTER/newstock",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.splitter.proportion": "0.28134558",
+    "spring.configuration.checksum": "026665c24cf7aeaa78e21924117d9046",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="agentmaster.newstock.repository" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\82109\Desktop\대학생활\3학년 여름방학\상상기업\프로젝트\BackEnd 김태완 작업 공간\AGENTMASTER\newstock\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.NewstockApplication">
+    <configuration name="newstock [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="newstock [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="newstock [classes]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="classes" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="newstock [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="newstock [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="NewstockApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="newstock.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="agentmaster.newstock.NewstockApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.newstock [build]" />
+        <item itemvalue="Gradle.newstock [clean]" />
+        <item itemvalue="Gradle.newstock [jar]" />
+        <item itemvalue="Gradle.newstock [classes]" />
+        <item itemvalue="Gradle.newstock [buildDependents]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="" />
+      <created>1693717086346</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1693717086346</updated>
+      <workItem from="1693717087350" duration="4037000" />
+      <workItem from="1693920325741" duration="1207000" />
+      <workItem from="1693958427188" duration="674000" />
+      <workItem from="1693964381586" duration="17193000" />
+      <workItem from="1694131959141" duration="12484000" />
+      <workItem from="1694334673260" duration="16111000" />
+      <workItem from="1694435030412" duration="1614000" />
+      <workItem from="1694441114554" duration="5081000" />
+      <workItem from="1694493030833" duration="2493000" />
+      <workItem from="1694500786698" duration="696000" />
+      <workItem from="1694528254258" duration="604000" />
+      <workItem from="1694563580416" duration="14929000" />
+      <workItem from="1694582291116" duration="14494000" />
+      <workItem from="1694696510566" duration="2599000" />
+      <workItem from="1694699127920" duration="2736000" />
+      <workItem from="1694762487030" duration="1537000" />
+      <workItem from="1694959171282" duration="1553000" />
+      <workItem from="1694997538588" duration="308000" />
+      <workItem from="1695011406642" duration="27000" />
+      <workItem from="1695011461493" duration="18503000" />
+      <workItem from="1695204197624" duration="2488000" />
+      <workItem from="1695216933007" duration="2325000" />
+      <workItem from="1695291908738" duration="8853000" />
+      <workItem from="1695342029993" duration="5392000" />
+      <workItem from="1695348855841" duration="4444000" />
+      <workItem from="1695445938781" duration="24936000" />
+      <workItem from="1695777048260" duration="1035000" />
+      <workItem from="1695792487304" duration="3575000" />
+      <workItem from="1696169153662" duration="5687000" />
+      <workItem from="1696234187707" duration="7366000" />
+      <workItem from="1696342200450" duration="21942000" />
+      <workItem from="1696479616342" duration="16576000" />
+      <workItem from="1696681144088" duration="11508000" />
+      <workItem from="1696731532607" duration="747000" />
+      <workItem from="1696732916754" duration="673000" />
+      <workItem from="1696739061307" duration="16691000" />
+      <workItem from="1696831761838" duration="949000" />
+      <workItem from="1696863550792" duration="1644000" />
+      <workItem from="1697004407912" duration="698000" />
+      <workItem from="1697024669112" duration="644000" />
+      <workItem from="1697288496390" duration="181000" />
+      <workItem from="1697295986478" duration="219000" />
+      <workItem from="1697347658233" duration="3425000" />
+      <workItem from="1697353717716" duration="10006000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

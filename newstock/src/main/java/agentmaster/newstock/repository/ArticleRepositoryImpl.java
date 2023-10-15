@@ -8,7 +8,7 @@ import agentmaster.newstock.dto.stockPage.detailPage.ArticleByStock;
 import agentmaster.newstock.dto.stockPage.mainPage.TodayArticle;
 import agentmaster.newstock.dto.userPage.ScrapArticle;
 import org.springframework.stereotype.Repository;
-
+import agentmaster.newstock.user.entitiy.User;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;

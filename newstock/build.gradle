@@ -1,7 +1,18 @@
+//QueryDSL 버전정보 추가
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+		swaggerVersion = "3.0.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.15'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+	//QueryDSL 플러그인 추가
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
 group = 'jpa-Test'
@@ -24,16 +35,58 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'junit:junit:4.13.1'
+//	testImplementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'org.postgresql:postgresql'
 
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//백엔드 파트원 부분 : json 객체를 위한 의존성 주입
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'					//open api 파싱을 위한 json 라이브러리 의존성 주입
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.4' // 현재 버전에 맞게 업데이트하세요.
 
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+	//QueryDSL
+	implementation 'com.querydsl:querydsl-core'
+	implementation 'com.querydsl:querydsl-jpa'
+//	annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
+//	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+//	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+	annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+	annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 }
+
+//QueryDSL 플러그인 설정 START
+
+def querydslDir = '$buildDir/generated/querydsl' //QueryDSL로 생성된 소스가 저장되는 위치
+
+querydsl{
+	jpa=true //JPA 사용여부 설정
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir //빌드시 컴파일이 필요한 소스위치
+}
+
+//QueryDSL 컴파일시 참조할 설정정보
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	compileOnly{
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath //외부라이브러리 컴파일 경로 상속
+}
+
+//QueryDSL 플러그인 설정 END
 
 tasks.named('test') {
 	useJUnitPlatform()
