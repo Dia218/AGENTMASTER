@@ -3,9 +3,15 @@ package agentmaster.newstock.dto.stockPage.mainPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 public class KeyWordStock {
-    private String stockCode;
-    private String stockName;
+    private final Long stockId;
+    private final String stockCode;
+    private final String stockName;
+
+    public KeyWordStock(Long stockId,String stockCode, String stockName){
+        this.stockId = stockId;
+        this.stockCode = stockCode;
+        this.stockName = stockName;
+    }
 }

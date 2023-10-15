@@ -3,10 +3,16 @@ package agentmaster.newstock.dto.articlePage.detailPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 public class FlowArticle {
-    private Long articleId;
-    private String title;
-    private String articleSummary;
+
+    private final Long articleId;
+    private final String title;
+    private final String articleSummary;
+
+    public FlowArticle(Long id, String title, String articleSummary){
+        this.articleId = id;
+        this.title = title;
+        this.articleSummary = articleSummary;
+    }
 }

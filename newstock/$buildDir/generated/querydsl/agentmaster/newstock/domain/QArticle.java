@@ -42,7 +42,7 @@ public class QArticle extends EntityPathBase<Article> {
 
     public final DateTimePath<java.time.LocalDateTime> lastPub = createDateTime("lastPub", java.time.LocalDateTime.class);
 
-    public final StringPath repoter = createString("repoter");
+    public final StringPath reporter = createString("reporter");
 
     public final StringPath title = createString("title");
 

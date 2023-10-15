@@ -2,18 +2,15 @@ package agentmaster.newstock.user.entitiy;
 
 import agentmaster.newstock.common.converter.BooleanToYnConverter;
 import agentmaster.newstock.common.entity.BaseEntity;
-import agentmaster.newstock.domain.ArticleScrap;
-import agentmaster.newstock.domain.Simulation;
 import agentmaster.newstock.ranking.entity.Ranking;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
 

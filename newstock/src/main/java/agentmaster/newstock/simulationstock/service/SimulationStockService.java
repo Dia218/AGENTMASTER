@@ -18,7 +18,7 @@ public class SimulationStockService {
     private final UserRepository userRepository;
 
     public void deleteSimulationStock(User user, String stockCode) {
-        SimulationStock simulationStock = simulationStockRepository.findByUserAndStock(user, stockCode);
+        SimulationStock simulationStock = simulationStockRepository.findByUserAndStockCode(user, stockCode);
         simulationStockRepository.delete(simulationStock);
     }
 

@@ -30,17 +30,19 @@ public class QStockInfo extends EntityPathBase<StockInfo> {
 
     public final NumberPath<Integer> lowPrice = createNumber("lowPrice", Integer.class);
 
+    public final NumberPath<Double> startPrice = createNumber("startPrice", Double.class);
+
     public final QStock stock;
 
-    public final DateTimePath<java.time.LocalDateTime> stockDate = createDateTime("stockDate", java.time.LocalDateTime.class);
+    public final DatePath<java.time.LocalDate> stockDate = createDate("stockDate", java.time.LocalDate.class);
 
     public final NumberPath<Integer> stockPrice = createNumber("stockPrice", Integer.class);
 
     public final NumberPath<Double> stockRange = createNumber("stockRange", Double.class);
 
-    public final NumberPath<Integer> tradingVolume = createNumber("tradingVolume", Integer.class);
+    public final NumberPath<Long> tradingVolume = createNumber("tradingVolume", Long.class);
 
-    public final NumberPath<Integer> transactionAmount = createNumber("transactionAmount", Integer.class);
+    public final NumberPath<Long> transactionAmount = createNumber("transactionAmount", Long.class);
 
     public QStockInfo(String variable) {
         this(StockInfo.class, forVariable(variable), INITS);

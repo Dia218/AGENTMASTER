@@ -3,9 +3,15 @@ package agentmaster.newstock.dto.stockPage.mainPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
 public class TodayArticle {
-    private String company;
-    private String article_summary;
+    private final Long articleId;
+    private final String title;
+    private final String summary;
+
+    public TodayArticle(Long articleId,String title, String summary){
+        this.articleId = articleId;
+        this.title = title;
+        this.summary =summary;
+    }
 }

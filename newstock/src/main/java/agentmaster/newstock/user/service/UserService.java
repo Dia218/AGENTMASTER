@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public SignupResponse signup(SignupRequest signupRequest) {
-        if (userRepository.existByName(signupRequest.getName())) {
+        if (userRepository.existsByName(signupRequest.getName())) {
             throw new UserDuplicateException();
         }
 

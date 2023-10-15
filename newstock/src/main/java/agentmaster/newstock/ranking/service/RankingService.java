@@ -1,6 +1,8 @@
 package agentmaster.newstock.ranking.service;
 
+import agentmaster.newstock.dto.simulPage.simulTrade.StockDto;
 import agentmaster.newstock.ranking.dto.RankingResponse;
+import agentmaster.newstock.repository.StockRepository;
 import agentmaster.newstock.simulationstock.entity.SimulationStock;
 import agentmaster.newstock.simulationstock.repository.SimulationStockRepository;
 import agentmaster.newstock.user.entitiy.User;

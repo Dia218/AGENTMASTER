@@ -17,10 +17,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(
-        name = "orders",
         indexes = {
                 @Index(name = "idx_status", columnList = "status"),
-                @Index(name = "idx_notice_yn", columnList = "noticeYn")
         }
 )
 public class Simulation extends BaseEntity {

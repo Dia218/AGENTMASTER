@@ -48,11 +48,11 @@ public class SimulationService {
             conclusionSimulation (simulation);
             return new SimulationResponse(simulation.getId());
         } else if (TYPE_SELL.equals(simulationRequest.getType())) {
-            if (!simulationStockRepository.existByUserAndStock(user, simulationRequest.getStockCode())) {
+            if (!simulationStockRepository.existsByUserAndStockCode(user, simulationRequest.getStockCode())) {
                 throw new StockNotExistException();
             }
 
-            SimulationStock simulationStock = simulationStockRepository.findByUserAndStock(user, simulationRequest.getStockCode());
+            SimulationStock simulationStock = simulationStockRepository.findByUserAndStockCode(user, simulationRequest.getStockCode());
             if (simulationStock.getVolume() - simulationRequest.getVolume() < 0) {
                 throw new NotSufficientVolumeException();
             }
@@ -88,8 +88,8 @@ public class SimulationService {
         if (TYPE_BUY.equals(simulation.getType())) {
             findSimulation.getUser().buy(simulation.getPrice(), simulation.getVolume());
 
-            if (simulationStockRepository.existByUserAndStock(simulation.getUser(), simulation.getStockCode())) {
-                simulationStockRepository.findByUserAndStock(simulation.getUser(), simulation.getStockCode())
+            if (simulationStockRepository.existsByUserAndStockCode(simulation.getUser(), simulation.getStockCode())) {
+                simulationStockRepository.findByUserAndStockCode(simulation.getUser(), simulation.getStockCode())
                         .change(simulation.getType(), simulation.getVolume(), simulation.getPrice(), findSimulation);
             }
 
@@ -97,7 +97,7 @@ public class SimulationService {
         } else if (TYPE_SELL.equals(simulation.getType())) {
             findSimulation.getUser().sell(simulation.getPrice(), simulation.getVolume());
 
-            SimulationStock simulationStock = simulationStockRepository.findByUserAndStock(simulation.getUser(), simulation.getStockCode());
+            SimulationStock simulationStock = simulationStockRepository.findByUserAndStockCode(simulation.getUser(), simulation.getStockCode());
 
             if (simulationStock.getVolume() - simulation.getVolume() > 0) {
                 simulationStock.change(simulation.getType(), simulation.getVolume(), simulation.getPrice(), findSimulation);

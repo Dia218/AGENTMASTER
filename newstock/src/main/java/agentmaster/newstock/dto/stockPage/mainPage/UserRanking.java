@@ -3,10 +3,17 @@ package agentmaster.newstock.dto.stockPage.mainPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+
 @Getter
 public class UserRanking {
-    private Integer ranking;
-    private String userName;
-    private Double rankRange;
+    private final Integer ranking;
+    private final String userName;
+    private final Double rankRange;
+
+    public UserRanking(String userName, Double rankRange,Integer ranking){
+
+        this.userName = userName;
+        this.rankRange = rankRange;
+        this.ranking = ranking;
+    }
 }

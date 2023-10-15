@@ -4,9 +4,14 @@ package agentmaster.newstock.dto.articlePage.detailPage;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
+
 @Getter
 public class RelationArticle {
-    private Long articleId;
-    private String title;
+    private final Long articleId;
+    private final String title;
+
+    public RelationArticle(Long articleId, String title){
+        this.articleId = articleId;
+        this.title = title;
+    }
 }

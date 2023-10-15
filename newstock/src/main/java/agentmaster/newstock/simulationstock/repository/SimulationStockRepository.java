@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SimulationStockRepository extends JpaRepository<SimulationStock, Long>, SimulationStockRepositoryCustom {
 
-    SimulationStock findByUserAndStock(User user, String stockCode);
-    boolean existByUserAndStock(User user, String stockCode);
+    SimulationStock findByUserAndStockCode(User user, String stockCode);
+    boolean existsByUserAndStockCode(User user, String stockCode);
 }
