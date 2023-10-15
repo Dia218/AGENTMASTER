@@ -1,4 +1,4 @@
-package agentmaster.newstock;
+package agentmaster.newstock.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
