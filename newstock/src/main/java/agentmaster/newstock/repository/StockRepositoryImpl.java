@@ -91,7 +91,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockRanking> result = new ArrayList<>();
 
         for(int i=0;i<results.size();i++){
-            StockRanking stockRanking = new StockRanking(i+1,(String) results.get(i)[0], (String) results.get(i)[1], (String) results.get(i)[2], (Date) results.get(i)[3], (Integer) results.get(i)[4], (Integer) results.get(i)[5],((BigDecimal) results.get(i)[6]).doubleValue(),((BigInteger) results.get(i)[7]).longValue());
+            StockRanking stockRanking = new StockRanking(i+1,(String) results.get(i)[0], (String) results.get(i)[1], (String) results.get(i)[2], (Date) results.get(i)[3], (Integer) results.get(i)[4], (Integer) results.get(i)[5],((Double) results.get(i)[6]).doubleValue(),((BigInteger) results.get(i)[7]).longValue());
             result.add(stockRanking);
         }
 
@@ -117,7 +117,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockRanking> result = new ArrayList<>();
 
         for(int i=0;i<results.size();i++){
-            StockRanking stockRanking = new StockRanking(i+1,(String) results.get(i)[0], (String) results.get(i)[1], (String) results.get(i)[2], (Date) results.get(i)[3], (Integer) results.get(i)[4], (Integer) results.get(i)[5],((BigDecimal) results.get(i)[6]).doubleValue(),((BigInteger)results.get(i)[7]).longValue());
+            StockRanking stockRanking = new StockRanking(i+1,(String) results.get(i)[0], (String) results.get(i)[1], (String) results.get(i)[2], (Date) results.get(i)[3], (Integer) results.get(i)[4], (Integer) results.get(i)[5],((Double) results.get(i)[6]).doubleValue(),((BigInteger)results.get(i)[7]).longValue());
             result.add(stockRanking);
         }
 
@@ -170,7 +170,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockRanking> result = new ArrayList<>();
         int i = 1;
         for(Object[] results : query){
-            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((BigDecimal) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
+            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((Double) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
             result.add(stockRanking);
         }
 
@@ -237,7 +237,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockRanking> result = new ArrayList<>();
         int i =1;
         for(Object[] results : query){
-            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((BigDecimal) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
+            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((Double) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
             result.add(stockRanking);
         }
         return result;
@@ -274,7 +274,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockRanking> result = new ArrayList<>();
         int i = 1;
         for(Object[] results : queryResult){
-            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((BigDecimal) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
+            StockRanking stockRanking = new StockRanking(i++,(String) results[0], (String) results[1], (String) results[2], (Date) results[3], (Integer) results[4], (Integer) results[5],((Double) results[6]).doubleValue(),((BigInteger) results[7]).longValue());
             result.add(stockRanking);
         }
         return result;
@@ -320,7 +320,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<Object[]> queryResult = query.setMaxResults(7).getResultList();
         List<ChartData> result = new ArrayList<>();
         for(Object[] objects : queryResult){
-            result.add(new ChartData((String)objects[0],(String)objects[1],(String)objects[2],(Date)objects[3],(Integer) objects[4],(Integer) objects[5],((BigDecimal)objects[6]).doubleValue()));
+            result.add(new ChartData((String)objects[0],(String)objects[1],(String)objects[2],(Date)objects[3],(Integer) objects[4],(Integer) objects[5],(Double)objects[6]));
         }
 
         return result;
@@ -422,7 +422,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<FluctuationStockInfo> result = new ArrayList<>();
 
         for(Object[] results : queryResult){
-            result.add(new FluctuationStockInfo((String) results[0],(String) results[1], (Integer) results[2], (Integer) results[3], ((BigDecimal) results[4]).doubleValue()));
+            result.add(new FluctuationStockInfo((String) results[0],(String) results[1], (Integer) results[2], (Integer) results[3], (Double)results[4]));
         }
 
         return result;

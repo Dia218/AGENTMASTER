@@ -39,7 +39,7 @@ public class ArticleController {
         User user = User.builder().name(userName).build();
         article.setId(articleId);
         if(userName.equals("null")) {
-            user.setName("exdadabmausr");
+            user.setName("admin");
             result.put("RealViewArticle", articleService.provideArticleByDetail(article,user));
         }
         else{
@@ -131,6 +131,7 @@ public class ArticleController {
         Map<String, Object> result = new HashMap<>();
 
         result.put("SearchNewsInfo",articleService.provideArticleBySearch(keyword));
+//        result.put("SearchNewsInfo",null);
         return result;
     }
 }
