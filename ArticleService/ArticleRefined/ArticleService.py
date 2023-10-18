@@ -43,48 +43,46 @@ class ArticleService:
 
     def relate(self, 
                target_id: int, 
-               narticle: int = 5, 
-               criteria: str = 'title'):
+               narticle: int = 5):
+        """
+            NECC. BODY
         """
 
-        """
-        if criteria not in ('title', 'body'):
-            raise Exception(f'Invalid criteria. Parameter "criteria" does not allow {criteria}.')
-        
         if narticle <= 0:
             raise Exception(f'Invalid nariticle. Parameter "narticle" must be larger than 0.')
         
         if target_id <= 0:
             raise Exception(f'Invalid target_id. Parameter "target_id" must be a positive integer.')
         
-        target_article = self.db_handler.article_by_id(target_id)
+        target_article = self.db_handler.article_by_id(target_id)[0][0].split('.')[0]
+
         if not target_article:
             raise Exception(f'Non exsisting target_article.')
         
-        target_words = self._nouns(target_article)
-        
-        base_articles = self.db_handler.articles_by_keywords(target_words)
+        target_words = "'" + str(' '.join([w[0] for w in self.tokenizer.pos(target_article) if w[1][0] == 'N'])) + "'"
+        base_articles = self.db_handler.articles_by_keywords(
+            str(target_id), 
+            [w[0] for w in self.tokenizer.pos(target_article) if w[1][0] == 'N']
+        )
         
         # 비교군이 필요보다 적으면 그냥 다 반환한다. 
         if len(base_articles) < narticle:
-            return base_articles
+            diff = narticle - len(base_articles)
+
+            base_articles += self.db_handler.get_random_N(diff)
 
         base_word = list()
         for base_article in base_articles:
             base_article_words = self._nouns(base_article)
-
-            base_word.append(base_article_words)
+                                # id, tokenized body
+            base_word.append((base_article[0], base_article_words))
 
         # 유사도 검사
         sim = FrequencySimilarity()
-        sorted_bases = sim.calculate_frequency(target=target_words, base=base_word)[:narticle+1]
-        
-        return sorted_bases
-    
-    def _nouns(self, criteria: str, text: str) -> list:
-        attr_index = {
-            'title': 4,
-            'body': 7
-        }
+        sorted_bases = sim.calculate_frequency(target=target_words, base=base_word)[:narticle]
 
-        return [wt[0] for wt in self.tokenizer.pos(text[attr_index[criteria]]) if wt[1][0] == 'N']
+        # target_id, similars_ids, body
+        return sorted_bases
+
+    def _nouns(self, text: str) -> list:
+        return [wt[0] for wt in self.tokenizer.pos(text[1]) if wt[1][0] == 'N']

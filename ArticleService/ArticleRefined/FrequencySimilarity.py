@@ -39,17 +39,21 @@ class FrequencySimilarity:
         if list(filter(lambda x: not x, base)):
             raise Exception(f'Parameter "base" cannot include empty collections.')
 
-        # base의 하위 리스트의 원소는 str 형만 있어야 함. 
-        if (lf := list(filter(lambda x: type(x) is not str, chain(*base)))):
-            raise Exception(f'Parameter "base" cannot have a element type of {type(lf[0])}.')
+        # # base의 하위 리스트의 원소는 str 형만 있어야 함. 
+        # if (lf := list(filter(lambda x: type(x) is not str, chain(*base)))):
+        #     raise Exception(f'Parameter "base" cannot have a element type of {type(lf[0])}.')
+        
+        base_id = [b[0] for b in base]
+        base = [b[1] for b in base]
         
         sim_mat = self._similarity_matrix(target, base)
         
         # Sort by similarity
-        data = sorted([(simm, base[isimm]) for isimm, simm in enumerate(sim_mat)], key=lambda x: x[0], reverse=True)
-        return [d[1] for d in data]
+        data = sorted([(simm, base_id[isimm], base[isimm]) for isimm, simm in enumerate(sim_mat)], key=lambda x: x[0], reverse=True)
+        return data
         
     def _similarity_matrix(self, target, base) -> np.array:
+
         target_freq = self._word_matrix(target, base)[0, :]
         base_freq = self._freq_matrix(target, base)[1:, :]
 

@@ -78,13 +78,15 @@ class ArticleBundle:
         crawl_round = math.ceil(narticleLB / N_ARTICLES_PER_PAGE)
         
         for r in range(crawl_round):
-            l = assemble_link(base= "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm",
-                              keys=["sid1", "sid2", "date", "page"],
-                              values=[str(section_to_code[self.section]), 
+            l = assemble_link(base= "https://news.naver.com/main/list.naver",
+                              keys=["mode", "mid", "sid1", "sid2", "date", "page"],
+                              values=["LS2D",
+                                      "shm",
+                                    str(section_to_code[self.section]), 
                                       str(section_to_general_code[self.section]), 
                                       self.date, 
                                       str(self.last_crawled_page + r)])
-            
+            print('total link', l)
             # Fetch html document containing article links. 
             document = BeautifulSoup(requests.get(l, headers=header).text, "html.parser")
             aggregated = self._parse_links(document)

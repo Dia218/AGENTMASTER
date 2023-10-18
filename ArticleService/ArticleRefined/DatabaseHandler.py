@@ -9,8 +9,9 @@ class DatabaseHandler:
         """
         
         """
-        if not type(config_path) == str:  raise TypeError()
-        
+        print('DATABASEHANDLER::__INIT__')
+        if not type(config_path) == str: raise TypeError()
+
         # Initialize config parameters. 
         self.config_key = ["host", "user", "password", "dbname", "port"]
         for k in self.config_key :
@@ -21,9 +22,12 @@ class DatabaseHandler:
         self._connect(conn_str)
 
     def __del__(self) -> None:
-        if not self.connection: return
-
-        self.connection.close()
+        try:
+            self.connection.close()
+        except Exception as e:
+            print(e)
+            
+        return
 
     def _load_config(self, config_path: str) -> None:
         """
@@ -78,9 +82,28 @@ class DatabaseHandler:
         return connection_string
     
     def _connect(self, conn_str: str) -> None:
-
         if not type(conn_str) == str: raise TypeError()
-
-        if not (conn := psycopg2.connect(conn_str)): raise Exception()
-
+        
+        conn = None
+        try:
+            conn = psycopg2.connect(conn_str)
+        except Exception as e:
+            print('what')
+            raise Exception(e)
+        
         self.connection = conn
+        self.cursor = self.connection.cursor()
+
+    def request(self, query, attribute = None):
+        try:
+            if not attribute:
+                self.cursor.execute(query)
+                self.connection.commit()
+            else:
+                self.cursor.execute(query, attribute)
+                self.connection.commit()
+        except Exception as e:
+            print('db connection has occured error following: ')
+            print(e)
+        return self.cursor.fetchall()
+            
