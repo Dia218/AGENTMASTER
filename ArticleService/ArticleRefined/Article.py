@@ -36,11 +36,11 @@ class Article:
         """
         if not link: raise Exception()
 
-        self.attributes = { "title": title, "link": link, "company": company, 
-                                  "body":body, "summary": summary, "reporter": reporter, 
+        self.attributes = { "title": title, "link": link, "article_field_id": -1, "article_link_id": 0, 
+                           "company": company, "body":body, "summary": summary, "reporter": reporter, 
                                   "first_pub": first_pub, "last_pub": last_pub }
         self.essential_attributes = ["link"]
-        self.post_work_attributes = ["summary"]
+        self.post_work_attributes = ["summary", "article_field_id", "article_link_id"]
         
         # Create members
         for attr in self.attributes.keys():
@@ -58,10 +58,17 @@ class Article:
 
         # Fetch html document of an article.
         document = BeautifulSoup(requests.get(self.link, headers=header).text, "html.parser")
-
+        
         for attr in working_attrs:
-            working_func = getattr(self, "_parse_" + attr)
-            setattr(self, attr, working_func(document))
+            try:
+                working_func = getattr(self, "_parse_" + attr)
+                setattr(self, attr, working_func(document))
+            except AttributeError as e:
+                print(f'An error has occured while crawling {self.link} in the field of {attr}')
+                setattr(self, attr, '')
+            except KeyError as e:
+                print(f'An error has occured while crawling {self.link} in the field of {attr}')
+                setattr(self, attr, '')
 
     def _parse_title(self, document: BeautifulSoup) -> str:
         content = document.find("h2", id="title_area").find("span")
@@ -89,7 +96,7 @@ class Article:
     
     def _parse_company(self, document: BeautifulSoup) -> str: 
         content = document.find("span", class_="media_end_head_top_channel_layer_text").find("strong")
-        text = content.text
+        text = "" if not content else content.text
 
         return text
     
@@ -105,11 +112,9 @@ class Article:
         content = document.find("div", class_="media_end_head_info_datestamp") \
         .find("span", class_="media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME") 
         
-        text = self._parse_first_pub(document) if not content.text else content['data-date-time']
+        text = self._parse_first_pub(document) if not content else content['data-modify-date-time']
         
         return text
-    
-    def set_summary(self, summ: str) -> None: return
 
     def to_dict(self) -> dict:
         ret = dict()
@@ -121,3 +126,7 @@ class Article:
     def is_filled(self) -> bool:
         return not self.title or not self.first_pub or not self.company
     
+    def fill_article_link_id(self, id: int):
+        assert type(id) is int, 'Parameter id must be an int'
+
+        self.article_link_id = id
