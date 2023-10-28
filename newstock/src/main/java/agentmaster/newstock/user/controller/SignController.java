@@ -15,16 +15,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/newsMain")
+@CrossOrigin
+//@RequestMapping("/newsMain")
 public class SignController {
     private final UserService userService;
 
     @ApiOperation("회원가입")
-    @GetMapping("/join/checkJoin")
+    @GetMapping("/newsMain/join/checkJoin")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public SignupResponse signup(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword, @RequestParam("userEmail") String userEmail){
@@ -37,12 +42,18 @@ public class SignController {
     }
 
     @ApiOperation("회원 로그인")
-    @GetMapping("/login")
+    @GetMapping("/newsMain/login")
     @ResponseBody
-    public User signin(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) {
+    public Map<String,Object> signin(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) {
         SigninRequest signinRequest = new SigninRequest();
         signinRequest.setName(userId);
         signinRequest.setPassword(userPassword);
-        return userService.signin(signinRequest);
+
+        Map<String, Object> result = new HashMap<>();
+        List<SigninResponse> resultin = new ArrayList<>();
+
+        resultin.add(userService.signin(signinRequest));
+        result.put("UserInfo", resultin);
+        return result;
     }
 }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "\"User\"")
-public class User extends BaseEntity {
+public class User {
 
     // 현재 DB는 H2를 이용하기에 AUTO(디폴트 값)을 이용중 추후 POSTGRE를 이용시 다음과 같이 수정
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,21 +26,19 @@ public class User extends BaseEntity {
     private String email;
     private BigDecimal balance;
     private String role;
-    @Convert(converter = BooleanToYnConverter.class)
-    private boolean botYn;
+
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ranking_id")
     private Ranking ranking;
 
     @Builder
-    public User(String name, String password, String email, BigDecimal balance, String role, boolean botYn, Ranking ranking) {
+    public User(String name, String password, String email, BigDecimal balance, String role, Ranking ranking) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.balance = balance;
         this.role = role;
-        this.botYn = botYn;
         this.ranking = ranking;
     }
 

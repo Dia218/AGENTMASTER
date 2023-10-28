@@ -22,21 +22,11 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final agentmaster.newstock.common.entity.QBaseEntity _super = new agentmaster.newstock.common.entity.QBaseEntity(this);
-
     public final NumberPath<java.math.BigDecimal> balance = createNumber("balance", java.math.BigDecimal.class);
-
-    public final BooleanPath botYn = createBoolean("botYn");
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> createTime = _super.createTime;
 
     public final StringPath email = createString("email");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> modifiedTime = _super.modifiedTime;
 
     public final StringPath name = createString("name");
 

@@ -12,7 +12,7 @@ import javax.print.attribute.standard.MediaSize;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Ranking extends BaseEntity {
+public class Ranking {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ranking_id")
