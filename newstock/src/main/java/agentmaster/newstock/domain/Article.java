@@ -21,6 +21,10 @@ public class Article {
     @Column (name = "article_id")
     private Long id;
 
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "article_link_id")
+    private ArticleLink articleLink;
+
     @Column (name = "company")
     private String company;
 
@@ -41,9 +45,7 @@ public class Article {
 
 
     //@OneToOne (mappedBy = "article", fetch = FetchType.LAZY)
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "article_link_id")
-    private ArticleLink articleLink;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "issue_summary_id")

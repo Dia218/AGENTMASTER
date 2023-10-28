@@ -71,7 +71,8 @@ public class ArticleRepositoryImpl implements ArticleRepository{
                 + "LIKE :keyword2)";
 
         TypedQuery<SearchArticle> query = em.createQuery(jpql, SearchArticle.class);
-        String need = "%"+search+"";
+        String need = "%"+search+"%";
+        System.out.println("keyword : " + search +"\nneed : " + need);
         query.setParameter("keyword1", need);
         query.setParameter("keyword2", need);
         List<SearchArticle> resultList = query.getResultList();
@@ -170,7 +171,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 
         List<RelationArticle> result = new ArrayList<>();
         for(int i = 0; i<results.size();i++){
-            RelationArticle ra = new RelationArticle((Long)results.get(i)[0], (String)results.get(i)[1]);
+            RelationArticle ra = new RelationArticle(((BigInteger)results.get(i)[0]).longValue(), (String)results.get(i)[1]);
             result.add(ra);
         }
 
@@ -182,7 +183,9 @@ public class ArticleRepositoryImpl implements ArticleRepository{
     public List<FlowArticleSummary> findArticleByFlowSummary(Article article) {
         Article article1 = em.find(Article.class, article.getId());
 
-
+        System.out.println("\n\n\n\n" +
+                article1.getIssueSummary().getId() +
+                "\n\n\n\n\n");
         FlowArticleSummary flowArticleSummary = new FlowArticleSummary(article1.getIssueSummary().getIssueSummary());
         List<FlowArticleSummary> result = new ArrayList<>();
 
@@ -288,7 +291,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 
         TypedQuery<ArticleByStock> query = em.createQuery(jpql, ArticleByStock.class);
         query.setParameter("stockId", stock.getId());
-        query.setMaxResults(5);
+        query.setMaxResults(4);
         List<ArticleByStock> resultList = query.getResultList();
 
         return resultList;
@@ -316,9 +319,9 @@ public class ArticleRepositoryImpl implements ArticleRepository{
         String jpql = "SELECT NEW agentmaster.newstock.dto.stockPage.mainPage.TodayArticle(a.id,a.title, s.articleSummary) "+
                 "FROM Article a "+
                 "INNER JOIN ArticleSummary s ON a.id = s.article.id "+
-                "WHERE a.lastPub = (SELECT MAX(a2.lastPub) FROM Article a2) "+
-                "ORDER BY FUNCTION('RAND')";
-
+//                "WHERE a.lastPub = (SELECT MAX(a2.lastPub) FROM Article a2) "+
+//                "ORDER BY FUNCTION('RAND')";
+                "ORDER BY a.lastPub DESC ";
         TypedQuery<TodayArticle> query = em.createQuery(jpql, TodayArticle.class);
         query.setMaxResults(5);
 
