@@ -25,7 +25,7 @@ public class RankingDto {
         this.id = ranking.getId();
         this.rank = ranking.getRank();
         this.profit = Double.valueOf(String.format("%.2f", ranking.getProfit()));
-        this.createTime = ranking.getCreateTime();
-        this.modifiedTime = ranking.getModifiedTime();
+//        this.createTime = ranking.getCreateTime();
+//        this.modifiedTime = ranking.getModifiedTime();
     }
 }

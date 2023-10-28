@@ -19,15 +19,7 @@ public class QRanking extends EntityPathBase<Ranking> {
 
     public static final QRanking ranking = new QRanking("ranking");
 
-    public final agentmaster.newstock.common.entity.QBaseEntity _super = new agentmaster.newstock.common.entity.QBaseEntity(this);
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> createTime = _super.createTime;
-
     public final NumberPath<Long> id = createNumber("id", Long.class);
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> modifiedTime = _super.modifiedTime;
 
     public final NumberPath<Double> profit = createNumber("profit", Double.class);
 

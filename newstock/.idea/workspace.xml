@@ -4,18 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" afterDir="false" />
+    <list default="true" id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/common/entity/QBaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleLink.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleScrap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleSummary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QIssueSummary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/ranking/entity/QRanking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/simulation/entity/QSimulation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/simulationstock/entity/QSimulationStock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/user/entitiy/QUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/QRanking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/QRanking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/QUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SigninResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SigninResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/entity/Ranking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/entity/Ranking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/controller/SignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/controller/SignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SigninResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SigninResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,191 +65,36 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2Us8mRZjCC1TVkdRwNKeXSwzEpB" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2XOAJkzAbXj4snp1YsvVKvjUUnZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;0-server-stock-b&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/82109/Desktop/대학생활/3학년 여름방학/상상기업/프로젝트/AGENTMASTER/newstock&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.28134558&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;026665c24cf7aeaa78e21924117d9046&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "0-server-stock-b",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="agentmaster.newstock.repository" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\82109\Desktop\대학생활\3학년 여름방학\상상기업\프로젝트\BackEnd 김태완 작업 공간\AGENTMASTER\newstock\src\main\resources" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Gradle.newstock [build]">
-    <configuration name="newstock [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildDependents" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="newstock [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="newstock [classes]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="classes" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="newstock [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="newstock [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
-      <method v="2" />
-    </configuration>
+}]]></component>
+  <component name="RunManager">
     <configuration name="NewstockApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="newstock.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="agentmaster.newstock.NewstockApplication" />
@@ -219,72 +102,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.newstock [build]" />
-        <item itemvalue="Gradle.newstock [clean]" />
-        <item itemvalue="Gradle.newstock [buildDependents]" />
-        <item itemvalue="Gradle.newstock [jar]" />
-        <item itemvalue="Gradle.newstock [classes]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="" />
-      <created>1693717086346</created>
+      <changelist id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="" />
+      <created>1698489687483</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1693717086346</updated>
-      <workItem from="1693717087350" duration="4037000" />
-      <workItem from="1693920325741" duration="1207000" />
-      <workItem from="1693958427188" duration="674000" />
-      <workItem from="1693964381586" duration="17193000" />
-      <workItem from="1694131959141" duration="12484000" />
-      <workItem from="1694334673260" duration="16111000" />
-      <workItem from="1694435030412" duration="1614000" />
-      <workItem from="1694441114554" duration="5081000" />
-      <workItem from="1694493030833" duration="2493000" />
-      <workItem from="1694500786698" duration="696000" />
-      <workItem from="1694528254258" duration="604000" />
-      <workItem from="1694563580416" duration="14929000" />
-      <workItem from="1694582291116" duration="14494000" />
-      <workItem from="1694696510566" duration="2599000" />
-      <workItem from="1694699127920" duration="2736000" />
-      <workItem from="1694762487030" duration="1537000" />
-      <workItem from="1694959171282" duration="1553000" />
-      <workItem from="1694997538588" duration="308000" />
-      <workItem from="1695011406642" duration="27000" />
-      <workItem from="1695011461493" duration="18503000" />
-      <workItem from="1695204197624" duration="2488000" />
-      <workItem from="1695216933007" duration="2325000" />
-      <workItem from="1695291908738" duration="8853000" />
-      <workItem from="1695342029993" duration="5392000" />
-      <workItem from="1695348855841" duration="4444000" />
-      <workItem from="1695445938781" duration="24936000" />
-      <workItem from="1695777048260" duration="1035000" />
-      <workItem from="1695792487304" duration="3575000" />
-      <workItem from="1696169153662" duration="5687000" />
-      <workItem from="1696234187707" duration="7366000" />
-      <workItem from="1696342200450" duration="21942000" />
-      <workItem from="1696479616342" duration="16576000" />
-      <workItem from="1696681144088" duration="11508000" />
-      <workItem from="1696731532607" duration="747000" />
-      <workItem from="1696732916754" duration="673000" />
-      <workItem from="1696739061307" duration="16691000" />
-      <workItem from="1696831761838" duration="949000" />
-      <workItem from="1696863550792" duration="1644000" />
-      <workItem from="1697004407912" duration="698000" />
-      <workItem from="1697024669112" duration="644000" />
-      <workItem from="1697288496390" duration="181000" />
-      <workItem from="1697295986478" duration="219000" />
-      <workItem from="1697347658233" duration="3425000" />
-      <workItem from="1697353717716" duration="10006000" />
-      <workItem from="1697441421727" duration="10136000" />
-      <workItem from="1697466534405" duration="1640000" />
-      <workItem from="1697516504356" duration="1548000" />
-      <workItem from="1698470424674" duration="7935000" />
+      <updated>1698489687483</updated>
+      <workItem from="1698489692042" duration="293000" />
     </task>
     <servers />
   </component>

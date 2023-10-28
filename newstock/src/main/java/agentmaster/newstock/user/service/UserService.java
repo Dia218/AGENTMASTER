@@ -8,6 +8,7 @@ import agentmaster.newstock.user.repository.UserRepository;
 import agentmaster.newstock.user.repository.UserRepositoryImpl;
 import agentmaster.newstock.user.request.SigninRequest;
 import agentmaster.newstock.user.request.SignupRequest;
+import agentmaster.newstock.user.response.SigninResponse;
 import agentmaster.newstock.user.response.SignupResponse;
 import agentmaster.newstock.user.response.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,6 @@ public class UserService {
                 .email(signupRequest.getEmail())
                 .balance(signupRequest.getBalance())
                 .role("ROLE_USER")
-                .botYn(signupRequest.getBotYn().equals("Y"))
                 .ranking(ranking)
                 .build();
 
@@ -60,15 +60,15 @@ public class UserService {
         return new SignupResponse(result.getId());
     }
 
-    public User signin(SigninRequest signinRequest) {
+    public SigninResponse signin(SigninRequest signinRequest) {
         User user = userRepository.findByName(signinRequest.getName());
         checkPassword(signinRequest.getPassword(), user.getPassword());
 
-        return user;
+        return new SigninResponse(user.getName());
     }
 
     private void checkPassword(String loginPassword, String password) {
-        if (!loginPassword.equals(password)) {
+        if (!(loginPassword.equals(password))) {
             throw new PasswordMismatchException();
         }
     }
