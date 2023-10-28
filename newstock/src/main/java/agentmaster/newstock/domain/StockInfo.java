@@ -31,7 +31,7 @@ public class StockInfo {
 
     //설계상으로 존재하는 값이기때문에 필요함.
     @Column (name = "start_price")
-    private double startPrice;
+    private int startPrice;
     @Column (name = "high_price")
     private int highPrice;
     @Column (name = "low_price")

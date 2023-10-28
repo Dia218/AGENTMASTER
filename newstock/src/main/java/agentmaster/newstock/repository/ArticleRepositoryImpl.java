@@ -319,9 +319,9 @@ public class ArticleRepositoryImpl implements ArticleRepository{
         String jpql = "SELECT NEW agentmaster.newstock.dto.stockPage.mainPage.TodayArticle(a.id,a.title, s.articleSummary) "+
                 "FROM Article a "+
                 "INNER JOIN ArticleSummary s ON a.id = s.article.id "+
-                "WHERE a.lastPub = (SELECT MAX(a2.lastPub) FROM Article a2) "+
-                "ORDER BY FUNCTION('RAND')";
-
+//                "WHERE a.lastPub = (SELECT MAX(a2.lastPub) FROM Article a2) "+
+//                "ORDER BY FUNCTION('RAND')";
+                "ORDER BY a.lastPub DESC ";
         TypedQuery<TodayArticle> query = em.createQuery(jpql, TodayArticle.class);
         query.setMaxResults(5);
 

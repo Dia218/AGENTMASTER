@@ -346,7 +346,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockBase> result = new ArrayList<>();
 
         for(Object[] results : queryResult){
-            result.add(new StockBase((Date) results[0],(Integer)results[1], (Integer)results[2], ((BigDecimal)results[3]).doubleValue(),(Integer)results[4],(Integer)results[5],(Integer) results[6],((BigInteger) results[7]).longValue(), ((BigInteger) results[8]).longValue()));
+            result.add(new StockBase((Date) results[0],(Integer)results[1], (Integer)results[2], ((Double)results[3]).doubleValue(),((Double)results[4]).intValue(),(Integer)results[5],(Integer) results[6],((BigInteger) results[7]).longValue(), ((BigInteger) results[8]).longValue()));
         }
 
         return result;

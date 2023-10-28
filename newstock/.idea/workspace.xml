@@ -5,41 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/common/entity/QBaseEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QArticle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QArticleGroup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QArticleLink.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QArticleScrap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QArticleSummary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QField.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QIssueSummary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QStock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/domain/QStockInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/ranking/entity/QRanking.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/simulation/entity/QSimulation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/simulationstock/entity/QSimulationStock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/$buildDir/generated/querydsl/agentmaster/newstock/user/entitiy/QUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileQuerydsl/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileQuerydsl/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Article.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Article.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Article.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +282,9 @@
       <workItem from="1697347658233" duration="3425000" />
       <workItem from="1697353717716" duration="10006000" />
       <workItem from="1697441421727" duration="10136000" />
-      <workItem from="1697466534405" duration="764000" />
+      <workItem from="1697466534405" duration="1640000" />
+      <workItem from="1697516504356" duration="1548000" />
+      <workItem from="1698470424674" duration="7935000" />
     </task>
     <servers />
   </component>

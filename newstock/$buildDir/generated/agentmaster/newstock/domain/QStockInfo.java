@@ -30,7 +30,7 @@ public class QStockInfo extends EntityPathBase<StockInfo> {
 
     public final NumberPath<Integer> lowPrice = createNumber("lowPrice", Integer.class);
 
-    public final NumberPath<Double> startPrice = createNumber("startPrice", Double.class);
+    public final NumberPath<Integer> startPrice = createNumber("startPrice", Integer.class);
 
     public final QStock stock;
 
