@@ -4,66 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/QueryDslConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/common/converter/BooleanToYnConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/common/entity/BaseEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/dto/RankingResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/entity/Ranking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/ranking/service/RankingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/entity/Simulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/exception/NotSufficientBalanceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/exception/NotSufficientVolumeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepositoryCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/repository/SimulationRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/request/SimulationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/response/SimulationDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/response/SimulationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationStatusConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/entity/SimulationStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/exception/StockNotExistException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/SimulationStockDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/entitiy/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/NotLoginException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/PasswordMismatchException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/UserDuplicateException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepositoryCustom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/repository/UserRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/request/SigninRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/request/SignupRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SigninResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/SignupResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/response/UserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleLink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleScrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleScrap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/ArticleSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/IssueSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/IssueSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Simulation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/StockInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/domain/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/TestRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/TestService.java" beforeDir="false" />
+    <list default="true" id="9fee5dfc-70a4-42cd-a935-c6d084e07090" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/Holdings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/controller/SignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,8 +67,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging 0-server-stock-b",
-    "last_opened_file_path": "C:/Users/82109/Desktop/대학생활/3학년 여름방학/상상기업/프로젝트/AGENTMASTER/newstock",
+    "git-widget-placeholder": "0-server-news-b",
+    "last_opened_file_path": "C:/Users/gomets/Desktop/상상기업-백엔드/newstock/build.gradle",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -146,7 +95,7 @@
       <recent name="C:\Users\82109\Desktop\대학생활\3학년 여름방학\상상기업\프로젝트\BackEnd 김태완 작업 공간\AGENTMASTER\newstock\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.NewstockApplication">
+  <component name="RunManager" selected="Gradle.newstock [build]">
     <configuration name="newstock [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
