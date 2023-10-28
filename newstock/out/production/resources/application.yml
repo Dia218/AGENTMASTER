@@ -1,0 +1,25 @@
+# PostgreSQL
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test?currentSchema="AGENTMASTER"
+    username: postgres
+    password: 7069
+
+  # JPA
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show-sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true # Clob을 String으로 자동 변환하는 설정
+    hibernate.naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+logging:
+  level:
+    org.hibernate.SQL: TRACE
+    org.hibernate.type.descriptor.sql: trace
