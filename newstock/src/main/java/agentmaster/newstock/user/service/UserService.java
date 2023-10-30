@@ -34,8 +34,16 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto getUser(String userName) {
-        return new UserDto(userRepository.findByNameFetch(userName));
+    /**
+     * 이전 코드
+     * public UserDto getUser(Long userid) {
+     *     return new UserDto(userRepository.findByIdFetch(userId));
+     * }
+     * 이였으나 프론트와 형식을 맞추기 위해 다음과 같이 수정함.
+     * 다만 위에처럼 하는 것이 보안 상 더 좋을 것이다라고 생각함.
+     */
+    public User getUser(String userName) {
+        return userRepository.findByNameFetch(userName);
     }
 
     public UserRanking getRankByName(UserDto userDto) {
@@ -63,7 +71,6 @@ public class UserService {
                 .password(signupRequest.getPassword())
                 .email(signupRequest.getEmail())
                 .availableAsset(signupRequest.getAvailableAsset())
-                .stockMoney(signupRequest.getStockMoney())
                 .role("ROLE_USER")
                 .ranking(ranking)
                 .build();

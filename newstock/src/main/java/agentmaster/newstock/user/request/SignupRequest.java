@@ -35,9 +35,4 @@ public class SignupRequest {
     @Min(value = 100000)
     @ApiParam(value = "보유 금액")
     private BigDecimal availableAsset;
-
-    @NotNull
-    @Min(value = 0)
-    @ApiParam(value = "주식 자산")
-    private BigDecimal stockMoney;
 }

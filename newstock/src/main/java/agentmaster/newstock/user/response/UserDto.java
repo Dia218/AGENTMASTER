@@ -18,7 +18,6 @@ public class UserDto {
     private String name;
     private String password;
     private BigDecimal availableAsset;
-    private BigDecimal stockMoney;
     private String role;
     private List<RankingDto> ranking;
 
@@ -27,7 +26,6 @@ public class UserDto {
         this.name = user.getName();
         this.password = user.getPassword();
         this.availableAsset = user.getAvailableAsset();
-        this.stockMoney = user.getStockMoney();
         this.role = user.getRole();
         this.ranking = List.of(new RankingDto(user.getRanking()));
     }
