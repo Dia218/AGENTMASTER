@@ -10,6 +10,7 @@ public class UserRanking {
     private final String userName;
     private final Double rankRange;
 
+    @Builder
     public UserRanking(String userName, Double rankRange,Integer ranking){
 
         this.userName = userName;

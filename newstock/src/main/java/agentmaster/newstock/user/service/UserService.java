@@ -1,5 +1,7 @@
 package agentmaster.newstock.user.service;
 
+import agentmaster.newstock.dto.stockPage.mainPage.UserRanking;
+import agentmaster.newstock.ranking.dto.RankingResponse;
 import agentmaster.newstock.ranking.entity.Ranking;
 import agentmaster.newstock.user.entitiy.User;
 import agentmaster.newstock.user.exception.PasswordMismatchException;
@@ -32,8 +34,18 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto getUser(Long userId) {
+    public UserDto getUserById(Long userId) {
         return new UserDto(userRepository.findByIdFetch(userId));
+    }
+
+    public UserRanking getUserByName(UserDto userDto) {
+        User user = userRepository.findByName(userDto.getName());
+        UserRanking userRanking = UserRanking.builder()
+                .userName(user.getName())
+                .rankRange(user.getRanking().getProfit())
+                .ranking(user.getRanking().getRank())
+                .build();
+        return userRanking;
     }
 
     public SignupResponse signup(SignupRequest signupRequest) {
