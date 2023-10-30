@@ -25,10 +25,10 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public User findByIdFetch(Long id) {
+    public User findByNameFetch(String name) {
         return jpaQueryFactory.selectFrom(user)
                 .leftJoin(user.ranking, ranking).fetchJoin()
-                .where(user.id.eq(id))
+                .where(user.name.eq(name))
                 .fetchOne();
     }
 
