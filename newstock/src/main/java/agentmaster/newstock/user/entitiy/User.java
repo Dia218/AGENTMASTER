@@ -24,7 +24,8 @@ public class User {
     private String name;
     private String password;
     private String email;
-    private BigDecimal balance;
+    private BigDecimal availableAsset;
+    private BigDecimal stockMoney;
     private String role;
 
 
@@ -33,21 +34,26 @@ public class User {
     private Ranking ranking;
 
     @Builder
-    public User(String name, String password, String email, BigDecimal balance, String role, Ranking ranking) {
+    public User(String name, String password, String email, BigDecimal availableAsset, BigDecimal stockMoney, String role, Ranking ranking) {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.balance = balance;
+        this.availableAsset = availableAsset;
+        this.stockMoney = stockMoney;
         this.role = role;
         this.ranking = ranking;
     }
 
     public void buy(String price, Double volume) {
-        this.balance = this.balance.subtract(BigDecimal.valueOf(Double.valueOf(price) * volume));
+        this.availableAsset = this.availableAsset.subtract(BigDecimal.valueOf(Double.valueOf(price) * volume));
+        //추가 코드
+        this.stockMoney = this.stockMoney.add(BigDecimal.valueOf(Double.valueOf(price) * volume));
     }
 
     public void sell(String price, Double volume) {
-        this.balance = this.balance.add(BigDecimal.valueOf(Double.valueOf(price) * volume));
+        this.availableAsset = this.availableAsset.add(BigDecimal.valueOf(Double.valueOf(price) * volume));
+        //추가 코드
+        this.stockMoney = this.stockMoney.subtract(BigDecimal.valueOf(Double.valueOf(price) * volume));
     }
 
     public static User createNullUser() {

@@ -37,7 +37,8 @@ public class SignController {
         signupRequest.setName(userId);
         signupRequest.setPassword(userPassword);
         signupRequest.setEmail(userEmail);
-        signupRequest.setBalance(BigDecimal.valueOf(100000));
+        signupRequest.setAvailableAsset(BigDecimal.valueOf(100000));
+        signupRequest.setStockMoney(BigDecimal.valueOf(0));
         return userService.signup(signupRequest);
     }
 

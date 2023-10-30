@@ -32,7 +32,7 @@ public class SimulationStockService {
             totalTradePrice.add(new BigDecimal(simulationStock.getPrice()).multiply(BigDecimal.valueOf(simulationStock.getVolume())));
         }
 
-        return new Holdings(new UserDto(userRepository.findByIdFetch(user.getId())),
+        return new Holdings(new UserDto(userRepository.findByNameFetch(user.getName())),
                 simulationStocks.stream()
                         .map(SimulationStockDto::new)
                         .collect(Collectors.toList()), totalTradePrice

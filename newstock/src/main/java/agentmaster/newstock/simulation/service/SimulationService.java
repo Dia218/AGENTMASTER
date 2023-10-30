@@ -40,7 +40,7 @@ public class SimulationService {
 
         if (TYPE_BUY.equals(simulationRequest.getType())){
             BigDecimal needBalance = BigDecimal.valueOf(Double.valueOf(simulationRequest.getPrice()) * simulationRequest.getVolume());
-            if (user.getBalance().compareTo(needBalance) < 0) {
+            if (user.getAvailableAsset().compareTo(needBalance) < 0) {
                 throw new NotSufficientBalanceException();
             }
 
@@ -129,10 +129,10 @@ public class SimulationService {
                 .collect(Collectors.toList());
     }
 
-//    public String getSimulationPrice(String price, Integer profit) {
-//        Integer result = Integer.valueOf(price) + Integer.valueOf(price) * profit / 100;
-//        return String.valueOf(result);
-//    }
+    public String getSimulationPrice(String price, Integer profit) {
+        Integer result = Integer.valueOf(price) + Integer.valueOf(price) * profit / 100;
+        return String.valueOf(result);
+    }
 
     private void loginCheck(User user) {
         if (user == null) {

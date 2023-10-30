@@ -34,11 +34,11 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto getUserById(Long userId) {
-        return new UserDto(userRepository.findByIdFetch(userId));
+    public UserDto getUser(String userName) {
+        return new UserDto(userRepository.findByNameFetch(userName));
     }
 
-    public UserRanking getUserByName(UserDto userDto) {
+    public UserRanking getRankByName(UserDto userDto) {
         User user = userRepository.findByName(userDto.getName());
         UserRanking userRanking = UserRanking.builder()
                 .userName(user.getName())
@@ -62,7 +62,8 @@ public class UserService {
                 .name(signupRequest.getName())
                 .password(signupRequest.getPassword())
                 .email(signupRequest.getEmail())
-                .balance(signupRequest.getBalance())
+                .availableAsset(signupRequest.getAvailableAsset())
+                .stockMoney(signupRequest.getStockMoney())
                 .role("ROLE_USER")
                 .ranking(ranking)
                 .build();

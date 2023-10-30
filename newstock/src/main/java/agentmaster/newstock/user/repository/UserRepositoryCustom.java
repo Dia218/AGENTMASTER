@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface UserRepositoryCustom {
     List<User> findAllFetch();
-    User findByIdFetch(Long id);
+    User findByNameFetch(String name);
     List<User> findAllFetchByRankings();
 }
