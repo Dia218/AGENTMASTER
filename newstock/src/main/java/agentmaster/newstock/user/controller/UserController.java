@@ -52,19 +52,4 @@ public class UserController {
         result.put("RankInfo", resultin);
         return result;
     }
-
-    @ApiOperation("단일 회원 계좌 정보 조회")
-    @GetMapping("/AccountInfo")
-    @ResponseStatus(HttpStatus.OK)
-    public Map<String, Object> getUserAccount(@RequestParam("userName") String userName) {
-        UserDto userDto = new UserDto();
-        userDto.setName(userName);
-
-        Map<String, Object> result = new HashMap<>();
-        List<UserDto> resultin = new ArrayList<>();
-
-        resultin.add(userService.getUser(userDto.getName()));
-        result.put("AccountInfo", resultin);
-        return result;
-    }
 }

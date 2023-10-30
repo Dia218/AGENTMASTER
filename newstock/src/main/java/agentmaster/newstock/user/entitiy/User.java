@@ -39,21 +39,16 @@ public class User {
         this.password = password;
         this.email = email;
         this.availableAsset = availableAsset;
-        this.stockMoney = stockMoney;
         this.role = role;
         this.ranking = ranking;
     }
 
     public void buy(String price, Double volume) {
         this.availableAsset = this.availableAsset.subtract(BigDecimal.valueOf(Double.valueOf(price) * volume));
-        //추가 코드
-        this.stockMoney = this.stockMoney.add(BigDecimal.valueOf(Double.valueOf(price) * volume));
     }
 
     public void sell(String price, Double volume) {
         this.availableAsset = this.availableAsset.add(BigDecimal.valueOf(Double.valueOf(price) * volume));
-        //추가 코드
-        this.stockMoney = this.stockMoney.subtract(BigDecimal.valueOf(Double.valueOf(price) * volume));
     }
 
     public static User createNullUser() {
