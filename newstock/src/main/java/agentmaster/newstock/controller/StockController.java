@@ -138,7 +138,26 @@ public class StockController {
         return result;
     }
 
+    @ResponseBody
+    @GetMapping("/simulTrade/SiCategory")
+    public Map<String, Object> sameFielJson(@RequestParam("keyword") String stockName){
+        //            "sameFieldStock": [{"stockName":"카카오","simulReturn":"-5000","simulRate":"-0.06","stockPrice":"230000"},
+        //            {"stockName":"넷플릭스","simulReturn":"+8000","simulRate":"+2.09","stockPrice":"120000"},
+        //            {"stockName":"유튜브","simulReturn":"+12000","simulRate":"+10.18","stockPrice":"4500000"}]
 
+        // {"sameFieldStock":[{"stockName":"쌍용C&E","stockPrice":5550,"stockDiff":110,"stockRange":2.02},
+        // {"stockName":"동화기업","stockPrice":66800,"stockDiff":2200,"stockRange":3.41},
+        // {"stockName":"한일시멘트","stockPrice":12130,"stockDiff":180,"stockRange":1.51},
+        // {"stockName":"KCC","stockPrice":224500,"stockDiff":2000,"stockRange":0.9}]}
+        Stock stock = new Stock();
+        stock.setStockName(stockName);
+        Map<String, Object> result = new HashMap<>();
+
+
+        result.put("sameFieldStock", stockService.provideStockBuSamefield(stock));
+
+        return result;
+    }
     @ResponseBody
     @GetMapping("/start")
     public void StartStockInfo() throws IOException, ParseException {

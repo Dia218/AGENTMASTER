@@ -22,7 +22,7 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final NumberPath<java.math.BigDecimal> balance = createNumber("balance", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> availableAsset = createNumber("availableAsset", java.math.BigDecimal.class);
 
     public final StringPath email = createString("email");
 
@@ -35,6 +35,8 @@ public class QUser extends EntityPathBase<User> {
     public final agentmaster.newstock.ranking.entity.QRanking ranking;
 
     public final StringPath role = createString("role");
+
+    public final NumberPath<java.math.BigDecimal> stockMoney = createNumber("stockMoney", java.math.BigDecimal.class);
 
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);

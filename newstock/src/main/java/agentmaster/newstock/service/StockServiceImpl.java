@@ -3,6 +3,7 @@ package agentmaster.newstock.service;
 import agentmaster.newstock.domain.Stock;
 import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
+import agentmaster.newstock.dto.simulPage.simulTrade.StockSameField;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;
 import agentmaster.newstock.dto.stockPage.detailPage.StockBase;
 import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
@@ -87,6 +88,13 @@ public class StockServiceImpl implements StockService{
     public List<StockBase> provideStockByBase(Stock stock) {
         Stock target = stockRepository.findIdByName(stock).get(0);
         return stockRepository.findStockByBase(target);
+    }
+
+    @Override
+    public List<StockSameField> provideStockBuSamefield(Stock stock) {
+        Stock target = stockRepository.findIdByName(stock).get(0);
+        target.setStockName(stock.getStockName());
+        return stockRepository.findStockBySameField(target);
     }
 
     @Override
