@@ -5,6 +5,7 @@ import agentmaster.newstock.domain.StockInfo;
 import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDto;
+import agentmaster.newstock.dto.simulPage.simulTrade.StockSameField;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;
 import agentmaster.newstock.dto.stockPage.detailPage.StockBase;
 import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
@@ -52,9 +53,13 @@ public interface StockRepository {
     //뉴스 메인 페이지 주식 증시 정보 DB SELECT
     List<FluctuationStockInfo> findStockByFluctuation();
 
+    List<StockSameField> findStockBySameField(Stock stock);
+
     //주기적으로 주식 API 정보 DB저장
     void insertStock(StockInfo stockInfo);
 
     List<StockDto> findByStockId(Stock stock);
      List<StockDto> findAll();
+
+
 }

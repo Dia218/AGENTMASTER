@@ -11,6 +11,7 @@ public class StockSameField {
     private final Integer stockDiff;
     private final Double stockRange;
 
+    @Builder
     public StockSameField(String stockName, Integer stockPrice, Integer stockDiff, Double stockRange){
         this.stockName = stockName;
         this.stockPrice =stockPrice;

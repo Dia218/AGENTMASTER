@@ -6,6 +6,7 @@ import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.articlePage.mainPage.PreviewArticle;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDto;
+import agentmaster.newstock.dto.simulPage.simulTrade.StockSameField;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;
 import agentmaster.newstock.dto.stockPage.detailPage.StockBase;
 import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
@@ -423,6 +424,42 @@ public class StockRepositoryImpl implements StockRepository{
 
         for(Object[] results : queryResult){
             result.add(new FluctuationStockInfo((String) results[0],(String) results[1], (Integer) results[2], (Integer) results[3], (Double)results[4]));
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<StockSameField> findStockBySameField(Stock stock) {
+//        SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range
+//        FROM "AGENTMASTER"."Stock" AS sto
+//                 INNER JOIN "AGENTMASTER"."Stock_info" AS sin
+//                            ON sto.stock_id = sin.stock_id
+//        WHERE field_id = (SELECT field_id FROM "AGENTMASTER"."Stock" WHERE stock_id = '{stock_id}')
+//          AND sin.stock_date = (SELECT stock_date FROM "AGENTMASTER"."Stock_info" ORDER BY stock_date DESC LIMIT 1)
+//        ORDER BY sin.trading_volume DESC
+//        LIMIT 4;
+
+        String nativeQuery = "SELECT sto.stock_name, sin.stock_price, sin.diff_from_prevday, sin.stock_range " +
+                "FROM \"AGENTMASTER\".\"Stock\" AS sto " +
+                "INNER JOIN \"AGENTMASTER\".\"Stock_info\" AS sin " +
+                "ON sto.stock_id = sin.stock_id " +
+                "WHERE field_id = (SELECT field_id FROM \"AGENTMASTER\".\"Stock\" WHERE stock_Name = \'"+stock.getStockName()+"\') " +
+                "AND sin.stock_date = (SELECT stock_date FROM \"AGENTMASTER\".\"Stock_info\" ORDER BY stock_date DESC LIMIT 1) " +
+                "ORDER BY sin.trading_volume DESC " +
+                "LIMIT 4";
+
+        Query query = em.createNativeQuery(nativeQuery);
+        List<Object[]> queryResult = query.getResultList();
+
+        List<StockSameField> result = new ArrayList<>();
+
+        for(Object[] results : queryResult){
+            result.add(StockSameField.builder().stockName((String)results[0])
+                    .stockPrice((Integer)results[1])
+                    .stockDiff((Integer)results[2])
+                    .stockRange(((Double) results[3]))
+                    .build());
         }
 
         return result;

@@ -3,6 +3,7 @@ package agentmaster.newstock.service;
 import agentmaster.newstock.domain.Stock;
 import agentmaster.newstock.dto.articlePage.mainPage.FluctuationStockInfo;
 import agentmaster.newstock.dto.simulPage.simulTrade.StockDetail;
+import agentmaster.newstock.dto.simulPage.simulTrade.StockSameField;
 import agentmaster.newstock.dto.stockPage.detailPage.ChartData;
 import agentmaster.newstock.dto.stockPage.detailPage.StockBase;
 import agentmaster.newstock.dto.stockPage.mainPage.KeyWordStock;
@@ -41,6 +42,8 @@ public interface StockService {
 
     //주식 상세페이지 주식 정보 전달부
     List<StockBase> provideStockByBase(Stock stock);
+
+    List<StockSameField> provideStockBuSamefield(Stock stock);
 
     //모의투자 거래 페이지 주식 추가 정보 전달부
     List<StockBase> provideStockByMoreInfo(Stock stock);
