@@ -5,6 +5,7 @@ import agentmaster.newstock.user.request.SigninRequest;
 import agentmaster.newstock.user.request.SignupRequest;
 import agentmaster.newstock.user.response.SigninResponse;
 import agentmaster.newstock.user.response.SignupResponse;
+import agentmaster.newstock.user.response.UserDto;
 import agentmaster.newstock.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +25,13 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-//@RequestMapping("/newsMain")
+@RequestMapping("/newsMain")
 public class SignController {
     private final UserService userService;
 
     @ApiOperation("회원가입")
-    @GetMapping("/newsMain/join/checkJoin")
+    @GetMapping("/join/checkJoin")
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     public SignupResponse signup(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword, @RequestParam("userEmail") String userEmail){
         SignupRequest signupRequest = new SignupRequest();
         signupRequest.setName(userId);
@@ -42,8 +42,7 @@ public class SignController {
     }
 
     @ApiOperation("회원 로그인")
-    @GetMapping("/newsMain/login")
-    @ResponseBody
+    @GetMapping("/login")
     public Map<String,Object> signin(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) {
         SigninRequest signinRequest = new SigninRequest();
         signinRequest.setName(userId);
