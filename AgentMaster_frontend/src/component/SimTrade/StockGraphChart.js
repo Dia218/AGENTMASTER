@@ -11,11 +11,14 @@ import {
 } from "recharts";
 import React from "react";
 
-export default function StockGraphChart({GraphChartInput}) {
+export default function StockGraphChart({ GraphChartInput }) {
+    // "stockPrice" 필드만 추출하여 새로운 배열 생성
+    const stockPrices = GraphChartInput.map(data => data.stockPrice);
+
     return (
         <ResponsiveContainer width="100%" height={400}>
             <BarChart
-                data={GraphChartInput}
+                data={stockPrices}
                 margin={{
                     top: 5,
                     right: 30,
@@ -26,13 +29,10 @@ export default function StockGraphChart({GraphChartInput}) {
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis dataKey="name"/>
                 <YAxis/>
-                <Tooltip
-                    wrapperStyle={{color: "white"}}
-                />
+                <Tooltip wrapperStyle={{ color: "white" }}/>
                 <Legend/>
                 <ReferenceLine y={0} stroke="#000"/>
-                <Bar dataKey="pv" fill="blue"/>
-                <Bar dataKey="uv" fill="red"/>
+                <Bar dataKey={stockPrices} fill="blue"/>
             </BarChart>
         </ResponsiveContainer>
     );
