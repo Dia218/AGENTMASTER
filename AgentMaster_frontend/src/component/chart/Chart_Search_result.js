@@ -15,10 +15,10 @@ function Chart_Search_result({ searchBarRef, isSearchBarFocused, relatedSearches
             <ul className="chartSearchResult_ul">
                 {relatedSearches.map((stock, index) => (
                     <li className='chartSearchResult_li' key={index}>
-                        <div className="chartSearchResult_div" id={stock.itmsNm} onClick={onClick}>
-                            <Link className='chartSearchResult_a' to={`/ChartDetail?keyword=${encodeURIComponent(stock.itmsNm)}`}>
-                                <div className="chartSearchResultId">{stock.srtnCd}</div>
-                                <div className="chartSearchResultName">{stock.itmsNm}</div>
+                        <div className="chartSearchResult_div" id={stock.stockName} onClick={onClick}>
+                            <Link className='chartSearchResult_a' to={`/ChartDetail?keyword=${encodeURIComponent(stock.stockName)}`}>
+                                <div className="chartSearchResultId">{stock.stockCode}</div>
+                                <div className="chartSearchResultName">{stock.stockName}</div>
                                 <div className="chartSearchResultMarket">{stock.mrktCtg}</div>
                             </Link>
                         </div>

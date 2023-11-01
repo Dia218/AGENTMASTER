@@ -18,8 +18,8 @@ function StatusList({ userName }) {
     // 백엔드에서 데이터를 가져오는 함수
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/getHoldingInfo?userName=${userName}`'); // 백엔드에서 보유 주식 정보를 가져오는 엔드포인트
-        setStockHoldings(response.data.HoldingInfo); // 받아온 데이터를 stockHoldings 상태로 설정
+        const response = await axios.get(`http://localhost:8080/getHoldingInfo?userName=${sessionStorage.getItem('user')}`); // 백엔드에서 보유 주식 정보를 가져오는 엔드포인트
+        setStockHoldings(response.data.HoldingInfo[0].simulationStocks); // 받아온 데이터를 stockHoldings 상태로 설정
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
@@ -54,16 +54,16 @@ function StatusList({ userName }) {
                     </Link>
                   </td>
                   <td>
-                    {holding.simulReturn} ({addComma(holding.stockPerchaseAmount)})
+                    {holding.simulReturn} ({addComma(holding.price)})
                   </td>
                   <td>
                     {holding.simulRange > 0 ? (
-                      <div style={{ color: 'red' }}>▼{addComma(holding.simulRange)}</div>
+                      <div style={{ color: 'red' }}>▲{addComma(holding.profit)}</div>
                     ) : (
-                      <div style={{ color: 'blue' }}>▲{addComma(holding.simulRange)}</div>
+                      <div style={{ color: 'blue' }}>▼{addComma(holding.profit)}</div>
                     )}
                   </td>
-                  <td>{holding.simulHoldingsnum}</td>
+                  <td>{holding.volume}</td>
                 </tr>
               ))
             )}

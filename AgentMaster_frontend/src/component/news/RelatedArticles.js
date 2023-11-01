@@ -18,7 +18,8 @@ function RelatedArticles(){
     const getNewsRA = async() => {
         try {
             const responseNewsRA = await axios.get(`http://localhost:8080/newsDetail/relatedArticle?newsId=${location.state.id}`);
-            setRa(responseNewsRA.RelationArticle);
+            //백엔드 수정(.data 추가)
+            setRa(responseNewsRA.data.RelationArticle);
             setLoading(false);
         } catch (error) {
             const responseNewsRA = await RAData();

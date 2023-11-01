@@ -34,10 +34,15 @@ function SearchList(){
     //GET함수를 이용해 백엔드에 유저가 입력한 keyword를 전송하고 검색 결과를 전달받아 state에 저장하는 함수
     const getSearchList = async() => {
         try {
-            const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
-            setSearchResult(responseSearchList.SearchNewsInfo);
+            //백엔드 수정 : 처음 검색 페이지로 갈때 계속 빈 keyword("")로 한번 요청을 보내서 수정
+            if(keyword == "") {
 
+            }
+            else{
+            const responseSearchList = await axios.get(`http://localhost:8080/searchList?keyword=${keyword}`);
+            setSearchResult(responseSearchList.data.SearchNewsInfo);
             setLoading(true);
+            }
       
         } catch (error) {
             const responseSearchList = await searchData();
@@ -48,7 +53,8 @@ function SearchList(){
     }
 
     async function searchData() {
-        const json = {
+        const json = 
+        {
             "SearchNewsInfo" : [
                 {"articleId" : 1,
                 "company" : "company1",
@@ -56,18 +62,18 @@ function SearchList(){
                 "lastPub" : "2023-08-18 16:26:36",
                 "title" : "신문기사 제목이 올라갈 공간이고 말줄임표를 테스트해야하는 공간입니다. 다음으로 말줄임표를 사용해보세요. 이 뒤로는 표시되지 않는 문구입니다.",
                 "issueKeyword" : "keyword1"},
-                {"articleId" : 2,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 3,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 4,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 5,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 6,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 7,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 8,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 9,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 10,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 11,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 12,title,company,name,firstPub,issueKeyword:keyword},
-                {"articleId" : 13,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 2,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 3,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 4,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 5,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 6,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 7,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 8,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 9,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 10,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 11,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 12,title,company,name,firstPub,issueKeyword:keyword},
+                // {"articleId" : 13,title,company,name,firstPub,issueKeyword:keyword},
             ]
         };
         
@@ -77,6 +83,7 @@ function SearchList(){
     //검색을 통해 url이 변경되고 그에 따른 keyword가 변경될때마다 실행하여 keyword를 받아온다.
     useEffect(()=>{
         setKeyword(searchParams.get('result'));
+        // setKeyword('민주당')
         setPage(parseInt(searchParams.get('page')));
     },[searchParams]);
 

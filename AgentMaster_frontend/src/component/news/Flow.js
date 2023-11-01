@@ -22,10 +22,14 @@ function Flow(){
     const getNewsFlowIssue = async() => {
         try {
             const responseNewsFlowIssue = await axios.get(`http://localhost:8080/newsDetail/flowIssue?newsId=${location.state.id}`);
-            setFlow(responseNewsFlowIssue.IssueSummary);
-            if(responseNewsFlowIssue.IssueSummary){
-                setCheck(true);
-                setFlow_text(responseNewsFlowIssue.IssueSummary[0].issueSummary);
+            //백엔드 수정(data 추가)
+            setFlow(responseNewsFlowIssue.data.IssueSummary);
+            //백엔드 수정(data 추가)
+            if(responseNewsFlowIssue.data.IssueSummary){
+                //백엔드(다른 기사 없을때를 대비하여 주석 처리)
+                // setCheck(true);
+                //백엔드 수정(data 추가)
+                setFlow_text(responseNewsFlowIssue.data.IssueSummary[0].issueSummary);
                 setLoading(false);
             } else {
                 setFlow_text("이슈가 존재하지 않습니다.");
@@ -47,8 +51,20 @@ function Flow(){
     }
     const getNewsFlowList = async() => {
         try {
+            // const responseNewsFlowList = await listData();
+            // setFlowNews(responseNewsFlowList.FlowList);
+            //백엔드 아직 미완성 부분
             const responseNewsFlowList = await axios.get(`http://localhost:8080/newsDetail/flowList?newsId=${location.state.id}`);
-            setFlowNews(responseNewsFlowList.FlowList);
+            //백엔드 수정(data 추가&다른 기사 없을때(if-else)추가)
+            if(responseNewsFlowList.data.FlowList){
+                setCheck(true)
+                setFlowNews(responseNewsFlowList.data.FlowList);
+            }
+            else{
+                setCheck(false)
+                setFlowNews([]);
+            }
+            //백엔드 아직 미완성 부분 종료
         } catch (error) {
             console.error('Error fetching flowList data:', error);
             const responseNewsFlowList = await listData();

@@ -70,10 +70,13 @@ function ComponentSearch({ keywordFromSearch2, handleKeywordChange }) {
 
     const getKeyword = async () => {
         if (isNaN(keyword)) {
-            const json = await fetch(
-                "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3lxB%2F1OXwuo7FgMdLkt0cG6kMEVKc1fHITjq6%2F5aAF5wYK5UQbaKvl7JxcXkdZnLL6ao2N2U6NbUpMKXRA8NqQ%3D%3D&resultType=json&basDt=20230802&likeItmsNm=" + keyword
-            ).then(response => response.json());
-            setRelatedSearches(json.response.body.items.item);
+            const json = await (    //종목명
+                //백엔드 수정(입력한 키워드를 백엔드에 자동완성 요청하기)
+                await fetch(`http://localhost:8080/stockMain/search?search=${keyword}`)
+                // await fetch("https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3lxB%2F1OXwuo7FgMdLkt0cG6kMEVKc1fHITjq6%2F5aAF5wYK5UQbaKvl7JxcXkdZnLL6ao2N2U6NbUpMKXRA8NqQ%3D%3D&resultType=json&basDt=20230802&likeItmsNm=" + keyword)     //
+            ).json();
+            setRelatedSearches(json.search);
+            //console.log(keyword + "종목명 불러오기 완료");
         } else {
             const json = await fetch(
                 "https://apis.data.go.kr/1160100/service/GetStockSecuritiesInfoService/getStockPriceInfo?serviceKey=3lxB%2F1OXwuo7FgMdLkt0cG6kMEVKc1fHITjq6%2F5aAF5wYK5UQbaKvl7JxcXkdZnLL6ao2N2U6NbUpMKXRA8NqQ%3D%3D&resultType=json&basDt=20230802&likeSrtnCd=" + keyword

@@ -22,7 +22,10 @@ export function ArticleList() {
 
   const getArticle=async () =>{
    try{
-    const getArticleRep= await axios.get('localhost:8080/article?stockCode=${selectedArticle.stockCode}');
+        //백엔드 코드 추가
+        const queryParams = new URLSearchParams(window.location.search);
+        const stockCode = queryParams.get('keyword');
+    const getArticleRep= await axios.get(`http://localhost:8080/article?stockCode=${stockCode}`);
     setArticles(getArticleRep.data.articles);
     setLoading(false); // 로딩 완료
    }catch (error) {
@@ -82,7 +85,8 @@ export function ArticleList() {
                 X
               </p>
             </div>
-            {selectedArticle.articleContent ? (
+            {/*백엔드 코드 변경 : selectedArticle.articleContent -> selectedArticle.summary */}
+            {selectedArticle.summary ? (
               <div className="ModalBox">
                 <p className="ModalText">{selectedArticle.summary}</p>
               </div>
@@ -106,11 +110,18 @@ export function Table() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
+    //백엔드 코드 추가
+    const queryParams = new URLSearchParams(window.location.search);
+    const stockCode = queryParams.get('keyword');
+    //추가 종료
     // Axios를 사용하여 데이터를 백엔드에서 요청
-    axios.get('http://localhost:8080/stockData?stockCode=${stockCode}') //url 임시 설정
+    //백엔드 코드 수정(단순 ''을 백틱 ``으로 수정)
+    axios.get(`http://localhost:8080/stockData?stockCode=${stockCode}`) //url 임시 설정
       .then((response) => {
         // 요청이 성공하면 데이터 업데이트
-        setData(response.data);
+        //백엔드 코드 수정 StockBase 추가
+        setData(response.data.StockBase);
         setLoading(false); // 로딩 완료
       })
       .catch((err) => {
@@ -160,8 +171,9 @@ const getChart1 = async () => {
   try{
     const queryParams = new URLSearchParams(window.location.search);
     const keywordFromURL = queryParams.get('keyword');
-    const getChart1Rep= await axios.get('http://localhost:8080/ChartData?stockId=${keywordFromURL}');
-    setStockData(getChart1Rep.data);
+    //백엔드 코드 수정(단순 ''을 백틱 ``으로 수정)
+    const getChart1Rep= await axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromURL}`);
+    setStockData(getChart1Rep.data.ChartData);
     setLoading(false);
   }catch(error) {
     setLoading(false);
@@ -262,10 +274,11 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
+    .get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
+      // .get(`http://localhost:8080/ChartData?stockId=${keywordFromChartMain}`)
       .then((response) => {
-        setChartData(response.data);
-        updateXAxisCategories(response.data);
+        setChartData(response.data.ChartData);
+        updateXAxisCategories(response.data.ChartData);
         setLoading(false);
       })
       .catch((error) => {
@@ -274,10 +287,11 @@ export function Rechart2({ keywordFromChartMain, keywordFromSearch2 }) {
       });
 
     axios
+      //프론트 임시코드
       .get(`http://localhost:8080/ChartData?stockId=${keywordFromSearch2}`)
       .then((response) => {
-        setSearchData(response.data);
-        updateXAxisCategories(response.data);
+        setSearchData(response.data.ChartData);
+        updateXAxisCategories(response.data.ChartData);
         setLoading(false);
       })
       .catch((error) => {

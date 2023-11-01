@@ -27,9 +27,20 @@ export function News() {
       setNewsData(getNewsRep.data.Today);
       setLoading(false); // 로딩 완료
     } catch (error) {
+      //임의 추가 부분
+      const getNewsRep = await servedata();
+      setNewsData(getNewsRep.Today);
       setLoading(false);
+      //임의 추가 부분 종료
     }
   };
+
+  //임의 추가 부분
+  async function servedata() {
+    const json = {"Today":[{"title":"Sample Title","summary":"나랏말싸미123듕13귁에 다라"}]};
+    return json;
+}
+//임의 추가 부분 종료
 
   useEffect(() => {
     // 백엔드에서 데이터 요청
@@ -57,7 +68,8 @@ export function News() {
               <div>No news available.</div> // 데이터가 없는 경우에 대한 처리
             ) : (
               newsData.map((article) => (
-                <div key={article.title} className="news-item" onClick={() => handleClick(article.title)}>
+                //백엔드 파트's 코드 수정 article.title => article.articleId (백엔드 DTO도 수정함 TodayArticle에 id 속성 추가)
+                <div key={article.title} className="news-item" onClick={() => handleClick(article.articleId)}>
                   <p>{article.title}</p>
                   <p className="news-summary">{article.summary}</p>
                 </div>
@@ -87,7 +99,7 @@ export function Table() {
       .then((response) => {
         // 요청이 성공하면 데이터 업데이트
         setData(response.data.TopRate); // "TopRate" 필드에서 데이터를 가져옴
-        setLoading(false);
+        setLoading(true);
       })
       .catch((error) => {
         setError(error);
@@ -127,11 +139,11 @@ export function Table() {
   return (
     <div className="table-parent-container">
       <div className="table-buttons">
-        <button onClick={() => handleButtonClick('상한가')}>상한가</button>
-        <button onClick={() => handleButtonClick('하한가')}>하한가</button>
-        <button onClick={() => handleButtonClick('상승')}>상승</button>
-        <button onClick={() => handleButtonClick('하락')}>하락</button>
-        <button onClick={() => handleButtonClick('거래량상위')}>거래량상위</button>
+        <button onClick={() => handleButtonClick('TopReturn')}>상한가</button>
+        <button onClick={() => handleButtonClick('BottomReturn')}>하한가</button>
+        <button onClick={() => handleButtonClick('TopRate')}>상승</button>
+        <button onClick={() => handleButtonClick('BottomRate')}>하락</button>
+        <button onClick={() => handleButtonClick('TopVolume')}>거래량상위</button>
         <button className='test' onClick={handleClick}>모의투자 해보기</button>
       </div>
       <div className="table-container">
@@ -218,7 +230,12 @@ export function MockInvestmentRanking() {
   const getRanking=async () => {
     try {
       const getRankingRep= await axios.get('http://localhost:8080/Ranking');
-      setRankingData(getRankingRep.data.Ranking);
+      const userRank = getRankingRep.data.Ranking.sort((a,b) => b.ranking[0].profit - a.ranking[0].profit);
+      for(var i = 0 ; i<10;i++){
+        // userRank.Ranking[i].rank=i+1;
+      }
+      setRankingData(userRank);
+      // setRankingData(getRankingRep.data.Ranking);
       setLoading(false); // 로딩 완료
     } catch (error) {
       setLoading(false);
@@ -249,9 +266,9 @@ export function MockInvestmentRanking() {
                   </ul>
                   <ul className="dot-list" start={1}>
                     {rankingData.slice(0, 5).map((item) => (
-                      <li key={item.rank} className="ranking-item">
-                        {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span>{' '}
-                        <span className="item-id">{item.id}</span>
+                      <li key={item.ranking[0].rank} className="ranking-item">
+                        {getRankIcon(item.ranking[0].rank)} <span className="item-text">{item.ranking[0].profit}</span>{' '}
+                        <span className="item-id">{item.name}</span>
                       </li>
                     ))}
                   </ul>
@@ -259,9 +276,9 @@ export function MockInvestmentRanking() {
                 <div className="ranking-right">
                   <ul className="dot-list" start={6}>
                     {rankingData.slice(5, 10).map((item) => (
-                      <li key={item.rank} className="ranking-item">
-                        {getRankIcon(item.rank)} <span className="item-text">{item.returns}</span>{' '}
-                        <span className="item-id">{item.id}</span>
+                      <li key={item.ranking[0].rank} className="ranking-item">
+                        {getRankIcon(item.ranking[0].rank)} <span className="item-text">{item.ranking[0].profit}</span>{' '}
+                        <span className="item-id">{item.name}</span>
                       </li>
                     ))}
                   </ul>

@@ -29,54 +29,31 @@ function Main() {
     //GET함수를 이용해 백엔드에 메인페이지 랜덤 뉴스 데이터 5개를 요청하고 state에 저장하는 함수.
     const getNews_Main = async () => {
         try {
+            //임의 추가부분
+            // const responseNews_Main = await data();
+            // setNews(responseNews_Main.PreviewNews);
+            //임의 추가부분 종료
             const responseNews_Main = await axios.get('http://localhost:8080/newsMain/randomNews');
-            setNews(responseNews_Main.PreviewNews);
+            setNews(responseNews_Main.data.PreviewNews);
             setLoading(false);
        
         } catch (error) {
             const responseNews_Main = await data();
             setNews(responseNews_Main.PreviewNews);
-
+            setLoading(false);
             console.error('Error fetching news data:', error);
         }
     };
 
     //임시 뉴스값 반환 함수
     async function data() {
-        const json = {
-            "PreviewNews" : [
-                {	
-                    "articleId" : 1,
-                    "company" : "company1",
-                    "title" : "전 세계 클럽 주장 중 가장 높은 가치를 지닌 선수 베스트11'이라는 이름으로 스쿼드를 구성해 공개했다",
-                    "fieldName" : "fieldname1"
-                },
-                {	
-                    "articleId" : 2,
-                    "company" : "company2",
-                    "title" : "title2",
-                    "fieldName" : "fieldname2"
-                },
-                {	
-                    "articleId" : 3,
-                    "company" : "company3",
-                    "title" : "title3",
-                    "fieldName" : "fieldname3"
-                },
-                {	
-                    "articleId" : 4,
-                    "company" : "company4",
-                    "title" : "title4",
-                    "fieldName" : "fieldname4"
-                },
-                {	
-                    "articleId" : 5,
-                    "company" : "company5",
-                    "title" : "title5",
-                    "fieldName" : "fieldname5",
-                }
-            ]
-        }
+        const json = 
+        
+        {"PreviewNews":[{"articleId":1,"company":"Company Name","title":"Sample Title","fieldName":"Energy"},
+        {"articleId":1,"company":"Company Name","title":"Sample Title","fieldName":"Energy"},
+        {"articleId":1,"company":"Company Name","title":"Sample Title","fieldName":"Energy"},
+        {"articleId":1,"company":"Company Name","title":"Sample Title","fieldName":"Energy"},
+        {"articleId":1,"company":"Company Name","title":"Sample Title","fieldName":"Energy"}]};
         
         return json;
     }
