@@ -135,6 +135,7 @@ export function ScrapedArticles({ userName }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    userName = sessionStorage.getItem('user')
     // 데이터 요청 시작 시 로딩 상태 설정
     const fetchData = async () => {
       try {

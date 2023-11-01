@@ -18,8 +18,10 @@ function Chart() {
     //GET함수를 이용해 백엔드에 메인페이지 주식 데이터 4개를 요청하고 state에 저장하는 함수.
     const getStock_Main = async () => {
         try {
+            
             const responseStock_Main = await axios.get('http://localhost:8080/newsMain/stockChart');
-            setStockData(responseStock_Main.FluctuationStockInfo);
+            //수정함.
+            setStockData(responseStock_Main.data.FluctuationStockInfo);
             setLoading(false);
         } catch (error) {
             const responseStock_Main = await data();

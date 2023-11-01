@@ -27,7 +27,7 @@ export default function SimTrade() {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/simulTrade/ChartData?stockCode=${keywordFromURL}`);
+          const response = await axios.get(`http://localhost:8080/simulTrade/ChartData?stock=${keywordFromURL}`);
           const fetchedData = response.data.ChartData;
           setGraphInput(fetchedData);
         } catch (error) {
@@ -38,7 +38,7 @@ export default function SimTrade() {
     const getStockInvestData = async () => {
         try {
             const responseStockInvestData = await axios.get(`http://localhost:8080/simulTrade/stockInvestData?keyword=${keywordFromURL}&userId=${sessionStorage.getItem("user")}`);
-            setStockInvestData(responseStockInvestData.StockInfo);
+            setStockInvestData(responseStockInvestData.data.StockInfo);
         } catch (error) {
             const responseStockInvestData = await stockData();
             setStockInvestData(responseStockInvestData.StockInfo);
@@ -49,10 +49,9 @@ export default function SimTrade() {
     const getStockInvestInput = async () => {
         try {
             const responseStockInvestInput = await axios.get(`http://localhost:8080/simulTrade/stockInvestInput?keyword=${keywordFromURL}&userId=${sessionStorage.getItem("user")}`);
-            setStockInvestInput(responseStockInvestInput.StockHodingData);
+            setStockInvestInput(responseStockInvestInput.data.StockHodingData);
         } catch (error) {
-            const responseStockInvestInput = await stockInputData();
-            setStockInvestInput(responseStockInvestInput.StockHodingData);
+
             console.error('Error fetching stockInvestInput data:', error);
         }
     }
@@ -60,7 +59,7 @@ export default function SimTrade() {
     const getSiCategory = async () => {
         try {
             const responseSiCategory = await axios.get(`http://localhost:8080/simulTrade/SiCategory?keyword=${keywordFromURL}`);
-            setSiCategory(responseSiCategory.sameFieldStock);
+            setSiCategory(responseSiCategory.data.sameFieldStock);
             setLoadingSi(false);
         } catch (error) {
             const responseSiCategory = await siCategoryData();
@@ -96,7 +95,43 @@ export default function SimTrade() {
         
         return json;
     }
-
+    function simulReturn(){
+        if(stockInvestInput.stockAveragePrice!==null){
+            // const a = (stockInvestInput.stockAveragePrice - stockInvestData[0].stockPrice)/stockInvestInput.stockAveragePrice * 100;        
+            const a = (stockInvestData[0].stockPrice -stockInvestInput.stockAveragePrice) * stockInvestInput.simulHoldingsum
+            return Math.round(a);
+        }
+        else{
+            const a = '-'
+            return a;
+        }
+    }
+    function simulRate(){
+        if(stockInvestInput.stockAveragePrice!==null){
+            const a = (stockInvestData[0].stockPrice-stockInvestInput.stockAveragePrice)/stockInvestInput.stockAveragePrice * 100
+            return Math.round(a);
+        }
+        else{
+            const a ='-'
+            return a;
+        }
+    }
+    function purchasePrice(){
+        if(stockInvestInput.purchasePrice!==null){
+            return Math.round(stockInvestInput.purchasePrice);
+        }
+        else{
+            return '-'
+        }
+    }
+    function averagePrice(){
+        if(stockInvestInput.purchasePrice!==null){
+            return Math.round(stockInvestInput.stockAveragePrice);
+        }
+        else{
+            return '-'
+        }
+    }
     useEffect(()=>{
         getSiCategory();
         getStockInvestData();
@@ -137,18 +172,20 @@ export default function SimTrade() {
                     <StockInvestData
                         CurrentPrice={stockInvestData[0].stockPrice}
                         DaysRange={stockInvestData[0].stockRange}
-                        Volume={stockInvestData[0].stockAmount}
+                        Volume={stockInvestData[0].stockTradingAmount}
                         OpenPrice={stockInvestData[0].stockStartPrice}
-                        HighPrice={stockInvestData[0].stockHighPrice}
-                        LowPrice={stockInvestData[0].stockLowPrice}
-                        ProfitRate={stockInvestData[0].simulRange}
-                        ProfitLoss={stockInvestData[0].simulReturn}
-                        PurchasePrice={stockInvestData[0].PurchasePrice}
-                        AveragePrice={stockInvestData[0].stockAveragePrice}
+                        HighPrice={stockInvestData[0].stockhighPrice}
+                        LowPrice={stockInvestData[0].stocklowPrice}
+                        // ProfitRate={stockInvestInput.simulRange}
+                        ProfitRate={simulRate()}
+                        // ProfitLoss={stockInvestInput.simulReturn}
+                        ProfitLoss={simulReturn()}
+                        PurchasePrice={purchasePrice()}
+                        AveragePrice={averagePrice()}
                     ></StockInvestData>
                     <StockInvestInput
-                        AvailableAsset={stockInvestInput[0].AvailableAsset}
-                        Amount={stockInvestInput[0].simulHoldingsnum}
+                        AvailableAsset={stockInvestInput.availableAsset}
+                        Amount={stockInvestInput.simulHoldingsum}
                         CurrentPrice={stockInvestData[0].stockPrice}
                         stockName={keywordFromURL}
                         >

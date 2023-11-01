@@ -5,6 +5,8 @@ import "./css/Simul_status.css";
 import { LoadingOutlined } from '@ant-design/icons';
 
 function Simul_status({ userName }) {
+  //백엔드 코드 추가 (원래는 userName이 지정되지 않고 넘어옴)
+  userName = sessionStorage.getItem('user');
   const [money, setMoney] = useState(320000);
   const [stock_money, setStockMoney] = useState(443200);
   const [total_money, setTotalMoney] = useState(money + stock_money);
@@ -16,7 +18,7 @@ function Simul_status({ userName }) {
     const resetConfirmed = window.confirm('모의투자 정보를 초기화 하시겠습니까?');
 
     if (resetConfirmed) {
-     
+      
       axios.post(`http://localhost:8080/resetAccount`, { userName })
         .then((response) => {
           
@@ -41,10 +43,13 @@ function Simul_status({ userName }) {
   useEffect(() => {
     // 사용자 모의투자 순위 정보를 백엔드에서 요청
     axios.get(`http://localhost:8080/RankInfo?userName=${userName}`)
+    // axios.get(`http://localhost:8080/Ranking?userName=root1234`)
       .then((response) => {
         const rankInfo = response.data.RankInfo[0]; // 첫 번째 사용자 순위 정보를 가져옴
-        setCustomerRank(rankInfo.customerRank);
-        setCustomerRankRange(rankInfo.customerRankRange);
+        // setCustomerRank(rankInfo.customerRank);
+        setCustomerRank(rankInfo.ranking);
+        // setCustomerRankRange(rankInfo.customerRankRange);
+        setCustomerRankRange(rankInfo.rankRange);
         setLoading(false);
       })
       .catch((error) => {
@@ -57,9 +62,12 @@ function Simul_status({ userName }) {
       .then((response) => {
         const accountInfo = response.data.AccountInfo[0]; // 첫 번째 사용자 계좌 정보를 가져옴
         // 백엔드에서 제공되는 필드 이름에 따라 설정
-        setMoney(accountInfo.customerSimulMoney);
-        setStockMoney(accountInfo.customerStockMoney);
-        setStockHoldings(accountInfo.customerStockHoldingNum);
+        // setMoney(accountInfo.customerSimulMoney);
+        // setStockMoney(accountInfo.customerStockMoney);
+        // setStockHoldings(accountInfo.customerStockHoldingNum);
+        setMoney(accountInfo.user[0].availableAsset);
+        setStockMoney(accountInfo.totalTradePrice);
+        setStockHoldings(accountInfo.simulationStockCount);
         setLoading(false);
       })
       .catch((error) => {
@@ -76,7 +84,7 @@ function Simul_status({ userName }) {
         <>
           <div className="simulStatusHeader">
             <div className="simulStatusHeaderBar">
-              <div className="simulStatusTitle">{sessionStorage.getItem('user')} 님의 투자 정보</div>
+              <div className="simulStatusTitle">{userName} 님의 투자 정보</div>
               <div className="simulStatusReset">
                 <button className="simulStatusResetBtn" onClick={resetAccount}>
                   초기화

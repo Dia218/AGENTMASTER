@@ -60,8 +60,9 @@ const Login_before = ({setIsLogin}) => {
 
     useEffect(()=>{
         if(click){
-            if(result.UserInfo[0].customerId==id){
-                sessionStorage.setItem("user","admin1234");
+            //백엔드 코드 수정 result.UserInfo[0].dustomerId -> result.data.UserInfo[0].customerId==id
+            if(result.data.UserInfo[0].customerId==id){
+                sessionStorage.setItem("user",'root1234');
                 sessionStorage.setItem("isLogin",true);
                 setIsLogin(true);
                 setClick(false);
