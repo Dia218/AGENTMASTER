@@ -102,10 +102,11 @@ public class ArticleRepositoryImpl implements ArticleRepository{
 //        query.setParameter("articleId", article.getId());
 //        query.setParameter("articleId2", article.getId());
 //        query.setParameter("userId", user.getName());
-
+        Article article1 = em.find(Article.class, article.getId());
+        System.out.println("\n\n\n\n\n\n\n\n article_linkId = "+article1.getArticleLink().getId()+"\n\n\n\n\n\n\n\n\n\n");
         String nativeQuery = "SELECT article.article_id, article.title, article.company, article.reporter, " +
                 "CASE WHEN EXISTS (SELECT FROM \"AGENTMASTER\".\"Article_scrap\" " +
-                "WHERE article_id = " + article.getId() + " AND user_id = " + user.getId() + ") THEN TRUE " +
+                "WHERE article_link_id = " + article1.getArticleLink().getId() + " AND user_id = " + user.getId() + ") THEN TRUE " +
                 "ELSE FALSE END AS isscrap " +
                 "FROM \"AGENTMASTER\".\"Article\" AS article " +
                 "WHERE article_id = " + article.getId();
@@ -205,7 +206,6 @@ public class ArticleRepositoryImpl implements ArticleRepository{
         // WHERE user_id = '{user_id}';
 
         Boolean isscrap = findArticle(article, user).get(0).getIsScrap();
-
         return isscrap;
 
     }
@@ -255,7 +255,7 @@ public class ArticleRepositoryImpl implements ArticleRepository{
         //           ON "AGENTMASTER"."Article".article_link_id = "AGENTMASTER"."Article_scrap".article_link_id
         // WHERE user_id = '{user_id}';
 
-        String jpql = "SELECT NEW agentmaster.newstock.dto.userPage.ScrapArticle(article.id, article.title, article.reporter, article.firstPub) "
+        String jpql = "SELECT NEW agentmaster.newstock.dto.userPage.ScrapArticle(article.id, article.title, article.reporter, article.firstPub, article.articleLink.link) "
                 + "FROM Article article "
                 + "Join ArticleScrap articleScrap "
                 + "On article.articleLink.id = articleScrap.articleLink.id "

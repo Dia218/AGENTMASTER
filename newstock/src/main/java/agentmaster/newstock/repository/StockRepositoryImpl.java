@@ -347,7 +347,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockBase> result = new ArrayList<>();
 
         for(Object[] results : queryResult){
-            result.add(new StockBase((Date) results[0],(Integer)results[1], (Integer)results[2], ((Double)results[3]).doubleValue(),((Double)results[4]).intValue(),(Integer)results[5],(Integer) results[6],((BigInteger) results[7]).longValue(), ((BigInteger) results[8]).longValue()));
+            result.add(new StockBase((Date) results[0],(Integer)results[1], (Integer)results[2], ((Double)results[3]).doubleValue(),((Integer)results[4]),(Integer)results[5],(Integer) results[6],((BigInteger) results[7]).longValue(), ((BigInteger) results[8]).longValue()));
         }
 
         return result;
@@ -368,7 +368,7 @@ public class StockRepositoryImpl implements StockRepository{
         List<StockBase> result = new ArrayList<>();
 
         for(Object[] temp : queryResult){
-            result.add(new StockBase((Date)temp[0],(Integer)temp[1], (Integer)temp[2], ((BigDecimal)temp[3]).doubleValue(), (Integer)temp[4],(Integer)temp[5],(Integer)temp[6], ((BigInteger)temp[7]).longValue(),((BigInteger)temp[8]).longValue()));
+            result.add(new StockBase((Date)temp[0],(Integer)temp[1], (Integer)temp[2], ((Double)temp[3]), (Integer)temp[4],(Integer)temp[5],(Integer)temp[6], ((BigInteger)temp[7]).longValue(),((BigInteger)temp[8]).longValue()));
         }
 
         return result;

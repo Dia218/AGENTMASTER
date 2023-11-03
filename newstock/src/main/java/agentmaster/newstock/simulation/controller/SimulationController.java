@@ -32,7 +32,7 @@ public class SimulationController {
         SimulationRequest simulationRequest = new SimulationRequest();
         Stock stock = new Stock();
 
-        User user = userService.getUser(orderRequest.getUserName());
+        User user = userService.getUser(orderRequest.getUserId());
         stock.setStockName(orderRequest.getStockName());
         String stockCode = stockRepository.findIdByName(stock).get(0).getStockCode();
 
@@ -51,7 +51,7 @@ public class SimulationController {
         SimulationRequest simulationRequest = new SimulationRequest();
         Stock stock = new Stock();
 
-        User user = userService.getUser(orderRequest.getUserName());
+        User user = userService.getUser(orderRequest.getUserId());
         stock.setStockName(orderRequest.getStockName());
         String stockCode = stockRepository.findIdByName(stock).get(0).getStockCode();
 

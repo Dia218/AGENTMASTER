@@ -9,15 +9,17 @@ import java.time.LocalDateTime;
 
 @Getter
 public class ScrapArticle {
-    private final Long articleId;
+    private final Long id;
     private final String title;
-    private final String reporter;
-    private final LocalDateTime firstPub;
+    private final String author;
+    private final LocalDateTime date;
+    private final String url;
 
-    public ScrapArticle(Long articleId, String title, String reporter, LocalDateTime firstPub){
-        this.articleId = articleId;
+    public ScrapArticle(Long articleId, String title, String reporter, LocalDateTime firstPub, String url){
+        this.id = articleId;
         this.title = title;
-        this.reporter = reporter;
-        this.firstPub = firstPub;
+        this.author = reporter;
+        this.date = firstPub;
+        this.url = url;
     }
 }
