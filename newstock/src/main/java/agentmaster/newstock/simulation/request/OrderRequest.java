@@ -15,7 +15,7 @@ import javax.validation.constraints.Positive;
 public class OrderRequest {
 
     @NotEmpty
-    private String userName;
+    private String userId;
     @NotEmpty
     private String stockName;
     @Positive

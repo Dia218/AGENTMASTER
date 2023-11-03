@@ -99,7 +99,7 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public List<StockBase> provideStockByMoreInfo(Stock stock) {
-        Stock target = stockRepository.findIdByCode(stock).get(0);
+        Stock target = stockRepository.findIdByName(stock).get(0);
         return stockRepository.findStockByMoreInfo(target);
     }
 

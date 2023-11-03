@@ -2,6 +2,7 @@ package agentmaster.newstock.controller;
 
 import agentmaster.newstock.domain.Article;
 import agentmaster.newstock.domain.Stock;
+import agentmaster.newstock.dto.userPage.ScrapArticle;
 import agentmaster.newstock.etc.ScrapRequest;
 import agentmaster.newstock.service.ArticleService;
 import agentmaster.newstock.user.entitiy.User;
@@ -9,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,6 +21,16 @@ import java.util.Map;
 public class ArticleController {
     private final ArticleService articleService;
 
+
+    @ResponseBody
+    @GetMapping("/getScrapedArticles")
+    public List<ScrapArticle> scrapArticle(@RequestParam("userName") String userName){
+        User user = User.builder().name(userName).build();
+
+        List<ScrapArticle> result = articleService.provideArticleByScrap(user);
+
+        return result;
+    }
 
     //뉴스 메인 페이지 오늘의 기사 전달부
     @ResponseBody
@@ -46,6 +59,7 @@ public class ArticleController {
             user.setName(userName);
             result.put("RealViewArticle", articleService.provideArticleByDetail(article,user));
         }
+
         return result;
     }
 
@@ -90,11 +104,7 @@ public class ArticleController {
         Map<String, Object> result = new HashMap<>();
         Article article = new Article();
         User user = User.builder().name(request.getUserName()).build();
-        System.out.println(request.getArticleId());
-        System.out.println(request.getUserName());
-
         article.setId(request.getArticleId());
-        user.setName(request.getUserName());
         articleService.scrapArticle(article,user);
         result.put("result",true);
         return result;
@@ -105,6 +115,7 @@ public class ArticleController {
     public Map<String, Object> TodayArticleJson(){
         Map<String, Object> result = new HashMap<>();
         result.put("Today", articleService.provideTodayArticle());
+
         return result;
     }
 
@@ -117,9 +128,6 @@ public class ArticleController {
         //프론트에 맞춰서 수정(stockCode->stock Name)
         stock.setStockCode(stockCode);
         stock.setStockName(stockCode);
-        System.out.println("\n\n\n\n\n\n\n\n\nstockCode = "+stock.getStockCode());
-
-        System.out.println("stockCode = "+stock.getStockName()+"\n\n\n\n\n\n\n\n\n");
         result.put("articles", articleService.provideArticleByStock(stock));
 
         return result;

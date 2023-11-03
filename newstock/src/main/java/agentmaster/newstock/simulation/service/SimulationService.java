@@ -44,8 +44,10 @@ public class SimulationService {
                 throw new NotSufficientBalanceException();
             }
 
+            //이부분 먼저 저장을 하고 그 후에 수정을 해서 문제가 생기는게 아닐까 형코드를 자세히 아는 건 아니지만
             Simulation simulation = saveSimulation(simulationRequest, user);
             conclusionSimulation (simulation);
+
             return new SimulationResponse(simulation.getId());
         } else if (TYPE_SELL.equals(simulationRequest.getType())) {
             if (!simulationStockRepository.existsByUserAndStockCode(user, simulationRequest.getStockCode())) {
@@ -85,12 +87,17 @@ public class SimulationService {
         Simulation findSimulation = simulationRepository.findByIdFetch(simulation.getId());
         findSimulation.changeStatus(ORDER_STATUS_CONCLUSION);
 
+
+
         if (TYPE_BUY.equals(simulation.getType())) {
             findSimulation.getUser().buy(simulation.getPrice(), simulation.getVolume());
 
             if (simulationStockRepository.existsByUserAndStockCode(simulation.getUser(), simulation.getStockCode())) {
                 simulationStockRepository.findByUserAndStockCode(simulation.getUser(), simulation.getStockCode())
                         .change(simulation.getType(), simulation.getVolume(), simulation.getPrice(), findSimulation);
+
+                return;
+
             }
 
             simulationStockService.saveSimulationStock(simulation);
@@ -99,8 +106,11 @@ public class SimulationService {
 
             SimulationStock simulationStock = simulationStockRepository.findByUserAndStockCode(simulation.getUser(), simulation.getStockCode());
 
+
+
             if (simulationStock.getVolume() - simulation.getVolume() > 0) {
                 simulationStock.change(simulation.getType(), simulation.getVolume(), simulation.getPrice(), findSimulation);
+                return;
             }
 
             simulationStockService.deleteSimulationStock(findSimulation.getUser(), findSimulation.getStockCode());

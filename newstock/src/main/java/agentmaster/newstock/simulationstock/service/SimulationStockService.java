@@ -27,15 +27,17 @@ public class SimulationStockService {
     public Holdings getSimulationStocks(User user) {
         List<SimulationStock> simulationStocks = simulationStockRepository.findByUser(user);
         BigDecimal totalTradePrice = BigDecimal.valueOf(0);
+        Integer simulationStockCount = Integer.valueOf(0);
 
         for (SimulationStock simulationStock : simulationStocks) {
-            totalTradePrice.add(new BigDecimal(simulationStock.getPrice()).multiply(BigDecimal.valueOf(simulationStock.getVolume())));
+            totalTradePrice = totalTradePrice.add(new BigDecimal(simulationStock.getPrice()).multiply(BigDecimal.valueOf(simulationStock.getVolume())));
+            simulationStockCount += simulationStock.getVolume().intValue();
         }
 
         return new Holdings(new UserDto(userRepository.findByNameFetch(user.getName())),
                 simulationStocks.stream()
                         .map(SimulationStockDto::new)
-                        .collect(Collectors.toList()), totalTradePrice
+                        .collect(Collectors.toList()), totalTradePrice, simulationStockCount
                 );
     }
 

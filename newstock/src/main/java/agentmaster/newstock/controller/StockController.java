@@ -30,6 +30,38 @@ import java.util.Map;
 public class StockController {
     private final StockService stockService;
     private final ParsingStockInfo parsingStockInfo;
+
+
+    @GetMapping("/simulTrade/stockInvestData")
+    @ResponseBody
+    public Map<String, Object> stockInvestRequest(@RequestParam("keyword") String stockName, @RequestParam("userId") String userName){
+        //    "StockInfo": [               //주식 정보 반환
+        //        {
+        //            "stockPrice": 10000,         //현재가
+        //            "stockRange": 5.0,            //등락률
+        //            "stockAmount": 123012,         //거래량
+        //            "stockStartPrice": 9500,         //시가
+        //            "stockHighPrice": 12000,         //최고가
+        //            "stockLowPrice": 9000         //최저가
+        //        }
+        //    ],
+
+        //    private final Date stockDate;
+        //    private final Integer stockPrice;
+        //    private final Integer stockDiff;
+        //    private final Double stockRange;
+        //    private final Integer stockStartPrice;
+        //    private final Integer stockhighPrice;
+        //    private final Integer stocklowPrice;
+        //    private final Long stockTradingAmount;
+        //    private final Long stockTradingTotalPrice;
+        Stock stock = new Stock();
+        stock.setStockName(stockName);
+        Map<String, Object> result = new HashMap<>();
+        result.put("StockInfo", stockService.provideStockByMoreInfo(stock));
+        System.out.println("실행");
+        return result;
+    }
     //주식 메인페이지 주식 검색 자동완성 요청부
     @ResponseBody
     @GetMapping("/stockMain/search")
@@ -107,6 +139,21 @@ public class StockController {
         Stock stock = new Stock();
         if(stockCode.charAt(0)>='0' && stockCode.charAt(0)<='9')
            stock.setStockCode(stockCode);
+        else
+            stock.setStockName(stockCode);
+        List<ChartData> ChartDatas = stockService.provideStockByChartData(stock);
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("ChartData", ChartDatas);
+        return result;
+    }
+
+    @ResponseBody
+    @GetMapping("/simulTrade/ChartData")
+    public Map<String, Object> simulChartDataJson(@RequestParam("stock") String stockCode){
+        Stock stock = new Stock();
+        if(stockCode.charAt(0)>='0' && stockCode.charAt(0)<='9')
+            stock.setStockCode(stockCode);
         else
             stock.setStockName(stockCode);
         List<ChartData> ChartDatas = stockService.provideStockByChartData(stock);

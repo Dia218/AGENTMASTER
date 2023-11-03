@@ -82,8 +82,8 @@ public class ArticleServiceImpl implements ArticleService{
 
         //추후 userRepository에서 findUser가 있다면 그를 활용할 생각.
         user.setId(articleRepository.findUserIdByName(user));
-        boolean now = articleRepository.findArticleScrapState(article, user);
 
+        boolean now = articleRepository.findArticleScrapState(article, user);
         if(!now){
             articleRepository.insertScrapeState(article, user);
         }
@@ -96,6 +96,7 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public List<ScrapArticle> provideArticleByScrap(User user) {
+        user.setId(articleRepository.findUserIdByName(user));
         List<ScrapArticle> result = articleRepository.findArticleByScrap(user);
 
         return result;
