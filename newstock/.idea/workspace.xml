@@ -5,37 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/ResetResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/StockController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/testController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/userPage/ScrapArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/userPage/ScrapArticle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings$HoldingsBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings$HoldingsBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/SignController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/SignController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SignupRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SignupRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/UserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/controller/StockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/userPage/ScrapArticle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/userPage/ScrapArticle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/StockServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/StockServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/controller/SimulationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/controller/SimulationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/request/OrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/request/OrderRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulation/service/SimulationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/Holdings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/Holdings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +21,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -67,30 +53,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;0-server-stock-b&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/82109/Desktop/대학생활/3학년 2학기/3_1 네트워크 보안/프로젝트/projectPage/PhisingNaver&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;026665c24cf7aeaa78e21924117d9046&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "5-3-service",
+    "last_opened_file_path": "C:/Users/gomets/Desktop/상상기업 - 백엔드/newstock/build.gradle",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "026665c24cf7aeaa78e21924117d9046",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="NewstockApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="newstock.main" />

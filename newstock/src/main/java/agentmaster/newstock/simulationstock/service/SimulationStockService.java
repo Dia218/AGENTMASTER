@@ -1,11 +1,14 @@
 package agentmaster.newstock.simulationstock.service;
 
+import agentmaster.newstock.ranking.service.RankingService;
 import agentmaster.newstock.simulation.entity.Simulation;
 import agentmaster.newstock.simulationstock.entity.SimulationStock;
 import agentmaster.newstock.simulationstock.repository.SimulationStockRepository;
 import agentmaster.newstock.simulationstock.response.Holdings;
+import agentmaster.newstock.simulationstock.response.ResetResponse;
 import agentmaster.newstock.simulationstock.response.SimulationStockDto;
 import agentmaster.newstock.user.entitiy.User;
+import agentmaster.newstock.user.exception.UserNotFoundException;
 import agentmaster.newstock.user.repository.UserRepository;
 import agentmaster.newstock.user.response.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ public class SimulationStockService {
 
     private final SimulationStockRepository simulationStockRepository;
     private final UserRepository userRepository;
+    private final RankingService rankingService;
 
     public Holdings getSimulationStocks(User user) {
         List<SimulationStock> simulationStocks = simulationStockRepository.findByUser(user);
@@ -58,5 +62,26 @@ public class SimulationStockService {
                 .build();
 
         simulationStockRepository.save(simulationStock);
+    }
+
+    public ResetResponse resetAccount(UserDto userDto) {
+        User user = userRepository.findByNameFetch(userDto.getName());
+
+        if (user == null) {
+            throw new UserNotFoundException();
+        }
+
+        user.setAvailableAsset(BigDecimal.valueOf(100000));
+
+        List<SimulationStock> simulationStocks = simulationStockRepository.findByUser(user);
+        for (SimulationStock simulationStock : simulationStocks) {
+            deleteSimulationStock(user, simulationStock.getStockCode());
+        }
+
+        rankingService.initRankings();
+
+        userRepository.save(user);
+
+        return new ResetResponse(user.getId());
     }
 }
