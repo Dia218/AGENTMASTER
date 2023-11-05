@@ -2,6 +2,7 @@ package agentmaster.newstock.simulationstock.controller;
 
 import agentmaster.newstock.dto.simulPage.simulMain.StockHoldingData;
 import agentmaster.newstock.simulationstock.response.Holdings;
+import agentmaster.newstock.simulationstock.response.ResetResponse;
 import agentmaster.newstock.simulationstock.service.SimulationStockService;
 import agentmaster.newstock.user.entitiy.User;
 import agentmaster.newstock.user.response.UserDto;
@@ -82,5 +83,15 @@ public class SimulationStockController {
             result.put("StockHodingData", stockHoldingData);
         }
         return result;
+    }
+
+    @ApiOperation("회원 계좌 초기화")
+    @GetMapping("??")
+    @ResponseStatus(HttpStatus.OK)
+    public ResetResponse resetUserInfo(@RequestParam("userName") String userName) {
+        UserDto userDto = new UserDto();
+        userDto.setName(userName);
+
+        return simulationStockService.resetAccount(userDto);
     }
 }
