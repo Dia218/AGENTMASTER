@@ -54,7 +54,7 @@ public class SimulationStockController {
     }
 
     @ApiOperation("회원  특정 보유 주식 정보 조회")
-    @GetMapping("/simulTrade/stockInvestInput")
+        @GetMapping("/simulTrade/stockInvestInput")
     public Map<String, Object> holdingStockInfo(@RequestParam("userId") String userName,@RequestParam("keyword") String keyword) {
         User user = userService.getUser(userName);
         Map<String, Object> result = new HashMap<>();
@@ -62,6 +62,10 @@ public class SimulationStockController {
 
         resultin.add(simulationStockService.getSimulationStocks(user));
         StockHoldingData stockHoldingData;
+        stockHoldingData = StockHoldingData.builder()
+                .AvailableAsset(resultin.get(0).getUser().get(0).getAvailableAsset().intValue())
+                .simulHoldingsum(0.0)
+                .build();
         for(int i = 0; i<resultin.get(0).getSimulationStocks().size();i++){
             if(resultin.get(0).getSimulationStocks().get(i).getStockName().equals(keyword)){
                 stockHoldingData = StockHoldingData.builder()
@@ -73,14 +77,9 @@ public class SimulationStockController {
                         .simulReturn(Double.valueOf(resultin.get(0).getSimulationStocks().get(i).getPrice()))
                         .build();
             }
-            else{
-                stockHoldingData = StockHoldingData.builder()
-                        .AvailableAsset(resultin.get(0).getUser().get(0).getAvailableAsset().intValue())
-                        .simulHoldingsum(0.0)
-                        .build();
-            }
-            result.put("StockHodingData", stockHoldingData);
+
         }
+        result.put("StockHodingData", stockHoldingData);
         return result;
     }
 }
