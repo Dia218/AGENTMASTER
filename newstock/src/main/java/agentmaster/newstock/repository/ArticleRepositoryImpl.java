@@ -183,14 +183,13 @@ public class ArticleRepositoryImpl implements ArticleRepository{
     @Override
     public List<FlowArticleSummary> findArticleByFlowSummary(Article article) {
         Article article1 = em.find(Article.class, article.getId());
-
-        System.out.println("\n\n\n\n" +
-                article1.getIssueSummary().getId() +
-                "\n\n\n\n\n");
-        FlowArticleSummary flowArticleSummary = new FlowArticleSummary(article1.getIssueSummary().getIssueSummary());
         List<FlowArticleSummary> result = new ArrayList<>();
 
-        result.add(flowArticleSummary);
+        if(article1.getIssueSummary()!=null){
+            FlowArticleSummary flowArticleSummary = new FlowArticleSummary(article1.getIssueSummary().getIssueSummary());
+            result.add(flowArticleSummary);
+        }
+
 
         return result;
     }

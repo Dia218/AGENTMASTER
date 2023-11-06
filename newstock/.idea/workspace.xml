@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/response/ResetResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/user/exception/UserNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/controller/SimulationStockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/controller/SimulationStockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/service/SimulationStockService.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,27 +60,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "5-3-service",
-    "last_opened_file_path": "C:/Users/gomets/Desktop/상상기업 - 백엔드/newstock/build.gradle",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "spring.configuration.checksum": "026665c24cf7aeaa78e21924117d9046",
-    "vue.rearranger.settings.migration": "true"
+
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;0-server-stock-b&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/82109/Desktop/대학생활/3학년 2학기/3_1 네트워크 보안/프로젝트/projectPage/PhisingNaver&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;026665c24cf7aeaa78e21924117d9046&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }]]></component>
   <component name="RunManager">
@@ -103,11 +111,32 @@
       <workItem from="1698824844960" duration="189000" />
       <workItem from="1698830697065" duration="646000" />
       <workItem from="1698887472490" duration="2032000" />
+      <workItem from="1699029297516" duration="660000" />
+      <workItem from="1699172804003" duration="13353000" />
+      <workItem from="1699214229511" duration="443000" />
+      <workItem from="1699214701177" duration="75000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

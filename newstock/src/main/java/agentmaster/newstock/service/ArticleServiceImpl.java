@@ -10,11 +10,17 @@ import agentmaster.newstock.dto.stockPage.mainPage.TodayArticle;
 import agentmaster.newstock.dto.userPage.ScrapArticle;
 import agentmaster.newstock.repository.*;
 import agentmaster.newstock.user.entitiy.User;
+import com.google.gson.JsonArray;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONTokener;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -109,7 +115,7 @@ public class ArticleServiceImpl implements ArticleService{
         List<ArticleByStock> result = articleRepository.findArticleByStock(stock);
         for(int i = 0 ; i<result.size();i++){
             Article article = new Article();
-            article.setId(result.get(0).getId());
+            article.setId(result.get(i).getId());
             result.get(i).setSummary(articleRepository.findArticleByDetail(article).get(0).getArticleSummary());
         }
         return result;
