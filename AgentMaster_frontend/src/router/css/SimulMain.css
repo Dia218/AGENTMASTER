@@ -1,0 +1,35 @@
+.simul_Main{
+    background-color: rgb(250, 250, 250);
+    min-height: 100vh;
+}
+
+.simulMain {
+    display: block;
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.simulMain_up{
+    display: flex;
+    width: 500px;
+}
+
+.simulMain_down{
+    display: block;
+    position: relative;
+    height: 550px;
+    
+}
+
+.simulMain_left{
+    float: left;
+    width: 640px;
+    margin: auto;
+}
+
+.simulMain_right{
+    float: right;
+    width: 340px;
+    margin: auto;
+}
+

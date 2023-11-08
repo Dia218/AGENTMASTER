@@ -1,0 +1,22 @@
+
+/*button*/
+.simulSearchBtn {
+    position: absolute;
+    z-index: 3;
+    height: 50px;
+    width: 50px;
+    right: 0%;
+}
+
+.simulSearchBtn > button {
+    position: relative;
+    height: 45px;
+    width: 45px;
+    top: 5px;
+    left: 5px;
+}
+.simulSearchBtnLink {
+
+    height: 45px;
+    width: 45px;
+}

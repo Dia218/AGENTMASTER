@@ -1,0 +1,43 @@
+.StockSimilarCategoryBox {
+    border-radius: 10px;
+    background: #95D6FF;
+    padding: 10px;
+    margin-right: 20px;
+    width: 30%;
+    min-width: 140px;
+    min-height: 140px;
+    max-width: 230px;
+    max-height: fit-content;
+}
+
+.StockSimilarCategoryBoxTitle {
+    font-size: 30px;
+    font-weight: 500;
+    color: white;
+    margin-left: 5px;
+}
+
+.StockSimilarCategoryBoxTitle:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.StockSimilarCategoryBoxBody {
+    font-size: 25px;
+    margin-left: 5px;
+    margin-top: 5px;
+    white-space: normal;
+}
+
+.StockSimilarCategoryBoxCurrentPrice {
+    font-size: 20px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    white-space: normal;
+}
+
+.StockSimilarCategoryBoxCode {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}

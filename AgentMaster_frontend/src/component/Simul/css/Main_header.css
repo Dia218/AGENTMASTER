@@ -1,0 +1,52 @@
+
+/*header*/
+.simulMainHeader {
+    position: relative;
+    height: 100px;
+}
+
+.simulMainHeaderTitle {
+    font-size: 25px;
+    height: 35px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #50B3FF;
+}
+
+.simulMainHeaderBar {
+    position: relative;
+    height: 30px;
+    margin-top: 20px;
+}
+
+.simulMainHeaderBar > div {
+    font-size: large;
+    float: left;
+}
+
+.simulMainHeaderStockId {
+    width: 90px;
+}
+
+.simulMainHeaderStockName {
+    width: 240px;
+}
+
+.simulMainHeaderStockPrice {
+    width: 90px;
+    text-align: right;
+}
+
+.simulMainHeaderStockDifferent {
+    width: 90px;
+    text-align: right;
+}
+
+.simulMainHeaderStockRange {
+    width: 90px;
+    text-align: right;
+}
+
+.simulMainHeaderLine {
+    border: 1px solid black;
+}
