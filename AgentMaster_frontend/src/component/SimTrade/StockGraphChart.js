@@ -92,7 +92,6 @@ const getChart1 = async () => {
     const keywordFromURL = queryParams.get('keyword');
     const getChart1Rep= await axios.get(`http://localhost:8080/ChartData?stockId=${keywordFromURL}`);
     setStockData(getChart1Rep.data.ChartData);
-
     setLoading(false);
   }catch(error) {
     setLoading(false);
@@ -168,6 +167,4 @@ useEffect(() => {
       )}
     </div>
   ); 
-
 }
-
