@@ -60,17 +60,25 @@ const Login_before = ({setIsLogin}) => {
 
     useEffect(()=>{
         if(click){
-            //백엔드 코드 수정 result.UserInfo[0].dustomerId -> result.data.UserInfo[0].customerId==id
-            if(result.data.UserInfo[0].customerId==id){
-                sessionStorage.setItem("user",'root1234');
-                sessionStorage.setItem("isLogin",true);
-                setIsLogin(true);
-                setClick(false);
-            } else {
+            if(result.data == null) {
                 alert("아이디/비밀번호가 틀립니다.");
                 setId("");
                 setPw("");
                 setClick(false);
+            }
+            //백엔드 코드 수정 result.UserInfo[0].dustomerId -> result.data.UserInfo[0].customerId==id
+            else{
+                if(result.data.UserInfo[0].customerId==id){
+                    sessionStorage.setItem("user",'root1234');
+                    sessionStorage.setItem("isLogin",true);
+                    setIsLogin(true);
+                    setClick(false);
+                } else {
+                    alert("아이디/비밀번호가 틀립니다.");
+                    setId("");
+                    setPw("");
+                    setClick(false);
+                }
             }
         }
     },[click]);

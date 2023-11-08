@@ -76,7 +76,7 @@ function Flow(){
         const json = {
             "IssueSummary": [
                 {
-                    "issueSummary": "IssueSummary11"
+                    "issueSummary": "사건 흐름이 존재하지 않습니다."
                 }
             ]
         };
@@ -122,6 +122,10 @@ function Flow(){
                 id: article.articleId
             }
         });
+        
+        //백엔드's 수정 코드 추가 재호출ㄴ
+        const url = `/newsDetail?id=${article.articleId}`;
+        window.location.href = url;
     }
 
     //사건의 흐름 중 요약 기사를 map함수를 통해 순서대로 출력.

@@ -231,8 +231,8 @@ export function MockInvestmentRanking() {
     try {
       const getRankingRep= await axios.get('http://localhost:8080/Ranking');
       const userRank = getRankingRep.data.Ranking.sort((a,b) => b.ranking[0].profit - a.ranking[0].profit);
-      for(var i = 0 ; i<10;i++){
-        // userRank.Ranking[i].rank=i+1;
+      for(let i = 0 ; i<10;i++){
+        userRank[i].ranking[0].rank = i + 1;
       }
       setRankingData(userRank);
       // setRankingData(getRankingRep.data.Ranking);
@@ -267,7 +267,7 @@ export function MockInvestmentRanking() {
                   <ul className="dot-list" start={1}>
                     {rankingData.slice(0, 5).map((item) => (
                       <li key={item.ranking[0].rank} className="ranking-item">
-                        {getRankIcon(item.ranking[0].rank)} <span className="item-text">{item.ranking[0].profit}</span>{' '}
+                        {getRankIcon(item.ranking[0].rank)} <span className="item-text">{item.ranking[0].profit}%</span>{' '}
                         <span className="item-id">{item.name}</span>
                       </li>
                     ))}

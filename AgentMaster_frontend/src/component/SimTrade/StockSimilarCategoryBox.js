@@ -16,6 +16,10 @@ export default function StockSimilarCategoryBox({
     const navigate = useNavigate();
     const onClickTitle = () => {
         navigate(`/simulTrade?keyword=${SimilarStockname}`)
+        
+        //백엔드's 수정 코드 추가 재호출
+        const url = `/simulTrade?keyword=${SimilarStockname}`;
+        window.location.href = url;
     }
 
     return (

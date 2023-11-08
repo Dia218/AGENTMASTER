@@ -15,6 +15,9 @@ const ArticleLink = (props) => {
                 id: props.id
             }
         });
+        //백엔드's 수정 코드 추가 재호출
+        const url = `/newsDetail?id=${props.id}`;
+        window.location.href = url;
     }
     return (
         <>
