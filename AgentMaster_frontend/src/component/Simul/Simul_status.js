@@ -28,6 +28,7 @@ function Simul_status({ userName }) {
           setStockMoney(0);
           setStockHoldings(0);
           setLoading(false);
+          window.location.reload();
         })
         .catch((error) => {
           setLoading(false);
