@@ -1,0 +1,21 @@
+
+
+/*bar*/
+.simulSearchBar {
+    position: relative;
+    z-index: 3;
+    z-index: 2;
+    float: left;
+    height: 50px;
+    width: 640px;
+}
+
+.simulSearchInputBar {
+    border: 2px solid #50B3FF;
+    height: 55px;
+    width: 640px;
+    padding: 10px;
+    padding-right: 55px;
+    border-radius: 15px;
+    font-size: 1.3em;
+}

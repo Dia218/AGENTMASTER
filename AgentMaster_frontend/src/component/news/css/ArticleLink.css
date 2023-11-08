@@ -1,0 +1,8 @@
+.RA_ListItem {
+    font-size: 20px;
+}
+
+.RA_ListItem:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

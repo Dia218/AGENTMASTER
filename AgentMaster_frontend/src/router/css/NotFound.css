@@ -1,0 +1,33 @@
+.NotFound{
+  background-color: rgb(240, 240, 240);
+  min-height: 100vh;
+}
+
+.top{
+    padding-left: 250px;
+    padding-top: 100px;
+    font-weight: 700;
+    color: #2067d8;
+}
+
+.middle{
+    padding-left: 250px;
+    padding-top: 50px;
+    margin-bottom: 30px;
+}
+.option {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-left: 1200px;
+  }
+  
+  .divider {
+    height: 20px;
+    width: 2px;
+    background-color: #2067d8;
+    margin: 0 10px; /* Apply some horizontal spacing between elements and divider */
+  }
+  .back{
+    color:#2067d8;
+  }
