@@ -1,6 +1,7 @@
 package agentmaster.newstock.simulationstock.controller;
 
 import agentmaster.newstock.dto.simulPage.simulMain.StockHoldingData;
+import agentmaster.newstock.simulationstock.request.ResetRequest;
 import agentmaster.newstock.simulationstock.response.Holdings;
 import agentmaster.newstock.simulationstock.response.ResetResponse;
 import agentmaster.newstock.simulationstock.service.SimulationStockService;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -85,11 +87,11 @@ public class SimulationStockController {
     }
 
     @ApiOperation("회원 계좌 초기화")
-    @GetMapping("??")
+    @PostMapping("/resetAccount")
     @ResponseStatus(HttpStatus.OK)
-    public ResetResponse resetUserInfo(@RequestParam("userName") String userName) {
+    public ResetResponse resetUserInfo(@RequestBody @Validated ResetRequest request) {
         UserDto userDto = new UserDto();
-        userDto.setName(userName);
+        userDto.setName(request.getUserName());
 
         return simulationStockService.resetAccount(userDto);
     }
