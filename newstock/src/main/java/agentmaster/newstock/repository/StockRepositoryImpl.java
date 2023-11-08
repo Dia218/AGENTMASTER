@@ -490,13 +490,13 @@ public class StockRepositoryImpl implements StockRepository{
             result.add(
                     StockDto.builder().stockCode((String)results[1])
                             .stockName((String)results[0])
-                            .stockPrice(BigDecimal.valueOf(((Integer) results[2])))
-                            .highPrice(BigDecimal.valueOf((Integer) results[3]))
-                            .lowPrice(BigDecimal.valueOf((Integer) results[4]))
-                            .tradingVolume(BigDecimal.valueOf(((BigInteger) results[5]).longValue()))
-                            .transactionAmount(BigDecimal.valueOf(((BigInteger) results[6]).longValue()))
-                            .diffFromPreday(BigDecimal.valueOf((Integer) results[7]))
-                            .stockRange((BigDecimal) results[8])
+                            .stockPrice((Integer) results[2])
+                            .highPrice(((Integer) results[3]))
+                            .lowPrice(((Integer) results[4]))
+                            .tradingVolume((((BigInteger) results[5])))
+                            .transactionAmount((((BigInteger) results[6])))
+                            .diffFromPreday((Integer)results[7])
+                            .stockRange(BigDecimal.valueOf(((Double)results[8])) )
                     .build());
         }
 
@@ -521,13 +521,13 @@ public class StockRepositoryImpl implements StockRepository{
             result.add(
                     StockDto.builder().stockCode((String)results[1])
                             .stockName((String)results[0])
-                            .stockPrice(BigDecimal.valueOf(((Integer) results[2])))
-                            .highPrice(BigDecimal.valueOf((Integer) results[3]))
-                            .lowPrice(BigDecimal.valueOf((Integer) results[4]))
-                            .tradingVolume(BigDecimal.valueOf(((BigInteger) results[5]).longValue()))
-                            .transactionAmount(BigDecimal.valueOf(((BigInteger) results[6]).longValue()))
-                            .diffFromPreday(BigDecimal.valueOf((Integer) results[7]))
-                            .stockRange((BigDecimal) results[8])
+                            .stockPrice((Integer) results[2])
+                            .highPrice(((Integer) results[3]))
+                            .lowPrice(((Integer) results[4]))
+                            .tradingVolume((((BigInteger) results[5])))
+                            .transactionAmount((((BigInteger) results[6])))
+                            .diffFromPreday((Integer)results[7])
+                            .stockRange(BigDecimal.valueOf(((Double)results[8])) )
                             .build());
         }
 

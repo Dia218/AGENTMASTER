@@ -4,20 +4,163 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="">
-
+    <list default="true" id="72d8563e-b3ce-4d0a-9067-0152570cb333" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/common/entity/QBaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleLink.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleScrap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QArticleSummary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QField.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QIssueSummary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/domain/QStockInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/ranking/entity/QRanking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/simulation/entity/QSimulation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/simulationstock/entity/QSimulationStock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/$buildDir/generated/agentmaster/newstock/user/entitiy/QUser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileQuerydsl/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/NewstockApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/NewstockApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/QueryDslConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/QueryDslConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/converter/BooleanToYnConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/converter/BooleanToYnConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/entity/BaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/entity/BaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/entity/QBaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/common/entity/QBaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/ArticleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/controller/StockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Article.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Article.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleScrap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleScrap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/ArticleSummary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Field.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Field.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/IssueSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/IssueSummary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleLink.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleLink.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleScrap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleScrap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QArticleSummary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QField.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QIssueSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QIssueSummary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/QStockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/Stock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/domain/StockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/FlowArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/FlowArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/FlowArticleSummary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/FlowArticleSummary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealView$RealViewBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealView$RealViewBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealViewArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealViewArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealViewArticleInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RealViewArticleInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RelationArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/detailPage/RelationArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/FluctuationStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/FluctuationStockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/PreviewArticle$PreviewArticleBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/PreviewArticle$PreviewArticleBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/PreviewArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/PreviewArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/UserInfo$UserInfoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/UserInfo$UserInfoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/UserInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/mainPage/UserInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/searchPage/SearchArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/articlePage/searchPage/SearchArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHolding.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHolding.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHoldingData$StockHoldingDataBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHoldingData$StockHoldingDataBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHoldingData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockHoldingData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockRankingAmount.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/StockRankingAmount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/UserAccount.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulMain/UserAccount.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDetail$StockDetailBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDetail$StockDetailBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDetail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDto$StockDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDto$StockDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockSameField$StockSameFieldBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockSameField$StockSameFieldBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockSameField.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/StockSameField.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeRequest$TradeRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeRequest$TradeRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeResult$TradeResultBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeResult$TradeResultBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/simulPage/simulTrade/TradeResult.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/ArticleByStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/ArticleByStock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/ChartData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/ChartData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/StockBase$StockBaseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/StockBase$StockBaseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/StockBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/detailPage/StockBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/KeyWordStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/KeyWordStock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/StockRanking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/StockRanking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/TodayArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/TodayArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/UserRanking$UserRankingBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/UserRanking$UserRankingBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/UserRanking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/stockPage/mainPage/UserRanking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/userPage/ScrapArticle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/dto/userPage/ScrapArticle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/etc/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/etc/Company.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/etc/ScrapRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/etc/ScrapRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/dto/RankingResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/QRanking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/QRanking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking$RankingBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking$RankingBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/entity/Ranking.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/service/RankingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/ranking/service/RankingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/ArticleRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/repository/StockRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ArticleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/ParsingStockInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/service/StockServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/controller/SimulationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/controller/SimulationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/QSimulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/QSimulation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/Simulation$SimulationBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/Simulation$SimulationBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/Simulation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/entity/Simulation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/exception/NotSufficientBalanceException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/exception/NotSufficientBalanceException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/exception/NotSufficientVolumeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/exception/NotSufficientVolumeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepositoryCustom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepositoryCustom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/repository/SimulationRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/request/OrderRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/request/OrderRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/request/SimulationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/request/SimulationRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/response/SimulationDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/response/SimulationDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/response/SimulationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/response/SimulationResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationStatusConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulation/service/SimulationStatusConstants.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/controller/SimulationStockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/controller/SimulationStockController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleFileRepsitoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/ArticleRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/service/ArticleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/QSimulationStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/QSimulationStock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/SimulationStock$SimulationStockBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/SimulationStock$SimulationStockBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/SimulationStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/entity/SimulationStock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/exception/StockNotExistException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/exception/StockNotExistException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryCustom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryCustom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/repository/SimulationStockRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings$HoldingsBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings$HoldingsBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/Holdings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/SimulationStockDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/response/SimulationStockDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/simulationstock/service/SimulationStockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/SignController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/SignController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/QUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/entitiy/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/NotLoginException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/NotLoginException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/PasswordMismatchException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/PasswordMismatchException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/UserDuplicateException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/exception/UserDuplicateException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepositoryCustom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepositoryCustom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/repository/UserRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SigninRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SigninRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SignupRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/request/SignupRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SigninResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SigninResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SignupResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/SignupResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/response/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/agentmaster/newstock/user/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/dto/simulPage/simulTrade/StockDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/repository/StockRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/agentmaster/newstock/simulationstock/controller/SimulationStockController.java" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +175,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -51,40 +197,78 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2XOAJkzAbXj4snp1YsvVKvjUUnZ" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2Xtb8wjpri5NNRBqXb845mxjUHl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;0-server-stock-b&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/82109/Desktop/대학생활/3학년 2학기/3_1 네트워크 보안/프로젝트/projectPage/PhisingNaver&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;026665c24cf7aeaa78e21924117d9046&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "0-server-stock-b",
+    "last_opened_file_path": "C:/Users/82109/Desktop/대학생활/3학년 여름방학/상상기업/프로젝트/AGENTMASTER/newstock",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.NewstockApplication">
+    <configuration name="newstock [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="newstock [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="NewstockApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="newstock.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="agentmaster.newstock.NewstockApplication" />
@@ -92,54 +276,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.newstock [clean]" />
+        <item itemvalue="Gradle.newstock [build]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a89bea2b-29ba-4ae0-b414-c2e4fce46246" name="Changes" comment="" />
-      <created>1698489687483</created>
+      <changelist id="72d8563e-b3ce-4d0a-9067-0152570cb333" name="Changes" comment="" />
+      <created>1699451168489</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1698489687483</updated>
-      <workItem from="1698489692042" duration="293000" />
-      <workItem from="1698648425372" duration="1552000" />
-      <workItem from="1698674500422" duration="20400000" />
-      <workItem from="1698727664288" duration="8521000" />
-      <workItem from="1698743855938" duration="219000" />
-      <workItem from="1698801826704" duration="1014000" />
-      <workItem from="1698820606605" duration="609000" />
-      <workItem from="1698824844960" duration="189000" />
-      <workItem from="1698830697065" duration="646000" />
-      <workItem from="1698887472490" duration="2032000" />
-      <workItem from="1699029297516" duration="660000" />
-      <workItem from="1699172804003" duration="13353000" />
-      <workItem from="1699214229511" duration="443000" />
-      <workItem from="1699214701177" duration="75000" />
+      <updated>1699451168489</updated>
+      <workItem from="1699451169509" duration="1664000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="false" />
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
