@@ -1,0 +1,145 @@
+--로또
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 2
+where article_id = 33;
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 2
+where article_id = 32;
+
+--이스라엘
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 29;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 95;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 58;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 89;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 93;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 3
+where article_id = 21;
+
+--체포
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 4
+where article_id = 135;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 4
+where article_id = 63;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 4
+where article_id = 151;
+
+--허위사실
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 5
+where article_id = 30;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 5
+where article_id = 85;
+
+--축구
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 6
+where article_id = 128;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 6
+where article_id = 116;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 6
+where article_id = 142;
+
+--화재
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 117;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 134;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 140;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 142;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 143;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 7
+where article_id = 149;
+
+
+--아파트
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 8
+where article_id = 94;
+
+--담배
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 9
+where article_id = 149;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 9
+where article_id = 85;
+
+--불법
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 10
+where article_id = 42;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 10
+where article_id = 53;
+
+
+Update "AGENTMASTER"."Article"
+SET issue_summary_id = 10
+where article_id = 80;
